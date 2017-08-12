@@ -1,0 +1,45 @@
+status_monitor:
+  name: 'Network Health'
+  view: yes
+  icon: mdi:lan-connect
+  entities:
+    - group.net_ha_server_stats
+    - group.net_networking
+    - group.net_reachability
+    - group.net_misc
+    - group.tracked_devices
+    - group.environmental
+    
+net_ha_server_stats:
+  name: 'Hassio Server'
+  icon: mdi:raspberrypi
+  entities:
+    - sensor.ram_use
+    - sensor.disk_use_
+    - sensor.since_last_boot
+    - sensor.sent_eth0
+    - sensor.received_eth0
+    - sensor.average_load_1m
+    - sensor.home_assistant_certificate
+    
+net_networking:
+  name: 'Internet Connection'
+  icon: mdi:networking
+  entities:
+    - sensor.internet_ping
+    - sensor.internet_download
+    - sensor.internet_upload
+    
+net_reachability:
+  name: 'Availability'
+  entities:
+    - binary_sensor.living_room_harmony
+    - binary_sensor.domain_controller
+    - binary_sensor.media_center_pc
+    
+net_misc:
+  name: 'Miscellaneous'
+  entities:
+    - sensor.plex
+    - sensor.iis_certificate
+    - sensor.ssl_certificate_expiry

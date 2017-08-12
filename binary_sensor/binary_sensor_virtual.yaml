@@ -1,0 +1,39 @@
+- platform: ping
+  host: 192.168.1.51
+  name: Living Room TV
+  icon: mdi:television
+  
+- platform: ping
+  host: 192.168.1.102
+  name: Living Room Harmony
+  icon: mdi:switch
+  
+- platform: ping
+  host: 192.168.1.20
+  name: Domain Controller
+  icon: mdi:sever
+  
+- platform: ping
+  host: 192.168.1.123
+  name: Media Center PC
+  icon: mdi:television-guide
+  
+- platform: workday
+  country: US
+  province: WA
+  
+- platform: template
+  sensors:
+    everybody_home:
+      friendly_name: 'Everybody Home'
+      device_class: occupancy
+      value_template: >
+        {% if is_state('device_tracker.84b7n15a17000392', 'home')
+           and is_state('device_tracker.phone_chelsea', 'home') %}
+         True
+         {% else %}
+         False
+         {% endif %}
+      entity_id:
+        - device_tracker.84b7n15a17000392
+        - device_tracker.phone_chelsea

@@ -1,0 +1,72 @@
+default_view:
+  name: 'Default'
+  icon: mdi:home
+  view: yes
+  entities:
+    - group.on_demand
+    - group.av_living_room
+    - group.environmental
+    - remote.living_room
+
+environmental:
+  name: 'Environment'
+  entities:
+    - sensor.weather_summary
+    - sensor.weather_temperature
+    - sun.sun
+    
+tracked_devices:
+  name: 'Family'
+  entities:
+    - device_tracker.phone_chelsea
+    - device_tracker.84b7n15a17000392
+
+living_room:
+  name: 'Living Room'
+  icon: mdi:sofa
+  view: yes
+  entities:
+    - remote.living_room
+    - group.av_living_room_media_players
+
+av_living_room:
+  name: 'Media Center'
+  entities:
+    - remote.living_room
+    - group.av_living_room_media_players
+    
+av_living_room_media_players:
+  name: 'Living Room Media Players'
+  icon: mdi:television
+  control: hidden
+  entities:
+    - media_player.master
+    - media_player.living_room_chromecast
+    - media_player.pioneer_avr
+    
+av_living_room_automation:
+  name: 'Living Room Media Center Automation'
+  entities:
+    - automation.media_center_turn_off_when_away
+    - automation.media_center_turn_off_when_past_midnight
+    
+ui_automation:
+  name: 'UI Automation'
+  icon: mdi:settings
+  entities:
+    - automation.ui_hide_living_room_group_when_turned_off
+    - automation.ui_show_living_room_group_when_turned_on
+    
+automation:
+  name: 'Automation'
+  icon: mdi:home-automation
+  view: yes
+  entities:
+    - group.ui_automation
+    - group.av_living_room_automation
+
+on_demand:
+  name: 'On-Demand'
+  icon: mdi:checkbox-marked-outline
+  entities:
+    - input_boolean.vacation_mode

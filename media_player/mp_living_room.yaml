@@ -1,0 +1,7 @@
+- platform: cast
+  host: 192.168.1.101
+  
+- platform: plex
+
+- platform: pioneer
+  host: 192.168.1.104

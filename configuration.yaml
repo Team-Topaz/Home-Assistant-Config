@@ -1,0 +1,53 @@
+homeassistant:
+  name: Home
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: 32
+  unit_system: imperial
+  time_zone: America/Los_Angeles
+  customize: !include_dir_merge_named customize
+frontend:
+config:
+http:
+  api_password: !secret http_password
+  server_port: 8123
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  base_url: !secret base_url
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+updater:
+  include_used_components: true
+discovery:
+conversation:
+history:
+logbook:
+sun:
+recorder:
+  purge_days: 7
+  exclude:
+    entities:
+      - sensor.since_last_boot
+tts:
+  - platform: picotts
+mqtt:
+google:
+  client_id: !secret gcal_client_id
+  client_secret: !secret gcal_client_secret
+upnp:
+  port_mapping: false
+device_tracker: !include device_tracker.yaml
+
+#Split all the major components into their own directories.
+alert: !include_dir_merge_named alert
+group: !include_dir_merge_named group
+input_boolean: !include_dir_merge_named input_boolean
+
+#Dir_Merge_Lists must contain lists in each file.
+zone: !include_dir_merge_list zone
+sensor: !include_dir_merge_list sensor
+binary_sensor: !include_dir_merge_list binary_sensor
+notify: !include_dir_merge_list notify
+media_player: !include_dir_merge_list media_player
+remote: !include_dir_merge_list remote
+automation: !include_dir_merge_list automation
+camera: !include_dir_merge_list camera

@@ -1,0 +1,10 @@
+- name: !secret work_1_name
+  latitude: !secret work_1_lat
+  longitude: !secret work_1_lon
+  radius: 150
+  icon: mdi:domain
+- name: !secret work_2_name
+  latitude: !secret work_2_lat
+  longitude: !secret work_2_lon
+  radius: 150
+  icon: mdi:briefcase

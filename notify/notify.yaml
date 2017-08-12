@@ -1,0 +1,22 @@
+- name: twitter_main
+  platform: twitter
+  consumer_key: !secret twitter_key
+  consumer_secret: !secret twitter_secret
+  access_token: !secret twitter_access_token
+  access_token_secret: !secret twitter_access_secret
+  username: !secret twitter_username
+  
+- name: email_main
+  platform: smtp
+  sender: !secret email_address
+  recipient: !secret email_recipient
+  server: !secret email_server
+  port: !secret email_port
+  username: !secret email_address
+  password: !secret email_password
+  encryption: !secret email_encryption
+  
+- name: push_main
+  platform: html5
+  gcm_api_key: !secret gcm_api_key
+  gcm_sender_id: !secret gcm_sender_id
