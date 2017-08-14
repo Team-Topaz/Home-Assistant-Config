@@ -1,0 +1,19 @@
+#We need to reset at the start of each day or this is pretty useless....
+- id: dog_reset_status
+  alias: 'Dog: Reset daily status'
+  trigger:
+  - platform: time
+    at: '00:00:00'
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.dog_fed_morning
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.dog_fed_evening
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.dog_let_out_morning
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.dog_let_out_evening

@@ -7,6 +7,7 @@ default_view:
     - group.av_living_room
     - group.environmental
     - remote.living_room
+    - group.dog_status
 
 environmental:
   name: 'Environment'
@@ -14,7 +15,7 @@ environmental:
     - sensor.weather_summary
     - sensor.weather_temperature
     - sun.sun
-    
+
 tracked_devices:
   name: 'Family'
   entities:
@@ -34,7 +35,7 @@ av_living_room:
   entities:
     - remote.living_room
     - group.av_living_room_media_players
-    
+
 av_living_room_media_players:
   name: 'Living Room Media Players'
   icon: mdi:television
@@ -43,20 +44,33 @@ av_living_room_media_players:
     - media_player.master
     - media_player.living_room_chromecast
     - media_player.pioneer_avr
-    
+
 av_living_room_automation:
   name: 'Living Room Media Center Automation'
   entities:
     - automation.media_center_turn_off_when_away
     - automation.media_center_turn_off_when_past_midnight
-    
+
 ui_automation:
   name: 'UI Automation'
   icon: mdi:settings
   entities:
     - automation.ui_hide_living_room_group_when_turned_off
     - automation.ui_show_living_room_group_when_turned_on
-    
+
+dog_automation:
+  name: 'Dog Automation'
+  entities:
+    - automation.dog_reset_daily_status
+
+dog_status:
+  name: Dog Status
+  entities:
+    - input_boolean.dog_fed_morning
+    - input_boolean.dog_fed_evening
+    - input_boolean.dog_let_out_morning
+    - input_boolean.dog_let_out_evening
+
 automation:
   name: 'Automation'
   icon: mdi:home-automation
@@ -64,6 +78,7 @@ automation:
   entities:
     - group.ui_automation
     - group.av_living_room_automation
+    - group.dog_automation
 
 on_demand:
   name: 'On-Demand'

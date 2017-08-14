@@ -1,9 +1,15 @@
 media_player.master:
   friendly_name: Media Center PC
+
 media_player.living_room_chromecast:
   friendly_name: Chromecast
+
 media_player.pioneer_avr:
   friendly_name: Receiver
   hidden: true
+
 media_player.nexus_5:
   hidden: true
+
+sensor.weather_temperature:
+  friendly_name: Outside Temperature

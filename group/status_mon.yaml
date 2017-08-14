@@ -26,9 +26,9 @@ net_networking:
   name: 'Internet Connection'
   icon: mdi:networking
   entities:
-    - sensor.internet_ping
-    - sensor.internet_download
-    - sensor.internet_upload
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
     
 net_reachability:
   name: 'Availability'
