@@ -3,22 +3,12 @@ vacation_mode:
   initial: off
   icon: mdi:sunglasses
 
-dog_fed_morning:
-  name: Breakfast
+dog_fed:
+  name: Fed
   initial: off
   icon: mdi:food
 
-dog_fed_evening:
-  name: Dinner
-  initial: off
-  icon: mdi:food
-
-dog_let_out_morning:
-  name: Morning Walk
-  initial: off
-  icon: mdi:pine-tree
-
-dog_let_out_evening:
-  name: Evening Walk
+dog_let_out:
+  name: Walked
   initial: off
   icon: mdi:pine-tree

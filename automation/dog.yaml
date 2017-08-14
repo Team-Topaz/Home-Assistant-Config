@@ -1,19 +1,49 @@
-#We need to reset at the start of each day or this is pretty useless....
+#Reset at midnight and noon.
 - id: dog_reset_status
-  alias: 'Dog: Reset daily status'
+  alias: 'Dog: Reset status'
   trigger:
   - platform: time
     at: '00:00:00'
+  - platform: time
+    at: '12:00:00'
   action:
   - service: input_boolean.turn_off
     data:
-      entity_id: input_boolean.dog_fed_morning
+      entity_id: input_boolean.dog_fed
   - service: input_boolean.turn_off
     data:
-      entity_id: input_boolean.dog_fed_evening
-  - service: input_boolean.turn_off
+      entity_id: input_boolean.dog_let_out
+
+- id: dog_check_let_out_workday
+  alias: 'Dog: Check let out status on workday'
+  trigger:
+  - platform: time
+    at: '00:08:00'
+  - platform: time
+    at: '00:22:00'
+  condition:
+  - condition: state
+    entity_id: input_boolean.dog_let_out
+    state: 'off'
+  action:
+  - service: notify.push_main
     data:
-      entity_id: input_boolean.dog_let_out_morning
-  - service: input_boolean.turn_off
+      title: Dog
+      message: "The dog hasn't yet been let out!"
+      data:
+        actions:
+        - action: let_out
+          title: "Let Out"
+
+#Handler for clicks
+- id: dog_get_notification_click_let_out
+  alias: 'Dog: Notification Clicked: Let Out'
+  trigger:
+    platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: let_out
+  action:
+  - service: input_boolean.turn_on
     data:
-      entity_id: input_boolean.dog_let_out_evening
+      entity_id: input_boolean.dog_let_out

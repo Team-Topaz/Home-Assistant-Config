@@ -61,15 +61,15 @@ ui_automation:
 dog_automation:
   name: 'Dog Automation'
   entities:
-    - automation.dog_reset_daily_status
+    - automation.dog_reset_status
+    - automation.dog_check_let_out_status_on_workday
+    - automation.dog_notification_clicked_let_out
 
 dog_status:
   name: Dog Status
   entities:
-    - input_boolean.dog_fed_morning
-    - input_boolean.dog_fed_evening
-    - input_boolean.dog_let_out_morning
-    - input_boolean.dog_let_out_evening
+    - input_boolean.dog_fed
+    - input_boolean.dog_let_out
 
 automation:
   name: 'Automation'
