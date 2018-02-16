@@ -33,9 +33,7 @@
   sensors:
     homeassistant_cpu:
       friendly_name: 'CPU Load'
-      entity_id:
-        - sensor.average_load_1m
-      value_template: "{{(((states('sensor.average_load_1m') | float)/4)*100) | round(1)}}"
+      value_template: "{{(((states('sensor.load_1m') | float)/4)*100) | round(1)}}"
       unit_of_measurement: '%'
 
 #- platform: cert_expiry
@@ -52,8 +50,6 @@
   sensors:
     ryan_phone_battery:
       friendly_name: "Ryan Phone Battery"
-      entity_id:
-        - device_tracker.ryan_phone
       value_template: >
         {% if states.device_tracker.ryan_phone %}
           {{ states.device_tracker.ryan_phone.attributes.battery | int }}
@@ -74,8 +70,6 @@
   sensors:
     chelsea_phone_battery:
       friendly_name: "Chelsea Phone Battery"
-      entity_id:
-        - device_tracker.chelsea_phone
       value_template: >
         {% if states.device_tracker.chelsea_phone %}
           {{ states.device_tracker.chelsea_phone.attributes.battery | int }}
