@@ -6,6 +6,9 @@
 *.conf
 *.cert
 *.pickle
+*.sqlite
+.DS_Store
+._.DS_Store
 OZW_Log.txt
 home-assistant.log
 home-assistant_v2.db
