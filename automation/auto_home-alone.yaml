@@ -1,0 +1,39 @@
+#These automations are "home alone" specific - that is, nobody here but us computers.
+- id: home_alone_lights_on
+  alias: 'Home Alone: Notify Lights On'
+  trigger:
+    - platform: state
+      entity_id: group.all_devices
+      to: not_home
+      for:
+        minutes: 15
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: group.indoor_lights
+        state: 'on'
+      - condition: state
+        entity_id: remote.living_room
+        state: 'on'
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Lights still on'
+      message: "It looks like a few lights are still on and nobody's home. Turn them off?"
+      data:
+        tag: 'home_alone_lights_on'
+        actions:
+        - action: turn_off
+          title: "Turn Off"
+
+- id: home_alone_turn_off_lights
+  alias: 'Home Alone: Notification Clicked: Turn Off'
+  trigger:
+    platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: turn_off
+  action:
+  - service: scene.turn_on
+    entity_id: scene.indoor_off

@@ -1,0 +1,27 @@
+- name: 'Indoor Off'
+  entities:
+    scene.caseta_indoor_off: on
+    #Scene "Indoor Off" calls the "Off" scene in the Lutron hub directly.
+    remote.living_room: off
+    group.indoor_lights: off
+
+- name: 'All Off'
+  entities:
+    #These scenes call the Lutron hub directly.
+    scene.caseta_indoor_off: on
+    scene.caseta_outdoor_off: on
+    remote.living_room: off
+    group.indoor_lights: off
+    group.outdoor_lights: off
+
+- name: 'Kitchen Only'
+  entities:
+    scene.caseta_kitchen_only: on
+
+- name: 'Living Room All On'
+  entities:
+    scene.caseta_living_room_all_On: on
+
+- name: 'Living Room Lights Off'
+  entities:
+    scene.caseta_indoor_off: on

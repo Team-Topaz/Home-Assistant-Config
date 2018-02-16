@@ -1,0 +1,123 @@
+environment_view:
+  name: 'Network Health'
+  view: yes
+  icon: mdi:weather-cloudy
+  entities:
+    - group.environment_outside
+    - group.outdoor_sensors
+    - group.office_sensor
+    - group.living_room_sensor
+    - group.sensor_node_3_card
+    - group.sensor_node_4_card
+    - group.sensor_node_5_card
+    - group.bike_room_sensor
+    - group.temperature
+    - group.fan_control
+    - group.cooling_control
+    - group.heat_control
+    - group.misc_env
+
+outdoor_sensors:
+  name: 'Outside Sensors'
+  entities:
+    - sensor.neighbor_1_outdoor_temperature
+    - sensor.neighbor_2_outdoor_temperature
+    - sensor.neighbor_3_outdoor_temperature
+    - sensor.neighbor_4_outdoor_temperature
+    - sensor.neighbor_5_outdoor_temperature
+    - sensor.neighbor_6_outdoor_temperature
+    - sensor.neighbor_5_rain_total
+
+temperature:
+  name: 'Temperature'
+  entities:
+    - sensor.average_indoor_temperature
+    - sensor.average_indoor_temperature_change_rate
+    - sensor.weather_temperature
+    - sensor.indoor_outdoor_temperature_delta
+
+cooling_control:
+  name: 'Cooling Control'
+  entities:
+    - input_number.cooling_setpoint
+    #- input_number.cooling_threshold
+    - sensor.indoor_cooling_setpoint_temperature_delta
+    - binary_sensor.average_cooling_required
+
+fan_control:
+  name: 'Living Room Fan Control'
+  entities:
+    - switch.sonoff_1
+    - sensor.living_room_outdoor_temperature_delta
+    - sensor.living_room_heating_setpoint_temperature_delta
+    - sensor.living_room_cooling_setpoint_temperature_delta
+
+heat_control:
+  name: 'Heat Control'
+  entities:
+    - climate.bonus_room
+    - switch.bonus_room_heater
+
+misc_env:
+  name: "Miscellaneous"
+  entities:
+    - sensor.average_humidity
+    - sensor.average_light_level
+
+environment_outside:
+  name: 'Environment'
+  entities:
+    - sensor.weather_summary
+    - sensor.weather_temperature
+    - sun.sun
+    - sensor.pollen_level
+    - sensor.air_quality_pm_25
+
+environment_today:
+  name: "Today's Weather"
+  entities:
+    - sensor.weather_summary
+    - sensor.weather_minutely_summary
+    - sensor.weather_hourly_summary
+    - sensor.weather_daily_summary
+    - sensor.weather_temperature
+    - sensor.weather_apparent_temperature
+    - sensor.weather_daily_high_apparent_temperature
+    - sensor.weather_daily_low_apparent_temperature
+    - sensor.weather_daily_high_temperature
+    - sensor.weather_daily_low_temperature
+    - sensor.weather_dew_point
+    - binary_sensor.weather_below_dew_point
+    - sensor.weather_humidity
+    - sensor.weather_cloud_coverage
+    - sensor.weather_daily_max_precip_intensity
+    - sensor.weather_precip
+    - sensor.weather_precip_probability
+    - sensor.weather_pressure
+    - sensor.weather_ozone
+    - sensor.weather_visibility
+    - sensor.weather_wind_bearing
+    - sensor.weather_wind_speed
+    - sensor.weather_uv_index
+
+environment_tomorrow:
+  name: "Tomorrow's Weather"
+  entities:
+  - sensor.weather_temperature_1
+  - sensor.weather_apparent_temperature_1
+  - sensor.weather_daily_high_apparent_temperature_1
+  - sensor.weather_daily_low_apparent_temperature_1
+  - sensor.weather_daily_high_temperature_1
+  - sensor.weather_daily_low_temperature_1
+  - sensor.weather_dew_point_1
+  - sensor.weather_humidity_1
+  - sensor.weather_cloud_coverage_1
+  - sensor.weather_daily_max_precip_intensity_1
+  - sensor.weather_precip_1
+  - sensor.weather_precip_probability_1
+  - sensor.weather_pressure_1
+  - sensor.weather_ozone_1
+  - sensor.weather_visibility_1
+  - sensor.weather_wind_bearing_1
+  - sensor.weather_wind_speed_1
+  - sensor.weather_uv_index_1

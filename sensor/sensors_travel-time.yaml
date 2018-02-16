@@ -1,0 +1,27 @@
+- platform: google_travel_time
+  name: "Ryan to Chelsea Drive Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.ryan_phone
+  destination: device_tracker.chelsea_phone
+  scan_interval: 900
+
+- platform: google_travel_time
+  name: "Chelsea to Ryan Drive Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.chelsea_phone
+  destination: device_tracker.ryan_phone
+  scan_interval: 900
+
+- platform: google_travel_time
+  name: "Ryan to Home Drive Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.ryan_phone
+  destination: zone.home
+  scan_interval: 900
+
+- platform: google_travel_time
+  name: "Chelsea to Home Drive Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.chelsea_phone
+  destination: zone.home
+  scan_interval: 900

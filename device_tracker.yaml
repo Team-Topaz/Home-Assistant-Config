@@ -1,7 +1,15 @@
+- platform: owntracks
+  track_new_devices: false
+  consider_home: 300
+  interval_seconds: 45
+
 - platform: nmap_tracker
   hosts: 192.168.1.1/24
-  track_new_devices: False
-  consider_home: 300
-  interval_seconds: 20
-  
-- platform: gpslogger
+  interval_seconds: 45
+
+#- platform: asuswrt
+#  host: 192.168.1.1
+#  username: herd
+#  password: !secret router_admin_password
+#  consider_home: 600
+#  track_new_devices: no

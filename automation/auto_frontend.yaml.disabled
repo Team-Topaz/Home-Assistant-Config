@@ -1,0 +1,23 @@
+- id: ui_hide_av_living_room
+  alias: 'UI: Hide living room group when turned off.'
+  trigger:
+  - platform: state
+    entity_id: remote.living_room
+    to: 'off'
+  action:
+    service: group.set_visibility
+    entity_id: group.av_living_room
+    data:
+      visible: False
+      
+- id: ui_show_av_living_room
+  alias: 'UI: Show living room group when turned on.'
+  trigger:
+  - platform: state
+    entity_id: remote.living_room
+    to: 'on'
+  action:
+    service: group.set_visibility
+    entity_id: group.av_living_room
+    data:
+      visible: True

@@ -3,12 +3,17 @@ vacation_mode:
   initial: off
   icon: mdi:sunglasses
 
-dog_fed:
-  name: Fed
+guest_mode:
+  name: 'Guest Mode'
   initial: off
-  icon: mdi:food
+  icon: mdi:glass-flute
 
-dog_let_out:
-  name: Walked
+sunrise_alarm_armed:
+  name: 'Enabled'
+  initial: on
+  icon: mdi:alarm
+
+power_out:
+  name: 'Power Out'
   initial: off
-  icon: mdi:pine-tree
+  icon: mdi:flash

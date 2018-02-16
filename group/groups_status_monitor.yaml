@@ -1,0 +1,79 @@
+status_monitor:
+  name: 'Network Health'
+  view: yes
+  icon: mdi:lan-connect
+  entities:
+    - group.net_ha_server_stats
+    - group.net_networking
+    - group.net_reachability
+    - group.net_misc
+    - group.net_sensor_status
+    - group.ups_status
+    - group.status_lights
+
+net_ha_server_stats:
+  name: 'Hassio Server'
+  icon: mdi:raspberrypi
+  entities:
+    - sensor.memory_use_percent
+    - sensor.disk_use_percent_
+    - sensor.since_last_boot
+    - sensor.sent_eth0
+    - sensor.received_eth0
+    #- sensor.average_load_1m
+    - sensor.home_assistant_certificate
+    - sensor.homeassistant_cpu
+
+ups_status:
+  name: 'UPS Status'
+  entities:
+    - binary_sensor.ups_communication
+    - binary_sensor.ups_outage_detected
+    - binary_sensor.ups_system_warning
+    - binary_sensor.ups_input_warning
+    - binary_sensor.ups_battery_warning
+    - binary_sensor.ups_output_warning
+    - sensor.ups_system_status
+    - sensor.ups_input_status
+    - sensor.ups_battery_status
+    - sensor.ups_output_status
+    - sensor.ups_battery_capacity
+    - sensor.ups_runtime
+    - sensor.ups_input_voltage
+    #- sensor.ups_output_load
+    #- sensor.ups_output_voltage
+    - sensor.ups_output_wattage
+net_networking:
+  name: 'Internet Connection'
+  icon: mdi:networking
+  entities:
+    - sensor.speedtest_download
+    - sensor.speedtest_upload
+    - sensor.speedtest_ping
+
+net_reachability:
+  name: 'Availability'
+  entities:
+    - binary_sensor.living_room_harmony_ping
+    - binary_sensor.domain_controller_ping
+    - binary_sensor.media_center_pc_ping
+    - binary_sensor.gateway_ping
+
+net_misc:
+  name: 'Miscellaneous'
+  entities:
+    - sensor.plex
+    - sensor.iis_certificate
+    - sensor.ssl_certificate_expiry
+    - sensor.ryan_phone_battery
+    - sensor.chelsea_phone_battery
+
+net_sensor_status:
+  name: 'Sensor Status'
+  entities:
+    - binary_sensor.office_status
+    - binary_sensor.sn2_status
+    - binary_sensor.sn3_status
+    - binary_sensor.sn4_status
+    - binary_sensor.sn5_status
+    - binary_sensor.bike_room_status

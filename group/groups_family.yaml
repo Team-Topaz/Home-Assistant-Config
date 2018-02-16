@@ -1,0 +1,71 @@
+family_view:
+  name: 'Family'
+  view: yes
+  icon: mdi:account-multiple
+  entities:
+    - group.tracked_devices
+    - group.dog_status
+    - group.guests
+    - group.steam_friends
+    - group.presence
+    - group.travel_time
+
+tracked_devices:
+  name: 'Family'
+  entities:
+    - device_tracker.chelsea_phone
+    - device_tracker.ryan_phone
+
+guests:
+  name: 'Guests'
+  entities:
+    - !secret friend_device1
+    - !secret friend_device2
+    - !secret friend_device3
+    - !secret friend_device4
+    - !secret friend_device5
+    - !secret friend_device6
+    - !secret friend_device7
+    - !secret friend_device8
+    - !secret friend_device9
+    - !secret friend_device10
+    - !secret friend_device11
+
+steam_friends:
+  name: 'Steam Friends'
+  entities:
+    - !secret steam_friend_sensor1
+    - !secret steam_friend_sensor2
+    - !secret steam_friend_sensor3
+    - !secret steam_friend_sensor4
+    - !secret steam_friend_sensor5
+    - !secret steam_friend_sensor6
+    - !secret steam_friend_sensor7
+    - !secret steam_friend_sensor8
+
+presence:
+  name: 'Aggregate Presence'
+  entities:
+    - binary_sensor.everybody_home
+    - binary_sensor.ryan_home
+    - binary_sensor.chelsea_home
+    - binary_sensor.everybody_home_or_distant
+    - binary_sensor.everyone_in_bed
+
+travel_time:
+  name: 'Travel Time'
+  entities:
+    - sensor.ryan_to_chelsea_drive_time
+    - sensor.ryan_to_home_drive_time
+    - sensor.chelsea_to_ryan_drive_time
+    - sensor.chelsea_to_home_drive_time
+    - sensor.ryan_distance_from_home
+    - sensor.chelsea_distance_from_home
+    - sensor.ryan_chelsea_distance
+
+dog_status:
+  name: Peeta
+  control: 'hidden'
+  entities:
+    - input_boolean.dog_fed
+    - input_boolean.dog_let_out

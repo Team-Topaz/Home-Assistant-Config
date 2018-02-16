@@ -1,0 +1,3 @@
+- name: CSV_Notifier
+  platform: file
+  filename: csv_notify.csv

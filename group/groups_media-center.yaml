@@ -1,0 +1,42 @@
+living_room:
+  name: 'Living Room'
+  icon: mdi:sofa
+  view: yes
+  entities:
+    - remote.living_room
+    - input_select.harmony_activity_select
+    - group.av_living_room_media_players
+    - group.hdmi_stuffs
+
+av_living_room:
+  name: 'Media Center'
+  entities:
+    - remote.living_room
+    - input_select.harmony_activity_select
+    - input_number.pioneer_volume_level
+
+av_living_room_media_players:
+  name: 'Media Players'
+  icon: mdi:television
+  control: hidden
+  entities:
+    - media_player.master
+    - media_player.living_room_chromecast
+    - media_player.pioneer_avr
+    - media_player.living_room_speaker
+
+av_living_room_automation:
+  name: 'Living Room Media Center Automation'
+  entities:
+    - automation.media_center_turn_off_when_away
+    - automation.media_center_turn_off_when_past_midnight
+    - automation.living_room_initialize_harmony_activity_selector
+    - automation.living_room_change_harmony_activity
+    - automation.media_center_turn_off_tv_if_it_is_erroneously_on
+
+hdmi_stuffs:
+  name: 'CEC'
+  entities:
+    - switch.hdmi_0
+    - switch.hdmi_4
+    - switch.hdmi_5

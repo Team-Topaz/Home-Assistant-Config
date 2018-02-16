@@ -1,0 +1,6 @@
+- name: 'Entertaining'
+  entities:
+    light.kitchen: on
+    light.floor_lamp: on
+    light.dining: on
+    remote.living_room: on

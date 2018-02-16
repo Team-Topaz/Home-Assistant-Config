@@ -1,0 +1,54 @@
+- id: bike_room_lamp_motion_on
+  alias: 'Bike Room Lamp: Turn On When Motion'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.bike_room_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: or
+        conditions:
+          - condition: numeric_state
+            entity_id: sun.sun
+            value_template: "{{ state.attributes.elevation }}"
+            below: 5
+          - condition: numeric_state
+            entity_id: sensor.bike_room_light_level
+            below: 400
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.bike_room_light
+
+- id: bike_room_lamp_motion_off
+  alias: 'Bike Room Lamp: Turn Off When No motion'
+  trigger:
+  - platform: state
+    entity_id: group.all_devices
+    to: not_home
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: binary_sensor.bike_room_motion
+    to: 'off'
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: light.bike_room_light
+    to: 'on'
+    for:
+      minutes: 10
+  condition:
+    condition: state
+    entity_id: binary_sensor.bike_room_motion
+    state: 'off'
+    for:
+      minutes: 10
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.bike_room_light

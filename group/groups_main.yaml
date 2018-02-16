@@ -1,0 +1,50 @@
+default_view:
+  name: 'Default'
+  icon: mdi:home
+  view: yes
+  entities:
+    - group.av_living_room
+    - remote.living_room
+    - group.indoor_lights
+    - group.outdoor_lights
+    - group.xmas_lights
+    - group.packages
+    - group.scenes
+    - group.on_demand
+    - group.sunrise_alarm
+
+sunrise_alarm:
+  name: 'Sunrise Alarm'
+  entities:
+    - input_boolean.sunrise_alarm_armed
+    - input_datetime.sunrise_alarm_weekday
+    - input_datetime.sunrise_alarm_weekend
+    - input_number.sunrise_alarm_fade_time
+    - input_number.sunrise_alarm_max_level
+
+scenes:
+  name: 'Scenes'
+  entities:
+    - scene.all_off
+    - scene.indoor_off
+    - scene.living_room_lights_off
+    - scene.living_room_all_on
+    - scene.kitchen_only
+
+on_demand:
+  name: 'On-Demand'
+  icon: mdi:checkbox-marked-outline
+  control: 'hidden'
+  entities:
+    - input_boolean.vacation_mode
+    - input_boolean.guest_mode
+
+packages:
+  name: 'Packages'
+  entities:
+    - camera.usps_mail
+    - sensor.usps_mail
+    - sensor.usps_packages
+    - sensor.usps_packages_delivered
+    - sensor.ups
+    - sensor.fedex

@@ -1,0 +1,90 @@
+#For detection of power outages.
+- id: power_out_detected
+  alias: 'Power Out: Detected'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ups_input_voltage
+    below: 100
+  condition:
+    condition: state
+    entity_id: input_boolean.power_out
+    state: 'off'
+  action:
+  - service: notify.push_main
+    data_template:
+      title: 'Power Outage Detected'
+      message: "{{ states('sensor.ups_input_status')}}. Estimated runtime is {{ states('sensor.ups_runtime')}} minutes."
+      data:
+        tag: 'power_outage'
+        actions:
+        - action: hass_shutdown
+          title: "Shut Down"
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.power_out
+
+- id: power_out_cleared
+  alias: 'Power Out: Power Restored'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ups_input_voltage
+    above: 100
+    below: 140
+  condition:
+    condition: state
+    entity_id: input_boolean.power_out
+    state: 'on'
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Power Restored'
+      message: "Power has been restored."
+      data:
+        tag: 'power_outage'
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.power_out
+
+- id: power_out_shutdown_clicked
+  alias: 'Power Out: Shutdown Requested'
+  trigger:
+    platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: hass_shutdown
+  condition:
+    condition: state
+    entity_id: input_boolean.power_out
+    state: 'on'
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Home Assistant Shut Down'
+      message: "Home Assistant has been powered down by user request."
+      data:
+        tag: 'power_outage'
+  - service: homeassistant.stop
+
+- id: power_out_shutdown_auto
+  alias: 'Power Out: Auto Shutdown'
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.ups_runtime
+    below: 5
+  - platform: numeric_state
+    entity_id: sensor.ups_battery_capacity
+    below: 25
+  - platform: state
+    entity_id: binary_sensor.domain_controller_ping
+    to: 'off'
+    for: 00:10:00
+  condition:
+    condition: state
+    entity_id: input_boolean.power_out
+    state: 'off'
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Home Assistant Shut Down'
+      message: "Home Assistant has been stopped due to critical battery."
+      data:
+        tag: 'power_outage'
+  - service: homeassistant.stop

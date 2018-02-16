@@ -1,0 +1,39 @@
+cooling_setpoint:
+  name: Target Temperature (Cooling)
+  icon: mdi:temperature-fahrenheit
+  initial: 72
+  min: 55
+  max: 80
+  step: 1
+
+cooling_threshold:
+  name: Cooling Threshold
+  icon: mdi:temperature-fahrenheit
+  initial: 2
+  min: 0
+  max: 3
+  step: 0.1
+
+pioneer_volume_level:
+  name: Media Center Volume
+  icon: mdi:volume-high
+  initial: -80.5
+  min: -80.5
+  max: 12
+  step: 0.5
+
+sunrise_alarm_fade_time:
+  name: Fade Time (Minutes)
+  icon: mdi:timelapse
+  initial: 30
+  min: 1
+  max: 60
+  step: 1
+
+sunrise_alarm_max_level:
+  name: Light Level
+  icon: mdi:lightbulb-on-outline
+  initial: 50
+  min: 0
+  max: 100
+  step: 1

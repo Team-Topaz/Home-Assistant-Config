@@ -1,0 +1,89 @@
+- id: living_room_window_open_ok
+  initial_state: 'off' #Disabled for winter
+  alias: 'Living Room: OK to open window'
+  trigger:
+    #Triggers if it's warmer inside than outside, AND it's warmer inside than the setpoint.
+    - platform: template
+      value_template: "{{ (states('sensor.sn2_temperature') > states('sensor.weather_temperature')) and ( states('sensor.sn2_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
+    #Triggers if it's warmer outside than inside and it's cooler than the setpoint.
+    - platform: template
+      value_template: "{{ (states('sensor.sn2_temperature') < states('sensor.weather_temperature')) and ( states('sensor.sn2_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.sn2_led
+        color_name: green
+
+- id: living_room_window_open_nok
+  initial_state: 'off' #Disabled for winter.
+  alias: 'Living Room: Close Windows'
+  trigger:
+    #Inside temperature is above setpoint, but outside temperature is above inside temperature.
+    - platform: template
+      value_template: "{{ (states('sensor.sn2_temperature') < states('sensor.weather_temperature')) and ( states('sensor.sn2_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
+    #Inside temperature is below setpoint, but outside temperature is below inside temperature.
+    - platform: template
+      value_template: "{{ (states('sensor.sn2_temperature') > states('sensor.weather_temperature')) and ( states('sensor.sn2_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.sn2_led
+        color_name: red
+
+
+
+- id: lights_left_on
+  alias: 'Notification Light: Lights Left On'
+  trigger:
+    - platform: time
+      minutes: '/3'
+      seconds: 40
+    - platform: state
+      entity_id: group.indoor_lights
+      to: 'on'
+    - platform: state
+      entity_id: remote.living_room
+      to: 'on'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: group.indoor_lights
+        state: 'on'
+      - condition: state
+        entity_id: remote.living_room
+        state: 'on'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.sn3_led
+        color_name: white
+        brightness: 32
+        transition: 10
+
+- id: lights_turned_off
+  alias: 'Notification Light: Lights Turned Off'
+  trigger:
+    - platform: time
+      minutes: '/3'
+      seconds: 50
+    - platform: state
+      entity_id: group.indoor_lights
+      to: 'off'
+    - platform: state
+      entity_id: remote.living_room
+      to: 'off'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.indoor_lights
+        state: 'off'
+      - condition: state
+        entity_id: remote.living_room
+        state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.sn3_led
+        transition: 10

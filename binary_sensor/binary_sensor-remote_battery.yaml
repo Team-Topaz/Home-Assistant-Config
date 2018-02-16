@@ -1,0 +1,51 @@
+#- platform: mqtt
+#  state_topic: "battery/OVERLORD/Powered"
+#  name: "UPS On Battery"
+#  payload_on: "False"
+#  payload_off: "True"
+#  device_class: power
+
+- platform: mqtt
+  state_topic: "battery/OVERLORD/outputWarning"
+  name: "UPS Output Warning"
+  payload_off: "False"
+  payload_on: "True"
+  device_class: power
+
+- platform: mqtt
+  state_topic: "battery/OVERLORD/inputWarning"
+  name: "UPS Input Warning"
+  payload_off: "False"
+  payload_on: "True"
+  device_class: power
+
+- platform: mqtt
+  state_topic: "battery/OVERLORD/systemWarning"
+  name: "UPS System Warning"
+  payload_off: "False"
+  payload_on: "True"
+  device_class: power
+
+- platform: mqtt
+  state_topic: "battery/OVERLORD/batteryWarning"
+  name: "UPS Battery Warning"
+  payload_off: "False"
+  payload_on: "True"
+  device_class: power
+
+- platform: mqtt
+  state_topic: "battery/OVERLORD/isConnected"
+  name: "UPS Communication"
+  payload_off: "False"
+  payload_on: "True"
+  device_class: connectivity
+
+#We do the below so we have a way to show this in the frontend without giving the user a chance to override.
+- platform: template
+  sensors:
+    ups_outage_detected:
+      friendly_name: "Power Outage Detected"
+      device_class: power
+      entity_id:
+        - input_boolean.power_out
+      value_template: "{{ states('input_boolean.power_out')}}"

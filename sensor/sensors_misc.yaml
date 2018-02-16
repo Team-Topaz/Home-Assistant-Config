@@ -1,0 +1,93 @@
+
+
+- platform: plex
+  host: 192.168.1.20
+  port: 32400
+  name: Plex
+  username: !secret plex_username
+  password: !secret plex_password
+
+#- platform: speedtest
+#  name: Internet
+#  monitored_conditions:
+#    - ping
+#    - download
+#    - upload
+#  hour:
+#    - 6
+#    - 18
+#  minute: 0
+
+- platform: systemmonitor
+  scan_interval: 240
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: load_1m
+    - type: since_last_boot
+
+- platform: uptime
+
+- platform: template
+  sensors:
+    homeassistant_cpu:
+      friendly_name: 'CPU Load'
+      entity_id:
+        - sensor.average_load_1m
+      value_template: "{{(((states('sensor.average_load_1m') | float)/4)*100) | round(1)}}"
+      unit_of_measurement: '%'
+
+#- platform: cert_expiry
+#  host: !secret ha_url
+#  name: Home Assistant Certificate
+#  port: 8123
+
+- platform: cert_expiry
+  host: !secret iis_url
+  name: IIS Certificate
+  port: 443
+
+- platform: template
+  sensors:
+    ryan_phone_battery:
+      friendly_name: "Ryan Phone Battery"
+      entity_id:
+        - device_tracker.ryan_phone
+      value_template: >
+        {% if states.device_tracker.ryan_phone %}
+          {{ states.device_tracker.ryan_phone.attributes.battery | int }}
+        {% else %}
+          unknown
+        {% endif %}
+      unit_of_measurement: '%'
+      icon_template: >
+        {% if states.device_tracker.ryan_phone.attributes.battery >= 90 %}
+          mdi:battery
+        {% elif states.device_tracker.ryan_phone.attributes.battery > 0 %}
+          mdi:battery-{{(states.device_tracker.ryan_phone.attributes.battery | int / 10) | int + 1}}0
+        {% else %}
+          mdi:battery-unknown
+        {% endif %}
+
+- platform: template
+  sensors:
+    chelsea_phone_battery:
+      friendly_name: "Chelsea Phone Battery"
+      entity_id:
+        - device_tracker.chelsea_phone
+      value_template: >
+        {% if states.device_tracker.chelsea_phone %}
+          {{ states.device_tracker.chelsea_phone.attributes.battery | int }}
+        {% else %}
+          unknown
+        {% endif %}
+      unit_of_measurement: '%'
+      icon_template: >
+        {% if states.device_tracker.chelsea_phone.attributes.battery >= 90 %}
+          mdi:battery
+        {% elif states.device_tracker.chelsea_phone.attributes.battery > 0 %}
+          mdi:battery-{{(states.device_tracker.chelsea_phone.attributes.battery | int / 10) | int + 1}}0
+        {% else %}
+          mdi:battery-unknown
+        {% endif %}

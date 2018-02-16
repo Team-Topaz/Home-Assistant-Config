@@ -1,0 +1,123 @@
+#This basically attaches lights to an RNG that
+- id: vacation_kitchen_on
+  alias: "Vacation: Kitchen Lights On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.kitchen_lights_toggle_randomizer
+      above: 7
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: time
+        after: '08:00:00'
+        before: '22:30:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.kitchen
+
+- id: vacation_kitchen_off
+  alias: "Vacation: Kitchen Lights Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.kitchen_lights_toggle_randomizer
+      below: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: state
+        entity_id: lights.kitchen
+        state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.kitchen
+
+- id: vacation_bedroom_on
+  alias: "Vacation: Bedroom Lights On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.Bedroom_Lights_Toggle_Randomizer
+      above: 7
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: or
+        conditions:
+        - condition: time
+          after: '07:00:00'
+          before: '09:00:00'
+        - condition: time
+          after: '18:00:00'
+          before: '22:00:00'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.sconces
+
+- id: vacation_bedroom_off
+  alias: "Vacation: Bedroom Lights Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.bedroom_Lights_Toggle_Randomizer
+      below: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: state
+        entity_id: lights.sconces
+        state: 'on'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.sconces
+
+- id: vacation_tv_on
+  alias: "Vacation: TV On"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.livng_room_tv_toggle_randomizer
+      above: 8
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: state
+        entity_id: lights.kitchen
+        state: 'on'
+  action:
+    - service: remote.turn_on
+      entity_id: remote.living_room
+
+- id: vacation_tv_off
+  alias: "Vacation: TV Off"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.livng_room_tv_toggle_randomizer
+      below: 3
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.vacation_mode
+        state: "on"
+      - condition: state
+        entity_id: remote.living_room
+        state: 'on'
+  action:
+    - service: remote.turn_off
+      entity_id: remote.living_room

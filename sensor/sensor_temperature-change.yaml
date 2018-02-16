@@ -1,0 +1,37 @@
+#Household wide math for temperature change prediction.
+#"{{ 1 - ( (states('sensor.weather_cloud_coverage') | float) / 100) }}"
+- platform: template
+  sensors:
+    cloud_cover_coefficient:
+      friendly_name: "Weather Cloud Cover Coefficient"
+      entity_id: sensor.weather_cloud_coverage
+      value_template: "{{ ((1 - ( (states('sensor.weather_cloud_coverage') | float) / 100))**2) | round(2) }}"
+      unit_of_measurement: 'units'
+    household_solar_gain:
+      friendly_name: "Household Solar Gain"
+      entity_id:
+        - sensor.solar_elevation
+      value_template: "{{ (([((states('sensor.solar_elevation') | float) - 28),0] | max)**0.1125) * (states('sensor.cloud_cover_coefficient') | float)}}"
+      unit_of_measurement: 'units'
+
+#Master Bedroom temperature change prediction
+- platform: template
+  sensors:
+    master_bedroom_solar_gain:
+      friendly_name: "Master Bedroom Solar Gain"
+      entity_id:
+        - sensor.household_solar_gain
+      value_template: "{{ (states('sensor.household_solar_gain') | float) * (1.18 | float) }}"
+      unit_of_measurement: "°F/H"
+    master_bedroom_outside_differential_change:
+      friendly_name: "Master Bedroom Outside Temperature Differential Change"
+      entity_id: sensor.master_bedroom_outdoor_temperature_delta
+      value_template: "{{ (states('sensor.master_bedroom_outdoor_temperature_delta') | float) * (-0.065 | float) }}"
+      unit_of_measurement: "°F/H"
+    master_bedroom_calculated_temperature_change:
+      friendly_name: "Master Bedroom Calculated Temperature Change Rate"
+      entity_id:
+        - sensor.master_bedroom_outside_differential_change
+        - sensor.master_bedroom_solar_gain
+      value_template: "{{ ((( (states('sensor.master_bedroom_outside_differential_change') | float) + (states('sensor.master_bedroom_solar_gain') | float) ) + (states('sensor.master_bedroom_calculated_temperature_change') | float)) / 2) | round(2) }}"
+      unit_of_measurement: "°F/H"

@@ -1,0 +1,10 @@
+sunrise_alarm_weekday:
+  name: Weekday
+  has_date: False
+  has_time: True
+  initial: '7:00'
+sunrise_alarm_weekend:
+  name: Weekend
+  has_date: False
+  has_time: True
+  initial: '8:00'

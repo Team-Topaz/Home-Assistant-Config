@@ -1,0 +1,29 @@
+#- id: dev_record_room_temperature_data
+#  alias: 'Development: Record Temperature Data to File'
+#  trigger:
+#    - platform: time
+#      minutes: '/5'
+#      seconds: 33
+#  action:
+#    - service: notify.CSV_Notifier
+#      data_template:
+#        message: "{{ states('sensor.sn3_temperature')}},{{states('sensor.weather_temperature')}},{{ states('sensor.solar_elevation')}},{{states('sensor.master_bedroom_temperature_change_rate')}},{{states('sensor.master_bedroom_calculated_temperature_change')}}"
+
+#- id: dev_check_motion_sensor
+#  alias: 'Dev: Test Motion Sensor'
+#  initial_state: 'off'
+#  trigger:
+#    platform: state
+#    entity_id: light.ev1527_025c62_05
+#    to: 'on'
+#  action:
+#  - service: notify.push_main
+#    data:
+#      title: 'Motion Sensor Triggered'
+#      message: "Motion sensor activated"
+#      data:
+#        tag: 'home_alone_lights_on'
+#  - delay: 00:00:15
+#  - service: light.turn_off
+#    data:
+#      entity_id: light.ev1527_025c62_05

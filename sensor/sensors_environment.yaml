@@ -1,0 +1,140 @@
+- platform: season
+  type: astronomical
+
+- platform: darksky
+  name: Weather
+  api_key: !secret darksky_api_key
+  forecast:
+    - 1
+  monitored_conditions:
+    - summary
+    - temperature
+    - humidity
+    - wind_speed
+    - wind_bearing
+    - dew_point
+    - apparent_temperature
+    - precip_type
+    - pressure
+    - ozone
+    - minutely_summary
+    - hourly_summary
+    - daily_summary
+    - cloud_cover
+    - visibility
+    - precip_probability
+    - temperature_min
+    - temperature_max
+    - apparent_temperature_min
+    - apparent_temperature_max
+    - precip_intensity_max
+    - uv_index
+  update_interval: '00:15'
+
+- platform: min_max
+  friendly_name: "Average Temperature"
+  name: "Average Indoor Temperature"
+  entity_ids:
+    - sensor.office_temperature
+    - sensor.sn2_temperature
+    - sensor.sn3_temperature
+    - sensor.sn4_temperature
+    #- sensor.sn5_temperature
+    #- sensor.sn6_temperature
+  type: mean
+  round_digits: 1
+
+- platform: min_max
+  name: "Average Humidity"
+  entity_ids:
+    - sensor.office_humidity
+    - sensor.sn2_humidity
+    - sensor.sn3_humidity
+    - sensor.sn4_humidity
+    #- sensor.sn5_humidity
+    #- sensor.sn6_humidity
+  type: mean
+  round_digits: 1
+
+- platform: min_max
+  name: "Average Light Level"
+  entity_ids:
+    - sensor.office_ldr
+    - sensor.sn2_ldr
+    - sensor.sn3_ldr
+    - sensor.sn4_ldr
+    #- sensor.sn5_humidity
+    - sensor.bike_room_light_level
+  type: mean
+  round_digits: 0
+
+#- platform: rest
+#  name: "Air Quality PM 2.5"
+#  resource: !secret airnow_url
+#  value_template: "{{value_json[1].AQI}}"
+#  scan_interval: 300
+#  unit_of_measurement: "ug/m³"
+
+- platform: template
+  sensors:
+    indoor_outdoor_temperature_delta:
+      friendly_name: "Outdoor Delta"
+      entity_id:
+        - sensor.average_indoor_temperature
+        - sensor.weather_temperature
+      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      unit_of_measurement: "Δ°F"
+
+    indoor_cooling_setpoint_temperature_delta:
+      friendly_name: "Cooling Setpoint Delta"
+      entity_id:
+        - sensor.average_indoor_temperature
+        - input_number.cooling_setpoint
+      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
+      unit_of_measurement: "Δ°F"
+
+    living_room_outdoor_temperature_delta:
+      friendly_name: "Living Room: Outdoor Delta"
+      entity_id:
+        - sensor.sn2_temperature
+        - sensor.weather_temperature
+      value_template: '{{ ( ( states.sensor.sn2_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      unit_of_measurement: "Δ°F"
+
+    master_bedroom_outdoor_temperature_delta:
+      friendly_name: "Master Bedroom: Outdoor Delta"
+      entity_id:
+        - sensor.sn3_temperature
+        - sensor.weather_temperature
+      value_template: '{{ ( ( states.sensor.sn3_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      unit_of_measurement: "Δ°F"
+
+    living_room_cooling_setpoint_temperature_delta:
+      friendly_name: "Living Room: Cooling Setpoint Delta"
+      entity_id:
+        - sensor.sn2_temperature
+        - input_number.cooling_setpoint
+      value_template: '{{ ( ( states.sensor.sn2_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
+      unit_of_measurement: "Δ°F"
+
+- platform: rest
+  name: Pollen Percentage
+  resource: !secret pollen_dot_com_url
+  value_template: "{{value_json.Location.periods[1].Index}}"
+  scan_interval: 21600
+  headers:
+    Referer: "https://www.pollen.com"
+  unit_of_measurement: '%'
+
+- platform: template
+  sensors:
+    pollen_level:
+      friendly_name: 'Pollen Level'
+      value_template: >
+        {% if states.sensor.pollen_percentage.state|float <= 2.4 %}Low
+        {% elif states.sensor.pollen_percentage.state|float <= 4.8 %}Low to Medium
+        {% elif states.sensor.pollen_percentage.state|float <= 7.2 %}Medium
+        {% elif states.sensor.pollen_percentage.state|float <= 9.6 %}Medium to High
+        {% elif states.sensor.pollen_percentage.state|float <= 12.0 %}High
+        {% else %}Unknown
+        {% endif %}

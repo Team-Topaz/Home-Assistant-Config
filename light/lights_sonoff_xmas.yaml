@@ -1,0 +1,17 @@
+- platform: mqtt
+  name: "Christmas Wreath"
+  state_topic: "stat/sonoff-xmaswreath/POWER"
+  command_topic: "cmnd/sonoff-xmaswreath/POWER"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+
+- platform: mqtt
+  name: "Christmas Tree"
+  state_topic: "stat/sonoff-xmastree/POWER"
+  command_topic: "cmnd/sonoff-xmastree/POWER"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true

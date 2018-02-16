@@ -1,0 +1,58 @@
+office_sensor:
+  name: Office Multisensor
+  entities:
+    - sensor.office_temperature
+    - sensor.office_temperature_change_rate
+    - sensor.office_humidity
+    - sensor.office_ldr
+    - binary_sensor.office_motion
+    - light.office_led
+
+living_room_sensor:
+  name: Living Room Multisensor
+  entities:
+    - sensor.sn2_temperature
+    - sensor.living_room_temperature_change_rate
+    - sensor.sn2_humidity
+    - sensor.sn2_ldr
+    - binary_sensor.sn2_motion
+    - light.sn2_led
+
+sensor_node_3_card:
+  name: Master Bedroom Multisensor
+  entities:
+    - sensor.sn3_temperature
+    - sensor.master_bedroom_temperature_change_rate
+    - sensor.sn3_humidity
+    - sensor.sn3_ldr
+    - binary_sensor.sn3_motion
+    - light.sn3_led
+
+sensor_node_4_card:
+  name: Bonus Room Multisensor
+  entities:
+    - sensor.sn4_temperature
+    - sensor.bonus_room_temperature_change_rate
+    - sensor.sn4_humidity
+    - sensor.sn4_ldr
+    - binary_sensor.sn4_motion
+    - light.sn4_led
+
+sensor_node_5_card:
+  name: Guest Bedroom Multisensor
+  entities:
+    - sensor.sn5_temperature
+    - sensor.sn5_humidity
+    - sensor.sn5_ldr
+    - binary_sensor.sn5_motion
+    - light.sn5_led
+
+bike_room_sensor:
+  name: Bike Room Multisensor
+  entities:
+    - sensor.bike_room_temperature
+    - sensor.bike_room_temperature_change_rate
+    - sensor.bike_room_humidity
+    - sensor.bike_room_light_level
+    - binary_sensor.bike_room_motion
+    - light.bike_room_led

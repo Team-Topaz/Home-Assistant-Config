@@ -1,0 +1,12 @@
+#- platform: mqtt
+#  name: "Sonoff 1"
+#  state_topic: "stat/sonoff1/POWER"
+#  command_topic: "cmnd/sonoff1/POWER"
+#  qos: 1
+#  payload_on: "ON"
+#  payload_off: "OFF"
+#  retain: true
+
+#- platform: tplink
+#  host: 192.168.1.52
+#  name: 'Bonus Room Heater'

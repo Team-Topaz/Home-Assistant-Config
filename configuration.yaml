@@ -11,38 +11,142 @@ config:
 http:
   api_password: !secret http_password
   server_port: 8123
-  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
   base_url: !secret base_url
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
 updater:
   include_used_components: true
 discovery:
+  ignore:
+    - roku
 conversation:
-history:
-logbook:
 sun:
+map:
+
+# Log and history configuration
 recorder:
-  purge_days: 7
+  purge_keep_days: 10
+  purge_interval: 1
   exclude:
     entities:
       - sensor.since_last_boot
-tts:
-  - platform: picotts
+      - sensor.iis_certificate
+      - sensor.master_bedroom_temperature_last_read_value
+      - sensor.master_bedroom_last_read_time
+      - sensor.living_room_temperature_last_read_value
+      - sensor.living_room_temperature_last_read_time
+      - sensor.office_temperature_last_read_time
+      - sensor.office_temperature_last_read_value
+      - sensor.bonus_room_temperature_last_read_time
+      - sensor.bonus_room_temperature_last_read_value
+      - sensor.bike_room_temperature_last_read_value
+      - sensor.bike_room_temperature_last_read_time
+history:
+  exclude:
+    domains:
+      - automation
+      - group
+    entities:
+      - sensor.iis_certificate
+logbook:
+  exclude:
+    entities:
+      - binary_sensor.office_status
+      - binary_sensor.sn2_status
+      - binary_sensor.sn3_status
+      - binary_sensor.sn4_status
+      - binary_sensor.bike_room_status
+      - sensor.average_load_1m
+      - group.office_sensor
+      - group.living_room_sensor
+      - group.sensor_node_3_card
+      - group.sensor_node_4_card
+      - group.sensor_node_5_card
+      - group.bike_room_sensor
+logger:
+  default: warning
+  logs:
+    homeassistant.core: warning
+    rflink: debug
+    homeassistant.components.rflink: debug
+    #homeassistant.components.hdmi_cec: debug
+    #pylutron_caseta: debug
+    #pylutron_caseta.smartbridge: debug
+    #pylutron_caseta.lip: debug
+
+#tts:
+#  - platform: picotts
+media_extractor:
 mqtt:
+  broker: 192.168.1.20
+  port: 1883
+  client_id: hassio
+  username: !secret mqtt_username
+  password: !secret mqtt_password
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
 google:
   client_id: !secret gcal_client_id
   client_secret: !secret gcal_client_secret
-upnp:
-  port_mapping: false
+ifttt:
+  key: !secret ifttt_key
+lutron_caseta:
+  host: 192.168.1.75
+  keyfile: caseta.key
+  certfile: caseta.crt
+  ca_certs: caseta-bridge.crt
+  lip_enabled: true
+wake_on_lan:
+google_assistant:
+  project_id: !secret g_assistant_projectid
+  client_id: !secret g_assistant_clientid
+  access_token: !secret g_assistant_accesstoken
+  exposed_domains:
+    - switch
+    - light
+    - scene
+hdmi_cec:
+  devices:
+    TV: 0.0.0.0
+    #HASS: 1.7.0.0
+    Chromecast: 1.1.0.0
+    Receiver: 1.0.0.0
+
+#If we have trouble finding a new RFLink device, check the console output
+#directly to make sure we're not filtering out the device.
+rflink:
+  host: 192.168.1.74
+  port: 23
+  ignore_devices:
+    - bosch_7ff*
+    - drayton_*
+    - doorbell_*
+    - v2phoenix_*
+    - forest_*
+
+#usps:
+#  username: !secret usps_username
+#  password: !secret usps_password
+
+#Single-file includes.
 device_tracker: !include device_tracker.yaml
+climate: !include climate.yaml
 
 #Split all the major components into their own directories.
 alert: !include_dir_merge_named alert
 group: !include_dir_merge_named group
 input_boolean: !include_dir_merge_named input_boolean
+script: !include_dir_merge_named script
+input_number: !include input_number.yaml
+input_select: !include input_select.yaml
+input_datetime: !include input_datetime.yaml
 
 #Dir_Merge_Lists must contain lists in each file.
+scene: !include_dir_merge_list scene
 zone: !include_dir_merge_list zone
 sensor: !include_dir_merge_list sensor
 binary_sensor: !include_dir_merge_list binary_sensor
@@ -50,4 +154,6 @@ notify: !include_dir_merge_list notify
 media_player: !include_dir_merge_list media_player
 remote: !include_dir_merge_list remote
 automation: !include_dir_merge_list automation
-camera: !include_dir_merge_list camera
+#camera: !include_dir_merge_list camera
+light: !include_dir_merge_list light
+switch: !include_dir_merge_list switch

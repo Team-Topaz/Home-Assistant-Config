@@ -1,0 +1,135 @@
+- platform: template
+  sensors:
+    master_bedroom_temperature_change_rate:
+      friendly_name: "Master Bedroom Temperature Change"
+      unit_of_measurement: "°F/H"
+      entity_id: sensor.sn3_temperature
+      value_template: >
+        {% if states('sensor.master_bedroom_temperature_last_read_value') != "unknown" %}
+          {{ ((([([(((( states('sensor.sn3_temperature') | float) - (states('sensor.master_bedroom_temperature_last_read_value')) | float )/( ( (as_timestamp(now()) | float) - (states('sensor.master_bedroom_temperature_last_read_time') | float) )/3600) ) | round(2)),10] | min),-10] | max) + (states('sensor.master_bedroom_temperature_change_rate') | float))/2) | round(2) }}
+        {% else %}
+          0.0
+        {% endif %}
+    master_bedroom_temperature_last_read_value:
+      friendly_name: "Master Bedroom Temperature Last Read Value"
+      entity_id: sensor.master_bedroom_temperature_change_rate
+      value_template: "{{ states('sensor.sn3_temperature') }}"
+    master_bedroom_temperature_last_read_time:
+      friendly_name: "Master Bedroom Temperature Last Read Time"
+      entity_id: sensor.master_bedroom_temperature_change_rate
+      value_template: "{{ as_timestamp(now()) }}"
+    master_bedroom_compensated_temperature_change_range:
+      friendly_name: "Master Bedroom Compensated Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      entity_id:
+        - sensor.master_bedroom_temperature_change_rate
+        - sensor.master_bedroom_calculated_temperature_change
+      value_template: "{{ ( (states('sensor.master_bedroom_temperature_change_rate') | float) - (states('sensor.master_bedroom_calculated_temperature_change') | float) ) | round(2) }}"
+
+
+- platform: template
+  sensors:
+    living_room_temperature_change_rate:
+      friendly_name: "Living Room Temperature Change"
+      unit_of_measurement: "°F/H"
+      entity_id: sensor.sn2_temperature
+      value_template: >
+        {% if states('sensor.living_room_temperature_last_read_value') != "unknown" %}
+          {{ ((([([(((( states('sensor.sn2_temperature') | float) - (states('sensor.living_room_temperature_last_read_value')) | float )/( ( (as_timestamp(now()) | float) - (states('sensor.living_room_temperature_last_read_time') | float) )/3600) ) | round(2)),10] | min),-10] | max) + (states('sensor.living_room_temperature_change_rate') | float))/2) | round(2) }}
+        {% else %}
+          0.0
+        {% endif %}
+    living_room_temperature_last_read_value:
+      friendly_name: "Living Room Temperature Last Read Value"
+      entity_id: sensor.living_room_temperature_change_rate
+      value_template: "{{ states('sensor.sn2_temperature') }}"
+    living_room_temperature_last_read_time:
+      friendly_name: "Living Room Temperature Last Read Time"
+      entity_id: sensor.living_room_temperature_change_rate
+      value_template: "{{ as_timestamp(now()) }}"
+
+
+- platform: template
+  sensors:
+    office_temperature_change_rate:
+      friendly_name: "Office Temperature Change"
+      unit_of_measurement: "°F/H"
+      entity_id: sensor.office_temperature
+      value_template: >
+        {% if states('sensor.office_temperature_last_read_value') != "unknown" %}
+          {{ ((([([(((( states('sensor.office_temperature') | float) - (states('sensor.office_temperature_last_read_value')) | float )/( ( (as_timestamp(now()) | float) - (states('sensor.office_temperature_last_read_time') | float) )/3600) ) | round(2)),10] | min),-10] | max) + (states('sensor.office_temperature_change_rate') | float))/2) | round(2) }}
+        {% else %}
+          0.0
+        {% endif %}
+    office_temperature_last_read_value:
+      friendly_name: "Office Temperature Last Read Value"
+      entity_id: sensor.office_temperature_change_rate
+      value_template: "{{ states('sensor.office_temperature') }}"
+    office_temperature_last_read_time:
+      friendly_name: "Office Temperature Last Read Time"
+      entity_id: sensor.office_temperature_change_rate
+      value_template: "{{ as_timestamp(now()) }}"
+
+
+- platform: template
+  sensors:
+    bonus_room_temperature_change_rate:
+      friendly_name: "Bonus Room Temperature Change"
+      unit_of_measurement: "°F/H"
+      entity_id: sensor.sn4_temperature
+      value_template: >
+        {% if states('sensor.bonus_room_temperature_last_read_value') != "unknown" %}
+          {{ ((([([(((( states('sensor.sn4_temperature') | float) - (states('sensor.bonus_room_temperature_last_read_value')) | float )/( ( (as_timestamp(now()) | float) - (states('sensor.bonus_room_temperature_last_read_time') | float) )/3600) ) | round(2)),10] | min),-10] | max) + (states('sensor.bonus_room_temperature_change_rate') | float))/2) | round(2) }}
+        {% else %}
+          0.0
+        {% endif %}
+    bonus_room_temperature_last_read_value:
+      friendly_name: "Bonus Room Temperature Last Read Value"
+      entity_id: sensor.bonus_room_temperature_change_rate
+      value_template: "{{ states('sensor.sn4_temperature') }}"
+    bonus_room_temperature_last_read_time:
+      friendly_name: "Bonus Room Temperature Last Read Time"
+      entity_id: sensor.bonus_room_temperature_change_rate
+      value_template: "{{ as_timestamp(now()) }}"
+
+- platform: template
+  sensors:
+    bike_room_temperature_change_rate:
+      friendly_name: "Bike Room Temperature Change"
+      unit_of_measurement: "°F/H"
+      entity_id: sensor.bike_room_temperature
+      value_template: >
+        {% if states('sensor.bike_room_temperature_last_read_value') != "unknown" %}
+          {{ ((([([(((( states('sensor.bike_room_temperature') | float) - (states('sensor.bike_room_temperature_last_read_value')) | float )/( ( (as_timestamp(now()) | float) - (states('sensor.bike_room_temperature_last_read_time') | float) )/3600) ) | round(2)),10] | min),-10] | max) + (states('sensor.bike_room_temperature_change_rate') | float))/2) | round(2) }}
+        {% else %}
+          0.0
+        {% endif %}
+    bike_room_temperature_last_read_value:
+      friendly_name: "Bike Room Temperature Last Read Value"
+      entity_id: sensor.bike_room_temperature_change_rate
+      value_template: "{{ states('sensor.bike_room_temperature') }}"
+    bike_room_temperature_last_read_time:
+      friendly_name: "Bike Room Temperature Last Read Time"
+      entity_id: sensor.bike_room_temperature_change_rate
+      value_template: "{{ as_timestamp(now()) }}"
+    bike_room_compensated_temperature_change_range:
+      friendly_name: "Bike Room Compensated Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      entity_id:
+        - sensor.bike_room_temperature_change_rate
+        - sensor.bike_room_calculated_temperature_change
+      value_template: "{{ ( (states('sensor.bike_room_temperature_change_rate') | float) - (states('sensor.bike_room_calculated_temperature_change') | float) ) | round(2) }}"
+
+
+
+- platform: min_max
+  name: "Average Indoor Temperature Change Rate"
+  entity_ids:
+    - sensor.bonus_room_temperature_change_rate
+    - sensor.living_room_temperature_change_rate
+    - sensor.master_bedroom_temperature_change_rate
+    - sensor.office_temperature_change_rate
+    - sensor.bike_room_temperature_change_rate
+    #- sensor.sn6_humidity
+  type: mean
+  round_digits: 2

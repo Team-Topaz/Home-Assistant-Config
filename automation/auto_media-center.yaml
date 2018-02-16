@@ -1,0 +1,138 @@
+- id: tv_away_off
+  alias: 'Media Center: Turn off when away'
+  trigger:
+  - platform: state
+    entity_id: group.all_devices
+    to: not_home
+    for:
+      minutes: 30
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.master
+        state: 'idle'
+      - condition: state
+        entity_id: media_player.living_room_chromecast
+        state: 'off'
+  action:
+    service: remote.turn_off
+    entity_id: remote.living_room
+
+- id: tv_midnight_off
+  alias: 'Media Center: Turn off when past midnight'
+  trigger:
+  - platform: time
+    at: '00:00:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: media_player.master
+        state: 'idle'
+      - condition: state
+        entity_id: media_player.living_room_chromecast
+        state: 'off'
+  action:
+    service: remote.turn_off
+    entity_id: remote.living_room
+
+#Turn off the TV if the Harmony messed up.
+- id: tv_harmony_error_off
+  alias: "Media Center: Turn off TV if it is erroneously on"
+  trigger:
+  - platform: time
+    minutes: '/5'
+    seconds: 00
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.living_room_tv
+        state: 'on'
+      - condition: state
+        entity_id: remote.living_room
+        state: 'off'
+  action:
+    #We delay before taking action because the binary sensor can take some time to register a correct status.
+    - delay: 1:00
+    - condition: state
+      entity_id: binary_sensor.living_room_tv
+      state: 'on'
+    - service: notify.push_main
+      data:
+        message: "Hey, the TV is on and it shouldn't be!"
+    - service: remote.send_command
+      data:
+        entity_id: remote.living_room
+        command: PowerOff
+        device: 44569912
+
+#On startup, initialize the harmony input selector.
+- id: living_room_initialize_harmony_input_selector
+  alias: "Living Room: Initialize Harmony Activity Selector"
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: remote.living_room
+  action:
+    - service: input_select.select_option
+      data_template:
+        entity_id: input_select.harmony_activity_select
+        option: >
+          {% if is_state('remote.living_room', 'off') %}
+            Off
+          {% elif is_state('states.remote.living_room.attributes.current_activity', 'PowerOff') %}
+            Off
+          {% else %}
+            {{ states.remote.living_room.attributes.current_activity }}
+          {% endif %}
+    - service: automation.turn_on
+      entity_id: automation.living_room_change_harmony_activity
+
+- id: living_room_change_harmony_activity
+  alias: "Living Room: Change Harmony Activity"
+  initial_state: 'off'
+  trigger:
+    - platform: state
+      entity_id: input_select.harmony_activity_select
+  action:
+    - service: remote.turn_on
+      data_template:
+        entity_id: remote.living_room
+        activity: >
+          {% if is_state('input_select.harmony_activity_select.state', 'Off') %}
+            -1
+          {% else %}
+            {{ states.input_select.harmony_activity_select.state }}
+          {% endif %}
+
+#Set up and synchronize the volume level for the media center
+- id: living_room_update_receiver_volume
+  alias: "Living Room: Update Receiver Volume in HA"
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sensor.pioneer_volume_level
+  action:
+    - service: input_number.set_value
+      data_template:
+        entity_id: input_number.pioneer_volume_level
+        value: "{{ states.sensor.pioneer_volume_level.state | float }}"
+
+- id: living_room_change_receiver_volume
+  alias: "Living Room: Change Receiver Volume"
+  #initial_state: 'off'
+  trigger:
+    - platform: state
+      entity_id: input_number.pioneer_volume_level
+  condition:
+    condition: template
+    value_template: '{{ (states.sensor.pioneer_volume_level.state) != (states.input_number.pioneer_volume_level.state) }}'
+  action:
+    - service: media_player.volume_set
+      data_template:
+        entity_id: media_player.pioneer_avr
+        volume_level: "{{ ( ( (states.input_number.pioneer_volume_level.state | float) + 80.5 ) * 2) / 185 }}"

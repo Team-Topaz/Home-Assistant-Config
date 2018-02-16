@@ -1,0 +1,16 @@
+- platform: template
+  sensors:
+    average_cooling_required:
+      friendly_name: 'Inside: Cooling Required'
+      device_class: heat
+      entity_id:
+        - sensor.indoor_cooling_setpoint_temperature_delta
+        - input_number.cooling_threshold
+      value_template: >
+        {% if (states.sensor.indoor_cooling_setpoint_temperature_delta.state | float) > (states.input_number.cooling_threshold.state | float) %}
+         True
+        {% elif ((states.binary_sensor.average_cooling_required.state) == "on") and (states.sensor.indoor_cooling_setpoint_temperature_delta.state | float) > (-1 * (states.input_number.cooling_threshold.state | float) ) %}
+         True
+        {% else %}
+         False
+        {% endif %}

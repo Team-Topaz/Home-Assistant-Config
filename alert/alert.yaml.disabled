@@ -1,0 +1,8 @@
+living_room_harmony:
+  name: Harmony is offline
+  done_message: Harmony has come online
+  entity_id: binary_sensor.living_room_harmony
+  state: 'off'
+  repeat: 120
+  notifiers:
+    - email_main

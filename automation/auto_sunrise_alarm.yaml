@@ -1,0 +1,37 @@
+- id: sunrise_alarm_bedroom
+  alias: "Bedroom Sunrise Alarm"
+  trigger:
+    - platform: time
+      minutes: '/1'
+      seconds: 50
+  condition:
+    condition: and
+    conditions:
+      - condition: or
+        conditions:
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.workday_sensor
+                state: 'on'
+              - condition: template
+                value_template: "{{ (now().hour | int) == (states.input_datetime.sunrise_alarm_weekday.attributes.hour) and (now().minute | int) == (states.input_datetime.sunrise_alarm_weekday.attributes.minute) }}"
+          - condition: and
+            conditions:
+              - condition: state
+                entity_id: binary_sensor.workday_sensor
+                state: 'off'
+              - condition: template
+                value_template: "{{ (now().hour | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.hour) and (now().minute | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.minute) }}"
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: state
+        entity_id: input_boolean.sunrise_alarm_armed
+        state: 'on'
+  action:
+    - service: light.turn_on
+      data_template:
+        entity_id: light.sconces
+        transition: "{{ states('input_number.sunrise_alarm_fade_time') | float * 60 | int }}"
+        brightness_pct: "{{ states('input_number.sunrise_alarm_max_level') | round(0) | int }}"

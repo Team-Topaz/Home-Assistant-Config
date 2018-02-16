@@ -1,0 +1,47 @@
+#These automations were used when the Lutron integration was broken.
+
+- id: living_room_lamp_motion_on
+  alias: 'Living Room Lamp: Turn On When Motion'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.sn2_motion
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+      - condition: numeric_state
+        entity_id: sun.sun
+        value_template: "{{ state.attributes.elevation }}"
+        below: 5
+      - condition: state
+        entity_id: remote.living_room
+        state: 'off'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.floor_lamp
+
+- id: living_room_lamp_motion_off
+  alias: 'Living Room Lamp: Turn On When No motion'
+  trigger:
+  - platform: state
+    entity_id: group.all_devices
+    to: not_home
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: binary_sensor.sn2_motion
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+  - condition: state
+    entity_id: remote.living_room
+    state: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.floor_lamp

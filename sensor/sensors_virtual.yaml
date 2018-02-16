@@ -1,0 +1,108 @@
+- platform: fedex
+  username: !secret fedex_username
+  password: !secret fedex_password
+
+- platform: ups
+  username: !secret ups_username
+  password: !secret ups_password
+
+- platform: steam_online
+  api_key: !secret steam_web_apikey
+  accounts:
+    - !secret steam_friend1
+    - !secret steam_friend2
+    - !secret steam_friend3
+    - !secret steam_friend4
+    - !secret steam_friend5
+    - !secret steam_friend6
+    - !secret steam_friend7
+    - !secret steam_friend8
+
+#- platform: template
+#  sensors:
+#     usps_packages_delivered:
+#       friendly_name: "USPS Packages Delivered"
+#       unit_of_measurement: "Packages"
+#       value_template: >
+#        {% if states.sensor.usps_packages.attributes.delivered %}
+#          {{ states.sensor.usps_packages.attributes.delivered }}
+#        {% else %}
+#          0
+#        {% endif %}
+
+- platform: template
+  sensors:
+     solar_elevation:
+       friendly_name: "Solar Elevation"
+       unit_of_measurement: "°"
+       entity_id:
+         - sun.sun
+       value_template: >
+        {% if states.sun.sun.attributes.elevation %}
+          {{ states.sun.sun.attributes.elevation }}
+        {% else %}
+          0
+        {% endif %}
+
+
+- platform: random
+  name: Kitchen Lights Toggle Randomizer
+  minimum: 0
+  maximum: 10
+  scan_interval: 1200
+
+- platform: random
+  name: Bedroom Lights Toggle Randomizer
+  minimum: 0
+  maximum: 10
+  scan_interval: 300
+
+- platform: random
+  name: Living Room TV Toggle Randomizer
+  minimum: 0
+  maximum: 10
+  scan_interval: 600
+
+#- platform: random
+#  name: Dining Lights Toggle Randomizer
+#  minimum: 0
+#  maximum: 10
+#  scan_interval: 600
+
+- platform: rest
+  resource: http://ip.jsontest.com
+  name: External IP
+  value_template: '{{ value_json.ip }}'
+
+- platform: template
+  sensors:
+    pioneer_volume_level:
+      friendly_name: "Pioneer Volume Level"
+      unit_of_measurement: "dB"
+      entity_id:
+        - media_player.pioneer_avr
+      value_template: >
+        {% if states.media_player.pioneer_avr.attributes.volume_level %}
+          {{ (((states.media_player.pioneer_avr.attributes.volume_level) | float) * 185 | round(0) / 2 ) - 80.5  }}
+        {% else %}
+          -80.5
+        {% endif %}
+    ryan_distance_from_home:
+      friendly_name: 'Ryan Distance from Home'
+      entity_id:
+        - device_tracker.ryan_phone
+      value_template: '{{distance(states.device_tracker.ryan_phone) | float | round(2) }}'
+      unit_of_measurement: 'mi'
+    chelsea_distance_from_home:
+      friendly_name: 'Chelsea Distance from Home'
+      entity_id:
+        - device_tracker.chelsea_phone
+      value_template: '{{distance(states.device_tracker.chelsea_phone) | float | round(2)}}'
+      unit_of_measurement: 'mi'
+    ryan_chelsea_distance:
+      friendly_name: 'Chelsea Distance from Ryan'
+      entity_id:
+        - device_tracker.chelsea_phone
+        - device_tracker.ryan_phone
+      value_template: '{{distance(states.device_tracker.chelsea_phone,states.device_tracker.ryan_phone) | float | round(2)}}'
+      unit_of_measurement: 'mi'

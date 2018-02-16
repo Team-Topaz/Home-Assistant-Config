@@ -1,0 +1,37 @@
+
+ui_automation:
+  name: 'UI Automation'
+  icon: mdi:settings
+  entities:
+    - automation.ui_hide_living_room_group_when_turned_off
+    - automation.ui_show_living_room_group_when_turned_on
+
+dog_automation:
+  name: 'Dog Automation'
+  entities:
+    - automation.dog_reset_status
+    - automation.dog_check_let_out_status_on_workday
+    - automation.dog_notification_clicked_let_out
+    - automation.dog_notification_clicked_fed
+    - automation.dog_check_let_out_status_on_nonworkday
+    - automation.dog_check_fed_status_on_workday
+    - automation.dog_check_fed_status_on_nonworkday
+
+
+
+other_automation:
+  name: 'Other Automation'
+  entities:
+    - automation.living_room_turn_fan_off_when_hotter_outside
+    - automation.living_room_turn_fan_off_when_setpoint_reached
+    - automation.living_room_turn_fan_on_when_hot
+
+automation:
+  name: 'Automation'
+  icon: mdi:home-automation
+  entities:
+    - group.ui_automation
+    - group.av_living_room_automation
+    - group.dog_automation
+    - group.lighting_automation
+    - group.other_automation

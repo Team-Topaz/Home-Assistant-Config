@@ -1,0 +1,91 @@
+#This should be what reading a motion sensor looks like.
+- id: door_sensor_bike_room
+  alias: 'Door Sensor: Bike Room Lights On'
+  trigger:
+    platform: event
+    event_type: button_pressed
+    event_data: {"state": "on", "entity_id": "switch.bike_room_door_sensor"}
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Door Sensor Triggered'
+      message: "Bike Room"
+      data:
+        tag: 'Bike_Room_door'
+  - service: light.turn_on
+    data:
+      entity_id: light.bike_room_light
+
+#This triggers if the front door is opened when the porch light is on, but the indoor lights are off.
+#EG if the front door is opened when you arrive home.
+- id: door_sensor_porch_unoccupied
+  alias: 'Door Sensor: Front Door Unoccupied'
+  trigger:
+    platform: event
+    event_type: button_pressed
+    event_data: {"state": "on", "entity_id": "switch.front_door_sensor"}
+  condition:
+    condition: and
+    conditions:
+      - condition: or
+        conditions:
+        - condition: sun
+          after: sunset
+          after_offset: '-00:30:00'
+        - condition: sun
+          before: sunrise
+          before_offset: '00:30:00'
+      - condition: state
+        entity_id: light.porch
+        state: 'on'
+      - condition: state
+        entity_id: light.kitchen
+        state: 'off'
+        for: 00:05:00
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Door Sensor Triggered'
+      message: "Front Door-Unoccupied"
+      data:
+        tag: 'Front_Room_door'
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen
+
+#This triggers if the front door is opened when the indoor lights are turned on, but porch light is off.
+#EG the front door is opened when you're home.
+- id: door_sensor_porch_occupied
+  alias: 'Door Sensor: Front Door Occupied'
+  trigger:
+    platform: event
+    event_type: button_pressed
+    event_data: {"state": "on", "entity_id": "switch.front_door_sensor"}
+  condition:
+    condition: and
+    conditions:
+      - condition: or
+        conditions:
+        - condition: sun
+          after: sunset
+          after_offset: '-00:30:00'
+        - condition: sun
+          before: sunrise
+          before_offset: '00:30:00'
+      - condition: state
+        entity_id: light.kitchen
+        state: 'on'
+      - condition: state
+        entity_id: light.porch
+        state: 'off'
+        for: 00:05:00
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Door Sensor Triggered'
+      message: "Front Door-Occupied"
+      data:
+        tag: 'Front_Room_door'
+  - service: light.turn_on
+    data:
+      entity_id: light.porch

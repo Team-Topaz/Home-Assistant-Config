@@ -1,0 +1,10 @@
+
+dog_fed:
+  name: Fed
+  initial: off
+  icon: mdi:food
+
+dog_let_out:
+  name: Walked
+  initial: off
+  icon: mdi:pine-tree

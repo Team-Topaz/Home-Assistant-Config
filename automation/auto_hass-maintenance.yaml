@@ -1,0 +1,41 @@
+#Tasks for keeping Home Assistant running well.
+
+#This auto-restarts Home Assistant. Rethink a bit? It's OK to restart when we're asleep.
+#There's an uptime restriction in conditions to prevent a condition where HASS bootloops.
+- id: hass_auto_reboot
+  alias: "HASS: Auto-reboot When Needed"
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.uptime
+      above: 7
+    - platform: numeric_state
+      entity_id: sensor.ram_used
+      above: 95
+  condition:
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.uptime
+        above: 3
+      - condition: state
+        entity_id: group.indoor_lights
+        state: 'off'
+      - condition: state
+        entity_id: group.outdoor_lights
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: group.all_devices
+            state: 'not_home'
+          - condition: time
+            after: '01:00:00'
+            before: '02:00:00'
+  action:
+    - service: notify.push_main
+      data:
+        title: 'Reboot Initiated'
+        message: "Home Assistant needed to reboot."
+        data:
+          tag: 'reboot_initiated'
+    - service: homeassistant.restart

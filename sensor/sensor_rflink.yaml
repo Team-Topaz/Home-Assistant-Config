@@ -1,0 +1,52 @@
+# alectov3_30ff_temp reads about 7 degrees high.
+# fineoffset 0000 often reads 0, so it's not used.
+- platform: rflink
+  automatic_add: true
+  devices:
+    bl999_0044_temp:
+      name: Neighbor 1 Outdoor Temperature
+      unit_of_measurement: '°F'
+      sensor_type: temperature
+    bl999_0044_bat:
+      name: Neighbor 1 Outdoor Temperature Battery
+      sensor_type: battery
+    alectov3_307f_temp:
+      name: Neighbor 2 Outdoor Temperature
+      unit_of_measurement: '°C'
+      sensor_type: temperature
+    alectov3_307f_bat:
+      name: Neighbor 2 Outdoor Temperature Battery
+      sensor_type: battery
+    alectov3_30ff_temp:
+      name: Neighbor 4 Outdoor Temperature
+      unit_of_measurement: '°F'
+      sensor_type: temperature
+    alectov3_30ff_bat:
+      name: Neighbor 4 Outdoor Temperature Battery
+      sensor_type: battery
+    alectov3_015e_temp:
+      name: Neighbor 3 Outdoor Temperature
+      unit_of_measurement: '°F'
+      sensor_type: temperature
+    alectov3_015e_bat:
+      name: Neighbor 3 Outdoor Temperature Battery
+      sensor_type: battery
+    alectov3_00ef_temp:
+      name: Neighbor 5 Outdoor Temperature
+      unit_of_measurement: '°F'
+      sensor_type: temperature
+    alectov3_00ef_bat:
+      name: Neighbor 5 Outdoor Temperature Battery
+      sensor_type: battery
+    alectov3_015e_raintot:
+      name: Neighbor 5 Rain Total
+      unit_of_measurement: 'mm'
+      sensor_type: total_rain
+    fineoffset_0081_temp:
+      name: Neighbor 6 Outdoor Temperature
+      unit_of_measurement: '°F'
+      sensor_type: temperature
+    #fineoffset_0000_temp:
+    #  name: Neighbor 7 Outdoor Temperature
+    #  unit_of_measurement: '°F'
+    #  sensor_type: temperature
