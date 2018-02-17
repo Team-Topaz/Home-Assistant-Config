@@ -6,12 +6,6 @@
     event_type: button_pressed
     event_data: {"state": "on", "entity_id": "switch.bike_room_door_sensor"}
   action:
-  - service: notify.push_main
-    data:
-      title: 'Door Sensor Triggered'
-      message: "Bike Room"
-      data:
-        tag: 'Bike_Room_door'
   - service: light.turn_on
     data:
       entity_id: light.bike_room_light
@@ -43,12 +37,6 @@
         state: 'off'
         for: 00:05:00
   action:
-  - service: notify.push_main
-    data:
-      title: 'Door Sensor Triggered'
-      message: "Front Door-Unoccupied"
-      data:
-        tag: 'Front_Room_door'
   - service: light.turn_on
     data:
       entity_id: light.kitchen
@@ -80,12 +68,6 @@
         state: 'off'
         for: 00:05:00
   action:
-  - service: notify.push_main
-    data:
-      title: 'Door Sensor Triggered'
-      message: "Front Door-Occupied"
-      data:
-        tag: 'Front_Room_door'
   - service: light.turn_on
     data:
       entity_id: light.porch
