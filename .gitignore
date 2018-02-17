@@ -3,6 +3,7 @@
 *.csr
 *.crt
 *.key
+*.csv
 *.conf
 *.cert
 *.pickle
