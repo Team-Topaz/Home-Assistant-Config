@@ -1,0 +1,10 @@
+#These inputs are not user facing.
+
+power_out:
+  name: 'Power Out'
+  initial: off
+  icon: mdi:flash
+
+great_room_linked:
+  name: 'Great Room Lights Linked'
+  initial: on

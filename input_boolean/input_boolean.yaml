@@ -12,8 +12,3 @@ sunrise_alarm_armed:
   name: 'Enabled'
   initial: on
   icon: mdi:alarm
-
-power_out:
-  name: 'Power Out'
-  initial: off
-  icon: mdi:flash
