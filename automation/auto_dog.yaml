@@ -1,34 +1,42 @@
-#SENSOR INPUTS for dog automation.
+#SENSOR INPUTS for dog automation. Includes push notification handlers.
 - id: dog_food_tub_sensor
-  alias: 'Dog: Food Container Opened'
+  alias: 'Dog: Fed Automated'
   trigger:
-    platform: event
+  - platform: event
     event_type: button_pressed
     event_data: {"state": "on", "entity_id": "switch.dog_food_container_sensor"}
+  - platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: dog_fed
   action:
   - service: notify.push_main
-    data:
-      title: 'Door Sensor Triggered'
-      message: "Food Tub"
+    data_template:
+      title: 'Dog has been fed!'
+      message: 'Fed at {{  as_timestamp( now() ) | timestamp_custom("%I:%M%p") }}.'
       data:
-        tag: 'Tub_door'
+        tag: 'dog_fed_notification'
   - service: input_boolean.turn_on
     data:
       entity_id: input_boolean.dog_fed
 
 - id: dog_back_door_sensor
-  alias: 'Dog: Back Door Opened'
+  alias: 'Dog: Let Out Automated'
   trigger:
-    platform: event
+  - platform: event
     event_type: button_pressed
     event_data: {"state": "on", "entity_id": "switch.back_door_sensor"}
+  - platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: dog_let_out
   action:
   - service: notify.push_main
-    data:
-      title: 'Door Sensor Triggered'
-      message: "Back Door"
+    data_template:
+      title: 'Dog let out'
+      message: 'Let out at {{  as_timestamp( now() ) | timestamp_custom("%I:%M%p") }}.'
       data:
-        tag: 'back_door'
+        tag: 'dog_let_out_notification'
   - service: input_boolean.turn_on
     data:
       entity_id: input_boolean.dog_let_out
@@ -72,6 +80,7 @@
       title: Let the Dog Out
       message: "The dog hasn't yet been let out!"
       data:
+        tag: dog_let_out_notification
         actions:
         - action: dog_let_out
           title: "Let Out"
@@ -98,6 +107,7 @@
       title: Let the Dog Out
       message: "The dog hasn't yet been let out!"
       data:
+        tag: dog_let_out_notification
         actions:
         - action: dog_let_out
           title: "Let Out"
@@ -124,6 +134,7 @@
       title: Feed the Dog
       message: "The dog hasn't yet been fed!"
       data:
+        tag: dog_fed_notification
         actions:
         - action: dog_fed
           title: "Fed"
@@ -150,31 +161,7 @@
       title: Feed the Dog
       message: "The dog hasn't yet been fed!"
       data:
+        tag: dog_fed_notification
         actions:
         - action: dog_fed
           title: "Fed"
-
-#Handler for clicks
-- id: dog_get_notification_click_let_out
-  alias: 'Dog: Notification Clicked: Let Out'
-  trigger:
-    platform: event
-    event_type: html5_notification.clicked
-    event_data:
-      action: dog_let_out
-  action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.dog_let_out
-
-- id: dog_get_notification_click_fed
-  alias: 'Dog: Notification Clicked: Fed'
-  trigger:
-    platform: event
-    event_type: html5_notification.clicked
-    event_data:
-      action: dog_fed
-  action:
-  - service: input_boolean.turn_on
-    data:
-      entity_id: input_boolean.dog_fed
