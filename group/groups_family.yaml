@@ -7,7 +7,6 @@ family_view:
     - group.dog_status
     - group.guests
     - group.steam_friends
-    - group.presence
     - group.travel_time
 
 tracked_devices:
