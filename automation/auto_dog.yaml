@@ -9,6 +9,10 @@
     event_type: html5_notification.clicked
     event_data:
       action: dog_fed
+  condition:
+  - condition: state
+    entity_id: input_boolean.dog_fed
+    state: 'off'
   action:
   - service: notify.push_main
     data_template:
@@ -30,6 +34,10 @@
     event_type: html5_notification.clicked
     event_data:
       action: dog_let_out
+  condition:
+  - condition: state
+    entity_id: input_boolean.dog_let_out
+    state: 'off'
   action:
   - service: notify.push_main
     data_template:
