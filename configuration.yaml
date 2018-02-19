@@ -109,12 +109,12 @@ google_assistant:
     - switch
     - light
     - scene
-hdmi_cec:
-  devices:
-    TV: 0.0.0.0
-    #HASS: 1.7.0.0
-    Chromecast: 1.1.0.0
-    Receiver: 1.0.0.0
+#hdmi_cec:
+#  devices:
+#    TV: 0.0.0.0
+#    #HASS: 1.7.0.0
+#    Chromecast: 1.1.0.0
+#    Receiver: 1.0.0.0
 
 #If we have trouble finding a new RFLink device, check the console output
 #directly to make sure we're not filtering out the device.
