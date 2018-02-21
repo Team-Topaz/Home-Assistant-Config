@@ -29,7 +29,7 @@
     - apparent_temperature_max
     - precip_intensity_max
     - uv_index
-  update_interval: '00:15'
+  update_interval: '00:05'
 
 - platform: min_max
   friendly_name: "Average Temperature"
