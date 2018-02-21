@@ -4,7 +4,6 @@ environment_view:
   icon: mdi:weather-cloudy
   entities:
     - group.environment_outside
-    - group.outdoor_sensors
     - group.office_sensor
     - group.living_room_sensor
     - group.sensor_node_3_card
@@ -16,17 +15,6 @@ environment_view:
     - group.cooling_control
     - group.heat_control
     - group.misc_env
-
-outdoor_sensors:
-  name: 'Outside Sensors'
-  entities:
-    - sensor.neighbor_1_outdoor_temperature
-    - sensor.neighbor_2_outdoor_temperature
-    - sensor.neighbor_3_outdoor_temperature
-    - sensor.neighbor_4_outdoor_temperature
-    - sensor.neighbor_5_outdoor_temperature
-    - sensor.neighbor_6_outdoor_temperature
-    - sensor.neighbor_5_rain_total
 
 temperature:
   name: 'Temperature'
