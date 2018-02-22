@@ -46,6 +46,4 @@
     ups_outage_detected:
       friendly_name: "Power Outage Detected"
       device_class: power
-      entity_id:
-        - input_boolean.power_out
       value_template: "{{ states('input_boolean.power_out')}}"

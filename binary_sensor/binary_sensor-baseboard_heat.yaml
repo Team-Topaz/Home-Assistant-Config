@@ -3,8 +3,6 @@
     master_bedroom_baseboard_heat_on:
         friendly_name: 'Master Bedroom Baseboard Heat On'
         device_class: heat
-        entity_id:
-          - sensor.master_bedroom_temperature_change_rate
         value_template: '{{ states.sensor.master_bedroom_temperature_change_rate.state | float > 0.8 }}'
 
 - platform: bayesian

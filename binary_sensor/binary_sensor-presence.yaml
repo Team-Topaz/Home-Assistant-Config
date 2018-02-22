@@ -3,9 +3,6 @@
     ryan_home:
       friendly_name: 'Ryan Home'
       device_class: presence
-      entity_id:
-        - device_tracker.ryan_phone
-        - device_tracker.ryanphonenmap
       value_template: >
         {% if is_state('device_tracker.ryan_phone', 'home') %}
          True
@@ -17,9 +14,6 @@
     chelsea_home:
       friendly_name: 'Chelsea Home'
       device_class: presence
-      entity_id:
-        - device_tracker.chelsea_phone
-        - device_tracker.chelseaphonenmap
       value_template: >
         {% if is_state('device_tracker.chelsea_phone', 'home') %}
          True
@@ -38,9 +32,6 @@
          {% else %}
          False
          {% endif %}
-      entity_id:
-        - binary_sensor.ryan_home
-        - binary_sensor.chelsea_home
     everybody_home_or_distant:
       friendly_name: 'Everybody Home or Distant'
       device_class: presence
@@ -59,9 +50,3 @@
         {% else %}
         False
         {% endif %}
-      entity_id:
-        - binary_sensor.ryan_home
-        - binary_sensor.chelsea_home
-        - binary_sensor.everybody_home
-        - sensor.chelsea_distance_from_home
-        - sensor.ryan_distance_from_home

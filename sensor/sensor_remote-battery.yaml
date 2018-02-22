@@ -77,16 +77,9 @@
   sensors:
     ups_full_capacity:
       friendly_name: "UPS Full Capacity"
-      entity_id:
-        - sensor.ups_current_capacity
-        - sensor.ups_battery_capacity
-        - sensor.ups_output_wattage
       value_template:  "{{ ((states('sensor.ups_current_capacity') | float) * (1 / (states('sensor.ups_battery_capacity') | float / 100))) | round(1) }}"
       unit_of_measurement: "Wh"
     ups_current_capacity:
       friendly_name: "UPS Current Capacity"
-      entity_id:
-        - sensor.ups_runtime
-        - sensor.ups_output_wattage
       value_template:  "{{ ((states('sensor.ups_runtime') | float / 60) * (states('sensor.ups_output_wattage') | float)) | round(1) }}"
       unit_of_measurement: "Wh"

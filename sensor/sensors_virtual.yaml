@@ -35,8 +35,6 @@
      solar_elevation:
        friendly_name: "Solar Elevation"
        unit_of_measurement: "°"
-       entity_id:
-         - sun.sun
        value_template: >
         {% if states.sun.sun.attributes.elevation %}
           {{ states.sun.sun.attributes.elevation }}
@@ -79,8 +77,6 @@
     pioneer_volume_level:
       friendly_name: "Pioneer Volume Level"
       unit_of_measurement: "dB"
-      entity_id:
-        - media_player.pioneer_avr
       value_template: >
         {% if states.media_player.pioneer_avr.attributes.volume_level %}
           {{ (((states.media_player.pioneer_avr.attributes.volume_level) | float) * 185 | round(0) / 2 ) - 80.5  }}
@@ -89,20 +85,13 @@
         {% endif %}
     ryan_distance_from_home:
       friendly_name: 'Ryan Distance from Home'
-      entity_id:
-        - device_tracker.ryan_phone
       value_template: '{{distance(states.device_tracker.ryan_phone) | float | round(2) }}'
       unit_of_measurement: 'mi'
     chelsea_distance_from_home:
       friendly_name: 'Chelsea Distance from Home'
-      entity_id:
-        - device_tracker.chelsea_phone
       value_template: '{{distance(states.device_tracker.chelsea_phone) | float | round(2)}}'
       unit_of_measurement: 'mi'
     ryan_chelsea_distance:
       friendly_name: 'Chelsea Distance from Ryan'
-      entity_id:
-        - device_tracker.chelsea_phone
-        - device_tracker.ryan_phone
       value_template: '{{distance(states.device_tracker.chelsea_phone,states.device_tracker.ryan_phone) | float | round(2)}}'
       unit_of_measurement: 'mi'
