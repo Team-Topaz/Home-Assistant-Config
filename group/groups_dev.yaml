@@ -15,6 +15,7 @@ baseboard_heat_dev:
   name: 'Baseboard Heat Sensor Development'
   entities:
     - sensor.sn3_temperature
+    - binary_sensor.master_bedroom_temperature_trend
     - sensor.master_bedroom_temperature_change_rate
     - binary_sensor.master_bedroom_baseboard_heat_on
     - binary_sensor.master_bedroom_bayesian_baseboard_heat_sensor
