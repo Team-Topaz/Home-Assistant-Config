@@ -127,6 +127,7 @@ rflink:
     - doorbell_*
     - v2phoenix_*
     - forest_*
+    - friedland_*
 
 #usps:
 #  username: !secret usps_username
