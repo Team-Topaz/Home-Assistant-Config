@@ -25,6 +25,10 @@
         - sensor.master_bedroom_temperature_change_rate
         - sensor.master_bedroom_calculated_temperature_change
       value_template: "{{ ( (states('sensor.master_bedroom_temperature_change_rate') | float) - (states('sensor.master_bedroom_calculated_temperature_change') | float) ) | round(2) }}"
+    mbed_tcr_trend:
+      friendly_name: "Master Bedroom Temperature Change Rate New"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ (states.binary_sensor.master_bedroom_temperature_trend.attributes.gradient | float) * 3600 }}"
 
 
 - platform: template
