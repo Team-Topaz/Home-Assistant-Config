@@ -1,0 +1,8 @@
+sunrise_alarm_light_on:
+  alias: 'Sunrise Alarm: Turn On Light'
+  sequence:
+  - service: light.turn_on
+    data_template:
+      entity_id: light.sconces
+      transition: "{{ states('input_number.sunrise_alarm_fade_time') | float * 60 | int }}"
+      brightness_pct: "{{ states('input_number.sunrise_alarm_max_level') | round(0) | int }}"
