@@ -14,3 +14,12 @@
         {% else %}
          False
         {% endif %}
+
+- platform: trend
+  sensors:
+    master_bedroom_temperature_trend:
+      friendly_name: "Master Bedroom Temperature Trend"
+      entity_id: sensor.sn3_temperature
+      max_samples: 10
+      sample_duration: 600
+      device_class: heat
