@@ -20,6 +20,36 @@
     master_bedroom_temperature_trend:
       friendly_name: "Master Bedroom Temperature Trend"
       entity_id: sensor.sn3_temperature
-      max_samples: 10
-      sample_duration: 600
+      max_samples: 100
+      sample_duration: 900
+      device_class: heat
+    office_temperature_trend:
+      friendly_name: "Office Temperature Trend"
+      entity_id: sensor.office_temperature
+      max_samples: 100
+      sample_duration: 900
+      device_class: heat
+    bike_room_temperature_trend:
+      friendly_name: "Bike Room Temperature Trend"
+      entity_id: sensor.bike_room_temperature_trend
+      max_samples: 100
+      sample_duration: 900
+      device_class: heat
+    living_room_temperature_trend:
+      friendly_name: "Living Room Temperature Trend"
+      entity_id: sensor.sn2_temperature
+      max_samples: 100
+      sample_duration: 900
+      device_class: heat
+    bonus_room_temperature_trend:
+      friendly_name: "Bonus Room Temperature Trend"
+      entity_id: sensor.sn4_temperature
+      max_samples: 100
+      sample_duration: 900
+      device_class: heat
+    outdoor_temperature_trend:
+      friendly_name: "Outdoor Temperature Trend"
+      entity_id: sensor.weather_temperature
+      max_samples: 100
+      sample_duration: 900
       device_class: heat
