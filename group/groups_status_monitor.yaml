@@ -54,6 +54,7 @@ net_networking:
 net_reachability:
   name: 'Availability'
   entities:
+    - binary_sensor.rflink_ping
     - binary_sensor.living_room_harmony_ping
     - binary_sensor.domain_controller_ping
     - binary_sensor.media_center_pc_ping
