@@ -33,7 +33,7 @@
       device_class: heat
     bike_room_temperature_trend:
       friendly_name: "Bike Room Temperature Trend"
-      entity_id: sensor.bike_room_temperature_trend
+      entity_id: sensor.bike_room_temperature
       max_samples: 100
       sample_duration: 900
       min_gradient: 0.000138
