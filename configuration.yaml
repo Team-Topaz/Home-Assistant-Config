@@ -129,9 +129,9 @@ rflink:
     - forest_*
     - friedland_*
 
-#usps:
-#  username: !secret usps_username
-#  password: !secret usps_password
+usps:
+  username: !secret usps_username
+  password: !secret usps_password
 
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
