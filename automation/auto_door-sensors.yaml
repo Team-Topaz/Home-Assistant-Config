@@ -71,3 +71,27 @@
   - service: light.turn_on
     data:
       entity_id: light.porch
+
+#Master bedroom automations.
+#The idea is that when you open the door at night, the light turns on at a low
+#level for a few minutes.
+- id: door_sensor_mbed_nightlight
+  alias: 'Door Sensor: Master Bedroom Nightlight'
+  initial_state: 'off'
+  trigger:
+    platform: event
+    event_type: button_pressed
+    event_data: {"state": "on", "entity_id": "switch.master_bedroom_door_sensor"}
+  action:
+  - service: light.turn_on
+    data:
+      entity_id: light.kitchen
+      brightness_pct: 25
+  - service: light.turn_on
+    data:
+      entity_id: light.floor_lamp
+      brightness_pct: 25
+  - service: light.turn_on
+    data:
+      entity_id: light.dining
+      brightness_pct: 25
