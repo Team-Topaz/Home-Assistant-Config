@@ -1,6 +1,0 @@
-- platform: template
-  sensors:
-    master_bedroom_baseboard_heat_on:
-        friendly_name: 'Master Bedroom Baseboard Heat On'
-        device_class: heat
-        value_template: '{{ states.sensor.master_bedroom_temperature_change_rate.state | float > 0.8 }}'

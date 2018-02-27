@@ -17,7 +17,6 @@ baseboard_heat_dev:
     - sensor.sn3_temperature
     - binary_sensor.master_bedroom_temperature_trend
     - sensor.master_bedroom_temperature_rate
-    - sensor.master_bedroom_temperature_change_rate
     - binary_sensor.master_bedroom_baseboard_heat_on
     - binary_sensor.master_bedroom_bayesian_baseboard_heat_sensor
     - sensor.master_bedroom_baseboard_heat_on_time_24
@@ -29,10 +28,6 @@ temperature_change_dev:
   entities:
     - sensor.sn3_temperature
     - sensor.weather_temperature
-    - sensor.solar_elevation
-    - sensor.master_bedroom_temperature_change_rate
-    - sensor.master_bedroom_temperature_last_read_time
-    - sensor.master_bedroom_temperature_last_read_value
     - sensor.master_bedroom_outdoor_temperature_delta
     - sensor.cloud_cover_coefficient
     - sensor.household_solar_gain

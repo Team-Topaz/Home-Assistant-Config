@@ -1,0 +1,64 @@
+- platform: template
+  sensors:
+    master_bedroom_compensated_temperature_change_range:
+      friendly_name: "Master Bedroom Compensated Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ( (states('sensor.master_bedroom_temperature_rate') | float) - (states('sensor.master_bedroom_calculated_temperature_change') | float) ) | round(2) }}"
+    master_bedroom_temperature_rate:
+      friendly_name: "Master Bedroom Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.master_bedroom_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+
+- platform: template
+  sensors:
+    living_room_temperature_rate:
+      friendly_name: "Living Room Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.living_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+
+- platform: template
+  sensors:
+    office_temperature_rate:
+      friendly_name: "Office Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.office_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+
+- platform: template
+  sensors:
+    bonus_room_temperature_rate:
+      friendly_name: "Bonus Room Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.bonus_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+- platform: template
+  sensors:
+    bike_room_compensated_temperature_change_range:
+      friendly_name: "Bike Room Compensated Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ( (states('sensor.bike_room_temperature_rate') | float) - (states('sensor.bike_room_calculated_temperature_change') | float) ) | round(2) }}"
+    bike_room_temperature_rate:
+      friendly_name: "Bike Room Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.bike_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+- platform: template
+  sensors:
+    outdoor_temperature_rate:
+      friendly_name: "Outdoor Temperature Change Rate"
+      unit_of_measurement: "°F/H"
+      value_template: "{{ ((states.binary_sensor.outdoor_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+- platform: min_max
+  name: "Average Indoor Temperature Rate"
+  entity_ids:
+    - sensor.bonus_room_temperature_rate
+    - sensor.living_room_temperature_rate
+    - sensor.master_bedroom_temperature_rate
+    - sensor.office_temperature_rate
+    - sensor.bike_room_temperature_rate
+    #- sensor.sn6_humidity
+  type: mean
+  round_digits: 2
