@@ -27,3 +27,8 @@
   host: 192.168.1.74
   name: RfLink Ping
   icon: mdi:access-point
+
+- platform: ping
+  host: 192.168.1.133
+  name: Printer Ping
+  icon: mdi:printer

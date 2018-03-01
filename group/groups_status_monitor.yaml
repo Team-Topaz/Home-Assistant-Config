@@ -4,12 +4,12 @@ status_monitor:
   icon: mdi:lan-connect
   entities:
     - group.net_ha_server_stats
-    - group.net_networking
+    - group.net_router_status
+    - group.net_printer_status
+    - group.net_dc_status
     - group.net_reachability
     - group.net_misc
-    - group.net_sensor_status
     - group.ups_status
-    - group.status_lights
 
 net_ha_server_stats:
   name: 'Hassio Server'
@@ -43,29 +43,17 @@ ups_status:
     #- sensor.ups_output_load
     #- sensor.ups_output_voltage
     - sensor.ups_output_wattage
-net_networking:
-  name: 'Internet Connection'
-  icon: mdi:networking
-  entities:
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-    - sensor.speedtest_ping
 
 net_reachability:
   name: 'Availability'
   entities:
     - binary_sensor.rflink_ping
     - binary_sensor.living_room_harmony_ping
-    - binary_sensor.domain_controller_ping
     - binary_sensor.media_center_pc_ping
-    - binary_sensor.gateway_ping
 
 net_misc:
   name: 'Miscellaneous'
   entities:
-    - sensor.plex
-    - sensor.iis_certificate
-    - sensor.ssl_certificate_expiry
     - sensor.ryan_phone_battery
     - sensor.chelsea_phone_battery
 
@@ -78,3 +66,25 @@ net_sensor_status:
     - binary_sensor.sn4_status
     - binary_sensor.sn5_status
     - binary_sensor.bike_room_status
+
+net_dc_status:
+  name: 'Server Status'
+  entities:
+    - binary_sensor.domain_controller_ping
+    - sensor.iis_certificate
+    - sensor.plex
+
+net_router_status:
+  name: 'Router Status'
+  entities:
+    - binary_sensor.gateway_ping
+    - sensor.router_ram_usage
+    - sensor.router_uptime
+    - sensor.router_cpu_usage
+
+net_printer_status:
+  name: 'Printer Status'
+  entities:
+    - binary_sensor.printer_ping
+    - sensor.printer_uptime
+    - sensor.printer_status
