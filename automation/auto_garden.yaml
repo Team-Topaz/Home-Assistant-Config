@@ -1,0 +1,51 @@
+- id: garden_frost_alert
+  alias: 'Garden: Frost Alert'
+  trigger:
+  - platform: time
+    at: '00:08:00'
+  condition:
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: sensor.weather_daily_low_temperature_1
+        below: 34
+      - condition: state
+        entity_id: binary_sensor.is_growing_season
+        state: 'on'
+  action:
+  - service: notify.push_main
+    data_template:
+      title: 'Unexpected Frost!'
+      message: "Tomorrow's temperature is expected to dip to {{ states('sensor.weather_daily_low_temperature_1') | float | round(0) | int }}°F. Protect frost-sensitive plants."
+      data:
+        tag: 'garden_frost'
+
+- id: garden_frost_alert_enabled
+  alias: 'Garden: Frost Alert Enabled'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.is_growing_season
+    to: 'on'
+  action:
+  - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
+  - service: notify.push_main
+    data:
+      title: 'Garden Frost Alerts Started'
+      message: "Gardening season has begun! You'll recieve alerts if frost is forecasted."
+      data:
+        tag: 'garden_frost_alerts_enabled'
+
+- id: garden_frost_alert_disabled
+  alias: 'Garden: Frost Alert Disabled'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.is_growing_season
+    to: 'off'
+  action:
+  - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
+  - service: notify.push_main
+    data:
+      title: 'Garden Frost Alerts Ended'
+      message: "Gardening season is wrapping up! Alerts for frost have stopped."
+      data:
+        tag: 'garden_frost_alerts_enabled'
