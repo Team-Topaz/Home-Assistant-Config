@@ -58,7 +58,7 @@
   trigger:
     - platform: event
       event_type: timer.finished
-      entity_id: timer.mqtt_timeout
+      event_data: {"state": "idle", "entity_id": "timer.mqtt_timeout"}
   action:
   - service: notify.push_main
     data_template:
