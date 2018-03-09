@@ -6,6 +6,10 @@
   username: !secret ups_username
   password: !secret ups_password
 
+- platform: mqtt
+  state_topic: "$SYS/broker/uptime"
+  name: "MQTT Broker Uptime"
+
 - platform: template
   sensors:
     day_of_year:
