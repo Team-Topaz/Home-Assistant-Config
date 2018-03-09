@@ -2,6 +2,9 @@
 
 #This auto-restarts Home Assistant. Rethink a bit? It's OK to restart when we're asleep.
 #There's an uptime restriction in conditions to prevent a condition where HASS bootloops.
+#There are some other problems:
+# 1. Certain things, like the sunrise alarm, might lose their settings.
+# 2. We need to not be on vacation or vacation mode will disable.
 - id: hass_auto_reboot
   alias: "HASS: Auto-reboot When Needed"
   trigger:
@@ -39,3 +42,49 @@
         data:
           tag: 'reboot_initiated'
     - service: homeassistant.restart
+
+#Begin counting down MQTT timeout.
+- id: hass_mqtt_timeout_refresh
+  alias: "HASS: Reset MQTT Timeout"
+  trigger:
+    - platform: state
+      entity_id: sensor.mqtt_broker_uptime
+  action:
+    - service: timer.start
+      entity_id: timer.mqtt_timeout
+
+- id: hass_mqtt_timeout_reached
+  alias: "HASS: MQTT Timeout"
+  trigger:
+    - platform: timer.finished
+      entity_id: timer.mqtt_timeout
+  action:
+  - service: notify.push_main
+    data_template:
+      title: 'Connectivity to MQTT Broker lost'
+      message: "This may cause difficulties controlling some lights and reading some sensors."
+      data:
+        tag: 'hass_mqtt'
+        actions:
+        - action: hass_restart
+          title: "Restart"
+
+- id: hass_restart_clicked
+  alias: 'HASS: Restart Requested'
+  trigger:
+    platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: hass_restart
+  condition:
+    condition: state
+    entity_id: input_boolean.power_out
+    state: 'on'
+  action:
+  - service: notify.push_main
+    data:
+      title: 'Home Assistant Restart'
+      message: "Home Assistant has been restarted by user request."
+      data:
+        tag: 'hass_restart'
+  - service: homeassistant.restart

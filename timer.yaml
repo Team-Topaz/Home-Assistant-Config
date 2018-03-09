@@ -1,0 +1,6 @@
+
+#This timeout is used to determine how long before HASS detects a failure
+#with the MQTT broker. It has been left long on purpose, as restarting the
+#server would otherwise cause it to trigger.
+mqtt_timeout:
+  duration: '00:20:00'
