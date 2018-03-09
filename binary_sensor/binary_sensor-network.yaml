@@ -1,34 +1,31 @@
 - platform: ping
   host: 192.168.1.51
   name: Living Room TV Ping
-  icon: mdi:television
 
 - platform: ping
   host: 192.168.1.102
   name: Living Room Harmony Ping
-  icon: mdi:switch
 
 - platform: ping
   host: 192.168.1.20
   name: Domain Controller Ping
-  icon: mdi:sever
 
 - platform: ping
   host: 192.168.1.123
   name: Media Center PC Ping
-  icon: mdi:television-guide
 
 - platform: ping
   host: 192.168.1.1
   name: Gateway Ping
-  icon: mdi:router-wireless
 
 - platform: ping
   host: 192.168.1.74
   name: RfLink Ping
-  icon: mdi:access-point
 
 - platform: ping
   host: 192.168.1.133
   name: Printer Ping
-  icon: mdi:printer
+
+- platform: ping
+  host: 192.168.1.75
+  name: Lutron Smart Bridge Ping

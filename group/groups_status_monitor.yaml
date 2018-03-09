@@ -50,6 +50,7 @@ net_reachability:
     - binary_sensor.rflink_ping
     - binary_sensor.living_room_harmony_ping
     - binary_sensor.media_center_pc_ping
+    - binary_sensor.lutron_smart_bridge_ping
 
 net_misc:
   name: 'Miscellaneous'
