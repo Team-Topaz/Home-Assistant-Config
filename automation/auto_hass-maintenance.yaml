@@ -62,7 +62,7 @@
   action:
   - service: notify.push_main
     data_template:
-      title: 'Connectivity to MQTT Broker lost'
+      title: 'Connectivity to MQTT lost'
       message: "This may cause difficulties controlling some lights and reading some sensors."
       data:
         tag: 'hass_mqtt'
