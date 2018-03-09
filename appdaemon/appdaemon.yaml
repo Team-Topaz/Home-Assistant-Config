@@ -1,0 +1,16 @@
+secrets: /config/secrets.yaml
+log:
+  logfile: STDOUT
+  errorfile: STDERR
+appdaemon:
+  threads: 10
+  app_dir: /config/appdaemon/apps
+  api_key: !secret appdaemon_api_key
+  plugins:
+HASS:
+  type: hass
+  ha_url: !secret base_url_with_protocol
+  ha_key: !secret http_password
+hadashboard:
+  dash_url: http://127.0.0.1:5050
+  dash_dir: /config/appdaemon/dashboards
