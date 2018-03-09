@@ -56,7 +56,8 @@
 - id: hass_mqtt_timeout_reached
   alias: "HASS: MQTT Timeout"
   trigger:
-    - platform: timer.finished
+    - platform: event
+      event_type: timer.finished
       entity_id: timer.mqtt_timeout
   action:
   - service: notify.push_main
