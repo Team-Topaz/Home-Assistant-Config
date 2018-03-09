@@ -1,7 +1,7 @@
 - platform: template
   sensors:
     is_growing_season:
-      friendly_name: 'Inside: Cooling Required'
+      friendly_name: 'Garden: Is Growing Season'
       device_class: cold
       value_template: >
         {% if ((states('sensor.day_of_year') | int) >= 90) and ((states('sensor.day_of_year') | int) <= 305) %}
