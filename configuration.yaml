@@ -121,6 +121,7 @@ rflink:
     - v2phoenix_*
     - forest_*
     - friedland_*
+ffmpeg:
 
 #usps:
 #  username: !secret usps_username
