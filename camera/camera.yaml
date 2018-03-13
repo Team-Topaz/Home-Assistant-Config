@@ -10,7 +10,11 @@
   name: Trail Camera
 
 - platform: onvif
-  name: Garden Camera
+  name: Garden Camera 2
   host: 192.168.1.81
   profile: 0
   port: 1018
+
+- platform: ffmpeg
+  name: Garden Camera
+  input: -rtsp_transport tcp -i rtsp://192.168.1.81:554/11
