@@ -62,7 +62,6 @@ environment_outside:
     - sensor.allergy_index_forecasted_average
     - sensor.allergy_index_today
     - sensor.allergy_index_tomorrow
-    - sensor.air_quality_pm_25
 
 environment_today:
   name: "Today's Weather"
