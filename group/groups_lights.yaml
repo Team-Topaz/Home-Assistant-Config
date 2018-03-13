@@ -9,6 +9,7 @@ lights:
 indoor_lights:
   name: 'Indoor Lights'
   entities:
+    - light.great_room
     - light.kitchen
     - light.dining
     - light.floor_lamp
@@ -30,6 +31,7 @@ status_lights:
   name: 'Status Lights'
   control: 'hidden'
   entities:
+    - light.notification_led
     - light.office_led
     - light.sn2_led
     - light.sn3_led

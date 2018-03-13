@@ -1,5 +1,5 @@
 homeassistant:
-  name: Home
+  name: !secret home_name
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: 32
@@ -30,17 +30,10 @@ recorder:
   exclude:
     entities:
       - sensor.since_last_boot
-      - sensor.iis_certificate
-      - sensor.master_bedroom_temperature_last_read_value
-      - sensor.master_bedroom_last_read_time
-      - sensor.living_room_temperature_last_read_value
-      - sensor.living_room_temperature_last_read_time
-      - sensor.office_temperature_last_read_time
-      - sensor.office_temperature_last_read_value
-      - sensor.bonus_room_temperature_last_read_time
-      - sensor.bonus_room_temperature_last_read_value
-      - sensor.bike_room_temperature_last_read_value
-      - sensor.bike_room_temperature_last_read_time
+      - automation.hass_reset_mqtt_timeout
+      - sensor.bedroom_lights_toggle_randomizer
+      - sensor.kitchen_lights_toggle_randomizer
+      - sensor.living_room_tv_toggle_randomizer
 history:
   exclude:
     domains:

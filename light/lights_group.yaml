@@ -1,0 +1,16 @@
+- platform: group
+  name: Great Room
+  entities:
+    - light.kitchen
+    - light.dining
+    - light.floor_lamp
+
+- platform: group
+  name: Notification LED
+  entities:
+  - light.office_led
+  - light.sn2_led
+  - light.sn3_led
+  - light.sn4_led
+  - light.sn5_led
+  - light.bike_room_led

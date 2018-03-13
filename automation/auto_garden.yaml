@@ -49,3 +49,49 @@
       message: "Gardening season is wrapping up! Alerts for frost have stopped."
       data:
         tag: 'garden_frost_alerts_enabled'
+
+- id: garden_irrigation_reset_status
+  alias: 'Garden: Reset Irrigation status'
+  trigger:
+  - platform: time
+    at: '00:00:00'
+  action:
+  - service: input_boolean.turn_off
+    data:
+      entity_id: input_boolean.garden_irrigated
+
+- id: garden_irrigation_check
+  alias: 'Garden: Check irrigation status'
+  trigger:
+  - platform: time
+    at: '08:00:00'
+  condition:
+    condition: and
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.is_growing_season
+      state: 'on'
+    - condition: template
+      value_template: "{{ as_timestamp(now()) | timestamp_custom('%w') == 6 }}" #On Saturday
+  action:
+  - service: notify.push_main
+    data_template:
+      title: Water the Garden
+      message: "It's watering day! It needs about {{ states(sensor.garden_rainmeter_water_needs) }} inches!"
+      data:
+        tag: garden_irrigation
+        actions:
+        - action: garden_irrigated
+          title: "Irrigated"
+
+- id: garden_irrigation_complete
+  alias: 'Garden: Irrigation Complete'
+  trigger:
+  - platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: garden_irrigated
+  action:
+  - service: input_boolean.turn_on
+    data:
+      entity_id: input_boolean.garden_irrigated

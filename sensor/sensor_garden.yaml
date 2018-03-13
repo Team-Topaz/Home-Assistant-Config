@@ -1,0 +1,23 @@
+- platform: mqtt
+  state_topic: "rainmeter/weekly"
+  name: "Garden Rainmeter Weekly"
+  unit_of_measurement: "in"
+  value_template: '{{ value | float | round(1) }}'
+
+- platform: mqtt
+  state_topic: "rainmeter/heatcompensation"
+  name: "Garden Rainmeter Heat Compensation"
+  unit_of_measurement: "in"
+  value_template: '{{ value | float | round(1) }}'
+
+- platform: template
+  sensors:
+    garden_rainmeter_water_needs:
+      friendly_name: 'Garden Rainmeter Water Needs'
+      value_template: "{{ (states('input_number.garden_irrigation_target') | float) - (states('sensor.garden_rainmaker_weekly') | float) + (states('sensor.garden_rainmeter_heat_compensation') | float) }}"
+      unit_of_measurement: 'in'
+    garden_rainmeter_water_needs_gal:
+      friendly_name: 'Garden Rainmeter Irrigation Volume'
+      value_template: "{{ (states('sensor.garden_rainmaker_weekly') | float) * 34.28 }}"
+      unit_of_measurement: 'gal'
+      #The conversion from inches to gallons is: 1" * 55 sq ft = 4.58 cubic feet * 7.48052 cu ft/gallon = 34.28 gallons per inch of water needed.

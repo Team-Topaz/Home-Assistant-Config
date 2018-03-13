@@ -37,3 +37,11 @@ sunrise_alarm_max_level:
   min: 0
   max: 100
   step: 1
+
+garden_irrigation_target:
+  name: Garden Irrigation Inches
+  icon: mdi:water
+  initial: 1.5
+  min: 0
+  max: 4
+  step: .25
