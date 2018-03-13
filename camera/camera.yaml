@@ -10,5 +10,11 @@
   name: Trail Camera
 
 - platform: ffmpeg
-  name: Garden Camera
+  name: Garden Camera Raw
   input: -rtsp_transport tcp -i rtsp://192.168.1.81:554/12 -an
+
+- platform: proxy
+  entity_id: camera.garden_camera_raw
+  name: Garden Camera
+  image_refresh_rate: 5.0
+  cache_images: true
