@@ -1,4 +1,5 @@
 - platform: snmp
+  scan_interval: 60
   name: Router Uptime
   host: 192.168.1.1
   community: public
@@ -7,6 +8,7 @@
   value_template: '{{((value | int) / 6000) | int}}'
 
 - platform: snmp
+  scan_interval: 30
   name: Router RAM Usage
   host: 192.168.1.1
   community: public
@@ -15,6 +17,7 @@
   unit_of_measurement: '%'
 
 - platform: snmp
+  scan_interval: 30
   name: Router CPU Usage
   host: 192.168.1.1
   community: public
@@ -23,6 +26,7 @@
   unit_of_measurement: '%'
 
 - platform: snmp
+  scan_interval: 60
   name: Printer Status
   host: 192.168.1.133
   community: public
@@ -43,6 +47,7 @@
     {% endif %}
 
 - platform: snmp
+  scan_interval: 60
   name: Printer Uptime
   host: 192.168.1.133
   community: public
