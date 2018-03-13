@@ -17,7 +17,7 @@ garden_irrigation:
   - input_number.garden_irrigation_target
 
 garden_temperature:
-  name: 'Tomorrow's Forecast'
+  name: "Tomorrow's Forecast"
   entities:
   - sensor.weather_daily_summary
   - sensor.weather_daily_high_temperature_1
