@@ -18,6 +18,6 @@
       unit_of_measurement: 'in'
     garden_rainmeter_water_needs_gal:
       friendly_name: 'Garden Rainmeter Irrigation Volume'
-      value_template: "{{ (states('sensor.garden_rainmaker_weekly') | float) * 34.28 }}"
+      value_template: "{{ (states('sensor.garden_rainmeter_water_needs') | float) * 34.28 }}"
       unit_of_measurement: 'gal'
       #The conversion from inches to gallons is: 1" * 55 sq ft = 4.58 cubic feet * 7.48052 cu ft/gallon = 34.28 gallons per inch of water needed.
