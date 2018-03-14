@@ -10,14 +10,14 @@ garden_view:
 garden_irrigation:
   name: 'Irrigation'
   entities:
-  - sensor.garden_rainmaker_weekly
+  - sensor.garden_rainmeter_weekly
   - sensor.garden_rainmeter_heat_compensation
   - sensor.garden_rainmeter_water_needs
   - sensor.garden_rainmeter_water_needs_gal
   - input_number.garden_irrigation_target
 
 garden_temperature:
-  name: "Tomorrow's Forecast"
+  name: "Forecast"
   entities:
   - sensor.weather_daily_summary
   - sensor.weather_daily_high_temperature_1
