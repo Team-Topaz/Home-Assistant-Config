@@ -1,10 +1,19 @@
 - platform: template
   sensors:
-    is_growing_season:
+    garden_is_growing_season:
       friendly_name: 'Garden: Is Growing Season'
       device_class: cold
       value_template: >
         {% if ((states('sensor.day_of_year') | int) >= 90) and ((states('sensor.day_of_year') | int) <= 305) %}
+         True
+        {% else %}
+         False
+        {% endif %}
+    garden_sun_is_visible:
+      friendly_name: 'Garden: Sun is Visible'
+      device_class: light
+      value_template: >
+        {% if states('sensor.solar_elevation') > 31 %}
          True
         {% else %}
          False

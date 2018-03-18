@@ -10,7 +10,7 @@
         entity_id: sensor.weather_daily_low_temperature_1
         below: 34
       - condition: state
-        entity_id: binary_sensor.is_growing_season
+        entity_id: binary_sensor.garden_is_growing_season
         state: 'on'
   action:
   - service: notify.push_main
@@ -24,7 +24,7 @@
   alias: 'Garden: Frost Alert Enabled'
   trigger:
   - platform: state
-    entity_id: binary_sensor.is_growing_season
+    entity_id: binary_sensor.garden_is_growing_season
     to: 'on'
   action:
   - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
@@ -39,7 +39,7 @@
   alias: 'Garden: Frost Alert Disabled'
   trigger:
   - platform: state
-    entity_id: binary_sensor.is_growing_season
+    entity_id: binary_sensor.garden_is_growing_season
     to: 'off'
   action:
   - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
@@ -69,7 +69,7 @@
     condition: and
     conditions:
     - condition: state
-      entity_id: binary_sensor.is_growing_season
+      entity_id: binary_sensor.garden_is_growing_season
       state: 'on'
     - condition: template
       value_template: "{{ as_timestamp(now()) | timestamp_custom('%w') == 6 }}" #On Saturday

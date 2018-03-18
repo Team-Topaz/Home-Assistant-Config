@@ -18,6 +18,22 @@
       unit_of_measurement: 'in'
     garden_rainmeter_water_needs_gal:
       friendly_name: 'Garden Rainmeter Irrigation Volume'
-      value_template: "{{ ((states('sensor.garden_rainmeter_weekly') | float) * 34.28) | round(0) }}"
+      value_template: "{{ ((states('sensor.garden_rainmeter_water_needs') | float) * 34.28) | round(0) }}"
       unit_of_measurement: 'gal'
       #The conversion from inches to gallons is: 1" * 55 sq ft = 4.58 cubic feet * 7.48052 cu ft/gallon = 34.28 gallons per inch of water needed.
+
+#Calculate the sun exposure of the garden. My formula for this is pretty bad.
+#We assume that we have 0 sun exposure unless the sun is above 32 degrees.
+#At 32 degrees, sun exposure is considered to be 100%
+#The sun exposure is then just the cloud cover coefficient.
+- platform: template
+  sensors:
+    garden_sun_level:
+      friendly_name: 'Garden Sun Exposure'
+      value_template: >
+      {% if states('binary_sensor.garden_sun_is_visible') == on %}
+        {{ (states('sensor.cloud_cover_coefficient') | float) * 100 }}
+      {% else %}
+        0
+      {% endif %}
+      unit_of_measurement: '%'
