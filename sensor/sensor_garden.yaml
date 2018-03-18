@@ -31,7 +31,7 @@
     garden_sun_level:
       friendly_name: 'Garden Sun Exposure'
       value_template: >
-      {% if states('binary_sensor.garden_sun_is_visible') == on %}
+      {% if is_state('binary_sensor.garden_sun_is_visible', 'On') %}
         {{ (states('sensor.cloud_cover_coefficient') | float) * 100 }}
       {% else %}
         0
