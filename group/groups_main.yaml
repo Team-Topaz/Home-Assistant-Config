@@ -21,6 +21,7 @@ sunrise_alarm:
     - input_datetime.sunrise_alarm_weekend
     - input_number.sunrise_alarm_fade_time
     - input_number.sunrise_alarm_max_level
+    - script.sunrise_alarm_light_on
 
 scenes:
   name: 'Scenes'
