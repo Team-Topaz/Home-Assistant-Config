@@ -14,7 +14,7 @@
   sensors:
     garden_rainmeter_water_needs:
       friendly_name: 'Garden Rainmeter Water Needs'
-      value_template: "{{ (states('input_number.garden_irrigation_target') | float) - (states('sensor.garden_rainmeter_weekly') | float) + (states('sensor.garden_rainmeter_heat_compensation') | float) }}"
+      value_template: "{{ ((states('input_number.garden_irrigation_target') | float) - (states('sensor.garden_rainmeter_weekly') | float) + (states('sensor.garden_rainmeter_heat_compensation') | float)) | round(1) }}"
       unit_of_measurement: 'in'
     garden_rainmeter_water_needs_gal:
       friendly_name: 'Garden Rainmeter Irrigation Volume'
