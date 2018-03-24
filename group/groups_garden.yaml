@@ -23,3 +23,8 @@ garden_temperature:
   - sensor.weather_daily_high_temperature_1
   - sensor.weather_daily_low_temperature_1
   - sensor.weather_daily_max_precip_intensity_1
+
+garden_misc:
+  name: "Misc"
+  entities:
+  - switch.seedling_fan
