@@ -6,6 +6,7 @@ garden_view:
   - camera.garden_camera
   - group.garden_irrigation
   - group.garden_temperature
+  - group.garden_misc
 
 garden_irrigation:
   name: 'Irrigation'
