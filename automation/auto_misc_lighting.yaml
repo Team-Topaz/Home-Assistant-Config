@@ -67,19 +67,20 @@
       data:
         entity_id: light.dining_room_chandelier
         brightness_pct: 100
-        transition: 900
+        transition: 450
     - service: light.turn_on
       data:
         entity_id: light.living_room_floor_lamp
         brightness_pct: 100
-        transition: 900
+        transition: 450
 
 - id: living_room_lamp_on_when_kitchen_on
   alias: 'Living Room: Turn On Floor Lamp and Dining'
   trigger:
     - platform: state
-      entity_id: light.kitchen_overhead_lights
-      to: 'on'
+      entity_id: sensor.hallway_pico
+      from: '0'
+      to: '1'
   condition:
     condition: and
     conditions:
@@ -91,7 +92,7 @@
             below: 5
           - condition: numeric_state
             entity_id: sensor.sn2_ldr
-            below: 500
+            below: 700
       - condition: state
         entity_id: light.kitchen_overhead_lights
         state: 'on'
@@ -105,8 +106,9 @@
   alias: 'Kitchen: Turn Off Dining and Living when Off'
   trigger:
     - platform: state
-      entity_id: light.kitchen_overhead_lights
-      to: 'off'
+      entity_id: sensor.hallway_pico
+      from: '0'
+      to: '4'
   action:
     - service: scene.turn_on
       entity_id: scene.caseta_living_and_dining_off
