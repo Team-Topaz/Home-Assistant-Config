@@ -1,3 +1,4 @@
+*.json
 *.pid
 *.xml
 *.csr
