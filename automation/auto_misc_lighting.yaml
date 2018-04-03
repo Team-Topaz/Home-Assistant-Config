@@ -1,12 +1,11 @@
 - id: living_room_and_dining_on_special
   #Turns on all main space lights when favorite button is pressed.
-  alias: 'Living Room: Hallway Favorite Button'
+  alias: 'Living Room: Hallway Favorite On'
   trigger:
-    - platform: numeric_state
-      entity_id: light.kitchen_overhead_lights
-      value_template: "{{ state.attributes.brightness }}"
-      above: 251
-      below: 253
+    - platform: state
+      entity_id: sensor.hallway_pico
+      from: '0'
+      to: '2'
   condition:
     condition: and
     conditions:
@@ -22,13 +21,12 @@
 
 - id: living_room_and_dining_off_special
   #Turns on all main space lights when favorite button is pressed.
-  alias: 'Living Room: Hallway Favorite Button'
+  alias: 'Living Room: Hallway Favorite Off'
   trigger:
-    - platform: numeric_state
-      entity_id: light.kitchen_overhead_lights
-      value_template: "{{ state.attributes.brightness }}"
-      above: 251
-      below: 253
+    - platform: state
+      entity_id: sensor.hallway_pico
+      from: '0'
+      to: '2'
   condition:
     condition: and
     conditions:
