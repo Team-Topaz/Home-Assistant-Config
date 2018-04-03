@@ -1,0 +1,3 @@
+media_player.master:
+  platform: plex
+  unique_id: !secret plex_unique_id
