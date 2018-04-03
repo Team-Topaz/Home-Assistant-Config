@@ -30,3 +30,4 @@ google_calendars.yaml
 .HA_VERSION
 www
 **/__PYCACHE__/
+entity_registry.yaml
