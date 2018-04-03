@@ -1,11 +1,11 @@
-light.kitchen:
+light.kitchen_overhead_lights:
   friendly_name: Kitchen Lights
   
-light.dining:
+light.dining_room_chandelier:
   friendly_name: Dining Room Lights
 
-light.porch:
+light.front_porch_light:
   friendly_name: Front Porch
 
-light.sconces:
+light.master_bedroom_sconce:
   friendly_name: Master Bedroom Light

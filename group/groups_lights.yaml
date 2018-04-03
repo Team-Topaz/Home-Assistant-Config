@@ -10,11 +10,11 @@ indoor_lights:
   name: 'Indoor Lights'
   entities:
     - light.great_room
-    - light.kitchen
-    - light.dining
-    - light.floor_lamp
+    - light.kitchen_overhead_lights
+    - light.dining_room_chandelier
+    - light.living_room_floor_lamp
     - light.bike_room_light
-    - light.sconces
+    - light.master_bedroom_sconce
 
 xmas_lights:
   name: 'Christmas Lights'
@@ -25,7 +25,7 @@ xmas_lights:
 outdoor_lights:
   name: 'Outdoor Lights'
   entities:
-    - light.porch
+    - light.front_porch_light
 
 status_lights:
   name: 'Status Lights'

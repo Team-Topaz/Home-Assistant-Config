@@ -30,16 +30,16 @@
           before: sunrise
           before_offset: '00:30:00'
       - condition: state
-        entity_id: light.porch
+        entity_id: light.front_porch_light
         state: 'on'
       - condition: state
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
         state: 'off'
         for: 00:05:00
   action:
   - service: light.turn_on
     data:
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
 
 #This triggers if the front door is opened when the indoor lights are turned on, but porch light is off.
 #EG the front door is opened when you're home.
@@ -61,16 +61,16 @@
           before: sunrise
           before_offset: '00:30:00'
       - condition: state
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
         state: 'on'
       - condition: state
-        entity_id: light.porch
+        entity_id: light.front_porch_light
         state: 'off'
         for: 00:05:00
   action:
   - service: light.turn_on
     data:
-      entity_id: light.porch
+      entity_id: light.front_porch_light
 
 #Master bedroom automations.
 #The idea is that when you open the door at night, the light turns on at a low
@@ -85,13 +85,13 @@
   action:
   - service: light.turn_on
     data:
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
       brightness_pct: 25
   - service: light.turn_on
     data:
-      entity_id: light.floor_lamp
+      entity_id: light.living_room_floor_lamp
       brightness_pct: 25
   - service: light.turn_on
     data:
-      entity_id: light.dining
+      entity_id: light.dining_room_chandelier
       brightness_pct: 25

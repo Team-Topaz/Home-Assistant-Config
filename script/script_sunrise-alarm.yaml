@@ -3,6 +3,6 @@ sunrise_alarm_light_on:
   sequence:
   - service: light.turn_on
     data_template:
-      entity_id: light.sconces
+      entity_id: light.master_bedroom_sconce
       transition: "{{ states('input_number.sunrise_alarm_fade_time') | float * 60 | int }}"
       brightness_pct: "{{ states('input_number.sunrise_alarm_max_level') | round(0) | int }}"

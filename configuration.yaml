@@ -87,12 +87,9 @@ google:
   client_secret: !secret gcal_client_secret
 ifttt:
   key: !secret ifttt_key
-lutron_caseta:
-  host: 192.168.1.75
-  keyfile: caseta.key
-  certfile: caseta.crt
-  ca_certs: caseta-bridge.crt
-  lip_enabled: true
+lutron_caseta_pro:
+  bridges:
+    - host: 192.168.1.75
 wake_on_lan:
 google_assistant:
   project_id: !secret g_assistant_projectid

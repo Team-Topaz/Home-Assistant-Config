@@ -3,7 +3,7 @@
   alias: 'Living Room: Hallway Favorite Button'
   trigger:
     - platform: numeric_state
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
       value_template: "{{ state.attributes.brightness }}"
       above: 251
       below: 253
@@ -11,10 +11,10 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: light.dining
+        entity_id: light.dining_room_chandelier
         state: 'off'
       - condition: state
-        entity_id: light.floor_lamp
+        entity_id: light.living_room_floor_lamp
         state: 'off'
   action:
     - service: scene.turn_on
@@ -25,7 +25,7 @@
   alias: 'Living Room: Hallway Favorite Button'
   trigger:
     - platform: numeric_state
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
       value_template: "{{ state.attributes.brightness }}"
       above: 251
       below: 253
@@ -33,10 +33,10 @@
     condition: and
     conditions:
       - condition: state
-        entity_id: light.dining
+        entity_id: light.dining_room_chandelier
         state: 'on'
       - condition: state
-        entity_id: light.floor_lamp
+        entity_id: light.living_room_floor_lamp
         state: 'on'
   action:
     - service: scene.turn_on
@@ -62,17 +62,17 @@
             entity_id: sensor.sn2_ldr
             below: 500
       - condition: state
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
         state: 'on'
   action:
     - service: light.turn_on
       data:
-        entity_id: light.dining
+        entity_id: light.dining_room_chandelier
         brightness_pct: 100
         transition: 900
     - service: light.turn_on
       data:
-        entity_id: light.floor_lamp
+        entity_id: light.living_room_floor_lamp
         brightness_pct: 100
         transition: 900
 
@@ -80,7 +80,7 @@
   alias: 'Living Room: Turn On Floor Lamp and Dining'
   trigger:
     - platform: state
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
       to: 'on'
   condition:
     condition: and
@@ -95,7 +95,7 @@
             entity_id: sensor.sn2_ldr
             below: 500
       - condition: state
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
         state: 'on'
   action:
     - service: scene.turn_on
@@ -107,7 +107,7 @@
   alias: 'Kitchen: Turn Off Dining and Living when Off'
   trigger:
     - platform: state
-      entity_id: light.kitchen
+      entity_id: light.kitchen_overhead_lights
       to: 'off'
   action:
     - service: scene.turn_on
@@ -120,14 +120,14 @@
   # Off because it's a demo.
   trigger:
     - platform: state
-      entity_id: light.dining
+      entity_id: light.dining_room_chandelier
       from: 'off'
       to: 'on'
   condition:
     - condition: template
-      value_template: '{{ states.light.dining.attributes.brightness == 255 }}'
+      value_template: '{{ states.light.dining_room_chandelier.attributes.brightness == 255 }}'
   action:
     - service: light.turn_on
       data:
-        entity_id: light.dining
+        entity_id: light.dining_room_chandelier
         brightness: 128

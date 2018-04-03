@@ -1,9 +1,9 @@
 - platform: group
   name: Great Room
   entities:
-    - light.kitchen
-    - light.dining
-    - light.floor_lamp
+    - light.kitchen_overhead_lights
+    - light.dining_room_chandelier
+    - light.living_room_floor_lamp
 
 - platform: group
   name: Notification LED

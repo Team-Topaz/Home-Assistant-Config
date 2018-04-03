@@ -17,7 +17,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
 
 - id: vacation_kitchen_off
   alias: "Vacation: Kitchen Lights Off"
@@ -37,7 +37,7 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.kitchen
+        entity_id: light.kitchen_overhead_lights
 
 - id: vacation_bedroom_on
   alias: "Vacation: Bedroom Lights On"
@@ -62,7 +62,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.sconces
+        entity_id: light.master_bedroom_sconce
 
 - id: vacation_bedroom_off
   alias: "Vacation: Bedroom Lights Off"
@@ -82,7 +82,7 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.sconces
+        entity_id: light.master_bedroom_sconce
 
 - id: vacation_tv_on
   alias: "Vacation: TV On"

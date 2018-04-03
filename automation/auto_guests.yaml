@@ -110,7 +110,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.porch
+        entity_id: light.front_porch_light
         brightness: 255
 
 #When guest mode is activated, turn on the entertaining scene unconditionally.
