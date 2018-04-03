@@ -28,3 +28,4 @@ google_calendars.yaml
 .google.token
 .HA_VERSION
 www
+**/__PYCACHE__/
