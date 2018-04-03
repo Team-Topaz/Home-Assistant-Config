@@ -1,3 +1,20 @@
+- id: master_bedroom_pico_all_off
+  #Turns off everything when pico off button is held
+  alias: 'Master Bedroom: Pico Lights Out'
+  trigger:
+    - platform: state
+      entity_id: sensor.master_bedroom_ryan_pico
+      from: '0'
+      to: '4'
+      for:
+        seconds: 1
+    - platform: state
+      entity_id: sensor.master_bedroom_chelsea_pico
+      from: '0'
+      to: '4'
+      for:
+        seconds: 1
+
 - id: living_room_and_dining_on_special
   #Turns on all main space lights when favorite button is pressed.
   alias: 'Living Room: Hallway Favorite On'
