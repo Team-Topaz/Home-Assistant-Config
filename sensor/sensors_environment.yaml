@@ -117,12 +117,11 @@
       value_template: '{{ ( ( states.sensor.sn2_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
-- platform: pollen
-  zip_code: !secret home_zip
-  monitored_conditions:
-    - allergy_average_forecasted
-    - allergy_average_historical
-    - allergy_index_today
-    - allergy_index_tomorrow
-    - allergy_index_yesterday
-    - disease_average_forecasted
+#- platform: pollen
+#  zip_code: !secret home_zip
+#  monitored_conditions:
+#    - allergy_average_forecasted
+#    - allergy_average_historical
+#    - allergy_index_today
+#    - allergy_index_tomorrow
+#    - disease_average_forecasted
