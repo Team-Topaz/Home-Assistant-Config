@@ -59,9 +59,9 @@ logbook:
 logger:
   default: warning
   logs:
-    homeassistant.core: warning
-    rflink: debug
-    homeassistant.components.rflink: debug
+    #homeassistant.core: warning
+    #rflink: debug
+    #homeassistant.components.rflink: debug
     #homeassistant.components.hdmi_cec: debug
     #pylutron_caseta: debug
     #pylutron_caseta.smartbridge: debug
