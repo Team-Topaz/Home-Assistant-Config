@@ -58,7 +58,7 @@ logbook:
       - group.bike_room_sensor
 logger:
   default: warning
-  logs:
+#  logs:
     #homeassistant.core: warning
     #rflink: debug
     #homeassistant.components.rflink: debug
