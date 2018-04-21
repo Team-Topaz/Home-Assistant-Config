@@ -5,6 +5,10 @@
     track_new_devices: False
     hide_if_away: False
 
+- platform: google_maps
+  username: !secret location_sharing_username
+  password: !secret location_sharing_password
+
 #- platform: owntracks
 #  consider_home: 300
 
