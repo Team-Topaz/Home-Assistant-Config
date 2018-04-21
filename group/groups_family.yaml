@@ -12,8 +12,8 @@ family_view:
 tracked_devices:
   name: 'Family'
   entities:
-    - device_tracker.chelsea_phone
-    - device_tracker.ryan_phone
+    - device_tracker.google_maps_106557812104068122300
+    - device_tracker.google_maps_110517150127386992510
 
 guests:
   name: 'Guests'

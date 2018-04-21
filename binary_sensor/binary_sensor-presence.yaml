@@ -4,7 +4,7 @@
       friendly_name: 'Ryan Home'
       device_class: presence
       value_template: >
-        {% if is_state('device_tracker.ryan_phone', 'home') %}
+        {% if is_state('device_tracker.google_maps_110517150127386992510', 'home') %}
          True
         {% elif is_state('device_tracker.ryanphonenmap', 'home') %}
          True
@@ -15,7 +15,7 @@
       friendly_name: 'Chelsea Home'
       device_class: presence
       value_template: >
-        {% if is_state('device_tracker.chelsea_phone', 'home') %}
+        {% if is_state('device_tracker.google_maps_106557812104068122300', 'home') %}
          True
         {% elif is_state('device_tracker.chelseaphonenmap', 'home') %}
          True
