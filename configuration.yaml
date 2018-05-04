@@ -90,6 +90,7 @@ ifttt:
 lutron_caseta_pro:
   bridges:
     - host: 192.168.1.75
+      mac: !secret lutron_hub_mac
 wake_on_lan:
 google_assistant:
   project_id: !secret g_assistant_projectid
