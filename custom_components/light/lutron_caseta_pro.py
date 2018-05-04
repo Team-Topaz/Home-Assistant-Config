@@ -11,12 +11,12 @@ import asyncio
 import logging
 
 from homeassistant.components.light import (
-    ATTR_BRIGHTNESS, ATTR_TRANSITION, SUPPORT_BRIGHTNESS, SUPPORT_TRANSITION, Light)
-from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_TYPE, CONF_NAME, CONF_ID)
+    ATTR_BRIGHTNESS, ATTR_TRANSITION, SUPPORT_BRIGHTNESS, SUPPORT_TRANSITION, Light, DOMAIN)
+from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC, CONF_TYPE, CONF_NAME, CONF_ID)
 
 # pylint: disable=relative-beyond-top-level
 from ..lutron_caseta_pro import (Caseta, DEFAULT_TYPE, ATTR_AREA_NAME, CONF_AREA_NAME,
-                                 ATTR_INTEGRATION_ID)
+                                 ATTR_INTEGRATION_ID, DOMAIN as COMPONENT_DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -59,7 +59,8 @@ class CasetaData:
                                   mode, integration, action, value)
                     if action == Caseta.Action.SET:
                         device.update_state(value)
-                        yield from device.async_update_ha_state()
+                        if device.hass is not None:
+                            yield from device.async_update_ha_state()
                         break
 
 
@@ -73,18 +74,21 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     yield from bridge.open()
 
     data = CasetaData(bridge)
-    devices = [CasetaLight(light, data) for light in discovery_info[CONF_DEVICES]]
+    devices = [CasetaLight(light, data, discovery_info[CONF_MAC])
+               for light in discovery_info[CONF_DEVICES]]
     data.set_devices(devices)
-
-    for device in devices:
-        yield from device.query()
 
     async_add_devices(devices)
 
+    # register callbacks
     bridge.register(data.read_output)
+
+    # start bridge main loop
     bridge.start(hass)
 
-    return True
+    # update state for all devices
+    for device in devices:
+        yield from device.query()
 
 
 def _format_transition(transition) -> str:
@@ -107,10 +111,11 @@ def _format_transition(transition) -> str:
     return transition
 
 
+# pylint: disable=too-many-instance-attributes
 class CasetaLight(Light):
     """Representation of a Lutron light."""
 
-    def __init__(self, light, data):
+    def __init__(self, light, data, mac):
         """Initialize a Lutron light."""
         self._data = data
         self._name = light[CONF_NAME]
@@ -123,6 +128,7 @@ class CasetaLight(Light):
         self._is_dimmer = light[CONF_TYPE] == DEFAULT_TYPE
         self._is_on = False
         self._brightness = 0
+        self._mac = mac
 
     @asyncio.coroutine
     def query(self):
@@ -133,6 +139,15 @@ class CasetaLight(Light):
     def integration(self):
         """Return the Integration ID."""
         return self._integration
+
+    @property
+    def unique_id(self) -> str:
+        """Return a unique ID."""
+        if self._mac is not None:
+            return "{}_{}_{}_{}".format(COMPONENT_DOMAIN,
+                                        DOMAIN, self._mac,
+                                        self._integration)
+        return None
 
     @property
     def name(self):
@@ -150,7 +165,7 @@ class CasetaLight(Light):
     @property
     def brightness(self):
         """Brightness of the light (an integer in the range 1-255)."""
-        return (self._brightness / 100) * 255
+        return int((self._brightness / 100) * 255)
 
     @property
     def is_on(self):

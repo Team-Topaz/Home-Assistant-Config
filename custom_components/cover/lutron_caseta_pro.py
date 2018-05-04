@@ -8,11 +8,13 @@ import asyncio
 import logging
 
 from homeassistant.components.cover import (CoverDevice, SUPPORT_OPEN,
-                                            SUPPORT_CLOSE, SUPPORT_STOP, ATTR_POSITION)
-from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_NAME, CONF_ID)
+                                            SUPPORT_CLOSE, SUPPORT_STOP, ATTR_POSITION,
+                                            SUPPORT_SET_POSITION, DOMAIN)
+from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC, CONF_NAME, CONF_ID)
 
 # pylint: disable=relative-beyond-top-level
-from ..lutron_caseta_pro import (Caseta, ATTR_AREA_NAME, CONF_AREA_NAME, ATTR_INTEGRATION_ID)
+from ..lutron_caseta_pro import (Caseta, ATTR_AREA_NAME, CONF_AREA_NAME, ATTR_INTEGRATION_ID,
+                                 DOMAIN as COMPONENT_DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -55,7 +57,8 @@ class CasetaData:
                     if action == Caseta.Action.SET:
                         # update zone level, e.g. 90.00
                         device.update_state(value)
-                        yield from device.async_update_ha_state()
+                        if device.hass is not None:
+                            yield from device.async_update_ha_state()
                         break
 
 
@@ -69,24 +72,27 @@ def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     yield from bridge.open()
 
     data = CasetaData(bridge, hass)
-    devices = [CasetaCover(cover, data) for cover in discovery_info[CONF_DEVICES]]
+    devices = [CasetaCover(cover, data, discovery_info[CONF_MAC])
+               for cover in discovery_info[CONF_DEVICES]]
     data.set_devices(devices)
-
-    for device in devices:
-        yield from device.query()
 
     async_add_devices(devices)
 
+    # register callbacks
     bridge.register(data.read_output)
+
+    # start bridge main loop
     bridge.start(hass)
 
-    return True
+    # update state for all devices
+    for device in devices:
+        yield from device.query()
 
 
 class CasetaCover(CoverDevice):
     """Representation of a Lutron shade."""
 
-    def __init__(self, cover, data):
+    def __init__(self, cover, data, mac):
         """Initialize a Lutron shade."""
         self._data = data
         self._name = cover[CONF_NAME]
@@ -97,6 +103,7 @@ class CasetaCover(CoverDevice):
             self._name = cover[CONF_AREA_NAME] + " " + cover[CONF_NAME]
         self._integration = int(cover[CONF_ID])
         self._position = 0
+        self._mac = mac
 
     @asyncio.coroutine
     def query(self):
@@ -112,6 +119,15 @@ class CasetaCover(CoverDevice):
     def integration(self):
         """Return the integration ID."""
         return self._integration
+
+    @property
+    def unique_id(self) -> str:
+        """Return a unique ID."""
+        if self._mac is not None:
+            return "{}_{}_{}_{}".format(COMPONENT_DOMAIN,
+                                        DOMAIN, self._mac,
+                                        self._integration)
+        return None
 
     @property
     def name(self):
@@ -174,7 +190,7 @@ class CasetaCover(CoverDevice):
 
     @property
     def supported_features(self):
-        return SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_STOP
+        return SUPPORT_OPEN | SUPPORT_CLOSE | SUPPORT_STOP | SUPPORT_SET_POSITION
 
     @asyncio.coroutine
     def async_stop_cover(self, **kwargs):
