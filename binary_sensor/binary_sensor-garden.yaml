@@ -13,7 +13,7 @@
       friendly_name: 'Garden: Sun is Visible'
       device_class: light
       value_template: >
-        {% if states('sensor.solar_elevation') > 31 %}
+        {% if ( states('sensor.solar_elevation') | float ) > 31 %}
          True
         {% else %}
          False
