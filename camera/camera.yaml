@@ -14,5 +14,5 @@
 #  input: -rtsp_transport tcp -i rtsp://192.168.1.81:554/12 -an
 
 - platform: mjpeg
-  mjpeg_url: http://192.168.1.71:32768/
+  mjpeg_url: http://192.168.1.71:32773/
   name: Garden Camera
