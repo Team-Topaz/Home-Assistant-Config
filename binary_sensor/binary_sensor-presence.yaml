@@ -39,13 +39,13 @@
         {% if is_state('binary_sensor.everybody_home', 'on') %}
         True
         {% elif is_state('binary_sensor.ryan_home', 'on')
-          and (states('sensor.chelsea_distance_from_home') | float > 2.75) %}
+          and (states('sensor.chelsea_distance_from_home') | float > 3) %}
         True
         {% elif is_state('binary_sensor.chelsea_home', 'on')
-          and (states('sensor.ryan_distance_from_home') | float > 2.75) %}
+          and (states('sensor.ryan_distance_from_home') | float > 3) %}
         True
-        {% elif (states('sensor.chelsea_distance_from_home') | float > 2.75)
-          and (states('sensor.ryan_distance_from_home') | float > 2.75)  %}
+        {% elif (states('sensor.chelsea_distance_from_home') | float > 3)
+          and (states('sensor.ryan_distance_from_home') | float > 3)  %}
         True
         {% else %}
         False
