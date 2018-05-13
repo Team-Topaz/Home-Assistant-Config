@@ -43,3 +43,43 @@
   host: !secret iis_url
   name: IIS Certificate
   port: 443
+
+- platform: template
+  sensors:
+    ryan_phone_battery:
+      friendly_name: "Ryan Phone Battery"
+      value_template: >
+        {% if states.device_tracker.ryan_phone %}
+          {{ states.device_tracker.ryan_phone.attributes.battery | int }}
+        {% else %}
+          unknown
+        {% endif %}
+      unit_of_measurement: '%'
+      icon_template: >
+        {% if states.device_tracker.ryan_phone.attributes.battery >= 90 %}
+          mdi:battery
+        {% elif states.device_tracker.ryan_phone.attributes.battery > 0 %}
+          mdi:battery-{{(states.device_tracker.ryan_phone.attributes.battery | int / 10) | int + 1}}0
+        {% else %}
+          mdi:battery-unknown
+        {% endif %}
+
+- platform: template
+  sensors:
+    chelsea_phone_battery:
+      friendly_name: "Chelsea Phone Battery"
+      value_template: >
+        {% if states.device_tracker.chelsea_phone %}
+          {{ states.device_tracker.chelsea_phone.attributes.battery | int }}
+        {% else %}
+          unknown
+        {% endif %}
+      unit_of_measurement: '%'
+      icon_template: >
+        {% if states.device_tracker.chelsea_phone.attributes.battery >= 90 %}
+          mdi:battery
+        {% elif states.device_tracker.chelsea_phone.attributes.battery > 0 %}
+          mdi:battery-{{(states.device_tracker.chelsea_phone.attributes.battery | int / 10) | int + 1}}0
+        {% else %}
+          mdi:battery-unknown
+        {% endif %}

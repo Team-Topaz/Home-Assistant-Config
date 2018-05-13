@@ -96,13 +96,13 @@
         {% endif %}
     ryan_distance_from_home:
       friendly_name: 'Ryan Distance from Home'
-      value_template: '{{distance(states.device_tracker.google_maps_110517150127386992510) | float | round(2) }}'
+      value_template: '{{distance(states.device_tracker.ryan_phone) | float | round(2) }}'
       unit_of_measurement: 'mi'
     chelsea_distance_from_home:
       friendly_name: 'Chelsea Distance from Home'
-      value_template: '{{distance(states.device_tracker.google_maps_106557812104068122300) | float | round(2)}}'
+      value_template: '{{distance(states.device_tracker.chelsea_phone) | float | round(2)}}'
       unit_of_measurement: 'mi'
     ryan_chelsea_distance:
       friendly_name: 'Chelsea Distance from Ryan'
-      value_template: '{{distance(states.device_tracker.google_maps_106557812104068122300,states.device_tracker.google_maps_110517150127386992510) | float | round(2)}}'
+      value_template: '{{distance(states.device_tracker.chelsea_phone,states.device_tracker.ryan_phone) | float | round(2)}}'
       unit_of_measurement: 'mi'

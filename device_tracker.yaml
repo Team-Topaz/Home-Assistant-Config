@@ -9,8 +9,8 @@
 #  username: !secret location_sharing_username
 #  password: !secret location_sharing_password
 
-#- platform: owntracks
-#  consider_home: 300
+- platform: owntracks
+  consider_home: 300
 
 #- platform: asuswrt
 #  host: 192.168.1.1
