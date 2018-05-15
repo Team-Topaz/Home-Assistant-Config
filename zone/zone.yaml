@@ -35,3 +35,8 @@
   longitude: !secret location_5_lon
   radius: 150
   icon: !secret location_5_icon
+- name: !secret location_6_name
+  latitude: !secret location_6_lat
+  longitude: !secret location_6_lon
+  radius: 150
+  icon: !secret location_6_icon
