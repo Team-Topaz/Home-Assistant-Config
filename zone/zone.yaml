@@ -3,38 +3,46 @@
   longitude: !secret work_1_lon
   radius: 150
   icon: mdi:domain
+
 - name: !secret work_2_name
   latitude: !secret work_2_lat
   longitude: !secret work_2_lon
   radius: 150
   icon: mdi:briefcase
+
 - name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   icon: mdi:home
   radius: 150
+
 - name: !secret location_1_name
   latitude: !secret location_1_lat
   longitude: !secret location_1_lon
   radius: 150
+
 - name: !secret location_2_name
   latitude: !secret location_2_lat
   longitude: !secret location_2_lon
   radius: 150
+
 - name: !secret location_3_name
   latitude: !secret location_3_lat
   longitude: !secret location_3_lon
   radius: 150
+
 - name: !secret location_4_name
   latitude: !secret location_4_lat
   longitude: !secret location_4_lon
   radius: 250
   icon: !secret location_4_icon
+
 - name: !secret location_5_name
   latitude: !secret location_5_lat
   longitude: !secret location_5_lon
   radius: 150
   icon: !secret location_5_icon
+
 - name: !secret location_6_name
   latitude: !secret location_6_lat
   longitude: !secret location_6_lon
