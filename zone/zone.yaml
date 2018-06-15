@@ -7,7 +7,7 @@
 - name: !secret work_2_name
   latitude: !secret work_2_lat
   longitude: !secret work_2_lon
-  radius: 150
+  radius: 200
   icon: mdi:briefcase
 
 - name: Home
@@ -48,3 +48,9 @@
   longitude: !secret location_6_lon
   radius: 150
   icon: !secret location_6_icon
+
+- name: !secret location_7_name
+  latitude: !secret location_7_lat
+  longitude: !secret location_7_lon
+  radius: 200
+  icon: !secret location_7_icon
