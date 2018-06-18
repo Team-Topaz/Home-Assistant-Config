@@ -14,7 +14,7 @@
       #We only turn the fan on if the temperature inside is higher than outside, and even then only if it's above (setpoint + 2).
   action:
   - service: switch.turn_on
-    entity_id: switch.sonoff_1
+    entity_id: switch.living_room_fan
 
 - id: fan_off_when_cold
   alias: 'Living Room: Turn Fan Off When Setpoint Reached'
@@ -28,7 +28,7 @@
     value_template: "{{ states('sensor.sn2_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) }}"
   action:
   - service: switch.turn_off
-    entity_id: switch.sonoff_1
+    entity_id: switch.living_room_fan
 
 - id: fan_off_when_hotter_outside
   alias: 'Living Room: Turn Fan Off When Hotter Outside'
@@ -42,4 +42,4 @@
       value_template: "{{ states('sensor.sn2_temperature') < states('sensor.weather_temperature')}}"
   action:
   - service: switch.turn_off
-    entity_id: switch.sonoff_1
+    entity_id: switch.living_room_fan
