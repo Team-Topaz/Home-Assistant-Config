@@ -30,14 +30,13 @@ cooling_control:
   entities:
     - input_number.cooling_setpoint
     #- input_number.cooling_threshold
-    - switch.living_room_fan
     - sensor.indoor_cooling_setpoint_temperature_delta
     - binary_sensor.average_cooling_required
 
 fan_control:
   name: 'Living Room Fan Control'
   entities:
-    - switch.sonoff_1
+    - switch.living_room_fan
     - sensor.living_room_outdoor_temperature_delta
     - sensor.living_room_heating_setpoint_temperature_delta
     - sensor.living_room_cooling_setpoint_temperature_delta
