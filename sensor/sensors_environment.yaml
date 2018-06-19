@@ -64,7 +64,7 @@
     - sensor.master_bedroom_brightness
     - sensor.bonus_room_brightness
     #- sensor.guest_bedroom_humidity
-    - sensor.bike_room_light_level
+    - sensor.bike_room_brightness
   type: mean
   round_digits: 0
 
