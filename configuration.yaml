@@ -19,7 +19,6 @@ updater:
 discovery:
   ignore:
     - roku
-conversation:
 sun:
 map:
 
