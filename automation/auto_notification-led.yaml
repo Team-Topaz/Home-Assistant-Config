@@ -1,5 +1,5 @@
 - id: living_room_window_open_ok
-  initial_state: 'off' #Disabled for winter
+  #initial_state: 'off' #Disabled for winter
   alias: 'Living Room: OK to open window'
   trigger:
     #Triggers if it's warmer inside than outside, AND it's warmer inside than the setpoint.
@@ -15,7 +15,7 @@
         color_name: green
 
 - id: living_room_window_open_nok
-  initial_state: 'off' #Disabled for winter.
+  #initial_state: 'off' #Disabled for winter.
   alias: 'Living Room: Close Windows'
   trigger:
     #Inside temperature is above setpoint, but outside temperature is above inside temperature.
