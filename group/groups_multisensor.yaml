@@ -9,7 +9,6 @@ office_card:
     - binary_sensor.office_motion
     - sensor.office_wifi
     - binary_sensor.office_status
-    - switch.office_restart
     - light.office_led
 
 living_room_card:
@@ -23,7 +22,6 @@ living_room_card:
     - binary_sensor.living_room_motion
     - sensor.living_room_wifi
     - binary_sensor.living_room_status
-    - switch.living_room_restart
     - light.living_room_led
 
 master_bedroom_card:
@@ -37,7 +35,6 @@ master_bedroom_card:
     - binary_sensor.master_bedroom_motion
     - sensor.master_bedroom_wifi
     - binary_sensor.master_bedroom_status
-    - switch.master_bedroom_restart
     - light.master_bedroom_led
 
 bonus_room_card:
@@ -51,7 +48,6 @@ bonus_room_card:
     - binary_sensor.bonus_room_motion
     - sensor.bonus_room_wifi
     - binary_sensor.bonus_room_status
-    - switch.bonus_room_restart
     - light.bonus_room_led
 
 bike_room_sensor:
@@ -65,5 +61,4 @@ bike_room_sensor:
     - binary_sensor.bike_room_motion
     - sensor.bike_room_wifi
     - binary_sensor.bike_room_status
-    - switch.bike_room_restart
     - light.bike_room_led
