@@ -1,10 +1,13 @@
 office_sensor:
   name: Office Multisensor
   entities:
+    - binary_sensor.office_status
+    - switch.office_restart
     - sensor.office_temperature
     - sensor.office_temperature_rate
     - sensor.office_humidity
-    - sensor.office_ldr
+    - sensor.office_brightness
+    - sensor.office_wifi
     - binary_sensor.office_motion
     - light.office_led
 
@@ -18,15 +21,18 @@ living_room_sensor:
     - binary_sensor.sn2_motion
     - light.sn2_led
 
-sensor_node_3_card:
+master_bedroom_card:
   name: Master Bedroom Multisensor
   entities:
-    - sensor.sn3_temperature
+    - binary_sensor.master_bedroom_status
+    - switch.master_bedroom_restart
+    - sensor.master_bedroom_temperature
     - sensor.master_bedroom_temperature_rate
-    - sensor.sn3_humidity
-    - sensor.sn3_ldr
-    - binary_sensor.sn3_motion
-    - light.sn3_led
+    - sensor.master_bedroom_humidity
+    - sensor.master_bedroom_brightness
+    - sensor.master_bedroom_wifi
+    - binary_sensor.master_bedroom_motion
+    - light.master_bedroom_led
 
 sensor_node_4_card:
   name: Bonus Room Multisensor

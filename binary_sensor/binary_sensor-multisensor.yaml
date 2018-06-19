@@ -1,11 +1,4 @@
 - platform: mqtt
-  state_topic: "bruh/office/lwt"
-  name: "Office Status"
-  payload_on: "online"
-  payload_off: "offline"
-  device_class: connectivity
-
-- platform: mqtt
   state_topic: "bruh/livingroom/lwt"
   name: "SN2 Status"
   payload_on: "online"
@@ -13,31 +6,8 @@
   device_class: connectivity
 
 - platform: mqtt
-  state_topic: "bruh/masterbedroom/lwt"
-  name: "SN3 Status"
-  payload_on: "online"
-  payload_off: "offline"
-  device_class: connectivity
-
-- platform: mqtt
-  state_topic: "bruh/office"
-  name: "Office Motion"
-  payload_on: "motion detected"
-  payload_off: "standby"
-  device_class: motion
-  value_template: '{{ value_json.motion }}'
-
-- platform: mqtt
   state_topic: "bruh/livingroom"
   name: "SN2 Motion"
-  payload_on: "motion detected"
-  payload_off: "standby"
-  device_class: motion
-  value_template: '{{ value_json.motion }}'
-
-- platform: mqtt
-  state_topic: "bruh/masterbedroom"
-  name: "SN3 Motion"
   payload_on: "motion detected"
   payload_off: "standby"
   device_class: motion
