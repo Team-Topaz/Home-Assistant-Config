@@ -71,6 +71,7 @@ logger:
 #  - platform: picotts
 media_extractor:
 mqtt:
+  discovery: true
   broker: 192.168.1.20
   port: 1883
   client_id: hassio
