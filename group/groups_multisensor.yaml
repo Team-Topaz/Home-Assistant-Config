@@ -1,4 +1,4 @@
-master_bedroomoffice_sensor_card:
+office_card:
   name: Office Multisensor
   control: hidden
   entities:

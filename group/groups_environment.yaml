@@ -4,7 +4,7 @@ environment_view:
   icon: mdi:weather-cloudy
   entities:
     - group.environment_outside
-    - group.office_sensor_card
+    - group.office_card
     - group.living_room_card
     - group.master_bedroom_card
     - group.bonus_room_card
