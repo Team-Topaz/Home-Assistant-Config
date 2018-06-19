@@ -4,11 +4,10 @@ environment_view:
   icon: mdi:weather-cloudy
   entities:
     - group.environment_outside
-    - group.office_sensor
-    - group.living_room_sensor
+    - group.office_sensor_card
+    - group.living_room_card
     - group.master_bedroom_card
-    - group.sensor_node_4_card
-    - group.sensor_node_5_card
+    - group.bonus_room_card
     - group.bike_room_sensor
     - group.temperature
     - group.fan_control

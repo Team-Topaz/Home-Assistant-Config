@@ -1,38 +1,7 @@
 - platform: mqtt_json
-  name: "Office LED"
-  state_topic: "bruh/office"
-  command_topic: "bruh/office/set"
-  brightness: true
-  flash: true
-  rgb: true
-  effect: true
-  effect_list:
-    - breathe
-    - pir_light
-    - blink
-  optimistic: false
-  qos: 1
-  retain: true
-
-- platform: mqtt_json
   name: "SN2 LED"
   state_topic: "bruh/livingroom"
   command_topic: "bruh/livingroom/set"
-  brightness: true
-  flash: true
-  rgb: true
-  effect: true
-  effect_list:
-    - breathe
-    - pir_light
-    - blink
-  optimistic: false
-  qos: 1
-
-- platform: mqtt_json
-  name: "SN3 LED"
-  state_topic: "bruh/masterbedroom"
-  command_topic: "bruh/masterbedroom/set"
   brightness: true
   flash: true
   rgb: true

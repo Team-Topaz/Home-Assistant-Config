@@ -33,10 +33,10 @@ status_lights:
   entities:
     - light.notification_led
     - light.office_led
-    - light.sn2_led
-    - light.sn3_led
-    - light.sn4_led
-    - light.sn5_led
+    - light.living_room_led
+    - light.master_bedroom_led
+    - light.bonus_room_led
+    - light.guest_bedroom_led
     - light.bike_room_led
 
 lighting_automation:

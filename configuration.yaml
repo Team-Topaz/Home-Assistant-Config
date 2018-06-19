@@ -45,9 +45,9 @@ logbook:
   exclude:
     entities:
       - binary_sensor.office_status
-      - binary_sensor.sn2_status
-      - binary_sensor.sn3_status
-      - binary_sensor.sn4_status
+      - binary_sensor.living_room_status
+      - binary_sensor.master_bedroom_status
+      - binary_sensor.bonus_room_status
       - binary_sensor.bike_room_status
       - sensor.average_load_1m
       - group.office_sensor

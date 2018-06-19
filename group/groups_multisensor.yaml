@@ -1,64 +1,69 @@
-office_sensor:
+master_bedroomoffice_sensor_card:
   name: Office Multisensor
+  control: hidden
   entities:
-    - binary_sensor.office_status
-    - switch.office_restart
     - sensor.office_temperature
     - sensor.office_temperature_rate
     - sensor.office_humidity
     - sensor.office_brightness
-    - sensor.office_wifi
     - binary_sensor.office_motion
+    - sensor.office_wifi
+    - binary_sensor.office_status
+    - switch.office_restart
     - light.office_led
 
-living_room_sensor:
+living_room_card:
   name: Living Room Multisensor
+  control: hidden
   entities:
-    - sensor.sn2_temperature
+    - sensor.living_room_temperature
     - sensor.living_room_temperature_rate
-    - sensor.sn2_humidity
-    - sensor.sn2_ldr
-    - binary_sensor.sn2_motion
-    - light.sn2_led
+    - sensor.living_room_humidity
+    - sensor.living_room_brightness
+    - binary_sensor.living_room_motion
+    - sensor.living_room_wifi
+    - binary_sensor.living_room_status
+    - switch.living_room_restart
+    - light.living_room_led
 
 master_bedroom_card:
   name: Master Bedroom Multisensor
+  control: hidden
   entities:
-    - binary_sensor.master_bedroom_status
-    - switch.master_bedroom_restart
     - sensor.master_bedroom_temperature
     - sensor.master_bedroom_temperature_rate
     - sensor.master_bedroom_humidity
     - sensor.master_bedroom_brightness
-    - sensor.master_bedroom_wifi
     - binary_sensor.master_bedroom_motion
+    - sensor.master_bedroom_wifi
+    - binary_sensor.master_bedroom_status
+    - switch.master_bedroom_restart
     - light.master_bedroom_led
 
-sensor_node_4_card:
+bonus_room_card:
   name: Bonus Room Multisensor
+  control: hidden
   entities:
-    - sensor.sn4_temperature
+    - sensor.bonus_room_temperature
     - sensor.bonus_room_temperature_rate
-    - sensor.sn4_humidity
-    - sensor.sn4_ldr
-    - binary_sensor.sn4_motion
-    - light.sn4_led
-
-sensor_node_5_card:
-  name: Guest Bedroom Multisensor
-  entities:
-    - sensor.sn5_temperature
-    - sensor.sn5_humidity
-    - sensor.sn5_ldr
-    - binary_sensor.sn5_motion
-    - light.sn5_led
+    - sensor.bonus_room_humidity
+    - sensor.bonus_room_brightness
+    - binary_sensor.bonus_room_motion
+    - sensor.bonus_room_wifi
+    - binary_sensor.bonus_room_status
+    - switch.bonus_room_restart
+    - light.bonus_room_led
 
 bike_room_sensor:
   name: Bike Room Multisensor
+  control: hidden
   entities:
     - sensor.bike_room_temperature
     - sensor.bike_room_temperature_rate
     - sensor.bike_room_humidity
-    - sensor.bike_room_light_level
+    - sensor.bike_room_brightness
     - binary_sensor.bike_room_motion
+    - sensor.bike_room_wifi
+    - binary_sensor.bike_room_status
+    - switch.bike_room_restart
     - light.bike_room_led

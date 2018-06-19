@@ -14,7 +14,7 @@ development_tab:
 baseboard_heat_dev:
   name: 'Baseboard Heat Sensor Development'
   entities:
-    - sensor.sn3_temperature
+    - sensor.master_bedroom_temperature
     - binary_sensor.master_bedroom_temperature_trend
     - sensor.master_bedroom_temperature_rate
     - binary_sensor.master_bedroom_baseboard_heat_on
@@ -26,7 +26,7 @@ baseboard_heat_dev:
 temperature_change_dev:
   name: 'Temperature Change Rate Development'
   entities:
-    - sensor.sn3_temperature
+    - sensor.master_bedroom_temperature
     - sensor.weather_temperature
     - sensor.master_bedroom_outdoor_temperature_delta
     - sensor.cloud_cover_coefficient

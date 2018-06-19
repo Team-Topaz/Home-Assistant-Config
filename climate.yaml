@@ -1,7 +1,7 @@
 #- platform: generic_thermostat
 #  name: Bonus Room
 #  heater: switch.bonus_room_heater
-#  target_sensor: sensor.sn4_temperature
+#  target_sensor: sensor.bonus_room_temperature
 #  min_temp: 55
 #  max_temp: 75
 #  target_temp: 62

@@ -36,10 +36,10 @@
   name: "Average Indoor Temperature"
   entity_ids:
     - sensor.office_temperature
-    - sensor.sn2_temperature
-    - sensor.sn3_temperature
-    - sensor.sn4_temperature
-    #- sensor.sn5_temperature
+    - sensor.living_room_temperature
+    - sensor.master_bedroom_temperature
+    - sensor.bonus_room_temperature
+    #- sensor.guest_bedroom_temperature
     #- sensor.sn6_temperature
   type: mean
   round_digits: 1
@@ -48,10 +48,10 @@
   name: "Average Humidity"
   entity_ids:
     - sensor.office_humidity
-    - sensor.sn2_humidity
-    - sensor.sn3_humidity
-    - sensor.sn4_humidity
-    #- sensor.sn5_humidity
+    - sensor.living_room_humidity
+    - sensor.master_bedroom_humidity
+    - sensor.bonus_room_humidity
+    #- sensor.guest_bedroom_humidity
     #- sensor.sn6_humidity
   type: mean
   round_digits: 1
@@ -59,11 +59,11 @@
 - platform: min_max
   name: "Average Light Level"
   entity_ids:
-    - sensor.office_ldr
-    - sensor.sn2_ldr
-    - sensor.sn3_ldr
-    - sensor.sn4_ldr
-    #- sensor.sn5_humidity
+    - sensor.office_brightness
+    - sensor.living_roombrightness
+    - sensor.master_bedroom_brightness
+    - sensor.bonus_roombrightness
+    #- sensor.guest_bedroom_humidity
     - sensor.bike_room_light_level
   type: mean
   round_digits: 0
@@ -96,25 +96,25 @@
     living_room_outdoor_temperature_delta:
       friendly_name: "Living Room: Outdoor Delta"
       entity_id:
-        - sensor.sn2_temperature
+        - sensor.living_room_temperature
         - sensor.weather_temperature
-      value_template: '{{ ( ( states.sensor.sn2_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     master_bedroom_outdoor_temperature_delta:
       friendly_name: "Master Bedroom: Outdoor Delta"
       entity_id:
-        - sensor.sn3_temperature
+        - sensor.master_bedroom_temperature
         - sensor.weather_temperature
-      value_template: '{{ ( ( states.sensor.sn3_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     living_room_cooling_setpoint_temperature_delta:
       friendly_name: "Living Room: Cooling Setpoint Delta"
       entity_id:
-        - sensor.sn2_temperature
+        - sensor.living_room_temperature
         - input_number.cooling_setpoint
-      value_template: '{{ ( ( states.sensor.sn2_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
 #- platform: pollen

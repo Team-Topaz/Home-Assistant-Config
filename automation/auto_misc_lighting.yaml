@@ -85,7 +85,7 @@
             value_template: "{{ state.attributes.elevation }}"
             below: 5
           - condition: numeric_state
-            entity_id: sensor.sn2_ldr
+            entity_id: sensor.living_roombrightness
             below: 500
       - condition: state
         entity_id: light.kitchen_overhead_lights
@@ -119,7 +119,7 @@
             value_template: "{{ state.attributes.elevation }}"
             below: 5
           - condition: numeric_state
-            entity_id: sensor.sn2_ldr
+            entity_id: sensor.living_roombrightness
             below: 700
       - condition: state
         entity_id: light.kitchen_overhead_lights
