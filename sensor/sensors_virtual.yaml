@@ -78,10 +78,10 @@
 #  maximum: 10
 #  scan_interval: 600
 
-- platform: rest
-  resource: http://ip.jsontest.com
-  name: External IP
-  value_template: '{{ value_json.ip }}'
+#- platform: rest
+#  resource: http://ip.jsontest.com
+#  name: External IP
+#  value_template: '{{ value_json.ip }}'
 
 - platform: template
   sensors:
