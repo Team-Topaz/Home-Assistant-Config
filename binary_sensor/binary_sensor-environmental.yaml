@@ -47,7 +47,8 @@
       device_class: heat
     bonus_room_temperature_trend:
       friendly_name: "Bonus Room Temperature Trend"
-      entity_id: sensor.bonus_room_temperature
+      entity_id: weather.dark_sky
+      attribute: temperature
       max_samples: 100
       sample_duration: 900
       min_gradient: 0.000138

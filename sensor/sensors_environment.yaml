@@ -1,36 +1,6 @@
 - platform: season
   type: astronomical
 
-- platform: darksky
-  name: Weather
-  api_key: !secret darksky_api_key
-  forecast:
-    - 1
-  monitored_conditions:
-    - summary
-    - temperature
-    - humidity
-    - wind_speed
-    - wind_bearing
-    - dew_point
-    - apparent_temperature
-    - precip_type
-    - pressure
-    - ozone
-    - minutely_summary
-    - hourly_summary
-    - daily_summary
-    - cloud_cover
-    - visibility
-    - precip_probability
-    - temperature_min
-    - temperature_max
-    - apparent_temperature_min
-    - apparent_temperature_max
-    - precip_intensity_max
-    - uv_index
-  update_interval: '00:05'
-
 - platform: min_max
   friendly_name: "Average Temperature"
   name: "Average Indoor Temperature"
@@ -68,60 +38,29 @@
   type: mean
   round_digits: 0
 
-#- platform: rest
-#  name: "Air Quality PM 2.5"
-#  resource: !secret airnow_url
-#  value_template: "{{value_json[1].AQI}}"
-#  scan_interval: 300
-#  unit_of_measurement: "ug/m³"
-
 - platform: template
   sensors:
     indoor_outdoor_temperature_delta:
       friendly_name: "Outdoor Delta"
-      entity_id:
-        - sensor.average_indoor_temperature
-        - sensor.weather_temperature
-      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.weather.dark_sky.attributes.temperature | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     indoor_cooling_setpoint_temperature_delta:
       friendly_name: "Cooling Setpoint Delta"
-      entity_id:
-        - sensor.average_indoor_temperature
-        - input_number.cooling_setpoint
       value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     living_room_outdoor_temperature_delta:
       friendly_name: "Living Room: Outdoor Delta"
-      entity_id:
-        - sensor.living_room_temperature
-        - sensor.weather_temperature
-      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.weather.dark_sky.attributes.temperature | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     master_bedroom_outdoor_temperature_delta:
       friendly_name: "Master Bedroom: Outdoor Delta"
-      entity_id:
-        - sensor.master_bedroom_temperature
-        - sensor.weather_temperature
-      value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.sensor.weather_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.weather.dark_sky.attributes.temperature | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     living_room_cooling_setpoint_temperature_delta:
       friendly_name: "Living Room: Cooling Setpoint Delta"
-      entity_id:
-        - sensor.living_room_temperature
-        - input_number.cooling_setpoint
       value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
-
-#- platform: pollen
-#  zip_code: !secret home_zip
-#  monitored_conditions:
-#    - allergy_average_forecasted
-#    - allergy_average_historical
-#    - allergy_index_today
-#    - allergy_index_tomorrow
-#    - disease_average_forecasted
