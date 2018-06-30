@@ -100,6 +100,10 @@ google_assistant:
     - switch
     - light
     - scene
+emulated_hue:
+  listen_port: 80
+  exposed_domains:
+    - light
 #hdmi_cec:
 #  devices:
 #    TV: 0.0.0.0
