@@ -55,5 +55,5 @@ misc_env:
 environment_outside:
   name: 'Environment'
   entities:
-    - weather.dark_sky
+    - weather.home_weather
     - sun.sun

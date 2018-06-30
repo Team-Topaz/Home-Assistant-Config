@@ -20,7 +20,7 @@ garden_irrigation:
 garden_temperature:
   name: "Forecast"
   entities:
-  - weather.dark_sky
+  - weather.home_weather
 
 garden_misc:
   name: "Misc"

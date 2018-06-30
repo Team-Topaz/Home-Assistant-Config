@@ -55,7 +55,7 @@
       device_class: heat
     outdoor_temperature_trend:
       friendly_name: "Outdoor Temperature Trend"
-      entity_id: weather.dark_sky
+      entity_id: weather.home_weather
       max_samples: 20
       sample_duration: 3600
       min_gradient: 0.000138
