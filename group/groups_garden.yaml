@@ -20,10 +20,7 @@ garden_irrigation:
 garden_temperature:
   name: "Forecast"
   entities:
-  - sensor.weather_daily_summary
-  - sensor.weather_daily_high_temperature_1
-  - sensor.weather_daily_low_temperature_1
-  - sensor.weather_daily_max_precip_intensity_1
+  - weather.dark_sky
 
 garden_misc:
   name: "Misc"

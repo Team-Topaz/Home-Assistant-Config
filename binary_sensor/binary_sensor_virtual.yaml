@@ -7,9 +7,9 @@
     ok_to_open_window:
       friendly_name: 'OK to Open Window'
       value_template: >
-        {% if (states('sensor.living_room_temperature') > states('sensor.weather_temperature')) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) %}
+        {% if (states('sensor.living_room_temperature') > state_attr('weather.dark_sky', 'temperature')) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) %}
           True
-        {% elif (states('sensor.living_room_temperature') < states('sensor.weather_temperature')) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) %}
+        {% elif (states('sensor.living_room_temperature') < state_attr('weather.dark_sky', 'temperature')) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) %}
           True
         {% else %}
           False
