@@ -4,8 +4,7 @@ My own Home Assistant configuration! I'm doing a lot of things in here, and it's
 
 #### Major Components:
 - Lutron Caseta Wireless dimmers
-- Custom multisensors (https://github.com/bruhautomation/ESP-MQTT-JSON-Multisensor)
-  - Running a heavily customized version of the firmware in the linked repository, but the repository owner isn't accepting pull requests at this time.
+- esphomeyaml multisensors
 - Logitech Harmony Hub
 - Owntracks/MQTT for device tracking
 - Sonoff outlets (https://github.com/arendst/Sonoff-Tasmota)
