@@ -5,6 +5,7 @@ office_card:
     - sensor.office_temperature
     - sensor.office_temperature_rate
     - sensor.office_humidity
+    - sensor.office_absolute_humidity
     - sensor.office_brightness
     - binary_sensor.office_motion
     - sensor.office_wifi
