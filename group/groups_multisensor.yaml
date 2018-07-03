@@ -18,6 +18,7 @@ living_room_card:
     - sensor.living_room_temperature
     - sensor.living_room_temperature_rate
     - sensor.living_room_humidity
+    - sensor.living_room_absolute_humidity
     - sensor.living_room_brightness
     - binary_sensor.living_room_motion
     - sensor.living_room_wifi
@@ -31,6 +32,7 @@ master_bedroom_card:
     - sensor.master_bedroom_temperature
     - sensor.master_bedroom_temperature_rate
     - sensor.master_bedroom_humidity
+    - sensor.master_bedroom_absolute_humidity
     - sensor.master_bedroom_brightness
     - binary_sensor.master_bedroom_motion
     - sensor.master_bedroom_wifi
@@ -44,6 +46,7 @@ bonus_room_card:
     - sensor.bonus_room_temperature
     - sensor.bonus_room_temperature_rate
     - sensor.bonus_room_humidity
+    - sensor.bonus_room_absolute_humidity
     - sensor.bonus_room_brightness
     - binary_sensor.bonus_room_motion
     - sensor.bonus_room_wifi
@@ -57,6 +60,7 @@ bike_room_sensor:
     - sensor.bike_room_temperature
     - sensor.bike_room_temperature_rate
     - sensor.bike_room_humidity
+    - sensor.bike_room_absolute_humidity
     - sensor.bike_room_brightness
     - binary_sensor.bike_room_motion
     - sensor.bike_room_wifi
