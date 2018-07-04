@@ -3,7 +3,7 @@
   alias: 'Power Out: Detected'
   trigger:
   - platform: numeric_state
-    entity_id: sensor.ups_input_voltage
+    entity_id: sensor.nut_ups_input_voltage
     below: 100
   condition:
     condition: state
@@ -13,7 +13,7 @@
   - service: notify.push_main
     data_template:
       title: 'Power Outage Detected'
-      message: "{{ states('sensor.ups_input_status')}}. Estimated runtime is {{ states('sensor.ups_runtime')}} minutes."
+      message: "{{ states('sensor.nut_ups_status')}}. Estimated runtime is {{((states('sensor.nut_ups_battery_runtime') | int) / 60) | round(0)}} minutes."
       data:
         tag: 'power_outage'
         actions:
@@ -26,7 +26,7 @@
   alias: 'Power Out: Power Restored'
   trigger:
   - platform: numeric_state
-    entity_id: sensor.ups_input_voltage
+    entity_id: sensor.nut_ups_input_voltage
     above: 100
     below: 140
   condition:
@@ -67,10 +67,10 @@
   alias: 'Power Out: Auto Shutdown'
   trigger:
   - platform: numeric_state
-    entity_id: sensor.ups_runtime
-    below: 5
+    entity_id: sensor.nut_ups_battery_runtime
+    below: 300
   - platform: numeric_state
-    entity_id: sensor.ups_battery_capacity
+    entity_id: sensor.nut_ups_battery_charge
     below: 25
   - platform: state
     entity_id: binary_sensor.domain_controller_ping
@@ -79,7 +79,7 @@
   condition:
     condition: state
     entity_id: input_boolean.power_out
-    state: 'off'
+    state: 'on'
   action:
   - service: notify.push_main
     data:
