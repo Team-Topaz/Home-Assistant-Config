@@ -86,7 +86,7 @@
             below: 5
           - condition: numeric_state
             entity_id: sensor.living_roombrightness
-            below: 500
+            below: 150
       - condition: state
         entity_id: light.kitchen_overhead_lights
         state: 'on'
@@ -120,7 +120,7 @@
             below: 5
           - condition: numeric_state
             entity_id: sensor.living_roombrightness
-            below: 700
+            below: 125
       - condition: state
         entity_id: light.kitchen_overhead_lights
         state: 'on'

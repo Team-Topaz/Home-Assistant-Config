@@ -18,7 +18,7 @@
             below: 5
           - condition: numeric_state
             entity_id: sensor.bike_room_light_level
-            below: 400
+            below: 100
   action:
     - service: light.turn_on
       data:
