@@ -9,7 +9,6 @@
     - battery.voltage.nominal
     - input.voltage
     - input.voltage.nominal
-    - output.voltage
     - ups.load
     - ups.status
     - ups.status.display
