@@ -12,9 +12,7 @@ living_room:
 av_living_room:
   name: 'Media Center'
   entities:
-    - remote.living_room
-    - input_select.harmony_activity_select
-    - input_number.pioneer_volume_level
+    - media_player.living_room_media_center
 
 av_living_room_media_players:
   name: 'Media Players'
