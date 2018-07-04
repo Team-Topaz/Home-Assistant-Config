@@ -4,7 +4,6 @@ default_view:
   view: yes
   entities:
     - group.av_living_room
-    - remote.living_room
     - group.indoor_lights
     - group.outdoor_lights
     - group.xmas_lights
