@@ -104,6 +104,10 @@ emulated_hue:
   listen_port: 80
   exposed_domains:
     - light
+cast:
+  media_player:
+    - host: 192.168.1.101
+    - host: 192.168.1.63
 #hdmi_cec:
 #  devices:
 #    TV: 0.0.0.0
