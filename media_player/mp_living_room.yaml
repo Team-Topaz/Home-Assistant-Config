@@ -45,9 +45,9 @@
       data_template:
         entity_id: remote.living_room
         activity: '{{ source }}'
-    attributes:
-      state: remote.living_room
-      is_volume_muted: media_player.pioneer_avr|is_volume_muted
-      volume_level: media_player.pioneer_avr|volume_level
-      source: remote.living_room|current_activity
-      source_list: input_select.harmony_activity_select|options
+  attributes:
+    state: remote.living_room
+    is_volume_muted: media_player.pioneer_avr|is_volume_muted
+    volume_level: media_player.pioneer_avr|volume_level
+    source: remote.living_room|current_activity
+    source_list: input_select.harmony_activity_select|options
