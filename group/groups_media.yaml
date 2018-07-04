@@ -3,6 +3,7 @@ living_room:
   icon: mdi:sofa
   view: yes
   entities:
+    - media_player.living_room_media_center
     - remote.living_room
     - input_select.harmony_activity_select
     - group.av_living_room_media_players
