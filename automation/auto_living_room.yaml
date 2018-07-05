@@ -8,7 +8,7 @@
     condition: and
     conditions:
     - condition: template
-      value_template: "{{ states('sensor.living_room_temperature') > state_attr('weather.home_weather', 'temperature') }}"
+      value_template: "{{ states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float }}"
     - condition: template
       value_template: "{{ states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) }}"
       #We only turn the fan on if the temperature inside is higher than outside, and even then only if it's above (setpoint + 2).
@@ -39,7 +39,7 @@
     seconds: 10
   condition:
     - condition: template
-      value_template: "{{ states('sensor.living_room_temperature') < state_attr('weather.home_weather', 'temperature')}}"
+      value_template: "{{ states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float}}"
   action:
   - service: switch.turn_off
     entity_id: switch.living_room_fan
