@@ -136,3 +136,26 @@
       data_template:
         entity_id: media_player.pioneer_avr
         volume_level: "{{ ( ( (states.input_number.pioneer_volume_level.state | float) + 80.5 ) * 2) / 185 }}"
+
+- id: media_center_dim_multisensor_led
+  alias: 'Media Center: Dim Notification LED for Media Playing'
+  trigger:
+    - condition: state
+      entity_id: media_player.living_room_media_center
+      state: 'playing'
+    - condition: numeric_state
+      value_template: '{{ state_attr('light.living_room_led', 'brightness') }}'
+      above: 50
+  condition:
+    condition: and
+    conditions:
+      - condition: template
+        value_template: '{{ state_attr('light.living_room_led', 'brightness') > 50 }}'
+      - condition: state
+        entity_id: media_player.living_room_media_center
+        state: 'playing'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.living_room_led
+        brightness: 50
