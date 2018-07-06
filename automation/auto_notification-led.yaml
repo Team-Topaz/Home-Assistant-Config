@@ -13,6 +13,7 @@
       data:
         entity_id: light.living_room_led
         color_name: green
+        brightness: 100
 
 - id: living_room_window_open_nok
   #initial_state: 'off' #Disabled for winter.
@@ -29,6 +30,7 @@
       data:
         entity_id: light.living_room_led
         color_name: red
+        brightness: 100
 
 
 
