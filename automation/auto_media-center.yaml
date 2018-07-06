@@ -143,14 +143,13 @@
     - platform: state
       entity_id: media_player.living_room_media_center
       to: 'playing'
-    - platform: numeric_state
-      value_template: "{{ state_attr('light.living_room_led', 'brightness') }}"
-      above: 50
+    - platform: template
+      value_template: "{{ state_attr('light.living_room_led', 'brightness') | int > 50 }}"
   condition:
     condition: and
     conditions:
       - condition: template
-        value_template: "{{ state_attr('light.living_room_led', 'brightness') > 50 }}"
+        value_template: "{{ state_attr('light.living_room_led', 'brightness') | int > 50 }}"
       - condition: state
         entity_id: media_player.living_room_media_center
         state: 'playing'
