@@ -142,7 +142,7 @@
   trigger:
     - platform: state
       entity_id: media_player.living_room_media_center
-      state: 'playing'
+      to: 'playing'
     - platform: numeric_state
       value_template: "{{ state_attr('light.living_room_led', 'brightness') }}"
       above: 50
