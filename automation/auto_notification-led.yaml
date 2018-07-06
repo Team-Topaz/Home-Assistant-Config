@@ -4,10 +4,10 @@
   trigger:
     #Triggers if it's warmer inside than outside, AND it's warmer inside than the setpoint.
     - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') > state_attr('weather.home_weather', 'temperature')) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
+      value_template: "{{ (states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
     #Triggers if it's warmer outside than inside and it's cooler than the setpoint.
     - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') < state_attr('weather.home_weather', 'temperature')) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+      value_template: "{{ (states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
   action:
     - service: light.turn_on
       data:
@@ -20,10 +20,10 @@
   trigger:
     #Inside temperature is above setpoint, but outside temperature is above inside temperature.
     - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') < state_attr('weather.home_weather', 'temperature')) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
+      value_template: "{{ (states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float ) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
     #Inside temperature is below setpoint, but outside temperature is below inside temperature.
     - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') > state_attr('weather.home_weather', 'temperature')) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+      value_template: "{{ (states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
   action:
     - service: light.turn_on
       data:
