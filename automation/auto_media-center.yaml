@@ -140,10 +140,10 @@
 - id: media_center_dim_multisensor_led
   alias: 'Media Center: Dim Notification LED for Media Playing'
   trigger:
-    - condition: state
+    - platform: state
       entity_id: media_player.living_room_media_center
       state: 'playing'
-    - condition: numeric_state
+    - platform: numeric_state
       value_template: "{{ state_attr('light.living_room_led', 'brightness') }}"
       above: 50
   condition:
