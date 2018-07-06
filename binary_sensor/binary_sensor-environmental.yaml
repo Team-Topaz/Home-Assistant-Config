@@ -48,7 +48,6 @@
     bonus_room_temperature_trend:
       friendly_name: "Bonus Room Temperature Trend"
       entity_id: sensor.bonus_room_temperature
-      attribute: temperature
       max_samples: 100
       sample_duration: 900
       min_gradient: 0.000138
@@ -56,6 +55,7 @@
     outdoor_temperature_trend:
       friendly_name: "Outdoor Temperature Trend"
       entity_id: weather.home_weather
+      attribute: temperature
       max_samples: 20
       sample_duration: 3600
       min_gradient: 0.000138
