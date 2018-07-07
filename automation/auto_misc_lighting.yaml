@@ -159,3 +159,30 @@
       data:
         entity_id: light.dining_room_chandelier
         brightness: 128
+
+- id: master_bedroom_nightstand_on
+  alias: 'Master Bedroom: Turn on Nightstand Lamp'
+  trigger:
+    - platform: numeric_state
+      entity_id: light.master_bedroom_sconce
+      value_template: '{{ state.attributes.brightness }}'
+      above: 128
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.ryan_nightstand_lamp
+
+- id: master_bedroom_nightstand_off
+  alias: 'Master Bedroom: Turn off Nightstand Lamp'
+  trigger:
+    - platform: numeric_state
+      entity_id: light.master_bedroom_sconce
+      value_template: '{{ state.attributes.brightness }}'
+      below: 128
+    - platform: state
+      entity_id: light.master_bedroom_sconce
+      to: 'off'
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.ryan_nightstand_lamp
