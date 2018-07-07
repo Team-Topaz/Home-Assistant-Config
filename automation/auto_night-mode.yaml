@@ -28,7 +28,7 @@
     conditions:
       - condition: numeric_state
         entity_id: light.kitchen_overhead_lights
-        value_template: {{ state.attributes.brightness }}
+        value_template: '{{ state.attributes.brightness }}'
         above: 99
       - condition: state
         entity_id: input_boolean.night_mode
