@@ -15,7 +15,9 @@ indoor_lights:
     - light.living_room_floor_lamp
     - light.bike_room_light
     - light.master_bedroom_sconce
+    - light.nightstand_lamps
     - light.ryan_nightstand_lamp
+    - light.chelsea_nightstand_lamp
 
 xmas_lights:
   name: 'Christmas Lights'
