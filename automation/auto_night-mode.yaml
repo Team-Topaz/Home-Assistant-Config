@@ -1,5 +1,5 @@
 - id: night_mode_autoenable
-  alias: "Night Mode: Autodetect On"
+  alias: "Night Mode: Auto On"
   trigger:
     - platform: time
       at: '23:00:00'
@@ -7,8 +7,8 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.night_mode
 
-- id: night_mode_autoenable
-  alias: "Night Mode: Autodetect On"
+- id: night_mode_autodisable
+  alias: "Night Mode: Auto Off"
   trigger:
     - platform: time
       at: '4:00:00'
