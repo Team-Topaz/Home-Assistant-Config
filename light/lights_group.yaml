@@ -19,4 +19,4 @@
   name: 'Nightstand Lamps'
   entities:
   - light.ryan_nightstand_lamp
-  - light.chelsea_nighstand_lamp
+  - light.chelsea_nightstand_lamp
