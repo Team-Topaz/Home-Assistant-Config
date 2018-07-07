@@ -14,3 +14,9 @@
   - light.bonus_room_led
   - light.guest_bedroom_led
   - light.bike_room_led
+
+- platform: group
+  name: 'Nightstand Lamps'
+  entities:
+  - light.ryan_nightstand_lamp
+  - light.chelsea_nighstand_lamp

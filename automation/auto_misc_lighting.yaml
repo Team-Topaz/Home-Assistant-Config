@@ -166,11 +166,11 @@
     - platform: numeric_state
       entity_id: light.master_bedroom_sconce
       value_template: '{{ state.attributes.brightness }}'
-      above: 128
+      above: 90
   action:
     - service: light.turn_on
       data:
-        entity_id: light.ryan_nightstand_lamp
+        entity_id: light.nightstand_lamps
 
 - id: master_bedroom_nightstand_off
   alias: 'Master Bedroom: Turn off Nightstand Lamp'
@@ -178,11 +178,11 @@
     - platform: numeric_state
       entity_id: light.master_bedroom_sconce
       value_template: '{{ state.attributes.brightness }}'
-      below: 128
+      below: 90
     - platform: state
       entity_id: light.master_bedroom_sconce
       to: 'off'
   action:
     - service: light.turn_off
       data:
-        entity_id: light.ryan_nightstand_lamp
+        entity_id: light.nightstand_lamps
