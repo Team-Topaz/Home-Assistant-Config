@@ -72,17 +72,6 @@
   maximum: 10
   scan_interval: 600
 
-#- platform: random
-#  name: Dining Lights Toggle Randomizer
-#  minimum: 0
-#  maximum: 10
-#  scan_interval: 600
-
-#- platform: rest
-#  resource: http://ip.jsontest.com
-#  name: External IP
-#  value_template: '{{ value_json.ip }}'
-
 - platform: template
   sensors:
     pioneer_volume_level:
@@ -106,3 +95,11 @@
       friendly_name: 'Chelsea Distance from Ryan'
       value_template: '{{distance(states.device_tracker.chelsea_phone,states.device_tracker.ryan_phone) | float | round(2)}}'
       unit_of_measurement: 'mi'
+
+- platform: dnsip
+  ipv6: false
+  scan_interval: 1200
+- platform: dnsip
+  hostname: !secret hostname
+  ipv6: false
+  scan_interval: 1200
