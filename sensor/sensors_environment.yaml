@@ -45,11 +45,6 @@
       value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.weather.home_weather.attributes.temperature | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
-    indoor_cooling_setpoint_temperature_delta:
-      friendly_name: "Cooling Setpoint Delta"
-      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
-      unit_of_measurement: "Δ°F"
-
     living_room_outdoor_temperature_delta:
       friendly_name: "Living Room: Outdoor Delta"
       value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.weather.home_weather.attributes.temperature | float ) ) | round(1) }}'
@@ -58,9 +53,4 @@
     master_bedroom_outdoor_temperature_delta:
       friendly_name: "Master Bedroom: Outdoor Delta"
       value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.weather.home_weather.attributes.temperature | float ) ) | round(1) }}'
-      unit_of_measurement: "Δ°F"
-
-    living_room_cooling_setpoint_temperature_delta:
-      friendly_name: "Living Room: Cooling Setpoint Delta"
-      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.input_number.cooling_setpoint.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"

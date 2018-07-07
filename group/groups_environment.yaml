@@ -11,8 +11,6 @@ environment_view:
     - group.bike_room_sensor
     - group.temperature
     - group.fan_control
-    - group.cooling_control
-    - group.heat_control
     - group.misc_env
 
 temperature:
@@ -24,27 +22,11 @@ temperature:
     - sensor.outdoor_temperature_rate
     - sensor.indoor_outdoor_temperature_delta
 
-cooling_control:
-  name: 'Cooling Control'
-  entities:
-    - input_number.cooling_setpoint
-    #- input_number.cooling_threshold
-    - sensor.indoor_cooling_setpoint_temperature_delta
-    - binary_sensor.average_cooling_required
-
 fan_control:
   name: 'Living Room Fan Control'
   entities:
-    - switch.living_room_fan
+    - climate.living_room_fan
     - sensor.living_room_outdoor_temperature_delta
-    - sensor.living_room_heating_setpoint_temperature_delta
-    - sensor.living_room_cooling_setpoint_temperature_delta
-
-heat_control:
-  name: 'Heat Control'
-  entities:
-    - climate.bonus_room
-    - switch.bonus_room_heater
 
 misc_env:
   name: "Miscellaneous"

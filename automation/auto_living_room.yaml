@@ -1,45 +1,36 @@
+#These turn on and off the living room fan climate component as needed.
+#They're designed to trigger ONLY when the temperature crosses the threshold.
+#This is to allow user control if they want the fan to stay off.
 - id: fan_on_when_hot
   alias: 'Living Room: Turn Fan On When Hot'
   trigger:
-  - platform: time
-    minutes: '/5'
-    seconds: 20
+  - platform: homeassistant
+    event: start
+  - platform: numeric_state
+    entity_id: sensor.living_room_outdoor_temperature_delta
+    above: 0
   condition:
-    condition: and
-    conditions:
-    - condition: template
-      value_template: "{{ states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float }}"
-    - condition: template
-      value_template: "{{ states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) }}"
-      #We only turn the fan on if the temperature inside is higher than outside, and even then only if it's above (setpoint + 2).
+  - condition: numeric_state
+    entity_id: sensor.living_room_outdoor_temperature_delta
+    above: 0
   action:
-  - service: switch.turn_on
-    entity_id: switch.living_room_fan
-
-- id: fan_off_when_cold
-  alias: 'Living Room: Turn Fan Off When Setpoint Reached'
-  #The name of this is a lie, but we'll work with it.
-  trigger:
-  - platform: time
-    minutes: '/5'
-    seconds: 10
-  condition:
-    condition: template
-    value_template: "{{ states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) }}"
-  action:
-  - service: switch.turn_off
-    entity_id: switch.living_room_fan
+  - service: climate.set_operation_mode
+    data:
+      entity_id: climate.living_room_fan
+      operation_mode: 'cool'
 
 - id: fan_off_when_hotter_outside
   alias: 'Living Room: Turn Fan Off When Hotter Outside'
-  #The name of this is a lie, but we'll work with it.
   trigger:
-  - platform: time
-    minutes: '/5'
-    seconds: 10
+  - platform: numeric_state
+    entity_id: sensor.living_room_outdoor_temperature_delta
+    below: 0
   condition:
-    - condition: template
-      value_template: "{{ states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float}}"
+  - condition: numeric_state
+    entity_id: sensor.living_room_outdoor_temperature_delta
+    below: 0
   action:
-  - service: switch.turn_off
-    entity_id: switch.living_room_fan
+  - service: climate.set_operation_mode
+    data:
+      entity_id: climate.living_room_fan
+      operation_mode: 'off'

@@ -7,3 +7,15 @@
 #  target_temp: 62
 #  min_cycle_duration:
 #    minutes: 10
+
+- platform: generic_thermostat
+  name: Living Room Fan
+  heater: switch.living_room_fan
+  target_sensor: sensor.living_room_temperature
+  min_temp: 60
+  max_temp: 80
+  target_temp: 70
+  ac_mode: True
+  min_cycle_duration:
+    minutes: 5
+  initial_operation_mode: 'off'
