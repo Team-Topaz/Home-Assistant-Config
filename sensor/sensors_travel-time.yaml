@@ -25,3 +25,15 @@
   origin: device_tracker.chelsea_phone
   destination: zone.home
   scan_interval: 900
+
+- platform: waze_travel_time
+  origin: device_tracker.ryan_phone
+  destination: zone.home
+  region: 'US'
+  name: "Ryan to Home Drive Time Waze"
+
+- platform: waze_travel_time
+  origin: device_tracker.chelsea_phone
+  destination: zone.home
+  region: 'US'
+  name: "Chelsea to Home Drive Time Waze"

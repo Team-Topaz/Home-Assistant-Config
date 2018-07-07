@@ -147,6 +147,7 @@ input_number: !include input_number.yaml
 input_select: !include input_select.yaml
 input_datetime: !include input_datetime.yaml
 weather: !include weather.yaml
+proximity: !include proximity.yaml
 
 #Dir_Merge_Lists must contain lists in each file.
 scene: !include_dir_merge_list scene

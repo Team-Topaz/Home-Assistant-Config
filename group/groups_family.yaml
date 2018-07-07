@@ -60,6 +60,8 @@ travel_time:
     - sensor.ryan_distance_from_home
     - sensor.chelsea_distance_from_home
     - sensor.ryan_chelsea_distance
+    - sensor.ryan_to_home_drive_time_waze
+    - sensor.chelsea_to_home_drive_time_waze
 
 dog_status:
   name: Peeta
