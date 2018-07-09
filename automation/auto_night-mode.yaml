@@ -13,7 +13,7 @@
     - platform: time
       at: '4:00:00'
   action:
-    - service: input_boolean.off
+    - service: input_boolean.turn_off
       entity_id: input_boolean.night_mode
 
 - id: night_mode_inhibit_kitchen
