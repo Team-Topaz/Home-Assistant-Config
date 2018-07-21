@@ -29,6 +29,7 @@ guests:
     - !secret friend_device9
     - !secret friend_device10
     - !secret friend_device11
+    - !secret friend_device12
 
 steam_friends:
   name: 'Steam Friends'
