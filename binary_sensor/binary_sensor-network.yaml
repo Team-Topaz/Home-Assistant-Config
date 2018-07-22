@@ -29,3 +29,11 @@
 - platform: ping
   host: 192.168.1.75
   name: Lutron Smart Bridge Ping
+
+- platform: ping
+  host: 192.168.100.1
+  name: Modem Ping
+
+- platform: ping
+  host: 192.168.1.2
+  name: Switch Ping
