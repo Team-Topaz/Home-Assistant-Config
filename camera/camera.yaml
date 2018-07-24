@@ -1,18 +1,3 @@
-#- platform: usps
-#  scan_interval: 10
-
-- platform: generic
-  still_image_url: !secret city1_trafficcam1_url
-  name: Traffic Camera
-
-- platform: generic
-  still_image_url: !secret city2_trafficcam1_url
-  name: Trail Camera
-
-#- platform: ffmpeg
-#  name: Garden Camera
-#  input: -rtsp_transport tcp -i rtsp://192.168.1.81:554/12 -an
-
 - platform: mjpeg
   mjpeg_url: http://192.168.1.71:32773/
   name: Garden Camera

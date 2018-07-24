@@ -1,11 +1,3 @@
-#- platform: fedex
-#  username: !secret fedex_username
-#  password: !secret fedex_password
-
-- platform: ups
-  username: !secret ups_username
-  password: !secret ups_password
-
 - platform: mqtt
   state_topic: "$SYS/broker/uptime"
   name: "MQTT Broker Uptime"
@@ -20,26 +12,11 @@
 - platform: steam_online
   api_key: !secret steam_web_apikey
   accounts:
-    - !secret steam_friend1
     - !secret steam_friend2
-    - !secret steam_friend3
     - !secret steam_friend4
     - !secret steam_friend5
     - !secret steam_friend6
-    - !secret steam_friend7
     - !secret steam_friend8
-
-#- platform: template
-#  sensors:
-#     usps_packages_delivered:
-#       friendly_name: "USPS Packages Delivered"
-#       unit_of_measurement: "Packages"
-#       value_template: >
-#        {% if states.sensor.usps_packages.attributes.delivered %}
-#          {{ states.sensor.usps_packages.attributes.delivered }}
-#        {% else %}
-#          0
-#        {% endif %}
 
 - platform: template
   sensors:
