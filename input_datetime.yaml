@@ -2,9 +2,7 @@ sunrise_alarm_weekday:
   name: Weekday
   has_date: False
   has_time: True
-  initial: '6:30'
 sunrise_alarm_weekend:
   name: Weekend
   has_date: False
   has_time: True
-  initial: '7:30'
