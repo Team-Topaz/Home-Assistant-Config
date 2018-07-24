@@ -38,6 +38,28 @@
   type: mean
   round_digits: 0
 
+
+- platform: statistics
+  name: Office Temperature Stats
+  entity_id: sensor.office_temperature
+  max_age:
+    minutes: 15
+- platform: statistics
+  name: Living Room Temperature Stats
+  entity_id: sensor.living_room_temperature
+  max_age:
+    minutes: 15
+- platform: statistics
+  name: Master Bedroom Temperature Stats
+  entity_id: sensor.master_bedroom_temperature
+  max_age:
+    minutes: 15
+- platform: statistics
+  name: Bonus Room Temperature Stats
+  entity_id: sensor.bonus_room_temperature
+  max_age:
+    minutes: 15
+
 - platform: template
   sensors:
     indoor_outdoor_temperature_delta:
