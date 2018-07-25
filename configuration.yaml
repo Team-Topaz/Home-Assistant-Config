@@ -40,6 +40,12 @@ history:
       - group
     entities:
       - sensor.iis_certificate
+history_graph:
+  living_room_temperature:
+    entities:
+      - sensor.living_room_temperature
+      - sensor.home_temperature
+      - sensor.average_indoor_temperature
 logbook:
   exclude:
     entities:

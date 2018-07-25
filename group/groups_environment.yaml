@@ -27,6 +27,7 @@ fan_control:
   entities:
     - climate.living_room_fan
     - sensor.living_room_outdoor_temperature_delta
+    - history_graph.living_room_temperature
 
 misc_env:
   name: "Miscellaneous"
