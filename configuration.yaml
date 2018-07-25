@@ -107,6 +107,9 @@ google_assistant:
     - switch
     - light
     - scene
+    - climate
+    - fan
+    - input_boolean
 emulated_hue:
   listen_port: 80
   exposed_domains:
