@@ -1,6 +1,34 @@
 - platform: season
   type: astronomical
 
+- platform: darksky
+  name: Home
+  api_key: !secret darksky_api_key
+  monitored_conditions:
+    - summary
+    - temperature
+    - humidity
+    - wind_speed
+    - wind_bearing
+    - dew_point
+    - apparent_temperature
+    - precip_type
+    - pressure
+    - ozone
+    - minutely_summary
+    - hourly_summary
+    - daily_summary
+    - cloud_cover
+    - visibility
+    - precip_probability
+    - temperature_min
+    - temperature_max
+    - apparent_temperature_min
+    - apparent_temperature_max
+    - precip_intensity_max
+    - uv_index
+  update_interval: '00:15'
+
 - platform: min_max
   friendly_name: "Average Temperature"
   name: "Average Indoor Temperature"
