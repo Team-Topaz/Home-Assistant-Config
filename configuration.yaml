@@ -42,6 +42,8 @@ history:
       - sensor.iis_certificate
 history_graph:
   living_room_temperature:
+    name: 'Living Room Temperature History'
+    hours_to_show: 12
     entities:
       - sensor.living_room_temperature
       - sensor.home_temperature
