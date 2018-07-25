@@ -46,7 +46,7 @@ history_graph:
     hours_to_show: 8
     entities:
       - sensor.living_room_temperature
-      - sensor.home_temperature
+      - sensor.outdoor_temperature
 logbook:
   exclude:
     entities:

@@ -2,7 +2,7 @@
   type: astronomical
 
 - platform: darksky
-  name: Home
+  name: Outdoor
   api_key: !secret darksky_api_key
   monitored_conditions:
     - summary
@@ -103,15 +103,15 @@
   sensors:
     indoor_outdoor_temperature_delta:
       friendly_name: "Outdoor Delta"
-      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.home_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     living_room_outdoor_temperature_delta_raw:
       friendly_name: "Living Room: Outdoor Delta Raw"
-      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.home_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
 
     master_bedroom_outdoor_temperature_delta:
       friendly_name: "Master Bedroom: Outdoor Delta"
-      value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.sensor.home_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
       unit_of_measurement: "Δ°F"
