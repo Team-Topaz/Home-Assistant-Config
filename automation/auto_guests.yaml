@@ -123,5 +123,3 @@
   action:
     - service: scene.turn_on
       entity_id: scene.entertaining
-    - service: script.turn_on
-      entity_id: script.chromecast_yule_lug
