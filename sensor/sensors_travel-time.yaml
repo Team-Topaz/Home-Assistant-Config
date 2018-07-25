@@ -1,39 +1,51 @@
+#I only made one bike sensor because it'll USUALLY be pretty same both ways.
 - platform: google_travel_time
-  name: "Ryan to Chelsea Drive Time"
-  api_key: !secret google_api_key
-  origin: device_tracker.ryan_phone
-  destination: device_tracker.chelsea_phone
-  scan_interval: 900
-
-- platform: google_travel_time
-  name: "Chelsea to Ryan Drive Time"
+  name: "Chelsea to Ryan Bike Time"
   api_key: !secret google_api_key
   origin: device_tracker.chelsea_phone
   destination: device_tracker.ryan_phone
+  options:
+    mode: bicycling
   scan_interval: 900
 
 - platform: google_travel_time
+  name: "Ryan to Home Bike Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.ryan_phone
+  destination: zone.home
+  options:
+    mode: bicycling
+  scan_interval: 900
+
+- platform: google_travel_time
+  name: "Chelsea to Home Bike Time"
+  api_key: !secret google_api_key
+  origin: device_tracker.chelsea_phone
+  destination: zone.home
+  options:
+    mode: bicycling
+  scan_interval: 900
+
+- platform: waze_travel_time
+  origin: device_tracker.ryan_phone
+  destination: zone.home
+  region: 'US'
   name: "Ryan to Home Drive Time"
-  api_key: !secret google_api_key
-  origin: device_tracker.ryan_phone
-  destination: zone.home
-  scan_interval: 900
 
-- platform: google_travel_time
+- platform: waze_travel_time
+  origin: device_tracker.chelsea_phone
+  destination: zone.home
+  region: 'US'
   name: "Chelsea to Home Drive Time"
-  api_key: !secret google_api_key
+
+- platform: waze_travel_time
   origin: device_tracker.chelsea_phone
-  destination: zone.home
-  scan_interval: 900
+  destination: device_tracker.ryan_phone
+  region: 'US'
+  name: "Chelsea to Ryan Drive Time"
 
 - platform: waze_travel_time
   origin: device_tracker.ryan_phone
-  destination: zone.home
+  destination: device_tracker.chelsea_phone
   region: 'US'
-  name: "Ryan to Home Drive Time Waze"
-
-- platform: waze_travel_time
-  origin: device_tracker.chelsea_phone
-  destination: zone.home
-  region: 'US'
-  name: "Chelsea to Home Drive Time Waze"
+  name: "Ryan to Chelsea Ryan Drive Time"
