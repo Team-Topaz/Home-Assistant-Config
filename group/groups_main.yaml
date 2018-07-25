@@ -38,6 +38,7 @@ on_demand:
   entities:
     - input_boolean.vacation_mode
     - input_boolean.guest_mode
+    - input_boolean.night_mode
 
 packages:
   name: 'Packages'

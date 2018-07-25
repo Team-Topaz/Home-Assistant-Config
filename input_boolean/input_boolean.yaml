@@ -6,6 +6,10 @@ guest_mode:
   name: 'Guest Mode'
   icon: mdi:glass-flute
 
+night_mode:
+  name: 'Night Mode'
+  icon: mdi:weather-night
+
 sunrise_alarm_armed:
   name: 'Enabled'
   icon: mdi:alarm
