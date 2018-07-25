@@ -8,11 +8,11 @@
     event: start
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    above: 0.3
+    above: 0
   condition:
   - condition: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    above: 0.3
+    above: 0
   action:
   - service: climate.set_operation_mode
     data:
@@ -26,11 +26,11 @@
     event: start
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    below: 0.3
+    below: 0
   condition:
   - condition: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    below: 0.3
+    below: 0
   action:
   - service: climate.set_operation_mode
     data:
