@@ -21,10 +21,10 @@
     - cloud_cover
     - visibility
     - precip_probability
-    - temperature_min
-    - temperature_max
-    - apparent_temperature_min
-    - apparent_temperature_max
+    - temperature_low
+    - temperature_high
+    - apparent_temperature_low
+    - apparent_temperature_high
     - precip_intensity_max
     - uv_index
   update_interval: '00:15'

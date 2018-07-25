@@ -7,7 +7,7 @@
     condition: and
     conditions:
       - condition: numeric_state
-        entity_id: sensor.outdoor_daily_low_temperature
+        entity_id: sensor.temperature_low
         below: 34
       - condition: state
         entity_id: binary_sensor.garden_is_growing_season
@@ -16,7 +16,7 @@
   - service: notify.push_main
     data_template:
       title: 'Unexpected Frost!'
-      message: "Today's temperature is expected to dip to {{ states('sensor.outdoor_daily_low_temperature') | float | round(0) | int }}°F. Protect frost-sensitive plants."
+      message: "Today's temperature is expected to dip to {{ states('sensor.temperature_low') | float | round(0) | int }}°F. Protect frost-sensitive plants."
       data:
         tag: 'garden_frost'
 
