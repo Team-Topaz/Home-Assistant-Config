@@ -43,11 +43,10 @@ history:
 history_graph:
   living_room_temperature:
     name: 'Living Room Temperature History'
-    hours_to_show: 12
+    hours_to_show: 8
     entities:
       - sensor.living_room_temperature
       - sensor.home_temperature
-      - sensor.average_indoor_temperature
 logbook:
   exclude:
     entities:
