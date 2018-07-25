@@ -103,6 +103,7 @@ google_assistant:
   project_id: !secret g_assistant_projectid
   client_id: !secret g_assistant_clientid
   access_token: !secret g_assistant_accesstoken
+  api_key: !secret g_assistant_apikey
   exposed_domains:
     - switch
     - light
