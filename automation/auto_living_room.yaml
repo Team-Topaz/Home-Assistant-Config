@@ -8,11 +8,11 @@
     event: start
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    above: 1
+    above: 0.3
   condition:
   - condition: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    above: 1
+    above: 0.3
   action:
   - service: climate.set_operation_mode
     data:
@@ -22,13 +22,15 @@
 - id: fan_off_when_hotter_outside
   alias: 'Living Room: Turn Fan Off When Hotter Outside'
   trigger:
+  - platform: homeassistant
+    event: start
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    below: 1
+    below: 0.3
   condition:
   - condition: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
-    below: 1
+    below: 0.3
   action:
   - service: climate.set_operation_mode
     data:

@@ -1,13 +1,9 @@
 - id: living_room_window_open_ok
-  #initial_state: 'off' #Disabled for winter
   alias: 'Living Room: OK to open window'
   trigger:
-    #Triggers if it's warmer inside than outside, AND it's warmer inside than the setpoint.
-    - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
-    #Triggers if it's warmer outside than inside and it's cooler than the setpoint.
-    - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+    - platform: state
+      entity_id: climate.living_room_fan
+      to: 'on'
   action:
     - service: light.turn_on
       data:
@@ -19,12 +15,9 @@
   #initial_state: 'off' #Disabled for winter.
   alias: 'Living Room: Close Windows'
   trigger:
-    #Inside temperature is above setpoint, but outside temperature is above inside temperature.
-    - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') | float < state_attr('weather.home_weather', 'temperature') | float ) and ( states('sensor.living_room_temperature') | float > (float(states('input_number.cooling_setpoint')) + 2) ) }}"
-    #Inside temperature is below setpoint, but outside temperature is below inside temperature.
-    - platform: template
-      value_template: "{{ (states('sensor.living_room_temperature') | float > state_attr('weather.home_weather', 'temperature') | float) and ( states('sensor.living_room_temperature') | float < (float(states('input_number.cooling_setpoint')) - 2) ) }}"
+    - platform: state
+      entity_id: climate.living_room_fan
+      from: 'on'
   action:
     - service: light.turn_on
       data:
