@@ -5,10 +5,10 @@
   friendly_name: "Average Temperature"
   name: "Average Indoor Temperature"
   entity_ids:
-    - sensor.office_temperature
-    - sensor.living_room_temperature
-    - sensor.master_bedroom_temperature
-    - sensor.bonus_room_temperature
+    - sensor.office_temperature_stats_mean
+    - sensor.living_room_temperature_stats_mean
+    - sensor.master_bedroom_temperature_stats_mean
+    - sensor.bonus_room_temperature_stats_mean
     #- sensor.guest_bedroom_temperature
     #- sensor.sn6_temperature
   type: mean
