@@ -47,6 +47,15 @@ history_graph:
     entities:
       - sensor.living_room_temperature
       - sensor.outdoor_temperature
+      - sensor.living_room_temperature_setpoint
+  temperature_deltas:
+    name: 'Temperature Deltas'
+    hours_to_show: 8
+    entities:
+      - sensor.indoor_outdoor_temperature_delta
+      - sensor.living_room_outdoor_temperature_delta
+      - sensor.living_room_outdoor_temperature_delta_raw
+
 logbook:
   exclude:
     entities:

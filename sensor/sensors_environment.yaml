@@ -100,6 +100,18 @@
 
 - platform: template
   sensors:
+    living_room_fan_setpoint:
+      friendly_name: "Living Room Fan Setpoint"
+      value_template: '{{ (states.climate.living_room_fan.attributes.temperature | float) }}'
+      unit_of_measurement: "°F"
+    living_room_fan_setpoint_delta:
+      friendly_name: "Living Room Fan Setpoint Delta"
+      value_template: '{{ (states.climate.living_room_fan.attributes.current_temperature | float) - (states.climate.living_room_fan.attributes.temperature | float) }}'
+      unit_of_measurement: "°F"
+
+
+- platform: template
+  sensors:
     indoor_outdoor_temperature_delta:
       friendly_name: "Outdoor Delta"
       value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
