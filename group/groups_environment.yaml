@@ -21,7 +21,7 @@ temperature:
     - sensor.weather_temperature
     - sensor.outdoor_temperature_rate
     - sensor.indoor_outdoor_temperature_delta
-    -history_graph.temperature_deltas_history
+    - history_graph.temperature_deltas_history
 
 fan_control:
   name: 'Living Room Fan Control'
