@@ -107,7 +107,7 @@
     living_room_fan_setpoint_delta:
       friendly_name: "Living Room Fan Setpoint Delta"
       value_template: '{{ (states.climate.living_room_fan.attributes.current_temperature | float) - (states.climate.living_room_fan.attributes.temperature | float) }}'
-      unit_of_measurement: "°F"
+      unit_of_measurement: "Δ°F"
     home_weather_temperature:
       friendly_name: "Home Weather Temperature"
       value_template: '{{ (states.weather.home_weather.attributes.temperature | float) }}'
