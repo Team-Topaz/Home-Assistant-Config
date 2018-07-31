@@ -27,7 +27,7 @@
     - apparent_temperature_high
     - precip_intensity_max
     - uv_index
-  update_interval: '00:15'
+  update_interval: '00:05'
 
 - platform: min_max
   friendly_name: "Average Temperature"
@@ -108,7 +108,10 @@
       friendly_name: "Living Room Fan Setpoint Delta"
       value_template: '{{ (states.climate.living_room_fan.attributes.current_temperature | float) - (states.climate.living_room_fan.attributes.temperature | float) }}'
       unit_of_measurement: "°F"
-
+    home_weather_temperature:
+      friendly_name: "Home Weather Temperature"
+      value_template: '{{ (states.weather.home_weather.attributes.temperature | float) }}'
+      unit_of_measurement: "°F"
 
 - platform: template
   sensors:

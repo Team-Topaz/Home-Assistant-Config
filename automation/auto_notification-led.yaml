@@ -3,7 +3,7 @@
   trigger:
     - platform: state
       entity_id: climate.living_room_fan
-      to: 'on'
+      to: 'cool'
   action:
     - service: light.turn_on
       data:
@@ -17,7 +17,7 @@
   trigger:
     - platform: state
       entity_id: climate.living_room_fan
-      from: 'on'
+      to: 'off'
   action:
     - service: light.turn_on
       data:

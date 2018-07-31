@@ -2,7 +2,7 @@ homeassistant:
   name: !secret home_name
   latitude: !secret home_latitude
   longitude: !secret home_longitude
-  elevation: 32
+  elevation: !secret home_elevation
   unit_system: imperial
   time_zone: America/Los_Angeles
   customize: !include_dir_merge_named customize
@@ -47,11 +47,13 @@ history_graph:
     entities:
       - sensor.living_room_temperature
       - sensor.outdoor_temperature
-      - sensor.living_room_temperature_setpoint
+      - sensor.home_weather_temperature
+      - sensor.living_room_fan_setpoint
   temperature_deltas:
     name: 'Temperature Deltas'
     hours_to_show: 8
     entities:
+      - sensor.living_room_fan_setpoint_delta
       - sensor.indoor_outdoor_temperature_delta
       - sensor.living_room_outdoor_temperature_delta
       - sensor.living_room_outdoor_temperature_delta_raw
