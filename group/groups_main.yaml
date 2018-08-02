@@ -6,6 +6,7 @@ default_view:
     - group.av_living_room
     - group.indoor_lights
     - group.outdoor_lights
+    - group.special_lights
     - group.xmas_lights
     - group.packages
     #- group.scenes
