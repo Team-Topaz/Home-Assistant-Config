@@ -1,15 +1,15 @@
-- platform: nut
-  host: 192.168.1.58
-  username: homeassistant
-  password: !secret nut_password
-  resources:
-    - battery.charge
-    - battery.runtime
-    - battery.voltage
-    - input.voltage
-    - ups.load
-    - ups.status
-    - ups.status.display
+#- platform: nut
+#  host: 192.168.1.58
+#  username: homeassistant
+#  password: !secret nut_password
+#  resources:
+#    - battery.charge
+#    - battery.runtime
+#    - battery.voltage
+#    - input.voltage
+#    - ups.load
+#    - ups.status
+#    - ups.status.display
 
 - platform: plex
   host: 192.168.1.20
