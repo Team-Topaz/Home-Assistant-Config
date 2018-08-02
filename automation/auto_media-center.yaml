@@ -1,3 +1,26 @@
+- id: tv_backlight_on
+  alias: 'Media Center: Turn on Backlight When On'
+  trigger:
+    - platform: state
+      entity_id: remote.living_room
+      from: 'off'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.tv_backlight
+      color_name: white
+      brightness: 75
+
+- id: tv_backlight_off
+  alias: 'Media Center: Turn off Backlight When Off'
+  trigger:
+    - platform: state
+      entity_id: remote.living_room
+      to: 'off'
+  action:
+    service: light.turn_off
+    action: light.tv_backlight
+
 - id: tv_away_off
   alias: 'Media Center: Turn off when away'
   trigger:
