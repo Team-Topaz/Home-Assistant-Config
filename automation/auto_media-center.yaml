@@ -19,7 +19,7 @@
       to: 'off'
   action:
     service: light.turn_off
-    action: light.tv_backlight
+    entity_id: light.tv_backlight
 
 - id: tv_away_off
   alias: 'Media Center: Turn off when away'
