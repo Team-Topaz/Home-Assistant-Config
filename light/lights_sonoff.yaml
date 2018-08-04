@@ -1,11 +1,3 @@
-#- platform: mqtt
-#  name: "Living Room Floor Lamp"
-#  state_topic: "stat/sonoff-livingroomlamp/POWER"
-#  command_topic: "cmnd/sonoff-livingroomlamp/POWER"
-#  payload_on: "ON"
-#  payload_off: "OFF"
-#  retain: true
-
 - platform: mqtt
   name: "Bike Room Light"
   state_topic: "stat/sonoff-bike/POWER"

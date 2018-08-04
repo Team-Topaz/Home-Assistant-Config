@@ -18,17 +18,6 @@
   username: !secret plex_username
   password: !secret plex_password
 
-#- platform: speedtest
-#  name: Internet
-#  monitored_conditions:
-#    - ping
-#    - download
-#    - upload
-#  hour:
-#    - 6
-#    - 18
-#  minute: 0
-
 - platform: systemmonitor
   scan_interval: 240
   resources:
@@ -46,11 +35,6 @@
       friendly_name: 'CPU Load'
       value_template: "{{(((states('sensor.load_1m') | float)/4)*100) | round(1)}}"
       unit_of_measurement: '%'
-
-#- platform: cert_expiry
-#  host: !secret ha_url
-#  name: Home Assistant Certificate
-#  port: 8123
 
 - platform: cert_expiry
   host: !secret iis_url
