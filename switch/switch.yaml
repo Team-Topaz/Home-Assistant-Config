@@ -1,8 +1,0 @@
-- platform: mqtt
-  name: "Living Room Fan"
-  state_topic: "stat/sonoff-livingroomfan/POWER"
-  command_topic: "cmnd/sonoff-livingroomfan/POWER"
-  qos: 1
-  payload_on: "ON"
-  payload_off: "OFF"
-  retain: true
