@@ -100,6 +100,8 @@ mqtt:
   will_message:
     topic: 'hass/status'
     payload: 'offline'
+
+cloud:
 google:
   client_id: !secret gcal_client_id
   client_secret: !secret gcal_client_secret
@@ -110,18 +112,6 @@ lutron_caseta_pro:
     - host: 192.168.1.75
       mac: !secret lutron_hub_mac
 wake_on_lan:
-google_assistant:
-  project_id: !secret g_assistant_projectid
-  client_id: !secret g_assistant_clientid
-  access_token: !secret g_assistant_accesstoken
-  api_key: !secret g_assistant_apikey
-  exposed_domains:
-    - switch
-    - light
-    - scene
-    - climate
-    - fan
-    - input_boolean
 emulated_hue:
   listen_port: 80
   exposed_domains:
