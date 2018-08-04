@@ -1,4 +1,4 @@
 - platform: harmony
-  host: 192.168.1.102
+  host: 192.168.1.30
   name: Living Room
   activity: Watch Chromecast

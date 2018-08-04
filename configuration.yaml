@@ -109,7 +109,7 @@ ifttt:
   key: !secret ifttt_key
 lutron_caseta_pro:
   bridges:
-    - host: 192.168.1.75
+    - host: 192.168.1.34
       mac: !secret lutron_hub_mac
 wake_on_lan:
 emulated_hue:
@@ -118,8 +118,8 @@ emulated_hue:
     - light
 cast:
   media_player:
-    - host: 192.168.1.101
-    - host: 192.168.1.63
+    - host: 192.168.1.31
+    - host: 192.168.1.32
 #hdmi_cec:
 #  devices:
 #    TV: 0.0.0.0
