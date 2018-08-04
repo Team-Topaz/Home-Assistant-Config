@@ -141,25 +141,6 @@
     - service: scene.turn_on
       entity_id: scene.caseta_living_and_dining_off
 
-
-- id: reduce_default_dining_brightness
-  alias: "Dining Room: Reduce brightness"
-  initial_state: 'off'
-  # Off because it's a demo.
-  trigger:
-    - platform: state
-      entity_id: light.dining_room_chandelier
-      from: 'off'
-      to: 'on'
-  condition:
-    - condition: template
-      value_template: '{{ states.light.dining_room_chandelier.attributes.brightness == 255 }}'
-  action:
-    - service: light.turn_on
-      data:
-        entity_id: light.dining_room_chandelier
-        brightness: 128
-
 - id: master_bedroom_nightstand_on
   alias: 'Master Bedroom: Turn on Nightstand Lamp'
   trigger:
