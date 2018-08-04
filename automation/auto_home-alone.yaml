@@ -17,15 +17,19 @@
         entity_id: remote.living_room
         state: 'on'
   action:
+  - service: timer.start
+    entity_id: timer.home_alone_lights_off_timeout
   - service: notify.push_main
     data:
       title: 'Lights still on'
-      message: "It looks like a few lights are still on and nobody's home. Turn them off?"
+      message: "It looks like a few lights are still on. Turn them off? Auto-off in 20 minutes."
       data:
         tag: 'home_alone_lights_on'
         actions:
         - action: turn_off
           title: "Turn Off"
+        - action: home_alone_stay_on
+          title: "Stay On"
 
 - id: home_alone_turn_off_lights
   alias: 'Home Alone: Notification Clicked: Turn Off'
@@ -34,6 +38,29 @@
     event_type: html5_notification.clicked
     event_data:
       action: turn_off
+  action:
+  - service: scene.turn_on
+    entity_id: scene.indoor_off
+  - service: timer.cancel
+    entity_id: timer.home_alone_lights_off_timeout
+
+- id: home_alone_stay_on_clicked
+  alias: 'Home Alone: Notification Clicked: Stay On'
+  trigger:
+    platform: event
+    event_type: html5_notification.clicked
+    event_data:
+      action: home_alone_stay_on
+  action:
+  - service: timer.cancel
+    entity_id: timer.home_alone_lights_off_timeout
+
+- id: home_alone_lights_timed_out
+  alias: 'Home Alone: Lights Auto-Off'
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data: {"state": "idle", "entity_id": "timer.home_alone_lights_off_timeout"}
   action:
   - service: scene.turn_on
     entity_id: scene.indoor_off

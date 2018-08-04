@@ -4,6 +4,8 @@
     #Scene "Indoor Off" calls the "Off" scene in the Lutron hub directly.
     remote.living_room: off
     group.indoor_lights: off
+    group.special_lights: off
+    media_player.kitchen_speaker: off
 
 - name: 'All Off'
   entities:
