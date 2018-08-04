@@ -9,7 +9,7 @@
     data:
       entity_id: light.tv_backlight
       color_name: white
-      brightness: 75
+      brightness: 150
 
 - id: tv_backlight_off
   alias: 'Media Center: Turn off Backlight When Off'
