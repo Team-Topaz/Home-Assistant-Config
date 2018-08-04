@@ -13,7 +13,7 @@ indoor_lights:
     - light.kitchen_overhead_lights
     - light.dining_room_chandelier
     - light.living_room_floor_lamp
-    - light.bike_room_light
+    - light.bike_room_lamp
     - light.master_bedroom_sconce
     - light.nightstand_lamps
     - light.ryan_nightstand_lamp

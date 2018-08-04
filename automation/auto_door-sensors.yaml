@@ -8,7 +8,7 @@
   action:
   - service: light.turn_on
     data:
-      entity_id: light.bike_room_light
+      entity_id: light.bike_room_lamp
 
 #This triggers if the front door is opened when the porch light is on, but the indoor lights are off.
 #EG if the front door is opened when you arrive home.

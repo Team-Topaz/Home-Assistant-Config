@@ -1,8 +1,0 @@
-- platform: mqtt
-  name: "Bike Room Light"
-  state_topic: "stat/sonoff-bike/POWER"
-  command_topic: "cmnd/sonoff-bike/POWER"
-  qos: 1
-  payload_on: "ON"
-  payload_off: "OFF"
-  retain: true
