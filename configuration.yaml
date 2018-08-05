@@ -67,8 +67,6 @@ logger:
     #pylutron_caseta.smartbridge: debug
     #pylutron_caseta.lip: debug
 
-#tts:
-#  - platform: picotts
 media_extractor:
 mqtt:
   discovery: true
@@ -98,13 +96,6 @@ emulated_hue:
   listen_port: 80
   exposed_domains:
     - light
-
-#hdmi_cec:
-#  devices:
-#    TV: 0.0.0.0
-#    #HASS: 1.7.0.0
-#    Chromecast: 1.1.0.0
-#    Receiver: 1.0.0.0
 
 #If we have trouble finding a new RFLink device, check the console output
 #directly to make sure we're not filtering out the device.
