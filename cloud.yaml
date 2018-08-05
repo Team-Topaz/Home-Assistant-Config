@@ -4,9 +4,36 @@ google_actions:
       - climate
     include_entities:
       - switch.living_room_fan
-      - light.chelsea_nighstand_lamp
+      - light.chelsea_nightstand_lamp
       - light.ryan_nightstand_lamp
       - light.nightstand_lamps
+      - light.great_room
       - light.tv_bar_light
       - light.tv_backlight
       - scene.indoor_off
+  entity_config:
+    light.chelsea_nightstand_lamp:
+      aliases:
+        - "Chelsea's Nightstand"
+        - "Chelsea's Lamp"
+      room: Master Bedroom
+    light.ryan_nightstand_lamp:
+      aliases:
+        - "Ryan's Nightstand"
+        - "Ryan's Lamp"
+      room: Master Bedroom
+    light.nightstand_lamps:
+      aliases:
+        - bedroom lamps
+        - nightstand lamps
+        - bed lamps
+      room: Master Bedroom
+    light.tv_backlight:
+      aliases:
+        - backlight
+        - strip lights
+      room: living room
+    switch.living_room_fan:
+      aliases:
+        - fan
+      room: living room
