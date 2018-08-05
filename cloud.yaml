@@ -1,0 +1,12 @@
+google_actions:
+  filter:
+    include_domains:
+      - climate
+    include_entities:
+      - switch.living_room_fan
+      - light.chelsea_nighstand_lamp
+      - light.ryan_nightstand_lamp
+      - light.nightstand_lamps
+      - light.tv_bar_light
+      - light.tv_backlight
+      - scene.indoor_off
