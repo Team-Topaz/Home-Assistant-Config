@@ -17,9 +17,9 @@
     - service: switch.turn_off
       entity_id: switch.living_room_fan
     - service: automation.trigger
-      entity_id: living_room_fan_on_when_hot
+      entity_id: automation.living_room_fan_on_when_hot
     - service: automation.trigger
-      entity_id: living_room_fan_off_when_hotter_outside
+      entity_id: automation.living_room_fan_off_when_hotter_outside
 
 #Home assistant has been keen to change temperatures on its own.
 #I'm hoping this will help me figure out what causes it.
