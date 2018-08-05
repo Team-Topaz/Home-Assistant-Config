@@ -1,0 +1,17 @@
+living_room_temperature:
+  name: 'Living Room Temperature History'
+  hours_to_show: 8
+  entities:
+    - sensor.living_room_temperature
+    - sensor.outdoor_temperature
+    - sensor.home_weather_temperature
+    - sensor.living_room_fan_setpoint
+
+temperature_deltas:
+  name: 'Temperature Deltas'
+  hours_to_show: 8
+  entities:
+    - sensor.living_room_fan_setpoint_delta
+    - sensor.indoor_outdoor_temperature_delta
+    - sensor.living_room_outdoor_temperature_delta
+    - sensor.living_room_outdoor_temperature_delta_raw

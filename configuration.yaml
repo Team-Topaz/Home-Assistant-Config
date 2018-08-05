@@ -40,23 +40,6 @@ history:
       - group
     entities:
       - sensor.iis_certificate
-history_graph:
-  living_room_temperature:
-    name: 'Living Room Temperature History'
-    hours_to_show: 8
-    entities:
-      - sensor.living_room_temperature
-      - sensor.outdoor_temperature
-      - sensor.home_weather_temperature
-      - sensor.living_room_fan_setpoint
-  temperature_deltas:
-    name: 'Temperature Deltas'
-    hours_to_show: 8
-    entities:
-      - sensor.living_room_fan_setpoint_delta
-      - sensor.indoor_outdoor_temperature_delta
-      - sensor.living_room_outdoor_temperature_delta
-      - sensor.living_room_outdoor_temperature_delta_raw
 
 logbook:
   exclude:
@@ -115,10 +98,7 @@ emulated_hue:
   listen_port: 80
   exposed_domains:
     - light
-cast:
-  media_player:
-    - host: 192.168.1.31
-    - host: 192.168.1.32
+
 #hdmi_cec:
 #  devices:
 #    TV: 0.0.0.0
@@ -140,26 +120,25 @@ rflink:
     - friedland_*
 ffmpeg:
 
-#usps:
-#  username: !secret usps_username
-#  password: !secret usps_password
-
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
 climate: !include climate.yaml
-
-#Split all the major components into their own directories.
-alert: !include_dir_merge_named alert
-group: !include_dir_merge_named group
-timer: !include timer.yaml
-input_boolean: !include_dir_merge_named input_boolean
-script: !include_dir_merge_named script
 input_number: !include input_number.yaml
 input_select: !include input_select.yaml
 input_datetime: !include input_datetime.yaml
 weather: !include weather.yaml
 proximity: !include proximity.yaml
 cloud: !include cloud.yaml
+history_graph: !include history_graph.yaml
+cast: !include cast.yaml
+timer: !include timer.yaml
+
+#Split all the major components into their own directories.
+alert: !include_dir_merge_named alert
+group: !include_dir_merge_named group
+input_boolean: !include_dir_merge_named input_boolean
+script: !include_dir_merge_named script
+
 
 #Dir_Merge_Lists must contain lists in each file.
 scene: !include_dir_merge_list scene
