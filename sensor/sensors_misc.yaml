@@ -35,12 +35,7 @@
       friendly_name: 'CPU Load'
       value_template: "{{(((states('sensor.load_1m') | float)/4)*100) | round(1)}}"
       unit_of_measurement: '%'
-
-- platform: cert_expiry
-  host: !secret iis_url
-  name: IIS Certificate
-  port: 443
-
+      
 - platform: template
   sensors:
     ryan_phone_battery:

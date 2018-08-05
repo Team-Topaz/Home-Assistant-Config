@@ -63,7 +63,6 @@ net_dc_status:
   name: 'Server Status'
   entities:
     - binary_sensor.domain_controller_ping
-    - sensor.iis_certificate
     - sensor.plex
 
 net_router_status:
