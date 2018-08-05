@@ -3,7 +3,7 @@
   heater: switch.living_room_fan
   target_sensor: sensor.living_room_temperature
   min_temp: 60
-  max_temp: 80
+  max_temp: 75
   ac_mode: True
   keep_alive:
     minutes: 15
