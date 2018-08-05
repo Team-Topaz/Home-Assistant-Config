@@ -40,16 +40,10 @@
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
     above: 0
-  - platform: template
-    value_template: '{{ (states.living_room_fan_setpoint.state | float) < (states.outdoor_temperature.state | float) }}'
   condition:
-  - condition: and
-    conditions:
-    - condition: numeric_state
-      entity_id: sensor.living_room_outdoor_temperature_delta
-      above: 0
-    - condition: template
-      value_template: '{{ (states.living_room_fan_setpoint.state | float) < (states.outdoor_temperature.state | float) }}'
+  - condition: numeric_state
+    entity_id: sensor.living_room_outdoor_temperature_delta
+    above: 0
   action:
   - service: climate.set_operation_mode
     data:
