@@ -102,6 +102,15 @@ mqtt:
     payload: 'offline'
 
 cloud:
+  google_actions:
+    filter:
+      include_domains:
+      - switch
+      - light
+      - scene
+      - climate
+      - fan
+      - input_boolean
 google:
   client_id: !secret gcal_client_id
   client_secret: !secret gcal_client_secret
