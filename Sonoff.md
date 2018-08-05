@@ -8,3 +8,4 @@ Some notes for my Sonoff setup:
   - Currently only set on bike room lamp
 - Disable Serial output once tested and working
   - seriallog 0
+- With few exceptions, they're all now running customized firmware. Use the overrides file to set up wifi at a minimum, or you'll have a fun time taking them apart and reprogramming them, again.
