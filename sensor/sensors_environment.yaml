@@ -122,7 +122,7 @@
 
     living_room_outdoor_temperature_delta_raw:
       friendly_name: "Living Room: Outdoor Delta Raw"
-      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) - (states.sensor.outdoor_temperature_rate.state | float / 2.0) ) }}'
       unit_of_measurement: "Δ°F"
 
     master_bedroom_outdoor_temperature_delta:
