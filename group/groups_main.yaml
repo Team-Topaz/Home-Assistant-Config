@@ -13,6 +13,7 @@ default_view:
     #- group.scenes
     - group.on_demand
     - group.sunrise_alarm
+    - group.fan_control
 
 sunrise_alarm:
   name: 'Sunrise Alarm'
