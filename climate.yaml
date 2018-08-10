@@ -7,6 +7,4 @@
   ac_mode: True
   keep_alive:
     minutes: 15
-  min_cycle_duration:
-    minutes: 15
   initial_operation_mode: 'off'
