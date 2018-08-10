@@ -1,10 +1,6 @@
 sunrise_alarm_light_on:
   alias: 'Sunrise Alarm: Turn On Light'
   sequence:
-  - service: persistent_notification.create
-    data:
-      title: 'Sunrise Alarm'
-      message: 'Ran successfully'
   - service: automation.turn_off
     data:
       entity_id: automation.master_bedroom_turn_on_nightstand_lamp
