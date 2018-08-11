@@ -55,7 +55,7 @@
     outdoor_temperature_trend:
       friendly_name: "Outdoor Temperature Trend"
       entity_id: sensor.outdoor_temperature
-      max_samples: 5
-      sample_duration: 3600
+      max_samples: 10
+      sample_duration: 1800
       min_gradient: 0.000138
       device_class: heat
