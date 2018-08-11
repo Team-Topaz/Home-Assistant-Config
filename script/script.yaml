@@ -13,16 +13,6 @@ reload_groups:
   sequence:
     - service: group.reload
 
-turn_off_everything:
-  alias: Turn Off Everything
-  sequence:
-    - service: scene.turn_on
-      data:
-        entity_id: scene.all_off
-    #- service: ifttt.trigger
-    #  data:
-    #    event: "all_lights_off"
-
 blink_all_lights:
   alias: Blink All lights
   sequence:
