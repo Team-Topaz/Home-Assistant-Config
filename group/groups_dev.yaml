@@ -5,6 +5,7 @@ development_tab:
   entities:
     - group.environment_today
     - group.environment_tomorrow
+    - group.status_lights
     - group.all_scripts
     - group.all_automations
     - group.all_devices

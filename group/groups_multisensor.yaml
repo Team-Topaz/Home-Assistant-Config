@@ -3,57 +3,37 @@ office_card:
   control: hidden
   entities:
     - sensor.office_temperature
-    - sensor.office_temperature_rate
     - sensor.office_humidity
-    - sensor.office_absolute_humidity
-    - sensor.office_brightness
     - binary_sensor.office_motion
-    - light.office_led
 
 living_room_card:
   name: Living Room
   control: hidden
   entities:
     - sensor.living_room_temperature
-    - sensor.living_room_temperature_rate
     - sensor.living_room_humidity
-    - sensor.living_room_absolute_humidity
-    - sensor.living_room_brightness
     - binary_sensor.living_room_motion
-    - light.living_room_led
 
 master_bedroom_card:
   name: Master Bedroom
   control: hidden
   entities:
     - sensor.master_bedroom_temperature
-    - sensor.master_bedroom_temperature_rate
     - sensor.master_bedroom_humidity
-    - sensor.master_bedroom_absolute_humidity
-    - sensor.master_bedroom_brightness
     - binary_sensor.master_bedroom_motion
-    - light.master_bedroom_led
 
 bonus_room_card:
   name: Bonus Room
   control: hidden
   entities:
     - sensor.bonus_room_temperature
-    - sensor.bonus_room_temperature_rate
     - sensor.bonus_room_humidity
-    - sensor.bonus_room_absolute_humidity
-    - sensor.bonus_room_brightness
     - binary_sensor.bonus_room_motion
-    - light.bonus_room_led
 
 bike_room_sensor:
   name: Bike Room
   control: hidden
   entities:
     - sensor.bike_room_temperature
-    - sensor.bike_room_temperature_rate
     - sensor.bike_room_humidity
-    - sensor.bike_room_absolute_humidity
-    - sensor.bike_room_brightness
     - binary_sensor.bike_room_motion
-    - light.bike_room_led
