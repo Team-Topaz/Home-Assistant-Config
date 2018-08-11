@@ -11,7 +11,7 @@ default_view:
     - group.on_demand
     - group.sunrise_alarm
     - group.fan_control
-    - group.environment_outside
+    - weather.home_weather
 
 sunrise_alarm:
   name: 'Sunrise Alarm'

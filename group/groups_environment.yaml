@@ -3,7 +3,7 @@ environment_view:
   view: yes
   icon: mdi:weather-cloudy
   entities:
-    - group.environment_outside
+    - weather.home_weather
     - group.office_card
     - group.living_room_card
     - group.master_bedroom_card
@@ -32,9 +32,3 @@ misc_env:
   entities:
     - sensor.average_humidity
     - sensor.average_light_level
-
-environment_outside:
-  name: 'Environment'
-  entities:
-    - weather.home_weather
-    - sun.sun
