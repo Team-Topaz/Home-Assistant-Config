@@ -12,6 +12,5 @@ temperature_deltas:
   hours_to_show: 8
   entities:
     - sensor.living_room_fan_setpoint_delta
-    - sensor.indoor_outdoor_temperature_delta
     - sensor.living_room_outdoor_temperature_delta
     - sensor.living_room_outdoor_temperature_delta_raw

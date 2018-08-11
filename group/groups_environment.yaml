@@ -12,14 +12,13 @@ environment_view:
     - group.temperature
     - group.fan_control
     - history_graph.living_room_temperature_history
+    - history_graph.temperature_deltas
 
 temperature:
   name: 'Temperature'
   entities:
     - sensor.weather_temperature
     - sensor.outdoor_temperature_rate
-    - sensor.indoor_outdoor_temperature_delta
-    - history_graph.temperature_deltas
 
 fan_control:
   name: 'Living Room Fan Control'

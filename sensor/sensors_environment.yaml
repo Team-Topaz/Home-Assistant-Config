@@ -102,10 +102,6 @@
 
 - platform: template
   sensors:
-    indoor_outdoor_temperature_delta:
-      friendly_name: "Outdoor Delta"
-      value_template: '{{ ( ( states.sensor.average_indoor_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
-      unit_of_measurement: "Δ°F"
 
     living_room_outdoor_temperature_delta_raw:
       friendly_name: "Living Room: Outdoor Delta Raw"
