@@ -6,15 +6,18 @@
     group.indoor_lights: off
     group.special_lights: off
     media_player.kitchen_speaker: off
+    media_player.living_room_chromecast: off
+    media_player.pioneer_avr: off
+    media_player.living_room_media_center: off
 
 - name: 'All Off'
   entities:
     #These scenes call the Lutron hub directly.
     scene.caseta_indoor_off: on
     scene.caseta_outdoor_off: on
-    remote.living_room: off
-    group.indoor_lights: off
-    group.outdoor_lights: off
+    group.all_remotes: off
+    group.all_lights: off
+    media_player.kitchen_speaker: off
 
 - name: 'Kitchen Only'
   entities:
