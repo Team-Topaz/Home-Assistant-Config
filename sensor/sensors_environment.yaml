@@ -51,7 +51,7 @@
     #- sensor.guest_bedroom_humidity
     - sensor.bike_room_brightness
   type: mean
-  round_digits: 0
+  round_digits: 1
 
 
 - platform: statistics

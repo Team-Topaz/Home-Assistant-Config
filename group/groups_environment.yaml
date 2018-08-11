@@ -12,7 +12,6 @@ environment_view:
     - group.temperature
     - group.fan_control
     - history_graph.living_room_temperature_history
-    - group.misc_env
 
 temperature:
   name: 'Temperature'
