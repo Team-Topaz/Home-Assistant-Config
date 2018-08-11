@@ -17,8 +17,6 @@ environment_view:
 temperature:
   name: 'Temperature'
   entities:
-    - sensor.average_indoor_temperature
-    - sensor.average_indoor_temperature_rate
     - sensor.weather_temperature
     - sensor.outdoor_temperature_rate
     - sensor.indoor_outdoor_temperature_delta
