@@ -1,5 +1,5 @@
 office_card:
-  name: Office Multisensor
+  name: Office
   control: hidden
   entities:
     - sensor.office_temperature
@@ -8,12 +8,10 @@ office_card:
     - sensor.office_absolute_humidity
     - sensor.office_brightness
     - binary_sensor.office_motion
-    - sensor.office_wifi
-    - binary_sensor.office_status
     - light.office_led
 
 living_room_card:
-  name: Living Room Multisensor
+  name: Living Room
   control: hidden
   entities:
     - sensor.living_room_temperature
@@ -22,12 +20,10 @@ living_room_card:
     - sensor.living_room_absolute_humidity
     - sensor.living_room_brightness
     - binary_sensor.living_room_motion
-    - sensor.living_room_wifi
-    - binary_sensor.living_room_status
     - light.living_room_led
 
 master_bedroom_card:
-  name: Master Bedroom Multisensor
+  name: Master Bedroom
   control: hidden
   entities:
     - sensor.master_bedroom_temperature
@@ -36,12 +32,10 @@ master_bedroom_card:
     - sensor.master_bedroom_absolute_humidity
     - sensor.master_bedroom_brightness
     - binary_sensor.master_bedroom_motion
-    - sensor.master_bedroom_wifi
-    - binary_sensor.master_bedroom_status
     - light.master_bedroom_led
 
 bonus_room_card:
-  name: Bonus Room Multisensor
+  name: Bonus Room
   control: hidden
   entities:
     - sensor.bonus_room_temperature
@@ -50,12 +44,10 @@ bonus_room_card:
     - sensor.bonus_room_absolute_humidity
     - sensor.bonus_room_brightness
     - binary_sensor.bonus_room_motion
-    - sensor.bonus_room_wifi
-    - binary_sensor.bonus_room_status
     - light.bonus_room_led
 
 bike_room_sensor:
-  name: Bike Room Multisensor
+  name: Bike Room
   control: hidden
   entities:
     - sensor.bike_room_temperature
@@ -64,6 +56,4 @@ bike_room_sensor:
     - sensor.bike_room_absolute_humidity
     - sensor.bike_room_brightness
     - binary_sensor.bike_room_motion
-    - sensor.bike_room_wifi
-    - binary_sensor.bike_room_status
     - light.bike_room_led
