@@ -22,15 +22,6 @@ sunrise_alarm:
     - input_number.sunrise_alarm_max_level
     - script.sunrise_alarm_light_on
 
-scenes:
-  name: 'Scenes'
-  entities:
-    - scene.all_off
-    - scene.indoor_off
-    - scene.living_room_lights_off
-    - scene.living_room_all_on
-    - scene.kitchen_only
-
 on_demand:
   name: 'On-Demand'
   icon: mdi:checkbox-marked-outline
