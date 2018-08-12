@@ -24,16 +24,16 @@ google_actions:
       room: Master Bedroom
     light.nightstand_lamps:
       aliases:
-        - bedroom lamps
-        - nightstand lamps
-        - bed lamps
+        - Bedroom Lamps
+        - Nightstand Lamps
+        - Bed Lamps
       room: Master Bedroom
     light.tv_backlight:
       aliases:
-        - backlight
-        - strip lights
-      room: living room
+        - Backlight
+        - Strip Light
+      room: Living Room
     switch.living_room_fan:
       aliases:
-        - fan
-      room: living room
+        - Fan
+      room: Living Room
