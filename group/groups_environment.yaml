@@ -13,6 +13,7 @@ environment_view:
     - group.fan_control
     - history_graph.living_room_temperature_history
     - history_graph.temperature_deltas
+    - history_graph.temperature_rates
 
 temperature:
   name: 'Temperature'

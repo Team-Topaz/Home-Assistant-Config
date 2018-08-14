@@ -42,3 +42,10 @@
       sample_duration: 1800
       min_gradient: 0.000138
       device_class: heat
+    outdoor_temperature_trend_test:
+      friendly_name: "Outdoor Temperature Trend Test"
+      entity_id: sensor.outdoor_temperature_filtered
+      max_samples: 10
+      sample_duration: 1800
+      min_gradient: 0.000138
+      device_class: heat

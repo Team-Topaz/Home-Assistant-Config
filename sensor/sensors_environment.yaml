@@ -29,6 +29,13 @@
     - uv_index
   update_interval: '00:05'
 
+- platform: waqi
+  token: !secret airquality_api_key
+  locations:
+    - !secret airquality_station
+  stations:
+    - !secret airquality_location
+
 - platform: min_max
   name: "Average Humidity"
   entity_ids:
@@ -85,6 +92,18 @@
       window_size: 00:15
       precision: 1
 
+- platform: filter
+  name: "Outdoor Temperature Filtered"
+  entity_id: sensor.outdoor_temperature
+  filters:
+    - filter: outlier
+      radius: 2.0 #This sensor updates every 5 minutes. 0.4 degrees per minute is CRAZY.
+    - filter: lowpass
+      time_constant: 2
+    - filter: time_simple_moving_average
+      window_size: 00:10
+      precision: 2
+
 - platform: template
   sensors:
     living_room_fan_setpoint:
@@ -105,7 +124,7 @@
 
     living_room_outdoor_temperature_delta_raw:
       friendly_name: "Living Room: Outdoor Delta Raw"
-      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) - (states.sensor.outdoor_temperature_rate.state | float / 4.0) ) }}'
+      value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) - (states.sensor.outdoor_temperature_change_rate.state | float / 4.0) ) }}'
       unit_of_measurement: "Δ°F"
 
     master_bedroom_outdoor_temperature_delta:
