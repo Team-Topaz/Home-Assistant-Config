@@ -101,7 +101,7 @@
     - filter: lowpass
       time_constant: 2
     - filter: time_simple_moving_average
-      window_size: 00:10
+      window_size: 00:30
       precision: 2
 
 - platform: template

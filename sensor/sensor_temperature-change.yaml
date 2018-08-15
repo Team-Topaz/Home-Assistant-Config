@@ -34,9 +34,9 @@
   entity_id: sensor.outdoor_temperature_rate_raw
   filters:
     - filter: lowpass
-      time_constant: 5
+      time_constant: 4
     - filter: time_simple_moving_average
-      window_size: 00:30
+      window_size: 00:60
       precision: 1
 
 #This filter is a test for double-filtering outdoor change rate.
@@ -56,7 +56,7 @@
     - filter: lowpass
       time_constant: 2
     - filter: time_simple_moving_average
-      window_size: 00:20
+      window_size: 00:30
       precision: 1
 
 - platform: min_max
