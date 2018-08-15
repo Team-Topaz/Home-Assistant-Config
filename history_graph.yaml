@@ -36,4 +36,4 @@ test_change_rate:
     - sensor.outdoor_temperature_change_rate
     - sensor.outdoor_temperature_rate_raw
     - sensor.outdoor_temperature_rate_test
-    - sensor.outdoor_temperature_change_rate_test
+    - sensor.outdoor_temperature_change_rate_test_filtered

@@ -50,7 +50,7 @@
 #This sensor uses a pre-filtered temperature input, then applies lighter...
 #filtering at the change rate level.
 - platform: filter
-  name: "Outdoor Temperature Change Rate Test"
+  name: "Outdoor Temperature Change Rate Test Filtered"
   entity_id: sensor.outdoor_temperature_rate_test
   filters:
     - filter: lowpass
