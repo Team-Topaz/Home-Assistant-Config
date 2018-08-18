@@ -9,4 +9,3 @@ development_tab:
     - group.all_scripts
     - group.all_automations
     - group.all_devices
-    - history_graph.change_rate_test

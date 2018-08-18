@@ -24,10 +24,6 @@
       friendly_name: "Outdoor Temperature Change Rate Raw"
       unit_of_measurement: "°F/H"
       value_template: "{{ ((states.binary_sensor.outdoor_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
-    outdoor_temperature_rate_test: #This is a test to see if it's better to filter change rate before or after temperature filtering.
-      friendly_name: "Outdoor Temperature Change Rate Test"
-      unit_of_measurement: "°F/H"
-      value_template: "{{ ((states.binary_sensor.outdoor_temperature_trend_test.attributes.gradient | float) * 3600) | round(2) }}"
 
 - platform: filter
   name: "Outdoor Temperature Change Rate"
@@ -39,26 +35,6 @@
       time_constant: 4
     - filter: time_simple_moving_average
       window_size: 00:60
-      precision: 1
-
-#This filter is a test for double-filtering outdoor change rate.
-#We face two difficulties with outdoor change rate:
-#1. Real life is messy and doesn't like clean data.
-#2. DarkSky's data has periodic (15 minute) corrections where it looks like...
-#ihe model and the "actual" data reconverge, causing spikes and valleys...
-#in the temperature change rate.
-#The other filter sensor for this attempts to correct the change rate all at...
-#once, after the change rate is computed.
-#This sensor uses a pre-filtered temperature input, then applies lighter...
-#filtering at the change rate level.
-- platform: filter
-  name: "Outdoor Temperature Change Rate Test Filtered"
-  entity_id: sensor.outdoor_temperature_rate_test
-  filters:
-    - filter: lowpass
-      time_constant: 3
-    - filter: time_simple_moving_average
-      window_size: 00:45
       precision: 1
 
 - platform: min_max

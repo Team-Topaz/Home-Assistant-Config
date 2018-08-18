@@ -21,19 +21,9 @@ temperature_rates:
   hours_to_show: 8
   entities:
     - sensor.outdoor_temperature_change_rate
-    - sensor.outdoor_temperature_rate_raw
     - sensor.living_room_temperature_rate
     - sensor.average_indoor_temperature_rate
     - sensor.master_bedroom_temperature_rate
     - sensor.office_temperature_rate
     - sensor.bonus_room_temperature_rate
     - sensor.bike_room_temperature_rate
-
-test_change_rate:
-  name: 'Change Rate Test'
-  hours_to_show: 4
-  entities:
-    - sensor.outdoor_temperature_change_rate
-    - sensor.outdoor_temperature_rate_raw
-    - sensor.outdoor_temperature_rate_test
-    - sensor.outdoor_temperature_change_rate_test_filtered
