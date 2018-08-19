@@ -123,6 +123,7 @@ cloud: !include cloud.yaml
 history_graph: !include history_graph.yaml
 cast: !include cast.yaml
 timer: !include timer.yaml
+fan: !include fan.yaml
 
 #Split all the major components into their own directories.
 alert: !include_dir_merge_named alert
