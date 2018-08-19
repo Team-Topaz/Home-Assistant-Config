@@ -8,4 +8,5 @@ Some notes for my Sonoff setup:
   - Currently only set on bike room lamp
 - Disable Serial output once tested and working
   - seriallog 0
-- With few exceptions, they're all now running customized firmware. Use the overrides file to set up wifi at a minimum, or you'll have a fun time taking them apart and reprogramming them, again.
+- While they've all been loaded with customized firmware, I've configured them in such a way that standard Tasmota upgrades should be safe.
+  - Exception: TV Backlight runs a variant which needs DMA For WS2812 enabled.
