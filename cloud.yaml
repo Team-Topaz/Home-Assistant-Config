@@ -10,6 +10,10 @@ google_actions:
       - light.great_room
       - light.tv_bar_light
       - light.tv_backlight
+      - light.office_light
+      - light.bonus_room_fan_light
+      - fan.bonus_room_fan
+      - fan.office_fan
       - scene.indoor_off
   entity_config:
     light.chelsea_nightstand_lamp:
@@ -33,6 +37,11 @@ google_actions:
         - Backlight
         - Strip Light
       room: Living Room
+    light.bonus_room_fan_light:
+      aliases:
+        - Bonus Room Light
+        - Bonus Room
+      room: Bonus Room
     switch.living_room_fan:
       aliases:
         - Fan
