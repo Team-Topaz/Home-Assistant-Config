@@ -11,6 +11,7 @@ default_view:
     - group.on_demand
     - group.sunrise_alarm
     - group.fan_control
+    - group.ceiling_fans
     - weather.home_weather
 
 sunrise_alarm:

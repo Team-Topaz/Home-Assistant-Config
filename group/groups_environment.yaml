@@ -11,6 +11,7 @@ environment_view:
     - group.bike_room_sensor
     - group.temperature
     - group.fan_control
+    - group.ceiling_fans
     - history_graph.living_room_temperature_history
     - history_graph.temperature_deltas
     - history_graph.temperature_rates
@@ -33,8 +34,8 @@ misc_env:
     - sensor.average_humidity
     - sensor.average_light_level
 
-fans:
-  name: 'Fans'
+ceiling_fans:
+  name: 'Ceiling Fans'
   entities:
     - fan.office_fan
     - climate.office_fan
