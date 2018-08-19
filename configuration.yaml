@@ -1,7 +1,4 @@
 homeassistant:
-  auth_providers:
-    - type: homeassistant
-    - type: legacy_api_password
   name: !secret home_name
   latitude: !secret home_latitude
   longitude: !secret home_longitude
