@@ -32,3 +32,11 @@ misc_env:
   entities:
     - sensor.average_humidity
     - sensor.average_light_level
+
+fans:
+  name: 'Fans'
+  entities:
+    - fan.office_fan
+    - climate.office_fan
+    - fan.bonus_room_fan
+    - climate.bonus_room_fan

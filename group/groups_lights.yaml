@@ -18,6 +18,8 @@ indoor_lights:
     - light.nightstand_lamps
     - light.ryan_nightstand_lamp
     - light.chelsea_nightstand_lamp
+    - light.office_light
+    - light.bonus_room_fan_light
 
 xmas_lights:
   name: 'Christmas Lights'

@@ -8,3 +8,21 @@
   keep_alive:
     minutes: 15
   initial_operation_mode: 'off'
+
+- platform: generic_thermostat
+  name: Office Fan
+  heater: fan.office_fan
+  target_sensor: sensor.office_temperature
+  min_temp: 70
+  max_temp: 80
+  ac_mode: True
+  initial_operation_mode: 'off'
+
+- platform: generic_thermostat
+  name: Bonus Room Fan
+  heater: fan.bonus_room_fan
+  target_sensor: sensor.bonus_room_temperature
+  min_temp: 70
+  max_temp: 80
+  ac_mode: True
+  initial_operation_mode: 'off'
