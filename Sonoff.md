@@ -14,3 +14,5 @@ Some notes for my Sonoff setup:
   - I set PowerOnState 0
     - This fixes an issue where the fan thinks it's already in the appropriate state when it gets restarted. At least this way it KNOWS it's off.
   - Discovery doesn't seem to work for the fan, so I named each controller something like "office light," then manually added the fan to HASS.
+  - PowerRetain 1
+    - This makes it so restarts of Home Assistant keep proper fan state.
