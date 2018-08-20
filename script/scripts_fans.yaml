@@ -19,3 +19,25 @@ office_restore_fan_state:
       state: 'on'
     - service: climate.turn_on
       entity_id: climate.office_fan
+
+bonus_room_save_fan_state:
+  alias: 'Bonus Room: Save fan state'
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.bonus_room_fan_previous_state
+    - condition: state
+      entity_id: climate.bonus_room_fan
+      state: 'off'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.bonus_room_fan_previous_state
+
+bonus_room_restore_fan_state:
+  alias: 'Bonus Room: Restore fan state'
+  sequence:
+    - service: climate.turn_off
+      entity_id: climate.bonus_room_fan
+    - condition: state
+      entity_id: input_boolean.bonus_room_fan_previous_state
+      state: 'on'
+    - service: climate.turn_on
+      entity_id: climate.bonus_room_fan
