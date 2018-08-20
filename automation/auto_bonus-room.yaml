@@ -13,7 +13,7 @@
   action:
     - service: light.turn_on
       data:
-        entity_id: light.bonus_room_light
+        entity_id: light.bonus_room_fan_light
 
 - id: bonus_room_light_motion_off
   alias: 'Bonus Room Light: Turn Off When No motion'
@@ -24,7 +24,7 @@
     for:
       minutes: 10
   - platform: state
-    entity_id: light.bonus_room_light
+    entity_id: light.bonus_room_fan_light
     to: 'on'
     for:
       minutes: 10
@@ -37,7 +37,7 @@
   action:
     - service: light.turn_off
       data:
-        entity_id: light.bonus_room_light
+        entity_id: light.bonus_room_fan_light
 
 ### FAN ###
 
