@@ -1,0 +1,23 @@
+office_save_fan_state:
+  alias: 'Office: Save fan state'
+  sequence:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.office_fan_previous_state
+    - condition:
+      - condition: state
+        entity_id: climate.office_fan
+        state: 'off'
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.office_fan_previous_state
+
+office_restore_fan_state:
+  alias: 'Office: Restore fan state'
+  sequence:
+    - service: climate.turn_off
+      entity_id: climate.office_fan
+    - condition:
+      - condition: state
+        entity_id: input_boolean.office_fan_previous_state
+        state: 'on'
+    - service: climate.turn_on
+      entity_id: climate.office_fan

@@ -1,0 +1,82 @@
+### LIGHT ###
+
+- id: office_light_motion_on
+  alias: 'Office Light: Turn On When Motion'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.office_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: 'home'
+  action:
+    - service: light.turn_on
+      data:
+        entity_id: light.office_light
+
+- id: office_light_motion_off
+  alias: 'Office Light: Turn Off When No motion'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.office_motion
+    to: 'off'
+    for:
+      minutes: 10
+  - platform: state
+    entity_id: light.office_light
+    to: 'on'
+    for:
+      minutes: 10
+  condition:
+    condition: state
+    entity_id: binary_sensor.office_motion
+    state: 'off'
+    for:
+      minutes: 10
+  action:
+    - service: light.turn_off
+      data:
+        entity_id: light.office_light
+
+### FAN ###
+
+- id: office_enable_autofan_when_motion
+  alias: 'Office Fan: Turn On When Motion'
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.office_motion
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: group.all_devices
+    state: 'home'
+  action:
+    - service: script.turn_on
+      entity_id: script.office_restore_fan_state
+    
+- id: office_disable_autofan_when_away
+  alias: 'Office Light: Disable autofan when away'
+  trigger:
+  - platform: state
+    entity_id: group.all_devices
+    to: not_home
+    for:
+      minutes: 5
+  - platform: state
+    entity_id: binary_sensor.office_motion
+    to: 'off'
+    for:
+      minutes: 10
+  condition:
+    condition: state
+    entity_id: binary_sensor.office_motion
+    state: 'off'
+    for:
+      minutes: 10
+  action:
+    - service: script.turn_on
+      entity_id: script.office_save_fan_state
+    - service: climate.turn_off
+      data:
+        entity_id: climate.office_fan
