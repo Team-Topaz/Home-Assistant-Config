@@ -54,9 +54,9 @@
   action:
     - service: script.turn_on
       entity_id: script.office_restore_fan_state
-    
+
 - id: office_disable_autofan_when_away
-  alias: 'Office Light: Disable autofan when away'
+  alias: 'Office Fan: Disable autofan when away'
   trigger:
   - platform: state
     entity_id: group.all_devices
@@ -77,6 +77,7 @@
   action:
     - service: script.turn_on
       entity_id: script.office_save_fan_state
-    - service: climate.turn_off
+    - service: climate.set_operation_mode
       data:
         entity_id: climate.office_fan
+        operation_mode: 'off'
