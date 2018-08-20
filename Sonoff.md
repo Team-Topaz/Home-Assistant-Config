@@ -10,3 +10,7 @@ Some notes for my Sonoff setup:
   - seriallog 0
 - While they've all been loaded with customized firmware, I've configured them in such a way that standard Tasmota upgrades should be safe.
   - Exception: TV Backlight runs a variant which needs DMA For WS2812 enabled.
+- I have some iFan02s!
+  - I set PowerOnState 0
+    - This fixes an issue where the fan thinks it's already in the appropriate state when it gets restarted. At least this way it KNOWS it's off.
+  - Discovery doesn't seem to work for the fan, so I named each controller something like "office light," then manually added the fan to HASS.
