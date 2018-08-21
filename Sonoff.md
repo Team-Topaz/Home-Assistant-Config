@@ -12,7 +12,7 @@ Some notes for my Sonoff setup:
   - Exception: TV Backlight runs a variant which needs DMA For WS2812 enabled.
 - I have some iFan02s!
   - I set PowerOnState 0
-    - This fixes an issue where the fan thinks it's already in the appropriate state when it gets restarted. At least this way it KNOWS it's off.
+    - Originally this was to fix an issue. Now I just want it to start off.
   - Discovery doesn't seem to work for the fan, so I named each controller something like "office light," then manually added the fan to HASS.
   - PowerRetain 1
     - This makes it so restarts of Home Assistant keep proper fan state.
