@@ -44,6 +44,9 @@
   - condition: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
     above: 0
+  - condition: numeric_state
+    entity_id: sensor.us_air_quality_index
+    below: 100
   action:
   - service: climate.set_operation_mode
     data:
@@ -56,10 +59,9 @@
   - platform: numeric_state
     entity_id: sensor.living_room_outdoor_temperature_delta
     below: 0
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.living_room_outdoor_temperature_delta
-    below: 0
+  - platform: numeric_state
+    entity_id: sensor.us_air_quality_index
+    above: 100
   action:
   - service: climate.set_operation_mode
     data:
