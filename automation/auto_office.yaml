@@ -1,17 +1,5 @@
 ### LIGHT ###
 
-- id: office_clear_mqtt_retained
-  alias: 'Office Light: Clear retained message'
-  trigger:
-  - platform: state
-    entity_id: light.office_light
-    to: 'unavailable'
-  action:
-  - service: mqtt.publish
-    data:
-      topic: 'cmnd/officefan/power1'
-      payload: '1'
-
 - id: office_light_motion_on
   alias: 'Office Light: Turn On When Motion'
   trigger:
