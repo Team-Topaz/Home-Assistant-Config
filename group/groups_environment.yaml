@@ -12,6 +12,7 @@ environment_view:
     - group.temperature
     - group.fan_control
     - group.ceiling_fans
+    - group.misc_env
     - history_graph.living_room_temperature_history
     - history_graph.temperature_deltas
     - history_graph.temperature_rates
@@ -31,8 +32,11 @@ fan_control:
 misc_env:
   name: "Miscellaneous"
   entities:
-    - sensor.average_humidity
-    - sensor.average_light_level
+    - sensor.us_air_quality_index
+    - sensor.us_air_pollution_level
+    - sensor.allergy_index_today
+    - sensor.allergy_average_forecasted
+    - sensor.disease_average_forecasted
 
 ceiling_fans:
   name: 'Ceiling Fans'
