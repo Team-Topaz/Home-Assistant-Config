@@ -33,8 +33,6 @@
   token: !secret airquality_api_key
   locations:
     - !secret airquality_location
-  stations:
-    - !secret airquality_station
 
 - platform: airvisual
   api_key: !secret airvisual_api_key
