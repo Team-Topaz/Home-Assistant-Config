@@ -110,7 +110,7 @@
   entity_id: sensor.outdoor_temperature
   filters:
     - filter: outlier
-      radius: 2.0 #This sensor updates every 5 minutes. 0.4 degrees per minute is CRAZY.
+      radius: 10.0
     - filter: lowpass
       time_constant: 2
     - filter: time_simple_moving_average
