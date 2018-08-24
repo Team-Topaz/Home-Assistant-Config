@@ -51,6 +51,9 @@
   - condition: state
     entity_id: group.all_devices
     state: 'home'
+  - condition: state
+    entity_id: climate.bonus_room_fan
+    state: 'off'
   action:
     - service: script.turn_on
       entity_id: script.bonus_room_restore_fan_state
