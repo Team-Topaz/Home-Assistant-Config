@@ -32,9 +32,9 @@
 - platform: waqi
   token: !secret airquality_api_key
   locations:
-    - !secret airquality_station
-  stations:
     - !secret airquality_location
+  stations:
+    - !secret airquality_station
 
 - platform: min_max
   name: "Average Humidity"
