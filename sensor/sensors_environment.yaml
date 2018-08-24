@@ -36,6 +36,11 @@
   stations:
     - !secret airquality_station
 
+- platform: airvisual
+  api_key: !secret airvisual_api_key
+  monitored_conditions:
+    - us
+
 - platform: min_max
   name: "Average Humidity"
   entity_ids:
