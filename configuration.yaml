@@ -126,7 +126,7 @@ weather: !include weather.yaml
 proximity: !include proximity.yaml
 cloud: !include cloud.yaml
 history_graph: !include history_graph.yaml
-cast: !include cast.yaml
+#cast: !include cast.yaml
 timer: !include timer.yaml
 fan: !include fan.yaml
 
