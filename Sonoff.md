@@ -16,3 +16,7 @@ Some notes for my Sonoff setup:
   - Discovery doesn't seem to work for the fan, so I named each controller something like "office light," then manually added the fan to HASS.
   - PowerRetain 1
     - This makes it so restarts of Home Assistant keep proper fan state.
+- My cable modem likes to die on its own, so I have a Sonoff attached to its power brick.
+  - The whole point of this is to make it so I can remotely reboot the modem. So, I've set PowerOnState to 5, which inverts PulseTime.
+    - PowerOnState 5
+    - PulseTime 115
