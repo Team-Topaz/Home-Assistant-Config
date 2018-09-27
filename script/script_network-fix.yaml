@@ -1,0 +1,20 @@
+#The modem's switch should automatically toggle back on - but this explicitly requests it to turn back on.
+restart_modem:
+  alias: Restart Modem
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.modem_restart
+    - delay:
+        seconds: 30
+    - service: light.turn_on
+      data:
+        entity_id: switch.modem_restart
+    - delay:
+        minutes: 5
+    - service: notify.push_main
+      data:
+        title: 'Modem Restarted'
+        message: "Internet was down, so I rebooted the modem."
+        data:
+          tag: 'modem_reboot_notify'

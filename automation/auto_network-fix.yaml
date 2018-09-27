@@ -1,0 +1,17 @@
+#Sometimes the network falls over. We're hopefully going to detect this and resolve it.
+
+- id: home_alone_lights_on
+  alias: 'Home Alone: Notify Lights On'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.modem_ping
+      to: off
+      for:
+        minutes: 10
+  condition:
+  - condition: state
+    entity_id: binary_sensor.gateway_ping
+    state: on
+  action:
+  - service: script.turn_on
+    entity_id: script.restart_modem
