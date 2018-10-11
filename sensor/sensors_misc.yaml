@@ -1,7 +1,5 @@
 - platform: nut
-  host: 192.168.1.58
-  username: homeassistant
-  password: !secret nut_password
+  host: 192.168.1.1
   resources:
     - battery.charge
     - battery.runtime
@@ -35,7 +33,7 @@
       friendly_name: 'CPU Load'
       value_template: "{{(((states('sensor.load_1m') | float)/4)*100) | round(1)}}"
       unit_of_measurement: '%'
-      
+
 - platform: template
   sensors:
     ryan_phone_battery:
