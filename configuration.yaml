@@ -29,7 +29,8 @@ map:
 
 # Log and history configuration
 recorder:
-  purge_keep_days: 10
+  db_url: !secret mariadb_string
+  purge_keep_days: 7
   purge_interval: 1
   exclude:
     entities:
@@ -38,13 +39,17 @@ recorder:
       - sensor.bedroom_lights_toggle_randomizer
       - sensor.kitchen_lights_toggle_randomizer
       - sensor.living_room_tv_toggle_randomizer
+      - sensor.mqtt_broker_uptime
+      - sensor.office_uptime
+      - sensor.master_bedroom_uptime
+      - sensor.living_room_uptime
+      - sensor.bonus_room_uptime
+      - sensor.bike_room_uptime
 history:
   exclude:
     domains:
       - automation
       - group
-    entities:
-      - sensor.iis_certificate
 
 logbook:
   exclude:
@@ -63,16 +68,7 @@ logbook:
       - group.bike_room_sensor
 logger:
   default: warning
-#  logs:
-    #homeassistant.core: warning
-    #rflink: debug
-    #homeassistant.components.rflink: debug
-    #homeassistant.components.hdmi_cec: debug
-    #pylutron_caseta: debug
-    #pylutron_caseta.smartbridge: debug
-    #pylutron_caseta.lip: debug
 
-media_extractor:
 mqtt:
   discovery: true
   broker: 192.168.1.20
@@ -102,8 +98,6 @@ emulated_hue:
   exposed_domains:
     - light
 
-ffmpeg:
-
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
 climate: !include climate.yaml
@@ -119,7 +113,6 @@ timer: !include timer.yaml
 fan: !include fan.yaml
 
 #Split all the major components into their own directories.
-alert: !include_dir_merge_named alert
 group: !include_dir_merge_named group
 input_boolean: !include_dir_merge_named input_boolean
 script: !include_dir_merge_named script
