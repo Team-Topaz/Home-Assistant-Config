@@ -9,7 +9,6 @@ status_monitor:
     - group.net_dc_status
     - group.net_reachability
     - group.net_misc
-    - group.ups_status
 
 net_ha_server_stats:
   name: 'Hassio Server'
@@ -23,15 +22,6 @@ net_ha_server_stats:
     #- sensor.average_load_1m
     - sensor.home_assistant_certificate
     - sensor.homeassistant_cpu
-
-ups_status:
-  name: 'UPS Status'
-  entities:
-    - sensor.nut_ups_status
-    - sensor.nut_ups_battery_charge
-    - sensor.nut_ups_battery_runtime
-    - sensor.nut_ups_input_voltage
-    - sensor.nut_ups_load
 
 net_reachability:
   name: 'Availability'
