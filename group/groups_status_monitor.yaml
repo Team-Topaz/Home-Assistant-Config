@@ -38,7 +38,7 @@ net_misc:
   entities:
     - sensor.ryan_phone_battery
     - sensor.chelsea_phone_battery
-    - switch.modem_restart
+    - switch.modem_power
 
 net_sensor_status:
   name: 'Sensor Status'

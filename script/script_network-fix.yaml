@@ -4,12 +4,12 @@ restart_modem:
   sequence:
     - service: switch.turn_off
       data:
-        entity_id: switch.modem_restart
+        entity_id: switch.modem_power
     - delay:
         seconds: 30
     - service: light.turn_on
       data:
-        entity_id: switch.modem_restart
+        entity_id: switch.modem_power
     - delay:
         minutes: 5
     - service: notify.push_main

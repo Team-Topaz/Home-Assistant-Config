@@ -1,0 +1,12 @@
+switch:
+  - platform: mqtt
+    name: "Modem Power"
+    state_topic: "stat/modemswitch/POWER"
+    command_topic: "cmnd/modemswitch/POWER"
+    availability_topic: "tele/modemswitch/LWT"
+    qos: 1
+    payload_on: "ON"
+    payload_off: "OFF"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    retain: false
