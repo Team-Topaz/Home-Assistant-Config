@@ -16,12 +16,12 @@ net_ha_server_stats:
   entities:
     - sensor.memory_use_percent
     - sensor.disk_use_percent_
-    - sensor.since_last_boot
+    - sensor.uptime
     - sensor.sent_eth0
     - sensor.received_eth0
     #- sensor.average_load_1m
     - sensor.home_assistant_certificate
-    - sensor.homeassistant_cpu
+    - sensor.load_1m
 
 net_reachability:
   name: 'Availability'

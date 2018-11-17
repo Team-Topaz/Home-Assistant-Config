@@ -78,4 +78,4 @@
   origin: device_tracker.ryan_phone
   destination: device_tracker.chelsea_phone
   region: 'US'
-  name: "Ryan to Chelsea Ryan Drive Time"
+  name: "Ryan to Chelsea Drive Time"

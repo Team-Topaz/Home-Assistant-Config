@@ -12,16 +12,8 @@
       arg: /
     - type: memory_use_percent
     - type: load_1m
-    - type: since_last_boot
 
 - platform: uptime
-
-- platform: template
-  sensors:
-    homeassistant_cpu:
-      friendly_name: 'CPU Load'
-      value_template: "{{(((states('sensor.load_1m') | float)/4)*100) | round(1)}}"
-      unit_of_measurement: '%'
 
 - platform: template
   sensors:

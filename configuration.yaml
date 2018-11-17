@@ -1,7 +1,4 @@
 homeassistant:
-  auth_providers:
-    - type: homeassistant
-    - type: legacy_api_password
   name: !secret home_name
   latitude: !secret home_latitude
   longitude: !secret home_longitude
@@ -12,7 +9,6 @@ homeassistant:
 frontend:
 config:
 http:
-  api_password: !secret http_password
   server_port: !secret server_port
   base_url: !secret base_url
   ssl_certificate: /ssl/fullchain.pem
@@ -33,7 +29,7 @@ recorder:
   purge_interval: 1
   exclude:
     entities:
-      - sensor.since_last_boot
+      - sensor.uptime
       - automation.hass_reset_mqtt_timeout
       - sensor.bedroom_lights_toggle_randomizer
       - sensor.kitchen_lights_toggle_randomizer
@@ -91,7 +87,6 @@ lutron_caseta_pro:
   bridges:
     - host: 192.168.1.34
       mac: !secret lutron_hub_mac
-wake_on_lan:
 emulated_hue:
   listen_port: 80
   exposed_domains:

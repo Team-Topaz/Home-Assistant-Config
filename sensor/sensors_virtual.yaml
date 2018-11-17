@@ -30,25 +30,6 @@
           0
         {% endif %}
 
-
-- platform: random
-  name: Kitchen Lights Toggle Randomizer
-  minimum: 0
-  maximum: 10
-  scan_interval: 1200
-
-- platform: random
-  name: Bedroom Lights Toggle Randomizer
-  minimum: 0
-  maximum: 10
-  scan_interval: 300
-
-- platform: random
-  name: Living Room TV Toggle Randomizer
-  minimum: 0
-  maximum: 10
-  scan_interval: 600
-
 - platform: template
   sensors:
     pioneer_volume_level:
