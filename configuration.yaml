@@ -29,7 +29,6 @@ map:
 
 # Log and history configuration
 recorder:
-  db_url: !secret mariadb_string
   purge_keep_days: 7
   purge_interval: 1
   exclude:
