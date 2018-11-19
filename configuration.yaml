@@ -92,6 +92,19 @@ emulated_hue:
   exposed_domains:
     - light
 
+#If we have trouble finding a new RFLink device, check the console output
+#directly to make sure we're not filtering out the device.
+rflink:
+  host: 192.168.1.74
+  port: 23
+  ignore_devices:
+    - bosch_7ff*
+    - drayton_*
+    - doorbell_*
+    - v2phoenix_*
+    - forest_*
+    - friedland_*
+
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
 climate: !include climate.yaml
