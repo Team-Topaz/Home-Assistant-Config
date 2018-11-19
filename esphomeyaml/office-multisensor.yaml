@@ -1,0 +1,96 @@
+esphomeyaml:
+  name: office_multisensor
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret wifi1_name
+  password: !secret wifi1_pw
+  domain: !secret wifi_domain
+
+mqtt:
+  broker: !secret mqtt_server
+  username: !secret mqtt1_un
+  password: !secret mqtt1_pw
+
+time:
+  - platform: sntp
+    id: sntp_time
+    servers:
+      - 192.168.1.1
+      - 3.north-america.pool.ntp.org
+      - 2.pool.ntp.org
+
+# Enable logging
+logger:
+
+ota:
+  password: !secret ota_pw
+
+sensor:
+  - platform: wifi_signal
+    name: "Office WiFi"
+    update_interval: 15s
+  - platform: dht
+    model: DHT22
+    pin: D7
+    temperature:
+      name: "Office Temperature"
+      id: "temperature"
+    humidity:
+      name: "Office Humidity"
+      id: "humidity"
+  - platform: adc
+    pin: A0
+    name: "Office Brightness"
+    unit_of_measurement: lux
+    filters:
+      - lambda: >-
+          return x * 200.0;
+      - exponential_moving_average:
+          alpha: 0.2
+          send_every: 3
+  - platform: template
+    name: "Office Absolute Humidity"
+    lambda: >-
+      return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).value)/(id(temperature).value + 243.5))) * id(humidity).value * 2.1674)/(273.15 + id(temperature).value);
+    update_interval: 15s
+    accuracy_decimals: 2
+    unit_of_measurement: "g/m³"
+  - platform: uptime
+    name: Office Uptime
+
+
+binary_sensor:
+  - platform: gpio
+    pin: D5
+    name: "Office Motion"
+    device_class: motion
+    filters:
+      - delayed_on: 500ms
+      - delayed_off: 1000ms
+  - platform: status
+    name: "Office Status"
+
+output:
+  - platform: esp8266_pwm
+    pin: D1
+    id: redgpio
+  - platform: esp8266_pwm
+    pin: D2
+    id: greengpio
+  - platform: esp8266_pwm
+    pin: D3
+    id: bluegpio
+
+light:
+  - platform: rgb
+    name: "Office LED"
+    red: redgpio
+    green: greengpio
+    blue: bluegpio
+    #default_transition_length: 100ms
+
+switch:
+  - platform: restart
+    name: "Office Restart"

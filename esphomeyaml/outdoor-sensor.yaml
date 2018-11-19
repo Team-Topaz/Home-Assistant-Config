@@ -1,0 +1,50 @@
+esphomeyaml:
+  name: outdoor_sensor
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  ssid: !secret wifi2_name
+  password: !secret wifi2_pw
+  domain: !secret wifi_domain
+
+mqtt:
+  broker: !secret mqtt_server
+  username: !secret mqtt1_un
+  password: !secret mqtt1_pw
+  birth_message:
+  will_message:
+
+# Enable logging
+logger:
+
+#web_server:
+#  port: 80
+
+ota:
+  password: !secret ota_pw
+
+switch:
+  - platform: restart
+    name: "Outdoor Sensor Restart"
+
+sensor:
+  - platform: bme280
+    temperature:
+      name: "Outside Temperature"
+      availability:
+    pressure:
+      name: "Outside Pressure"
+    humidity:
+      name: "Outside Humidity"
+    address: 0x77
+    update_interval: 15s
+
+i2c:
+  sda: 4
+  scl: 5
+  scan: False
+
+#deep_sleep:
+#  run_duration: 10s
+#  sleep_duration: 10min
