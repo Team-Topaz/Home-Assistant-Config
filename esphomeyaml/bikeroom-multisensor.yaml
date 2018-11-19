@@ -70,7 +70,7 @@ binary_sensor:
       - delayed_off: 1000ms
   - platform: gpio
     pin: D4
-    name: "Bike Room Motion 2"
+    name: "Bike Room Motion Up"
     device_class: motion
     filters:
       - delayed_on: 500ms
@@ -82,3 +82,4 @@ switch:
   - platform: gpio
     pin: D0
     id: pir_power
+    name: "Bike Room Motion Up Power"
