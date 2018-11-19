@@ -2,6 +2,9 @@ esphomeyaml:
   name: test_sensor
   platform: ESP8266
   board: nodemcuv2
+  on_boot:
+    then:
+      - switch.turn_on: pir_power
 
 wifi:
   ssid: !secret wifi3_name
@@ -29,3 +32,9 @@ binary_sensor:
     pin: D0
     name: "Test Motion"
     device_class: motion
+
+switch:
+  - platform: gpio
+    pin: D1
+    name: "PIR Power"
+    id: pir_power
