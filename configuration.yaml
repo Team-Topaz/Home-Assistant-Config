@@ -93,9 +93,10 @@ emulated_hue:
     - light
 
 zwave:
-  device: /dev/ttyACM0
-zigbee:
-  device: /dev/ttyUSB1
+  usb_path: /dev/ttyUSB0
+zha:
+  usb_path: /dev/ttyUSB1
+  database_path: /config/zigbee.db
 
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
