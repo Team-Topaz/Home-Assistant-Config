@@ -15,6 +15,8 @@
 
 - platform: uptime
 
+- platform: rpi_power
+
 - platform: template
   sensors:
     ryan_phone_battery:
