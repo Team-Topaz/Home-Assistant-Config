@@ -93,6 +93,7 @@ emulated_hue:
     - light
 
 zwave:
+  device: /dev/ttyACM0
 zigbee:
   device: /dev/ttyUSB1
 
