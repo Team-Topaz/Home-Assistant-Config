@@ -8,3 +8,5 @@
 
 - platform: owntracks
   consider_home: 300
+
+- platform: owntracks_http
