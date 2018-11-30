@@ -96,8 +96,6 @@ emulated_hue:
   exposed_domains:
     - light
 
-zwave:
-  usb_path: "/dev/ttyUSB0"
 zha:
   usb_path: "/dev/ttyUSB1"
   database_path: /config/zigbee.db
