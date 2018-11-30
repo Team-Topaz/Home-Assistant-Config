@@ -19,16 +19,15 @@ net_ha_server_stats:
     - sensor.uptime
     - sensor.sent_eth0
     - sensor.received_eth0
-    #- sensor.average_load_1m
     - sensor.home_assistant_certificate
-    - sensor.load_1m
+    - sensor.load_5m
+    - sensor.cpu_temperature
 
 net_reachability:
   name: 'Availability'
   entities:
     - binary_sensor.modem_ping
     - binary_sensor.switch_ping
-    - binary_sensor.rflink_ping
     - binary_sensor.living_room_harmony_ping
     - binary_sensor.media_center_pc_ping
     - binary_sensor.lutron_smart_bridge_ping

@@ -4,19 +4,19 @@
       friendly_name: "Ryan Headed Home"
       entity_id: sensor.ryan_distance_from_home
       max_samples: 5
-      sample_duration: 1800
+      sample_duration: 900
       device_class: moving
     chelsea_headed_home:
       friendly_name: "Chelsea Headed Home"
       entity_id: sensor.chelsea_distance_from_home
       max_samples: 5
-      sample_duration: 1800
+      sample_duration: 900
       device_class: moving
     chelsea_headed_to_ryan:
       friendly_name: "Chelsea Headed to Ryan"
       entity_id: sensor.ryan_chelsea_distance
       max_samples: 5
-      sample_duration: 1800
+      sample_duration: 900
       device_class: moving
 
 - platform: template

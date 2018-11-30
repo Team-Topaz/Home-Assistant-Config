@@ -5,18 +5,6 @@
   username: !secret plex_username
   password: !secret plex_password
 
-- platform: systemmonitor
-  scan_interval: 240
-  resources:
-    - type: disk_use_percent
-      arg: /
-    - type: memory_use_percent
-    - type: load_1m
-
-- platform: uptime
-
-- platform: rpi_power
-
 - platform: template
   sensors:
     ryan_phone_battery:

@@ -58,7 +58,7 @@ logbook:
       - binary_sensor.master_bedroom_status
       - binary_sensor.bonus_room_status
       - binary_sensor.bike_room_status
-      - sensor.average_load_1m
+      - sensor.average_load_5m
       - group.office_sensor
       - group.living_room_sensor
       - group.sensor_node_3_card
@@ -97,9 +97,9 @@ emulated_hue:
     - light
 
 zwave:
-  usb_path: /dev/ttyUSB0
+  usb_path: "/dev/ttyUSB0"
 zha:
-  usb_path: /dev/ttyUSB1
+  usb_path: "/dev/ttyUSB1"
   database_path: /config/zigbee.db
 
 #Single-file includes.
