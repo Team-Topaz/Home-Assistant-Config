@@ -5,6 +5,3 @@
   new_device_defaults:
     track_new_devices: False
     hide_if_away: False
-
-- platform: owntracks
-  consider_home: 300
