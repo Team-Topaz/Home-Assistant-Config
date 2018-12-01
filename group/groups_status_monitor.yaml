@@ -22,6 +22,8 @@ net_ha_server_stats:
     - sensor.home_assistant_certificate
     - sensor.load_5m
     - sensor.cpu_temperature
+    - sensor.rpi_power_status
+    - sensor.cpu_frequency
 
 net_reachability:
   name: 'Availability'
