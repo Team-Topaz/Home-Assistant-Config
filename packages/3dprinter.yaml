@@ -1,0 +1,18 @@
+switch:
+  - platform: tplink
+    host: 192.168.1.52
+    name: '3D Printer Power'
+
+group:
+  - 3d_printer:
+    name: 3D Printer
+    control: hidden
+    entities:
+      - camera.3d_printer_camera
+      - switch.3d_printer_power
+
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://192.168.1.85:10123/?action=stream
+    still_image_url: http://192.168.1.85:10123/?action=snapshot
+    name: 3D Printer Camera

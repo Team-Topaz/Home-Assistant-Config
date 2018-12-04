@@ -118,7 +118,7 @@ fan: !include fan.yaml
 group: !include_dir_merge_named group
 input_boolean: !include_dir_merge_named input_boolean
 script: !include_dir_merge_named script
-
+packages: !include_dir_named packages
 
 #Dir_Merge_Lists must contain lists in each file.
 scene: !include_dir_merge_list scene
