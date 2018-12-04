@@ -8,6 +8,7 @@ default_view:
     - group.indoor_lights
     - group.outdoor_lights
     - group.special_lights
+    - group.xmas_lights
     - group.on_demand
     - group.sunrise_alarm
     - group.fan_control
