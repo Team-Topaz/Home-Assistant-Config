@@ -9,6 +9,14 @@ status_monitor:
     - group.net_dc_status
     - group.net_reachability
     - group.net_misc
+    - group.3d_printer
+
+3d_printer:
+  name: 3D Printer
+  control: hidden
+  entities:
+    - camera.3d_printer_camera
+    - switch.3d_printer_power
 
 net_ha_server_stats:
   name: 'Hassio Server'
