@@ -31,6 +31,10 @@ sensor:
           {% endif %}
   - platform: season
     type: astronomical
+  - platform: time_date
+    display_options:
+      - 'time'
+      - 'date'
 
 script:
   reload_scripts:

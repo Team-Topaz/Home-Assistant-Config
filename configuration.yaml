@@ -45,6 +45,8 @@ recorder:
       - sensor.living_room_uptime
       - sensor.bonus_room_uptime
       - sensor.bike_room_uptime
+      - sensor.time
+      - sensor.date
 history:
   exclude:
     domains:
