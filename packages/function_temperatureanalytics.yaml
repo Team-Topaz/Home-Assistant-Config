@@ -1,0 +1,159 @@
+#I do a lot of weird stuff with my temperature data.
+
+binary_sensor:
+  - platform: trend
+    sensors:
+      master_bedroom_temperature_trend:
+        friendly_name: "Master Bedroom Temperature Trend"
+        entity_id: sensor.master_bedroom_temperature
+        max_samples: 100
+        sample_duration: 900
+        min_gradient: 0.000138
+        device_class: heat
+      office_temperature_trend:
+        friendly_name: "Office Temperature Trend"
+        entity_id: sensor.office_temperature
+        max_samples: 100
+        sample_duration: 900
+        min_gradient: 0.000138
+        device_class: heat
+      bike_room_temperature_trend:
+        friendly_name: "Bike Room Temperature Trend"
+        entity_id: sensor.bike_room_temperature
+        max_samples: 100
+        sample_duration: 900
+        min_gradient: 0.000138
+        device_class: heat
+      living_room_temperature_trend:
+        friendly_name: "Living Room Temperature Trend"
+        entity_id: sensor.living_room_temperature
+        max_samples: 100
+        sample_duration: 900
+        min_gradient: 0.000138
+        device_class: heat
+      bonus_room_temperature_trend:
+        friendly_name: "Bonus Room Temperature Trend"
+        entity_id: sensor.bonus_room_temperature
+        max_samples: 100
+        sample_duration: 900
+        min_gradient: 0.000138
+        device_class: heat
+      outdoor_temperature_trend:
+        friendly_name: "Outdoor Temperature Trend"
+        entity_id: sensor.outdoor_temperature
+        max_samples: 10
+        sample_duration: 1800
+        min_gradient: 0.000138
+        device_class: heat
+      outdoor_temperature_trend_test:
+        friendly_name: "Outdoor Temperature Trend Test"
+        entity_id: sensor.outdoor_temperature_filtered
+        max_samples: 10
+        sample_duration: 1800
+        min_gradient: 0.000138
+        device_class: heat
+
+
+
+sensor:
+  - platform: template
+    sensors:
+      master_bedroom_temperature_rate:
+        friendly_name: "Master Bedroom Temperature Change Rate"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.master_bedroom_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+      living_room_temperature_rate:
+        friendly_name: "Living Room Temperature Change Rate"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.living_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+      office_temperature_rate:
+        friendly_name: "Office Temperature Change Rate"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.office_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+      bonus_room_temperature_rate:
+        friendly_name: "Bonus Room Temperature Change Rate"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.bonus_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+      bike_room_temperature_rate:
+        friendly_name: "Bike Room Temperature Change Rate"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.bike_room_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+      outdoor_temperature_rate_raw:
+        friendly_name: "Outdoor Temperature Change Rate Raw"
+        unit_of_measurement: "°F/H"
+        value_template: "{{ ((states.binary_sensor.outdoor_temperature_trend.attributes.gradient | float) * 3600) | round(2) }}"
+
+  - platform: filter
+    name: "Outdoor Temperature Change Rate"
+    entity_id: sensor.outdoor_temperature_rate_raw
+    filters:
+      - filter: outlier
+        radius: 10.0 #This sensor updates every 5 minutes. I think this is conservative.
+      - filter: lowpass
+        time_constant: 4
+      - filter: time_simple_moving_average
+        window_size: 00:60
+        precision: 1
+
+  - platform: min_max
+    name: "Average Indoor Temperature Rate Raw"
+    entity_ids:
+      - sensor.bonus_room_temperature_rate
+      - sensor.living_room_temperature_rate
+      - sensor.master_bedroom_temperature_rate
+      - sensor.office_temperature_rate
+      - sensor.bike_room_temperature_rate
+    type: mean
+    round_digits: 2
+
+  - platform: filter
+    name: "Average Indoor Temperature Rate"
+    entity_id: sensor.average_indoor_temperature_rate_raw
+    filters:
+      - filter: lowpass
+        time_constant: 4
+      - filter: time_simple_moving_average
+        window_size: 00:30
+        precision: 1
+  - platform: statistics
+    name: Office Temperature Stats
+    entity_id: sensor.office_temperature
+    max_age:
+      minutes: 15
+  - platform: statistics
+    name: Living Room Temperature Stats
+    entity_id: sensor.living_room_temperature
+    max_age:
+      minutes: 15
+  - platform: statistics
+    name: Master Bedroom Temperature Stats
+    entity_id: sensor.master_bedroom_temperature
+    max_age:
+      minutes: 15
+  - platform: statistics
+    name: Bonus Room Temperature Stats
+    entity_id: sensor.bonus_room_temperature
+    max_age:
+      minutes: 15
+
+  - platform: filter
+    name: "Outdoor Temperature Filtered"
+    entity_id: sensor.outdoor_temperature
+    filters:
+      - filter: outlier
+        radius: 10.0
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:30
+        precision: 2
+  - platform: template
+    sensors:
+      living_room_outdoor_temperature_delta_raw:
+        friendly_name: "Living Room: Outdoor Delta Raw"
+        value_template: '{{ ( ( states.sensor.living_room_temperature.state | float ) - ( states.sensor.outdoor_temperature_filtered.state | float ) - (states.sensor.outdoor_temperature_change_rate.state | float / 4.0) ) }}'
+        unit_of_measurement: "Δ°F"
+      master_bedroom_outdoor_temperature_delta:
+        friendly_name: "Master Bedroom: Outdoor Delta"
+        value_template: '{{ ( ( states.sensor.master_bedroom_temperature.state | float ) - ( states.sensor.outdoor_temperature.state | float ) ) | round(1) }}'
+        unit_of_measurement: "Δ°F"

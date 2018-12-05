@@ -1,8 +1,0 @@
-sunrise_alarm_weekday:
-  name: Weekday
-  has_date: False
-  has_time: True
-sunrise_alarm_weekend:
-  name: Weekend
-  has_date: False
-  has_time: True

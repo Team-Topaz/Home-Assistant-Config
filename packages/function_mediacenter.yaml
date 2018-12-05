@@ -1,0 +1,92 @@
+remote:
+  - platform: harmony
+    host: 192.168.1.30
+    name: Living Room
+    activity: Watch Chromecast
+
+input_number:
+  pioneer_volume_level:
+    name: Media Center Volume
+    icon: mdi:volume-high
+    min: -80.5
+    max: 12
+    step: 0.5
+
+input_select:
+  harmony_activity_select:
+    name: Harmony Activity
+    options:
+      - 'Off'
+      - 'Watch PC'
+      - 'Watch Chromecast'
+      - 'Administer Server'
+    icon: mdi:dip-switch
+
+media_player:
+  - platform: plex
+
+  - platform: pioneer
+    host: 192.168.1.104
+
+  - platform: universal
+    name: 'Living Room Media Center'
+    children:
+      - media_player.living_room_chromecast
+      - media_player.master
+    commands:
+      turn_on:
+        service: remote.turn_on
+        data:
+          entity_id: remote.living_room
+          activity: 'Watch Chromecast'
+      turn_off:
+        service: remote.turn_off
+        data:
+          entity_id: remote.living_room
+      volume_up:
+        service: media_player.volume_up
+        data:
+          entity_id: media_player.pioneer_avr
+      volume_down:
+        service: media_player.volume_down
+        data:
+          entity_id: media_player.pioneer_avr
+      volume_mute:
+        service: media_player.volume_mute
+        data:
+          entity_id: media_player.pioneer_avr
+      volume_set:
+        service: media_player.volume_set
+        data_template:
+          entity_id: media_player.pioneer_avr
+          volume_level: '{{ volume_level }}'
+      select_source:
+        service: remote.turn_on
+        data_template:
+          entity_id: remote.living_room
+          activity: '{{ source }}'
+    attributes:
+      state: remote.living_room
+      is_volume_muted: media_player.pioneer_avr|is_volume_muted
+      volume_level: media_player.pioneer_avr|volume_level
+      source: remote.living_room|current_activity
+      source_list: input_select.harmony_activity_select|options
+
+sensor:
+- platform: template
+  sensors:
+    pioneer_volume_level:
+      friendly_name: "Pioneer Volume Level"
+      unit_of_measurement: "dB"
+      value_template: >
+        {% if states.media_player.pioneer_avr.attributes.volume_level %}
+          {{ (((states.media_player.pioneer_avr.attributes.volume_level) | float) * 185 | round(0) / 2 ) - 80.5  }}
+        {% else %}
+          -80.5
+        {% endif %}
+  - platform: plex
+    host: 192.168.1.20
+    port: 32400
+    name: Plex
+    username: !secret plex_username
+    password: !secret plex_password

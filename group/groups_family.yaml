@@ -4,7 +4,6 @@ family_view:
   icon: mdi:account-multiple
   entities:
     - group.tracked_devices
-    - group.dog_status
     - group.guests
     - group.steam_friends
     - group.travel_time
@@ -65,10 +64,3 @@ travel_time:
     - sensor.chelsea_to_ryan_bike_time
     - sensor.ryan_to_home_bike_time
     - sensor.chelsea_to_home_bike_time
-
-dog_status:
-  name: Peeta
-  control: 'hidden'
-  entities:
-    - input_boolean.dog_fed
-    - input_boolean.dog_let_out

@@ -83,52 +83,38 @@ mqtt:
     topic: 'hass/status'
     payload: 'offline'
 
-google:
-  client_id: !secret gcal_client_id
-  client_secret: !secret gcal_client_secret
-ifttt:
-  key: !secret ifttt_key
-lutron_caseta_pro:
-  bridges:
-    - host: 192.168.1.34
-      mac: !secret lutron_hub_mac
-emulated_hue:
-  listen_port: 80
-  exposed_domains:
-    - light
-
 zha:
   usb_path: "/dev/ttyUSB1"
   database_path: /config/zigbee.db
 
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
-climate: !include climate.yaml
-input_number: !include input_number.yaml
-input_select: !include input_select.yaml
-input_datetime: !include input_datetime.yaml
-weather: !include weather.yaml
-proximity: !include proximity.yaml
-cloud: !include cloud.yaml
+#climate: !include climate.yaml
+#input_number: !include input_number.yaml
+#input_select: !include input_select.yaml
+#input_datetime: !include input_datetime.yaml
+#weather: !include weather.yaml
+#proximity: !include proximity.yaml
+#cloud: !include cloud.yaml
 history_graph: !include history_graph.yaml
 #cast: !include cast.yaml
-timer: !include timer.yaml
-fan: !include fan.yaml
+#timer: !include timer.yaml
+#fan: !include fan.yaml
 
 #Split all the major components into their own directories.
 group: !include_dir_merge_named group
-input_boolean: !include_dir_merge_named input_boolean
-script: !include_dir_merge_named script
+#input_boolean: !include_dir_merge_named input_boolean
+#script: !include_dir_merge_named script
 
 #Dir_Merge_Lists must contain lists in each file.
 scene: !include_dir_merge_list scene
 zone: !include_dir_merge_list zone
-sensor: !include_dir_merge_list sensor
-binary_sensor: !include_dir_merge_list binary_sensor
+#sensor: !include_dir_merge_list sensor
+#binary_sensor: !include_dir_merge_list binary_sensor
 notify: !include_dir_merge_list notify
-media_player: !include_dir_merge_list media_player
-remote: !include_dir_merge_list remote
+#media_player: !include_dir_merge_list media_player
+#remote: !include_dir_merge_list remote
 automation: !include_dir_merge_list automation
-camera: !include_dir_merge_list camera
-light: !include_dir_merge_list light
-switch: !include_dir_merge_list switch
+#camera: !include_dir_merge_list camera
+#light: !include_dir_merge_list light
+#switch: !include_dir_merge_list switch

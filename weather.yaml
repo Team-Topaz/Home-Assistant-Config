@@ -1,4 +1,0 @@
-- platform: openweathermap
-  api_key: !secret openweathermap_api_key
-  name: "Home Weather"
-  mode: hourly

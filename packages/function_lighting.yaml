@@ -1,0 +1,34 @@
+lutron_caseta_pro:
+  bridges:
+    - host: 192.168.1.34
+      mac: !secret lutron_hub_mac
+
+
+emulated_hue:
+  listen_port: 80
+  exposed_domains:
+    - light
+
+light:
+  - platform: group
+    name: Great Room
+    entities:
+      - light.kitchen_overhead_lights
+      - light.dining_room_chandelier
+      - light.living_room_floor_lamp
+
+  - platform: group
+    name: Notification LED
+    entities:
+    - light.office_led
+    - light.living_room_led
+    - light.master_bedroom_led
+    - light.bonus_room_led
+    - light.guest_bedroom_led
+    - light.bike_room_led
+
+  - platform: group
+    name: 'Nightstand Lamps'
+    entities:
+    - light.ryan_nightstand_lamp
+    - light.chelsea_nightstand_lamp

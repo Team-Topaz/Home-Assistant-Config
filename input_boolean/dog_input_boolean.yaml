@@ -1,8 +1,0 @@
-
-dog_fed:
-  name: Fed
-  icon: mdi:food
-
-dog_let_out:
-  name: Walked
-  icon: mdi:pine-tree

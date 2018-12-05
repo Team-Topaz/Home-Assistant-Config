@@ -1,0 +1,4 @@
+timer:
+  #Used for Home Alone automations to automatically turn off lights unless dismissed.
+  home_alone_lights_off_timeout:
+    duration: '00:20:00'

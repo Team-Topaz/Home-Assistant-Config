@@ -1,9 +1,9 @@
-switch 3dprinter:
+switch:
   - platform: tplink
     host: 192.168.1.52
     name: '3D Printer Power'
 
-camera 3dprinter:
+camera:
   - platform: mjpeg
     mjpeg_url: http://192.168.1.85:10123/?action=stream
     still_image_url: http://192.168.1.85:10123/?action=snapshot

@@ -1,0 +1,61 @@
+weather:
+  - platform: openweathermap
+    api_key: !secret openweathermap_api_key
+    name: "Home Weather"
+    mode: hourly
+
+sensor:
+  - platform: darksky
+    name: Outdoor
+    api_key: !secret darksky_api_key
+    monitored_conditions:
+      - summary
+      - temperature
+      - humidity
+      - wind_speed
+      - wind_bearing
+      - dew_point
+      - apparent_temperature
+      - precip_type
+      - pressure
+      - ozone
+      - minutely_summary
+      - hourly_summary
+      - daily_summary
+      - cloud_cover
+      - visibility
+      - precip_probability
+      - temperature_low
+      - temperature_high
+      - apparent_temperature_low
+      - apparent_temperature_high
+      - precip_intensity_max
+      - uv_index
+    update_interval: '00:05'
+
+  - platform: waqi
+    token: !secret airquality_api_key
+    locations:
+      - !secret airquality_location
+
+  - platform: airvisual
+    api_key: !secret airvisual_api_key
+    monitored_conditions:
+      - us
+
+  - platform: pollen
+    zip_code: !secret home_zip
+    monitored_conditions:
+      - allergy_average_forecasted
+      - allergy_average_historical
+      - allergy_index_today
+      - allergy_index_tomorrow
+      - allergy_index_yesterday
+      - disease_average_forecasted
+
+  - platform: template
+    sensors:
+      home_weather_temperature:
+        friendly_name: "Home Weather Temperature"
+        value_template: '{{ (states.weather.home_weather.attributes.temperature | float) }}'
+        unit_of_measurement: "°F"

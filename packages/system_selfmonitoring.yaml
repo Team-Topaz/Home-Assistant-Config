@@ -1,0 +1,43 @@
+sensor:
+  - platform: systemmonitor
+    scan_interval: 240
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: load_5m
+
+  - platform: uptime
+
+  - platform: rpi_power
+
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) }}'
+
+  - platform: command_line
+    name: CPU Frequency
+    command: "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq"
+    unit_of_measurement: "MHz"
+    value_template: '{{ value | multiply(0.001) }}'
+
+  - platform: mqtt
+    state_topic: "$SYS/broker/uptime"
+    name: "MQTT Broker Uptime"
+
+  - platform: dnsip
+    ipv6: false
+    scan_interval: 1200
+  - platform: dnsip
+    hostname: !secret hostname
+    ipv6: false
+    scan_interval: 1200
+
+timer:
+  #This timeout is used to determine how long before HASS detects a failure
+  #with the MQTT broker. It has been left long on purpose, as restarting the
+  #server would otherwise cause it to trigger.
+  mqtt_timeout:
+    duration: '00:20:00'

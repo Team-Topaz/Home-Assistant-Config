@@ -1,0 +1,33 @@
+climate:
+  - platform: generic_thermostat
+    name: Living Room Fan
+    heater: switch.living_room_fan
+    target_sensor: sensor.living_room_temperature
+    min_temp: 60
+    max_temp: 75
+    ac_mode: True
+    keep_alive:
+      minutes: 15
+    initial_operation_mode: 'off'
+
+sensor:
+  - platform: filter
+    name: "Living Room: Outdoor Temperature Delta"
+    entity_id: sensor.living_room_outdoor_temperature_delta_raw
+    filters:
+      - filter: lowpass
+        time_constant: 2
+      - filter: time_simple_moving_average
+        window_size: 00:15
+        precision: 1
+
+  - platform: template
+    sensors:
+      living_room_fan_setpoint:
+        friendly_name: "Living Room Fan Setpoint"
+        value_template: '{{ (states.climate.living_room_fan.attributes.temperature | float) }}'
+        unit_of_measurement: "°F"
+      living_room_fan_setpoint_delta:
+        friendly_name: "Living Room Fan Setpoint Delta"
+        value_template: '{{ (states.climate.living_room_fan.attributes.current_temperature | float) - (states.climate.living_room_fan.attributes.temperature | float) }}'
+        unit_of_measurement: "Δ°F"

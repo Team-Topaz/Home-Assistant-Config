@@ -1,0 +1,123 @@
+climate:
+  - platform: generic_thermostat
+    name: Office Fan
+    heater: fan.office_fan
+    target_sensor: sensor.office_temperature
+    min_temp: 70
+    max_temp: 80
+    ac_mode: True
+    initial_operation_mode: 'off'
+
+  - platform: generic_thermostat
+    name: Bonus Room Fan
+    heater: fan.bonus_room_fan
+    target_sensor: sensor.bonus_room_temperature
+    min_temp: 70
+    max_temp: 80
+    ac_mode: True
+    initial_operation_mode: 'off'
+
+input_boolean:
+  #These modes are used to remember what the state of the fan was before people
+  #left. This way we can toggle the climate component appropriately.
+  office_fan_previous_state:
+    name: 'Office fan previous state'
+
+  bonus_room_fan_previous_state:
+    name: 'Bonus room fan previous state'
+
+fan:
+  - platform: mqtt
+    name: "Office Fan"
+    state_topic: "stat/officefan/RESULT"
+    speed_state_topic: "stat/officefan/RESULT"
+    state_value_template: "{% if value_json.FanSpeed == 0 -%}0{%- elif value_json.FanSpeed > 0 -%}2{%- endif %}"
+    speed_value_template: "{{ value_json.FanSpeed }}"
+    availability_topic: tele/officefan/LWT
+    payload_available: Online
+    payload_not_available: Offline
+    speed_command_topic: "cmnd/officefan/FanSpeed"
+    payload_low_speed: "1"
+    payload_medium_speed: "2"
+    payload_high_speed: "3"
+    command_topic: "cmnd/officefan/FanSpeed"
+    payload_off: "0"
+    payload_on: "2"
+    speeds:
+      - low
+      - medium
+      - high
+
+  - platform: mqtt
+    name: "Bonus Room Fan"
+    state_topic: "stat/bonusroomfan/RESULT"
+    speed_state_topic: "stat/bonusroomfan/RESULT"
+    state_value_template: "{% if value_json.FanSpeed == 0 -%}0{%- elif value_json.FanSpeed > 0 -%}2{%- endif %}"
+    speed_value_template: "{{ value_json.FanSpeed }}"
+    availability_topic: tele/bonusroomfan/LWT
+    payload_available: Online
+    payload_not_available: Offline
+    speed_command_topic: "cmnd/bonusroomfan/FanSpeed"
+    payload_low_speed: "1"
+    payload_medium_speed: "2"
+    payload_high_speed: "3"
+    command_topic: "cmnd/bonusroomfan/FanSpeed"
+    payload_off: "0"
+    payload_on: "2"
+    speeds:
+      - low
+      - medium
+      - high
+
+script:
+  office_save_fan_state:
+    alias: 'Office: Save fan state'
+    sequence:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.office_fan_previous_state
+      - condition: state
+        entity_id: climate.office_fan
+        state: 'off'
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.office_fan_previous_state
+
+  office_restore_fan_state:
+    alias: 'Office: Restore fan state'
+    sequence:
+      - service: climate.set_operation_mode
+        data:
+          entity_id: climate.office_fan
+          operation_mode: 'off'
+      - condition: state
+        entity_id: input_boolean.office_fan_previous_state
+        state: 'on'
+      - service: climate.set_operation_mode
+        data:
+          entity_id: climate.office_fan
+          operation_mode: 'cool'
+
+  bonus_room_save_fan_state:
+    alias: 'Bonus Room: Save fan state'
+    sequence:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.bonus_room_fan_previous_state
+      - condition: state
+        entity_id: climate.bonus_room_fan
+        state: 'off'
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.bonus_room_fan_previous_state
+
+  bonus_room_restore_fan_state:
+    alias: 'Bonus Room: Restore fan state'
+    sequence:
+      - service: climate.set_operation_mode
+        data:
+          entity_id: climate.bonus_room_fan
+          operation_mode: 'off'
+      - condition: state
+        entity_id: input_boolean.bonus_room_fan_previous_state
+        state: 'on'
+      - service: climate.set_operation_mode
+        data:
+          entity_id: climate.bonus_room_fan
+          operation_mode: 'cool'

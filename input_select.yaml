@@ -1,8 +1,0 @@
-harmony_activity_select:
-  name: Harmony Activity
-  options:
-    - 'Off'
-    - 'Watch PC'
-    - 'Watch Chromecast'
-    - 'Administer Server'
-  icon: mdi:dip-switch

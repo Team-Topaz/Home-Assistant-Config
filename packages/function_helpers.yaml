@@ -1,0 +1,49 @@
+#Items which don't do a lot on their own but act as glue for other items.
+
+input_boolean:
+  power_out:
+    name: 'Power Out'
+    initial: off
+    icon: mdi:flash
+
+binary_sensor:
+  - platform: workday
+    country: US
+    province: WA
+
+sensor:
+  - platform: template
+    sensors:
+      day_of_year:
+        friendly_name: 'Day of Year'
+        unit_of_measurement: 'day'
+        value_template: "{{ as_timestamp(now()) | timestamp_custom('%j', true) | int }}"
+  - platform: template
+    sensors:
+       solar_elevation:
+         friendly_name: "Solar Elevation"
+         unit_of_measurement: "°"
+         value_template: >
+          {% if states.sun.sun.attributes.elevation %}
+            {{ states.sun.sun.attributes.elevation }}
+          {% else %}
+            0
+          {% endif %}
+  - platform: season
+    type: astronomical
+
+script:
+  reload_scripts:
+    alias: 'Reload Scripts'
+    sequence:
+      - service: script.reload
+
+  reload_automation:
+    alias: 'Reload Automation'
+    sequence:
+      - service: automation.reload
+
+  reload_groups:
+    alias: 'Reload Groups'
+    sequence:
+      - service: group.reload

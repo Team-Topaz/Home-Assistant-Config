@@ -1,0 +1,56 @@
+google:
+  client_id: !secret gcal_client_id
+  client_secret: !secret gcal_client_secret
+
+ifttt:
+  key: !secret ifttt_key
+
+cloud:
+  google_actions:
+    filter:
+      include_domains:
+        - climate
+      include_entities:
+        - switch.living_room_fan
+        - light.chelsea_nightstand_lamp
+        - light.ryan_nightstand_lamp
+        - light.nightstand_lamps
+        - light.great_room
+        - light.tv_bar_light
+        - light.tv_backlight
+        - light.office_light
+        - light.bonus_room_fan_light
+        - fan.bonus_room_fan
+        - fan.office_fan
+        - scene.indoor_off
+    entity_config:
+      light.chelsea_nightstand_lamp:
+        aliases:
+          - "Chelsea's Nightstand"
+          - "Chelsea's Lamp"
+        room: Master Bedroom
+      light.ryan_nightstand_lamp:
+        aliases:
+          - "Ryan's Nightstand"
+          - "Ryan's Lamp"
+        room: Master Bedroom
+      light.nightstand_lamps:
+        aliases:
+          - Bedroom Lamps
+          - Nightstand Lamps
+          - Bed Lamps
+        room: Master Bedroom
+      light.tv_backlight:
+        aliases:
+          - Backlight
+          - Strip Light
+        room: Living Room
+      light.bonus_room_fan_light:
+        aliases:
+          - Bonus Room Light
+          - Bonus Room
+        room: Bonus Room
+      switch.living_room_fan:
+        aliases:
+          - Fan
+        room: Living Room
