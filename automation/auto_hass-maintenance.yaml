@@ -100,3 +100,14 @@
     data:
       title: 'HASS Update Available'
       message: 'Update for Home Assistant is available.'
+
+- id: hass_update_sonoff_power_state
+  alias: "HASS: Get Sonoff Power State"
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "cmnd/sonoffs/state"
+        payload: ""
