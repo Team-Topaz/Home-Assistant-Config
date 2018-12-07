@@ -6,7 +6,7 @@ living_room_temperature:
     - sensor.outdoor_temperature
     - sensor.outdoor_temperature_filtered
     - sensor.home_weather_temperature
-    - sensor.vision_zp3111_multisensor_4in1_temperature
+    - sensor.outdoor_temperature_sensor
     - sensor.living_room_fan_setpoint
 
 temperature_deltas:

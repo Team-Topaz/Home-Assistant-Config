@@ -21,7 +21,7 @@ temperature:
   name: 'Temperature'
   entities:
     - sensor.weather_temperature
-    - sensor.vision_zp3111_multisensor_4in1_temperature
+    - sensor.outdoor_temperature_sensor
     - sensor.outdoor_temperature_rate
 
 fan_control:
