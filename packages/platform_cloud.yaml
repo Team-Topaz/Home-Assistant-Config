@@ -23,6 +23,8 @@ cloud:
         - fan.bonus_room_fan
         - fan.office_fan
         - scene.indoor_off
+        - light.christmas_tree
+        - light.christmas_wreath
     entity_config:
       light.chelsea_nightstand_lamp:
         aliases:
