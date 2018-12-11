@@ -43,16 +43,16 @@ timer:
     duration: '00:20:00'
 
 automation:
-    - id: hass_update_sonoff_power_state
-      alias: "HASS: Get Sonoff Power State"
-      trigger:
-        platform: homeassistant
-        event: start
-      action:
-        - service: mqtt.publish
-          data:
-            topic: "cmnd/sonoffs/state"
-            payload: ""
+  - id: hass_update_sonoff_power_state
+    alias: "HASS: Get Sonoff Power State"
+    trigger:
+      platform: homeassistant
+      event: start
+    action:
+      - service: mqtt.publish
+        data:
+          topic: "cmnd/sonoffs/state"
+          payload: ""
   - id: hass_update_available
     alias: 'HASS: Update Available Notifications'
     trigger:
