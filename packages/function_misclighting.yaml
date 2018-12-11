@@ -1,0 +1,81 @@
+automation:
+  - id: master_bedroom_pico_all_off
+    #Turns off everything when pico off button is held
+    alias: 'Master Bedroom: Pico Lights Out'
+    trigger:
+      - platform: state
+        entity_id: sensor.master_bedroom_ryan_pico
+        from: '0'
+        to: '4'
+        for:
+          seconds: 1
+      - platform: state
+        entity_id: sensor.master_bedroom_chelsea_pico
+        from: '0'
+        to: '4'
+        for:
+          seconds: 1
+    action:
+      - service: scene.turn_on
+        entity_id: scene.all_off
+
+  - id: living_room_lamp_on_at_sunset
+    alias: 'Living Room: Turn On Floor Lamp and Dining Slow Fade'
+    trigger:
+      - platform: numeric_state
+        entity_id: sun.sun
+        value_template: "{{ state.attributes.elevation }}"
+        below: 5
+    condition:
+      condition: and
+      conditions:
+        - condition: or
+          conditions:
+            - condition: numeric_state
+              entity_id: sun.sun
+              value_template: "{{ state.attributes.elevation }}"
+              below: 5
+            - condition: numeric_state
+              entity_id: sensor.living_roombrightness
+              below: 150
+        - condition: state
+          entity_id: light.kitchen_overhead_lights
+          state: 'on'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.dining_room_chandelier
+          brightness_pct: 100
+          transition: 450
+      - service: light.turn_on
+        data:
+          entity_id: light.living_room_floor_lamp
+          brightness_pct: 100
+          transition: 450
+
+  - id: master_bedroom_nightstand_on
+    alias: 'Master Bedroom: Turn on Nightstand Lamp'
+    trigger:
+      - platform: numeric_state
+        entity_id: light.master_bedroom_sconce
+        value_template: '{{ state.attributes.brightness }}'
+        above: 90
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.nightstand_lamps
+
+  - id: master_bedroom_nightstand_off
+    alias: 'Master Bedroom: Turn off Nightstand Lamp'
+    trigger:
+      - platform: numeric_state
+        entity_id: light.master_bedroom_sconce
+        value_template: '{{ state.attributes.brightness }}'
+        below: 90
+      - platform: state
+        entity_id: light.master_bedroom_sconce
+        to: 'off'
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.nightstand_lamps

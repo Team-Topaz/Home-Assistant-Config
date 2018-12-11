@@ -73,3 +73,103 @@ sensor:
             0
           {% endif %}
         unit_of_measurement: '%'
+
+automation:
+  #TBH I'm not sure if ANY of these work.
+  - id: garden_frost_alert
+    alias: 'Garden: Frost Alert'
+    trigger:
+    - platform: time
+      at: '00:08:00'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.temperature_low
+          below: 34
+        - condition: state
+          entity_id: binary_sensor.garden_is_growing_season
+          state: 'on'
+    action:
+    - service: notify.push_main
+      data_template:
+        title: 'Unexpected Frost!'
+        message: "Today's temperature is expected to dip to {{ states('sensor.temperature_low') | float | round(0) | int }}°F. Protect frost-sensitive plants."
+        data:
+          tag: 'garden_frost'
+
+  - id: garden_frost_alert_enabled
+    alias: 'Garden: Frost Alert Enabled'
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.garden_is_growing_season
+      to: 'on'
+    action:
+    - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
+    - service: notify.push_main
+      data:
+        title: 'Garden Frost Alerts Started'
+        message: "Gardening season has begun! You'll recieve alerts if frost is forecasted."
+        data:
+          tag: 'garden_frost_alerts_enabled'
+
+  - id: garden_frost_alert_disabled
+    alias: 'Garden: Frost Alert Disabled'
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.garden_is_growing_season
+      to: 'off'
+    action:
+    - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
+    - service: notify.push_main
+      data:
+        title: 'Garden Frost Alerts Ended'
+        message: "Gardening season is wrapping up! Alerts for frost have stopped."
+        data:
+          tag: 'garden_frost_alerts_enabled'
+
+  - id: garden_irrigation_reset_status
+    alias: 'Garden: Reset Irrigation status'
+    trigger:
+    - platform: time
+      at: '00:00:00'
+    action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.garden_irrigated
+
+  - id: garden_irrigation_check
+    alias: 'Garden: Check irrigation status'
+    trigger:
+    - platform: time
+      at: '08:00:00'
+    condition:
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.garden_is_growing_season
+        state: 'on'
+      - condition: template
+        value_template: "{{ as_timestamp(now()) | timestamp_custom('%w') == 6 }}" #On Saturday
+    action:
+    - service: notify.push_main
+      data_template:
+        title: Water the Garden
+        message: "It's watering day! It needs about {{ states(sensor.garden_rainmeter_water_needs) }} inches!"
+        data:
+          tag: garden_irrigation
+          actions:
+          - action: garden_irrigated
+            title: "Irrigated"
+
+  - id: garden_irrigation_complete
+    alias: 'Garden: Irrigation Complete'
+    trigger:
+    - platform: event
+      event_type: html5_notification.clicked
+      event_data:
+        action: garden_irrigated
+    action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.garden_irrigated

@@ -41,3 +41,35 @@ timer:
   #server would otherwise cause it to trigger.
   mqtt_timeout:
     duration: '00:20:00'
+
+automation:
+    - id: hass_update_sonoff_power_state
+      alias: "HASS: Get Sonoff Power State"
+      trigger:
+        platform: homeassistant
+        event: start
+      action:
+        - service: mqtt.publish
+          data:
+            topic: "cmnd/sonoffs/state"
+            payload: ""
+  - id: hass_update_available
+    alias: 'HASS: Update Available Notifications'
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.email_ryan
+      data:
+        title: 'HASS Update Available'
+        message: 'Update for Home Assistant is available.'
+  #Begin counting down MQTT timeout.
+  - id: hass_mqtt_timeout_refresh
+    alias: "HASS: Reset MQTT Timeout"
+    trigger:
+      - platform: state
+        entity_id: sensor.mqtt_broker_uptime
+    action:
+      - service: timer.start
+        entity_id: timer.mqtt_timeout
+        #See "selfrepair" for what happens if this times out.

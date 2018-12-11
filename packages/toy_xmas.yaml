@@ -1,0 +1,50 @@
+automation:
+  - id: xmas_lights_on
+    alias: 'Christmas: Lights On'
+    trigger:
+      - platform: state
+        entity_id: group.indoor_lights
+        to: 'on'
+      - platform: state
+        entity_id: group.outdoor_lights
+        to: 'on'
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: group.indoor_lights
+          state: 'on'
+        - condition: state
+          entity_id: group.outdoor_lights
+          state: 'on'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: group.xmas_lights
+
+  - id: xmas_lights_off
+    alias: 'Christmas: Lights Off'
+    trigger:
+      - platform: state
+        entity_id: group.indoor_lights
+        to: 'off'
+        for: 00:05:00
+      - platform: state
+        entity_id: group.outdoor_lights
+        to: 'off'
+        for: 00:05:00
+    condition:
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: group.indoor_lights
+          state: 'off'
+          for: 00:05:00
+        - condition: state
+          entity_id: group.outdoor_lights
+          state: 'off'
+          for: 00:05:00
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: group.xmas_lights

@@ -24,3 +24,4 @@ function | Specific functions that can be bundled together | function_presence
 system | Things that work specifically with  the management of Home Assistant | system_backup
 toy | Things that have no real use, but are just for fun. | toy_annoyaimee
 mode | Contains features that change the way the automation system behaves. | mode_homealone
+components | Logical groupings of a specific type of component (or similar) | components_lighting

@@ -31,3 +31,74 @@ sensor:
         friendly_name: "Living Room Fan Setpoint Delta"
         value_template: '{{ (states.climate.living_room_fan.attributes.current_temperature | float) - (states.climate.living_room_fan.attributes.temperature | float) }}'
         unit_of_measurement: "Δ°F"
+
+automation:
+  #These turn on and off the living room fan climate component as needed.
+  #They're designed to trigger ONLY when the temperature crosses the threshold.
+  #This is to allow user control if they want the fan to stay off.
+
+  #This specific automation is to work around an issue with
+  #the generic thermostat - it won't set the fan to match
+  #its setting until it changes modes.
+  #To get around this, we turn the fan off then ask the
+  #thermostat to set its mode. If we should be cooling,
+  #it will start the fan back up.
+  - id: fan_thermostat_initialize
+    alias: 'Living Room: Initialize Fan Controller'
+    trigger:
+    - platform: homeassistant
+      event: start
+    action:
+      - service: switch.turn_off
+        entity_id: switch.living_room_fan
+      - service: automation.trigger
+        entity_id: automation.living_room_fan_on_when_hot
+      - service: automation.trigger
+        entity_id: automation.living_room_fan_off_when_hotter_outside
+
+  #Home assistant has been keen to change temperatures on its own.
+  #I'm hoping this will help me figure out what causes it.
+  - id: fan_thermostat_setpoint_watcher
+    alias: 'Living Room: Watch fan setpoint'
+    trigger:
+    - platform: state
+      entity_id: sensor.living_room_fan_setpoint
+    action:
+      - service: notify.push_main
+        data_template:
+          title: 'Living Room Temperature Setpoint Changed'
+          message: "The living room fan setpoint changed to {{ states.sensor.living_room_fan_setpoint.state }}."
+
+  - id: living_room_fan_on_when_hot
+    alias: 'Living Room: Turn Fan On When Hot'
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.living_room_outdoor_temperature_delta
+      above: 0
+    condition:
+    - condition: numeric_state
+      entity_id: sensor.living_room_outdoor_temperature_delta
+      above: 0
+    - condition: numeric_state
+      entity_id: sensor.us_air_quality_index
+      below: 100
+    action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.living_room_fan
+        operation_mode: 'cool'
+
+  - id: living_room_fan_off_when_hotter_outside
+    alias: 'Living Room: Turn Fan Off When Hotter Outside'
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.living_room_outdoor_temperature_delta
+      below: 0
+    - platform: numeric_state
+      entity_id: sensor.us_air_quality_index
+      above: 100
+    action:
+    - service: climate.set_operation_mode
+      data:
+        entity_id: climate.living_room_fan
+        operation_mode: 'off'
