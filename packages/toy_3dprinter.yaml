@@ -8,3 +8,158 @@ camera:
     mjpeg_url: http://192.168.1.85:10123/?action=stream
     still_image_url: http://192.168.1.85:10123/?action=snapshot
     name: 3D Printer Camera
+
+sensor:
+  #Printerstatus known statuses: idle, canceled, printing, completed
+  - platform: rest
+    name: 3D Printer P10124
+    method: POST
+    json_attributes:
+      - BedTemp
+      - BedTempTarget
+      - ErrorCode
+      - Message
+      - NozzleTemp
+      - NozzleTempTarget
+      - PreheatNozzle
+      - PreheatBed
+      - PrinterStatus
+      - PrintingProgress
+      - RemainTime
+      - PrintingFileName
+    resource: http://192.168.1.85:10124/getHomeMessage
+    value_template: '{{ value_json.PrinterStatus }}'
+    scan_interval: 15
+  - platform: rest
+    name: 3D Printer P80
+    method: POST
+    resource: http://192.168.1.85/command
+    payload: "GETPRINTERSTATUS"
+    json_attributes:
+      - buildPlate_target_temperature
+      - chamber_temperature
+      - door_open
+      - elaspedtime #Yep this is correct.
+      - error_code
+      - extruder_target_temperature
+      - fanSpeed
+      - filament_type
+      - jobname
+      - jobstatus
+      - message
+      - platform_temperature
+      - progress
+      - remaining
+      - status
+      - temperature
+      - totalTime
+    value_template: '{{ value_json.jobstatus }}'
+    scan_interval: 15
+
+#JOB-RELATED SENSORS. Most of these should return nothing if no job is printing.
+  - platform: template
+    sensors:
+      3d_printer_job_elapsed_time:
+        friendly_name: '3D Printer Elapsed Print Time'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ (state_attr("sensor.3d_printer_p80","elaspedtime") | int / 60) | round(1) }}
+          {% endif %}
+      3d_printer_job_remaining_time:
+        friendly_name: '3D Printer Remaining Print Time'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ (state_attr("sensor.3d_printer_p10124","RemainTime") | int / 60) | round(1) }}
+          {% endif %}
+        unit_of_measurement: minutes
+      3d_printer_job_finish_time:
+        friendly_name: '3D Printer Print Completion Time'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ (as_timestamp(now()) +  (state_attr("sensor.3d_printer_p10124","RemainTime") | int)) | timestamp_local }}
+          {% endif %}
+      3d_printer_job_percent:
+        friendly_name: '3D Printer Percent Complete'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ state_attr("sensor.3d_printer_p10124","PrintingProgress") }}
+          {% else %}
+            0
+          {% endif %}
+        unit_of_measurement: '%'
+      3d_printer_job_name:
+        friendly_name: '3D Printer Current Job'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ state_attr("sensor.3d_printer_p10124","PrintingFileName") }}
+          {% endif %}
+      3d_printer_job_status:
+        friendly_name: '3D Printer Job Status'
+        value_template: >
+          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+            {{ state_attr("sensor.3d_printer_p80","jobstatus") }}
+          {% endif %}
+        #Known job statuses include:
+        #-"preparing" (while preheating before starting printing)
+        #-"pausing"
+        #-"!pausing" (Paused while out of filament?)
+        #-"abort"
+        #-"completed"
+        #-"!resuming" (When resuming)
+        #-"building"
+
+#HARDWARE STATUS
+  - platform: template
+    sensors:
+      3d_printer_bed_temp:
+        friendly_name: '3D Printer Bed Temperature'
+        value_template: '{{ state_attr("sensor.3d_printer_p10124","BedTemp") }}'
+        device_class: temperature
+        unit_of_measurement: '°C'
+      3d_printer_bed_temp_target:
+        friendly_name: '3D Printer Bed Temperature Target'
+        value_template: >
+            {{ state_attr("sensor.3d_printer_p10124","BedTempTarget") }}
+        device_class: temperature
+        unit_of_measurement: '°C'
+      3d_printer_nozzle_temp:
+        friendly_name: '3D Printer Nozzle Temperature'
+        value_template: '{{ state_attr("sensor.3d_printer_p10124","NozzleTemp") }}'
+        device_class: temperature
+        unit_of_measurement: '°C'
+      3d_printer_chamber_temp:
+        friendly_name: '3D Printer Chamber Temperature'
+        value_template: '{{ state_attr("sensor.3d_printer_p80","chamber_temperature") }}'
+        device_class: temperature
+        unit_of_measurement: '°C'
+      3d_printer_nozzle_temp_target:
+        friendly_name: '3D Printer Nozzle Temperature Target'
+        value_template: >
+            {{ state_attr("sensor.3d_printer_p10124","NozzleTempTarget") }}
+        device_class: temperature
+        unit_of_measurement: '°C'
+      3d_printer_fan_speed:
+        friendly_name: '3D Printer Fan Speed'
+        value_template: >
+            {{ state_attr("sensor.3d_printer_p80","fanSpeed") }}
+        unit_of_measurement: '%'
+
+binary_sensor:
+  - platform: template
+    sensors:
+      3d_printer_active:
+        friendly_name: '3D Printer Active'
+        value_template: '{{ not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) }}'
+        device_class: power
+      3d_printer_bed_preheating:
+        friendly_name: '3D Printer Bed Preheating'
+        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatBed",1) }}'
+        device_class: power
+      3d_printer_nozzle_preheating:
+        friendly_name: '3D Printer Nozzle Preheating'
+        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatNozzle",1) }}'
+        device_class: power
+      3d_printer_door_open:
+        friendly_name: '3D Printer Door Open'
+        value_template: '{{ is_state_attr("sensor.3d_printer_p80","door_open",1) }}'
+        device_class: safety
