@@ -3,11 +3,127 @@ switch:
     host: 192.168.1.52
     name: '3D Printer Power'
 
+  - platform: template
+    switches:
+      3d_printer_bed_preheat:
+        friendly_name: 'Bed Preheat'
+        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatBed",1) }}'
+        turn_on:
+          service: script.turn_on
+          entity_id: script.3d_printer_preheat_bed_on
+        turn_off:
+          service: script.turn_on
+          entity_id: script.3d_printer_preheat_bed_off
+      3d_printer_nozzle_preheat:
+        friendly_name: 'Nozzle Preheat'
+        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatNozzle",1) }}'
+        turn_on:
+          service: script.turn_on
+          entity_id: script.3d_printer_preheat_nozzle_on
+        turn_off:
+          service: script.turn_on
+          entity_id: script.3d_printer_preheat_nozzle_off
+
 camera:
   - platform: mjpeg
     mjpeg_url: http://192.168.1.85:10123/?action=stream
     still_image_url: http://192.168.1.85:10123/?action=snapshot
-    name: 3D Printer Camera
+    name: Dremel 3D45
+
+rest_command:
+  3d_printer_pause:
+    url: http://192.168.1.85/command
+    method: POST
+    payload: 'PAUSE={{states("sensor.3d_printer_job_name")}}'
+  3d_printer_resume:
+    url: http://192.168.1.85/command
+    method: POST
+    payload: 'RESUME={{states("sensor.3d_printer_job_name")}}'
+  3d_printer_stop:
+    url: http://192.168.1.85/command
+    method: POST
+    payload: 'CANCEL={{states("sensor.3d_printer_job_name")}}'
+  3d_printer_bed_preheat:
+    url: http://192.168.1.85:10124/bedPreheat
+    method: POST
+    payload: '{% raw %}{{% endraw %}"value":"{{ value }}"{% raw %}}{% endraw %}'
+  3d_printer_nozzle_preheat:
+    url: http://192.168.1.85:10124/nozzlePreheat
+    method: POST
+    payload: '{% raw %}{{% endraw %}"value":"{{ value }}"{% raw %}}{% endraw %}'
+
+script:
+  #These scripts are used to support the preheat buttons.
+  #Because the sensors only update periodically, the scripts
+  #force an update immediately after they are run.
+  #this minimizes the wait on the UI so it's invisible to user.
+  3d_printer_preheat_bed_on:
+    alias: '3D Printer: Preheat Bed On'
+    sequence:
+      - service: rest_command.3d_printer_bed_preheat
+        data:
+          value: 'on'
+      - delay:
+          milliseconds: 500
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p10124
+  3d_printer_preheat_bed_off:
+    alias: '3D Printer: Preheat Bed Off'
+    sequence:
+      - service: rest_command.3d_printer_bed_preheat
+        data:
+          value: 'off'
+      - delay:
+          milliseconds: 500
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p10124
+  3d_printer_preheat_nozzle_on:
+    alias: '3D Printer: Preheat Nozzle On'
+    sequence:
+      - service: rest_command.3d_printer_nozzle_preheat
+        data:
+          value: 'on'
+      - delay:
+          milliseconds: 500
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p10124
+  3d_printer_preheat_nozzle_off:
+    alias: '3D Printer: Preheat Nozzle Off'
+    sequence:
+      - service: rest_command.3d_printer_nozzle_preheat
+        data:
+          value: 'off'
+      - delay:
+          milliseconds: 500
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p10124
+  #These are just thin crappy wrappers for the REST commands.
+  #They refresh the sensor that we use to get job info.
+  3d_printer_pause_job:
+    alias: 'Pause Job'
+    sequence:
+      - service: rest_command.3d_printer_pause
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p80
+  3d_printer_resume_job:
+    alias: 'Resume Job'
+    sequence:
+      - service: rest_command.3d_printer_resume
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p80
+  3d_printer_stop_job:
+    alias: 'Stop Job'
+    sequence:
+      - service: rest_command.3d_printer_stop
+      - service: homeassistant.update_entity
+        data:
+          entity_id: sensor.3d_printer_p80
 
 sensor:
   #Printerstatus known statuses: idle, canceled, printing, completed
@@ -29,7 +145,6 @@ sensor:
       - PrintingFileName
     resource: http://192.168.1.85:10124/getHomeMessage
     value_template: '{{ value_json.PrinterStatus }}'
-    scan_interval: 15
   - platform: rest
     name: 3D Printer P80
     method: POST
@@ -54,49 +169,62 @@ sensor:
       - temperature
       - totalTime
     value_template: '{{ value_json.jobstatus }}'
-    scan_interval: 15
 
 #JOB-RELATED SENSORS. Most of these should return nothing if no job is printing.
   - platform: template
     sensors:
       3d_printer_job_elapsed_time:
-        friendly_name: '3D Printer Elapsed Print Time'
+        friendly_name: 'Elapsed Time'
         value_template: >
-          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+          {% if is_state("binary_sensor.3d_printer_active","on") %}
             {{ (state_attr("sensor.3d_printer_p80","elaspedtime") | int / 60) | round(1) }}
           {% endif %}
-      3d_printer_job_remaining_time:
-        friendly_name: '3D Printer Remaining Print Time'
+      3d_printer_job_remaining_time_seconds:
+        #If a print is initiated from a cloud slicer, "remaining time" isn't populated.
+        #Instead, we use this to make an estimate - 100 times elapsed time divided by current percentage, minus the current elapsed time.
+        friendly_name: 'Remaining Print Time Seconds'
         value_template: >
-          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
-            {{ (state_attr("sensor.3d_printer_p10124","RemainTime") | int / 60) | round(1) }}
+          {% if is_state("binary_sensor.3d_printer_active","on") %}
+            {% if not is_state_attr("sensor.3d_printer_p10124","RemainTime",0) %}
+              {{ state_attr("sensor.3d_printer_p80","remaining") }}
+            {% else %}
+              {{ ((state_attr("sensor.3d_printer_p80","elaspedtime") | int * 100)/(state_attr("sensor.3d_printer_p80","progress") | int) | round(0)) - (state_attr("sensor.3d_printer_p80","elaspedtime") | int) }}
+            {% endif %}
+          {% endif %}
+        unit_of_measurement: seconds
+      3d_printer_job_remaining_time:
+        friendly_name: 'Remaining Time'
+        value_template: >
+          {% if is_state("binary_sensor.3d_printer_active","on") %}
+            {{ (states("sensor.3d_printer_job_remaining_time_seconds") | int / 60) | round(1) }}
           {% endif %}
         unit_of_measurement: minutes
       3d_printer_job_finish_time:
-        friendly_name: '3D Printer Print Completion Time'
+        friendly_name: 'Completion Time'
         value_template: >
-          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
-            {{ (as_timestamp(now()) +  (state_attr("sensor.3d_printer_p10124","RemainTime") | int)) | timestamp_local }}
+          {% if (is_state_attr("sensor.3d_printer_p80","jobstatus","completed")) %}
+          {% elif is_state("binary_sensor.3d_printer_active","on") %}
+            {{ (as_timestamp(now()) +  (states("sensor.3d_printer_job_remaining_time_seconds") | int)) | timestamp_local }}
           {% endif %}
       3d_printer_job_percent:
-        friendly_name: '3D Printer Percent Complete'
+        friendly_name: 'Percent Complete'
         value_template: >
           {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
-            {{ state_attr("sensor.3d_printer_p10124","PrintingProgress") }}
+            {{ state_attr("sensor.3d_printer_p80","progress") }}
           {% else %}
             0
           {% endif %}
         unit_of_measurement: '%'
       3d_printer_job_name:
-        friendly_name: '3D Printer Current Job'
+        friendly_name: 'Current Job'
         value_template: >
-          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
-            {{ state_attr("sensor.3d_printer_p10124","PrintingFileName") }}
+          {% if is_state("binary_sensor.3d_printer_active","on") %}
+            {{ state_attr("sensor.3d_printer_p80","jobname") }}
           {% endif %}
       3d_printer_job_status:
-        friendly_name: '3D Printer Job Status'
+        friendly_name: 'Job Status'
         value_template: >
-          {% if not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) %}
+          {% if is_state("binary_sensor.3d_printer_active","on") %}
             {{ state_attr("sensor.3d_printer_p80","jobstatus") }}
           {% endif %}
         #Known job statuses include:
@@ -112,54 +240,114 @@ sensor:
   - platform: template
     sensors:
       3d_printer_bed_temp:
-        friendly_name: '3D Printer Bed Temperature'
+        friendly_name: 'Bed Temperature'
         value_template: '{{ state_attr("sensor.3d_printer_p10124","BedTemp") }}'
         device_class: temperature
         unit_of_measurement: '°C'
       3d_printer_bed_temp_target:
-        friendly_name: '3D Printer Bed Temperature Target'
+        friendly_name: 'Bed Temperature Target'
         value_template: >
             {{ state_attr("sensor.3d_printer_p10124","BedTempTarget") }}
         device_class: temperature
         unit_of_measurement: '°C'
       3d_printer_nozzle_temp:
-        friendly_name: '3D Printer Nozzle Temperature'
+        friendly_name: 'Nozzle Temperature'
         value_template: '{{ state_attr("sensor.3d_printer_p10124","NozzleTemp") }}'
         device_class: temperature
         unit_of_measurement: '°C'
       3d_printer_chamber_temp:
-        friendly_name: '3D Printer Chamber Temperature'
+        friendly_name: 'Chamber Temperature'
         value_template: '{{ state_attr("sensor.3d_printer_p80","chamber_temperature") }}'
         device_class: temperature
         unit_of_measurement: '°C'
       3d_printer_nozzle_temp_target:
-        friendly_name: '3D Printer Nozzle Temperature Target'
+        friendly_name: 'Nozzle Temperature Target'
         value_template: >
             {{ state_attr("sensor.3d_printer_p10124","NozzleTempTarget") }}
         device_class: temperature
         unit_of_measurement: '°C'
-      3d_printer_fan_speed:
-        friendly_name: '3D Printer Fan Speed'
+
+#A prettier output for the printer's status.
+  - platform: template
+    sensors:
+      3d_printer_status:
+        friendly_name: 'Printer Status'
         value_template: >
-            {{ state_attr("sensor.3d_printer_p80","fanSpeed") }}
-        unit_of_measurement: '%'
+          {% if (is_state_attr("sensor.3d_printer_p80","jobstatus","building")) %}
+            Printing
+          {% elif (is_state_attr("sensor.3d_printer_p80","jobstatus","!pausing")) %}
+            Paused
+          {% elif (is_state_attr("sensor.3d_printer_p80","jobstatus","pausing")) %}
+            Pausing
+          {% elif (is_state_attr("sensor.3d_printer_p80","jobstatus","!resuming")) %}
+            Resuming
+          {% elif (is_state_attr("sensor.3d_printer_p80","jobstatus","preparing")) %}
+            Warming Up
+          {% elif (is_state_attr("sensor.3d_printer_p80","jobstatus","abort")) %}
+            Aborted
+          {% elif (is_state_attr("sensor.3d_printer_p80","status","ready")) %}
+            Ready
+          {% elif (is_state("switch.33d_printer_power","off")) %}
+            Offline
+          {% else %}
+            Unknown
+          {% endif %}
 
 binary_sensor:
   - platform: template
     sensors:
       3d_printer_active:
-        friendly_name: '3D Printer Active'
-        value_template: '{{ not (is_state_attr("sensor.3d_printer_p10124","PrinterStatus","idle")) }}'
+        #This is used to determine if we should show job status.
+        friendly_name: 'Busy'
+        value_template: '{{ not (is_state_attr("sensor.3d_printer_p80","status","ready")) }}'
         device_class: power
-      3d_printer_bed_preheating:
-        friendly_name: '3D Printer Bed Preheating'
-        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatBed",1) }}'
-        device_class: power
-      3d_printer_nozzle_preheating:
-        friendly_name: '3D Printer Nozzle Preheating'
-        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatNozzle",1) }}'
+      3d_printer_job_active:
+        friendly_name: 'Job in Progress'
+        value_template: >
+          {{ (is_state_attr("sensor.3d_printer_p80","jobstatus","building"))
+          or (is_state_attr("sensor.3d_printer_p80","jobstatus","preparing"))
+          or (is_state_attr("sensor.3d_printer_p80","jobstatus","pausing"))
+          or (is_state_attr("sensor.3d_printer_p80","jobstatus","!resuming"))
+          }}
         device_class: power
       3d_printer_door_open:
-        friendly_name: '3D Printer Door Open'
+        friendly_name: 'Printer Door'
         value_template: '{{ is_state_attr("sensor.3d_printer_p80","door_open",1) }}'
-        device_class: safety
+        device_class: door
+
+automation:
+  - id: 3d_printer_auto_off
+    alias: "3D Printer: Turn Off When Done"
+    trigger:
+      - platform: state
+        entity_id: sensor.3d_printer_p10124
+        to: completed
+        for:
+          hours: 1
+      - platform: state
+        entity_id: sensor.3d_printer_p80
+        to: idle
+        for:
+          hours: 1
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.3d_printer_p80
+          state: 'completed'
+          for:
+            minutes: 30
+        - condition: state
+          entity_id: sensor.3d_printer_p10124
+          state: 'idle'
+          for:
+            minutes: 30
+    action:
+      - service: notify.push_main
+        data:
+          title: 'Idle Printer Shut Down'
+          message: "The 3D Printer was idle, so it has been shut down."
+          data:
+            tag: '3d_printer_idle_off'
+      - service: switch.turn_off
+        entity_id: switch.3d_printer_power

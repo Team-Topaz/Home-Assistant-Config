@@ -1,0 +1,41 @@
+3d_printer_view:
+  name: 3D Printer View
+  view: yes
+  icon: mdi:printer-3d
+  entities:
+    - camera.dremel_3d45
+    - group.3d_printer_hardware_status
+    - group.3d_printer_job_status
+    - group.3d_printer_control
+
+3d_printer_hardware_status:
+  name: Hardware Status
+  entities:
+    - sensor.3d_printer_status
+    - binary_sensor.3d_printer_door_open
+    - sensor.3d_printer_nozzle_temp
+    - sensor.3d_printer_bed_temp
+    - sensor.3d_printer_chamber_temp
+    - history_graph.3d_printer_temperature
+
+3d_printer_job_status:
+  name: Job Status
+  entities:
+    - binary_sensor.3d_printer_job_active
+    - sensor.3d_printer_job_name
+    - sensor.3d_printer_job_percent
+    - sensor.3d_printer_job_remaining_time
+    - sensor.3d_printer_job_finish_time
+
+3d_printer_control:
+  name: Printer Control
+  control: hidden
+  entities:
+    - switch.3d_printer_power
+    - switch.3d_printer_bed_preheat
+    - sensor.3d_printer_bed_temp_target
+    - switch.3d_printer_nozzle_preheat
+    - sensor.3d_printer_nozzle_temp_target
+    - script.3d_printer_resume_job
+    - script.3d_printer_pause_job
+    - script.3d_printer_stop_job

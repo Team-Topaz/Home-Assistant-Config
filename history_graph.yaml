@@ -29,8 +29,8 @@ temperature_rates:
     - sensor.bonus_room_temperature_rate
     - sensor.bike_room_temperature_rate
 
-3d_printer:
-  name: '3d Printer Temperature'
+3d_printer_temperature:
+  name: '3D Printer Temperature'
   hours_to_show: 2
   entities:
     - sensor.3d_printer_bed_temp
