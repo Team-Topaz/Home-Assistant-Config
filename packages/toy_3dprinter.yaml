@@ -7,7 +7,7 @@ switch:
     switches:
       3d_printer_bed_preheat:
         friendly_name: 'Bed Preheat'
-        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatBed",1) }}'
+        value_template: '{{ states("binary_sensor.3d_printer_bed_preheating") }}'
         turn_on:
           service: script.turn_on
           entity_id: script.3d_printer_preheat_bed_on
@@ -16,7 +16,7 @@ switch:
           entity_id: script.3d_printer_preheat_bed_off
       3d_printer_nozzle_preheat:
         friendly_name: 'Nozzle Preheat'
-        value_template: '{{ is_state_attr("sensor.3d_printer_p10124","PreheatNozzle",1) }}'
+        value_template: '{{ states("binary_sensor.3d_printer_nozzle_preheating") }}'
         turn_on:
           service: script.turn_on
           entity_id: script.3d_printer_preheat_nozzle_on
@@ -314,6 +314,23 @@ binary_sensor:
         friendly_name: 'Printer Door'
         value_template: '{{ is_state_attr("sensor.3d_printer_p80","door_open",1) }}'
         device_class: door
+      3d_printer_bed_preheating:
+        friendly_name: 'Bed Preheating'
+        value_template: >
+          {% if (state_attr("sensor.3d_printer_p10124","BedTempTarget") | int) <= 32 %}
+            False
+          {% else %}
+            is_state_attr("sensor.3d_printer_p10124","PreheatBed",1)
+          {% endif %}
+      3d_printer_nozzle_preheating:
+        friendly_name: 'Nozzle Preheating'
+        value_template: >
+          {% if (state_attr("sensor.3d_printer_p10124","NozzleTempTarget") | int) <= 32 %}
+            False
+          {% else %}
+            is_state_attr("sensor.3d_printer_p10124","PreheatNozzle",1)
+          {% endif %}
+
 
 automation:
   - id: 3d_printer_auto_off
