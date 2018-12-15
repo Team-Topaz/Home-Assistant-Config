@@ -123,11 +123,15 @@ automation:
       for:
         minutes: 30
     condition:
-      condition: state
-      entity_id: binary_sensor.office_motion
-      state: 'off'
-      for:
-        minutes: 30
+      condition: and
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.office_motion
+          state: 'off'
+          for:
+            minutes: 30
+        - condition: template
+          value_template: "{{ not is_state('device_tracker.chelsea_phone', 'home') }}"
     action:
       - service: light.turn_off
         data:
