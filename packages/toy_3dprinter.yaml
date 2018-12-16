@@ -379,11 +379,26 @@ automation:
       - service: camera.snapshot
         data_template:
           entity_id: camera.dremel_3d45
-          filename: '/config/www/{{ state_attr("sensor.3d_printer_p80","jobname") }}.jpg'
+          filename: '/config/www/3d_print/{{ state_attr("sensor.3d_printer_p80","jobname") }}.jpg'
       - service: notify.push_main
         data_template:
           title: 'Print Job Complete!'
           message: 'Printing finished on job {{ state_attr("sensor.3d_printer_p80","jobname") }}.'
           data:
             tag: '3d_printer_job_complete'
+            image: !secret 3d_printer_camera_url
+
+  - id: 3d_printer_job_paused
+    alias: "3D Printer: Take Snapshot When Paused"
+    trigger:
+      - platform: state
+        entity_id: sensor.3d_printer_p10124
+        to: paused
+    action:
+      - service: notify.push_main
+        data_template:
+          title: 'Print Job Paused!'
+          message: 'Printing stopped on job {{ state_attr("sensor.3d_printer_p80","jobname") }}. If this was not expected, please check printer.'
+          data:
+            tag: '3d_printer_job_paused'
             image: !secret 3d_printer_camera_url
