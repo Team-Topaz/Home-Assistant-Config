@@ -368,3 +368,17 @@ automation:
             tag: '3d_printer_idle_off'
       - service: switch.turn_off
         entity_id: switch.3d_printer_power
+
+  - id: 3d_printer_job_complete
+    alias: "3D Printer: Take Snapshot When Done"
+    trigger:
+      - platform: state
+        entity_id: sensor.3d_printer_p10124
+        to: completed
+    action:
+      - service: notify.push_main
+        data:
+          title: 'Print Job Complete!'
+          message: 'Printing finished on job {{ state_attr("3d_printer_p80","jobname"). }}'
+          tag: '3d_printer_job_complete'
+          image: !secret 3d_printer_camera_url
