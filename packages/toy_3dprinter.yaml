@@ -379,6 +379,6 @@ automation:
       - service: notify.push_main
         data:
           title: 'Print Job Complete!'
-          message: 'Printing finished on job {{ state_attr("3d_printer_p80","jobname"). }}'
+          message: 'Printing finished on job {{ state_attr("sensor.3d_printer_p80","jobname") }}.'
           tag: '3d_printer_job_complete'
           image: !secret 3d_printer_camera_url
