@@ -376,9 +376,14 @@ automation:
         entity_id: sensor.3d_printer_p10124
         to: completed
     action:
+      - service: camera.snapshot
+        data_template:
+          entity_id: camera.dremel_3d45
+          filename: '/config/www/{{ state_attr("sensor.3d_printer_p80","jobname") }}.jpg'
       - service: notify.push_main
-        title: 'Print Job Complete!'
-        message: 'Printing finished on job {{ state_attr("sensor.3d_printer_p80","jobname") }}.'
+        data_template:
+          title: 'Print Job Complete!'
+          message: 'Printing finished on job {{ state_attr("sensor.3d_printer_p80","jobname") }}.'
         data:
           tag: '3d_printer_job_complete'
           image: !secret 3d_printer_camera_url
