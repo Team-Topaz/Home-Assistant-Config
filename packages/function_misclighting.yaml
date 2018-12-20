@@ -79,3 +79,16 @@ automation:
       - service: light.turn_off
         data:
           entity_id: light.nightstand_lamps
+
+- id: dining_light_dim
+  alias: 'Workaround: Dim dining light'
+  #The dining room light flickers at 100%, so let's dim it to 75% instead.
+  trigger:
+    - platform: numeric_state
+      entity_id: light.dining_room_chandelier
+      value_template: '{{ state.attributes.brightness }}'
+      above: 250
+  action:
+    - service: light.turn_on
+      brightness_pct: 75
+      transition: 10
