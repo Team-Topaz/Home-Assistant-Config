@@ -238,7 +238,7 @@ sensor:
   - platform: template
     sensors:
       3d_printer_job_time_remaining_trend:
-        friendly_name: "Master Bedroom Temperature Change Rate"
+        friendly_name: "Remaining Time Rate"
         unit_of_measurement: "Minutes/Minute"
         value_template: "{{ (state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) | round(2) }}"
 
