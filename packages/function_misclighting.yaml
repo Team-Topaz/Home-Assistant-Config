@@ -90,5 +90,6 @@ automation:
         above: 250
     action:
       - service: light.turn_on
-        brightness_pct: 75
-        transition: 10
+        data:
+          brightness_pct: 75
+          transition: 10
