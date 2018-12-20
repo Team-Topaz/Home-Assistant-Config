@@ -91,5 +91,6 @@ automation:
     action:
       - service: light.turn_on
         data:
+          entity_id: light.dining_room_chandelier
           brightness_pct: 75
           transition: 10
