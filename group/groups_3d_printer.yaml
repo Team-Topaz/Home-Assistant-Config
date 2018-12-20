@@ -26,6 +26,7 @@
     - sensor.3d_printer_job_percent
     - sensor.3d_printer_job_remaining_time
     - sensor.3d_printer_job_finish_time
+    - sensor.3d_printer_job_time_remaining_trend
 
 3d_printer_control:
   name: Printer Control
