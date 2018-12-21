@@ -238,9 +238,9 @@ sensor:
   - platform: template
     sensors:
       3d_printer_job_time_remaining_trend:
-        friendly_name: "Remaining Time Rate"
-        unit_of_measurement: "Minutes/Minute"
-        value_template: "{{ (state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) | round(2) }}"
+        friendly_name: "Actual Print Speed"
+        unit_of_measurement: "%"
+        value_template: "{{ ((state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) * -100) | round(1) }}"
 
 #HARDWARE STATUS
   - platform: template
