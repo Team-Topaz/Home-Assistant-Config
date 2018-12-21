@@ -15,6 +15,7 @@ sensor:
   - platform: template
     sensors:
       day_of_year:
+        entity_id: sensor.date
         friendly_name: 'Day of Year'
         unit_of_measurement: 'day'
         value_template: "{{ as_timestamp(now()) | timestamp_custom('%j', true) | int }}"
