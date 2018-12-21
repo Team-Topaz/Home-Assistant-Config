@@ -184,7 +184,8 @@ sensor:
         #Instead, we use this to make an estimate - 100 times elapsed time divided by current percentage, minus the current elapsed time.
         friendly_name: 'Remaining Print Time Seconds'
         value_template: >
-          {% if is_state("binary_sensor.3d_printer_active","on") %}
+          {% if is_state("binary_sensor.3d_printer_job_active","off") %}
+          {% elif is_state("binary_sensor.3d_printer_active","on") %}
             {% if not is_state_attr("sensor.3d_printer_p10124","RemainTime",0) %}
               {{ ((state_attr("sensor.3d_printer_p80","remaining") | int) * 1.15) | round(0) }}
             {% else %}
@@ -195,7 +196,7 @@ sensor:
       3d_printer_job_remaining_time:
         friendly_name: 'Remaining Time'
         value_template: >
-          {% if is_state("binary_sensor.3d_printer_active","on") %}
+          {% if is_state("binary_sensor.3d_printer_job_active","on") %}
             {{ (states("sensor.3d_printer_job_remaining_time_seconds") | int / 60) | round(1) }}
           {% endif %}
         unit_of_measurement: minutes
