@@ -186,7 +186,7 @@ sensor:
         value_template: >
           {% if is_state("binary_sensor.3d_printer_active","on") %}
             {% if not is_state_attr("sensor.3d_printer_p10124","RemainTime",0) %}
-              {{ ((state_attr("sensor.3d_printer_p80","remaining") | int) * 1.25) | round(0) }}
+              {{ ((state_attr("sensor.3d_printer_p80","remaining") | int) * 1.15) | round(0) }}
             {% else %}
               {{ ((state_attr("sensor.3d_printer_p80","elaspedtime") | int * 100)/(state_attr("sensor.3d_printer_p80","progress") | int) | round(0)) - (state_attr("sensor.3d_printer_p80","elaspedtime") | int) }}
             {% endif %}
