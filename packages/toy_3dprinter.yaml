@@ -399,10 +399,6 @@ automation:
         entity_id: sensor.3d_printer_p10124
         to: completed
     action:
-      - service: camera.snapshot
-        data_template:
-          entity_id: camera.dremel_3d45
-          filename: '/config/www/3d_print/{{ state_attr("sensor.3d_printer_p80","jobname") }}.jpg'
       - service: notify.push_main
         data_template:
           title: 'Print Job Complete!'
@@ -410,6 +406,11 @@ automation:
           data:
             tag: '3d_printer_job_complete'
             image: !secret 3d_printer_camera_url
+      - delay: '00:00:10'
+      - service: camera.snapshot
+        data_template:
+          entity_id: camera.dremel_3d45
+          filename: '/config/www/3d_print/{{ state_attr("sensor.3d_printer_p80","jobname") }}.jpg'
 
   - id: 3d_printer_job_paused
     alias: "3D Printer: Take Snapshot When Paused"
