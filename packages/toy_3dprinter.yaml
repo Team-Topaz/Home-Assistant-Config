@@ -442,13 +442,13 @@ automation:
         entity_id: sensor.3d_printer_job_remaining_time_seconds
         above: 0
     action:
+    - service: timer.cancel
+      data:
+        entity_id: timer.3d_printer_job_remaining_time
     - service: timer.start
       data_template:
         entity_id: timer.3d_printer_job_remaining_time
         duration: '{{ states("sensor.3d_printer_job_remaining_time_seconds")}}'
-    - service: timer.start
-      data:
-        entity_id: timer.3d_printer_job_remaining_time
 
   - id: 3d_printer_job_status_refresh_on_timer
     alias: "3D Printer: Refresh when timer expires"
