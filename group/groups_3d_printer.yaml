@@ -24,7 +24,7 @@
     - binary_sensor.3d_printer_job_active
     - sensor.3d_printer_job_name
     - sensor.3d_printer_job_percent
-    - sensor.3d_printer_job_remaining_time
+    - timer.3d_printer_job_remaining_time
     - sensor.3d_printer_job_finish_time
     - sensor.3d_printer_job_time_remaining_trend
 

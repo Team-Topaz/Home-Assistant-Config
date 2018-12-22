@@ -55,6 +55,7 @@ rest_command:
 timer:
   #We need a timer set to a default value to adjust with an automation.
   3d_printer_job_remaining_time:
+    name: 'Job Remaining Time'
     duration: '00:00:00'
 
 script:
