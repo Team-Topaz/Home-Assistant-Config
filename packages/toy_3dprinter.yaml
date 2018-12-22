@@ -52,6 +52,11 @@ rest_command:
     method: POST
     payload: '{% raw %}{{% endraw %}"value":"{{ value }}"{% raw %}}{% endraw %}'
 
+timer:
+  #We need a timer set to a default value to adjust with an automation.
+  3d_printer_job_remaining_time:
+    duration: '00:00:00'
+
 script:
   #These scripts are used to support the preheat buttons.
   #Because the sensors only update periodically, the scripts
@@ -419,3 +424,34 @@ automation:
           data:
             tag: '3d_printer_job_paused'
             image: !secret 3d_printer_camera_url
+
+  - id: 3d_printer_job_status_refresh_set_timer
+    alias: "3D Printer: Set Refresh Timer"
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.3d_printer_job_remaining_time_seconds
+        above: 1
+    condition:
+      condition: state
+      entity_id: binary_sensor.3d_printer_job_active
+      state: 'on'
+    action:
+      service: timer.start
+      data_template:
+        entity_id: timer.3d_printer_job_remaining_time
+        duration: '{{ states("sensor.3d_printer_job_remaining_time_seconds")}}'
+
+  - id: 3d_printer_job_status_refresh_on_timer
+    alias: "3D Printer: Refresh when timer expires"
+    trigger:
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.3d_printer_job_remaining_time
+    action:
+    - service: homeassistant.update_entity
+      data:
+        entity_id: sensor.3d_printer_p10124
+    - service: homeassistant.update_entity
+      data:
+        entity_id: sensor.3d_printer_p80
