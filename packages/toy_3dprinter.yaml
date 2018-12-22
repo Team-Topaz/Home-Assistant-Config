@@ -429,13 +429,17 @@ automation:
   - id: 3d_printer_job_status_refresh_set_timer
     alias: "3D Printer: Set Refresh Timer"
     trigger:
-      - platform: numeric_state
+      - platform: state
         entity_id: sensor.3d_printer_job_remaining_time_seconds
-        above: 1
     condition:
-      condition: state
-      entity_id: binary_sensor.3d_printer_job_active
-      state: 'on'
+      condition: and
+      conditions:
+      - condition: state
+        entity_id: binary_sensor.3d_printer_job_active
+        state: 'on'
+      - condition: numeric_state
+        entity_id: sensor.3d_printer_job_remaining_time_seconds
+        above: 0
     action:
       service: timer.start
       data_template:
