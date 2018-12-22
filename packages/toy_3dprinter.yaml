@@ -442,7 +442,10 @@ automation:
         entity_id: sensor.3d_printer_job_remaining_time_seconds
         above: 0
     action:
-      service: timer.start
+    - service: timer.cancel
+      data:
+        entity_id: timer.3d_printer_job_remaining_time
+    - service: timer.start
       data_template:
         entity_id: timer.3d_printer_job_remaining_time
         duration: '{{ states("sensor.3d_printer_job_remaining_time_seconds")}}'
