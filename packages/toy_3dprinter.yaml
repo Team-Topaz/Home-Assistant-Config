@@ -44,13 +44,21 @@ rest_command:
     method: POST
     payload: 'CANCEL={{states("sensor.3d_printer_job_name")}}'
   3d_printer_bed_preheat:
-    url: http://192.168.1.85:10124/bedPreheat
+    url: http://192.168.1.85/command
     method: POST
-    payload: '{% raw %}{{% endraw %}"value":"{{ value }}"{% raw %}}{% endraw %}'
+    payload: 'PLATEHEAT'
+  3d_printer_bed_preheat_off:
+    url: http://192.168.1.85/command
+    method: POST
+    payload: 'STOPPLATEHEAT'
   3d_printer_nozzle_preheat:
-    url: http://192.168.1.85:10124/nozzlePreheat
+    url: http://192.168.1.85/command
     method: POST
-    payload: '{% raw %}{{% endraw %}"value":"{{ value }}"{% raw %}}{% endraw %}'
+    payload: 'NOZZLEHEAT'
+  3d_printer_nozzle_preheat_off:
+    url: http://192.168.1.85/command
+    method: POST
+    payload: 'STOPNOZZLEHEAT'
 
 timer:
   #We need a timer set to a default value to adjust with an automation.
@@ -67,46 +75,38 @@ script:
     alias: '3D Printer: Preheat Bed On'
     sequence:
       - service: rest_command.3d_printer_bed_preheat
-        data:
-          value: 'on'
       - delay:
           milliseconds: 500
       - service: homeassistant.update_entity
         data:
-          entity_id: sensor.3d_printer_p10124
+          entity_id: sensor.3d_printer_p80
   3d_printer_preheat_bed_off:
     alias: '3D Printer: Preheat Bed Off'
     sequence:
-      - service: rest_command.3d_printer_bed_preheat
-        data:
-          value: 'off'
+      - service: rest_command.3d_printer_bed_preheat_off
       - delay:
           milliseconds: 500
       - service: homeassistant.update_entity
         data:
-          entity_id: sensor.3d_printer_p10124
+          entity_id: sensor.3d_printer_p80
   3d_printer_preheat_nozzle_on:
     alias: '3D Printer: Preheat Nozzle On'
     sequence:
       - service: rest_command.3d_printer_nozzle_preheat
-        data:
-          value: 'on'
       - delay:
           milliseconds: 500
       - service: homeassistant.update_entity
         data:
-          entity_id: sensor.3d_printer_p10124
+          entity_id: sensor.3d_printer_p80
   3d_printer_preheat_nozzle_off:
     alias: '3D Printer: Preheat Nozzle Off'
     sequence:
-      - service: rest_command.3d_printer_nozzle_preheat
-        data:
-          value: 'off'
+      - service: rest_command.3d_printer_nozzle_preheat_off
       - delay:
           milliseconds: 500
       - service: homeassistant.update_entity
         data:
-          entity_id: sensor.3d_printer_p10124
+          entity_id: sensor.3d_printer_p80
   #These are just thin crappy wrappers for the REST commands.
   #They refresh the sensor that we use to get job info.
   3d_printer_pause_job:
