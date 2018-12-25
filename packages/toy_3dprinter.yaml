@@ -464,3 +464,24 @@ automation:
     - service: homeassistant.update_entity
       data:
         entity_id: sensor.3d_printer_p80
+
+  - id: 3d_printer_detect_hang
+    alias: "3D Printer: Detect Frozen State"
+    trigger:
+      - platform: state
+        entity_id: sensor.3d_printer_status
+        from: 'Printing'
+        to: 'Unknown'
+        for:
+          minutes: 2
+    condition:
+      - platform: state
+        entity_id: sensor.3d_printer_p80
+        state: 'unavailable'
+    action:
+      - service: notify.push_main
+        data_template:
+          title: 'Printer Frozen!'
+          message: 'The printer has stopped responding to queries. Check on printer ASAP!'
+          data:
+            tag: '3d_printer_hung'
