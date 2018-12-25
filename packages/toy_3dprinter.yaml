@@ -240,9 +240,6 @@ sensor:
         radius: 100.0 #This is a wide outlier range, but we want to avoid the sensor getting stuck.
       - filter: lowpass
         time_constant: 3
-      - filter: time_simple_moving_average
-        window_size: 00:10
-        precision: 1
   - platform: template
     sensors:
       3d_printer_job_time_remaining_trend:
