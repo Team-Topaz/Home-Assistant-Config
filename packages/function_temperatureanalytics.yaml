@@ -146,7 +146,6 @@ sensor:
         time_constant: 2
       - filter: time_simple_moving_average
         window_size: 00:30
-        precision: 2
   - platform: template
     sensors:
       living_room_outdoor_temperature_delta_raw:
