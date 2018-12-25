@@ -156,6 +156,7 @@ sensor:
       - temperature
       - totalTime
     value_template: '{{ value_json.jobstatus }}'
+    scan_interval: 20
 
 #JOB-RELATED SENSORS. Most of these should return nothing if no job is printing.
   - platform: template
