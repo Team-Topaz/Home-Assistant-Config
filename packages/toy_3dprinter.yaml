@@ -132,25 +132,6 @@ script:
           entity_id: sensor.3d_printer_p80
 
 sensor:
-  #Printerstatus known statuses: idle, canceled, printing, completed
-  - platform: rest
-    name: 3D Printer P10124
-    method: POST
-    json_attributes:
-      - BedTemp
-      - BedTempTarget
-      - ErrorCode
-      - Message
-      - NozzleTemp
-      - NozzleTempTarget
-      - PreheatNozzle
-      - PreheatBed
-      - PrinterStatus
-      - PrintingProgress
-      - RemainTime
-      - PrintingFileName
-    resource: http://192.168.1.85:10124/getHomeMessage
-    value_template: '{{ value_json.PrinterStatus }}'
   - platform: rest
     name: 3D Printer P80
     method: POST
@@ -477,9 +458,6 @@ automation:
         event_data:
           entity_id: timer.3d_printer_job_remaining_time
     action:
-    - service: homeassistant.update_entity
-      data:
-        entity_id: sensor.3d_printer_p10124
     - service: homeassistant.update_entity
       data:
         entity_id: sensor.3d_printer_p80
