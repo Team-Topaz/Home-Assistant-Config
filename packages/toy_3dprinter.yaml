@@ -233,10 +233,13 @@ sensor:
     name: "Actual Print Speed"
     entity_id: 3d_printer_job_time_remaining_trend
     filters:
+      - filter: range
+        upper_bound: 500.0 #I've never seen higher than ~300, but this seems reasonable.
+        lower_bound: 0 #This could theoretically go below 0 (if the estimate increases a lot) but it doesn't make much sense.
       - filter: outlier
-        radius: 500.0 #This is a wide outlier range, but we want to avoid the sensor getting stuck.
+        radius: 100.0 #This is a wide outlier range, but we want to avoid the sensor getting stuck.
       - filter: lowpass
-        time_constant: 4
+        time_constant: 3
       - filter: time_simple_moving_average
         window_size: 00:10
         precision: 1
