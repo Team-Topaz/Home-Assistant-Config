@@ -328,7 +328,7 @@ binary_sensor:
           {% if is_state('sensor.3d_printer_active','on') %}
             False
           {% else %}
-            {% if (states('sensor.3d_printer_bed_temp_target') | int) > 32 }
+            {% if (states('sensor.3d_printer_bed_temp_target') | int) > 32 %}
               True
             {% else %}
               False
@@ -340,7 +340,7 @@ binary_sensor:
           {% if is_state('sensor.3d_printer_active','on') %}
             False
           {% else %}
-            {% if (states('sensor.3d_printer_nozzle_temp_targer') | int) > 32 }
+            {% if (states('sensor.3d_printer_nozzle_temp_targer') | int) > 32 %}
               True
             {% else %}
               False
