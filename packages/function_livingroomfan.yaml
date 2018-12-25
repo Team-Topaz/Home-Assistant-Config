@@ -19,6 +19,7 @@ sensor:
         time_constant: 2
       - filter: time_simple_moving_average
         window_size: 00:15
+        precision: 1
 
   - platform: template
     sensors:

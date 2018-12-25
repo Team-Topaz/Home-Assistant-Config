@@ -93,6 +93,7 @@ sensor:
         time_constant: 4
       - filter: time_simple_moving_average
         window_size: 00:60
+        precision: 1
 
   - platform: min_max
     name: "Average Indoor Temperature Rate Raw"
@@ -113,6 +114,7 @@ sensor:
         time_constant: 4
       - filter: time_simple_moving_average
         window_size: 00:30
+        precision: 1
   - platform: statistics
     name: Office Temperature Stats
     entity_id: sensor.office_temperature
