@@ -231,7 +231,7 @@ sensor:
         value_template: "{{ ((state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) * -100) | round(1) }}"
   - platform: filter
     name: "3d_printer_job_time_remaining_trend_filtered"
-    entity_id: 3d_printer_job_time_remaining_trend_raw
+    entity_id: sensor.3d_printer_job_time_remaining_trend_raw
     filters:
       - filter: range
         upper_bound: 500.0 #I've never seen higher than ~300, but this seems reasonable.
