@@ -331,7 +331,7 @@ binary_sensor:
       3d_printer_bed_preheating:
         friendly_name: 'Bed Preheating'
         value_template: >
-          {% if is_state('sensor.3d_printer_active','on') %}
+          {% if is_state('binary_sensor.3d_printer_active','on') %}
             False
           {% else %}
             {% if (states('sensor.3d_printer_bed_temp_target') | int) > 32 %}
@@ -343,10 +343,10 @@ binary_sensor:
       3d_printer_nozzle_preheating:
         friendly_name: 'Nozzle Preheating'
         value_template: >
-          {% if is_state('sensor.3d_printer_active','on') %}
+          {% if is_state('binary_sensor.3d_printer_active','on') %}
             False
           {% else %}
-            {% if (states('sensor.3d_printer_nozzle_temp_targer') | int) > 32 %}
+            {% if (states('sensor.3d_printer_nozzle_temp_target') | int) > 32 %}
               True
             {% else %}
               False
