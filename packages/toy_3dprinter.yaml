@@ -244,10 +244,21 @@ sensor:
         #-"building"
   - platform: template
     sensors:
-      3d_printer_job_time_remaining_trend:
-        friendly_name: "Actual Print Speed"
+      3d_printer_job_time_remaining_trend_raw:
+        friendly_name: "Actual Print Speed Raw"
         unit_of_measurement: "%"
         value_template: "{{ ((state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) * -100) | round(1) }}"
+  - platform: filter
+    name: "Actual Print Speed"
+    entity_id: 3d_printer_job_time_remaining_trend
+    filters:
+      - filter: outlier
+        radius: 500.0 #This is a wide outlier range, but we want to avoid the sensor getting stuck.
+      - filter: lowpass
+        time_constant: 4
+      - filter: time_simple_moving_average
+        window_size: 00:10
+        precision: 1
 
 #HARDWARE STATUS
   - platform: template
