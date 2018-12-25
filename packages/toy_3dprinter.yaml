@@ -230,7 +230,7 @@ sensor:
         unit_of_measurement: "%"
         value_template: "{{ ((state_attr('binary_sensor.3d_printer_job_time_remaining_trend_seconds','gradient') | float) * -100) | round(1) }}"
   - platform: filter
-    name: "3d_printer_job_time_remaining_trend_filtered"
+    name: "3D Printer Job Time Remaining Trend Filtered"
     entity_id: sensor.3d_printer_job_time_remaining_trend_raw
     filters:
       - filter: range
@@ -356,7 +356,7 @@ binary_sensor:
     sensors:
       3d_printer_job_time_remaining_trend_seconds:
         #Outputs in "seconds per second.""
-        friendly_name: "Master Bedroom Temperature Trend"
+        friendly_name: "Printer Job Time Trend"
         entity_id: sensor.3d_printer_job_remaining_time_seconds
         max_samples: 20
         sample_duration: 300
