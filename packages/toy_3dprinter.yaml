@@ -475,7 +475,7 @@ automation:
         for:
           minutes: 2
     condition:
-      - platform: state
+      - condition: state
         entity_id: sensor.3d_printer_p80
         state: 'unavailable'
     action:
