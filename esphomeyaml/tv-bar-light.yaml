@@ -28,6 +28,7 @@ light:
     pin: D8
     num_leds: 7
     name: 'TV Bar Light'
+    color_correct: [90%,100%,100%]
     rgb_order: GRB
     effects:
       - strobe:
