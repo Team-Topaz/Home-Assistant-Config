@@ -42,23 +42,23 @@ light:
             - state: False
               duration: 1s
       - fastled_color_wipe:
-        name: Red Wipe
-        colors:
-            - red: 100%
-              green: 0%
-              blue: 0%
-              num_leds: 2
-            - red: 0%
-              green: 0%
-              blue: 0%
-              num_leds: 2
+          name: Red Wipe
+          colors:
+              - red: 100%
+                green: 0%
+                blue: 0%
+                num_leds: 2
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
       - fastled_scan:
-        name: Cylon
-        move_interval: 100ms
+          name: Cylon
+          move_interval: 100ms
       - fastled_flicker:
-        name: Flicker
+          name: Flicker
       - fastled_rainbow:
-        name: Rainbow
+          name: Rainbow
       - fastled_rainbow:
-        name: Fast Rainbow
-        speed: 20
+          name: Fast Rainbow
+          speed: 20
