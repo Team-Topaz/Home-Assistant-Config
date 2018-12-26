@@ -52,6 +52,15 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 2
+      - fastled_color_wipe:
+          name: Random Wipe
+          colors:
+              - random: True
+                num_leds: 2
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
       - fastled_scan:
           name: Cylon
           move_interval: 100ms
@@ -59,9 +68,11 @@ light:
           name: Flicker
       - fastled_rainbow:
           name: Rainbow
+          width: 40
       - fastled_rainbow:
           name: Fast Rainbow
           speed: 20
+          width: 40
       - fastled_fireworks:
           name: Fireworks
           update_interval: 32ms
