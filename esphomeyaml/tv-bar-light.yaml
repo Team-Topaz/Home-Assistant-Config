@@ -64,29 +64,6 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 2
-      - fastled_color_wipe:
-          name: Random Wipe 2
-          add_led_interval: 120ms
-          reverse: True
-          colors:
-              - random: True
-                num_leds: 2
-              - random: True
-                num_leds: 1
-              - random: True
-                num_leds: 1
-              - random: True
-                num_leds: 3
-              - random: True
-                num_leds: 4
-              - random: True
-                num_leds: 1
-              - random: True
-                num_leds: 3
-              - red: 0%
-                green: 0%
-                blue: 0%
-                num_leds: 2
       - fastled_scan:
           name: Cylon
           move_interval: 120ms
