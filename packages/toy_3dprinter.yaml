@@ -509,13 +509,13 @@ automation:
             tag: '3d_printer_hung'
 
   - id: 3d_printer_confirmation_slider_revert
-  alias: "3D Printer: Revert input to safe position"
-  trigger:
-    - platform: state
-      entity_id: input_boolean.3d_printer_allow_stop
-      to: 'on'
-      for:
-        seconds: 10
-  action:
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.3d_printer_allow_stop
+    alias: "3D Printer: Revert input to safe position"
+    trigger:
+      - platform: state
+        entity_id: input_boolean.3d_printer_allow_stop
+        to: 'on'
+        for:
+          seconds: 10
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.3d_printer_allow_stop
