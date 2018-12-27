@@ -37,3 +37,11 @@ bike_room_sensor:
     - sensor.bike_room_temperature
     - sensor.bike_room_humidity
     - binary_sensor.bike_room_motion
+
+outdoor_east_sensor:
+  name: "Outdoor (East)"
+  control: hidden
+  entities:
+    - sensor.outdoor_temperature_sensor
+    - sensor.outdoor_humidity_sensor
+    - sensor.outdoor_motion_sensor

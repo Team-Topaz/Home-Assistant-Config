@@ -9,6 +9,7 @@ environment_view:
     - group.master_bedroom_card
     - group.bonus_room_card
     - group.bike_room_sensor
+    - group.outdoor_east_sensor
     - group.temperature
     - group.fan_control
     - group.ceiling_fans
@@ -21,7 +22,6 @@ temperature:
   name: 'Temperature'
   entities:
     - sensor.weather_temperature
-    - sensor.outdoor_temperature_sensor
     - sensor.outdoor_temperature_rate
 
 fan_control:
