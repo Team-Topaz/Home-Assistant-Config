@@ -7,6 +7,7 @@
     - group.3d_printer_hardware_status
     - group.3d_printer_job_status
     - group.3d_printer_control
+    - group.3d_printer_danger
 
 3d_printer_hardware_status:
   name: Hardware Status
@@ -39,5 +40,11 @@
     - sensor.3d_printer_nozzle_temp_target
     - script.3d_printer_resume_job
     - script.3d_printer_pause_job
+
+3d_printer_danger:
+  name: Here There Be Dragons
+  control: hidden
+  entities:
     - input_boolean.3d_printer_allow_stop
     - script.3d_printer_stop_job_safe
+    - script.3d_printer_turn_off_printer_safe

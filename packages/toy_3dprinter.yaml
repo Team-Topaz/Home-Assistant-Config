@@ -1,6 +1,6 @@
 input_boolean:
   3d_printer_allow_stop:
-    name: 'Enable Stopping Print'
+    name: 'Enable Dangerous Actions'
     icon: mdi:alert
 
 switch:
@@ -136,13 +136,21 @@ script:
         data:
           entity_id: sensor.3d_printer_p80
   3d_printer_stop_job_safe:
-    alias: 'Stop Job (Enable with slider)'
+    alias: 'Stop Job (enable with slider)'
     sequence:
       - condition: state
         entity_id: 'input_boolean.3d_printer_allow_stop'
         state: 'on'
       - service: script.turn_on
         entity_id: script.3d_printer_stop_job
+  3d_printer_turn_off_printer_safe:
+    alias: 'Power Off (enable with slider)'
+    sequence:
+      - condition: state
+        entity_id: 'input_boolean.3d_printer_allow_stop'
+        state: 'on'
+      - service: switch.turn_off
+        entity_id: switch.3d_printer_power
   3d_printer_main_power_on:
     alias: 'Power On'
     sequence:
