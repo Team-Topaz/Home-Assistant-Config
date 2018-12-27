@@ -32,7 +32,7 @@
   name: Printer Control
   control: hidden
   entities:
-    - switch.3d_printer_power
+    - script.3d_printer_main_power_on
     - switch.3d_printer_bed_preheat
     - sensor.3d_printer_bed_temp_target
     - switch.3d_printer_nozzle_preheat

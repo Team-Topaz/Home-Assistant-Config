@@ -130,6 +130,11 @@ script:
       - service: homeassistant.update_entity
         data:
           entity_id: sensor.3d_printer_p80
+  3d_printer_main_power_on:
+    alias: 'Power On'
+    sequence:
+      - service: switch.turn_on
+        entity_id: switch.3d_printer_power
 
 sensor:
   - platform: rest
