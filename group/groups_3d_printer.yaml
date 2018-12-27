@@ -39,4 +39,4 @@
     - sensor.3d_printer_nozzle_temp_target
     - script.3d_printer_resume_job
     - script.3d_printer_pause_job
-    - script.3d_printer_stop_job
+    - script.3d_printer_stop_job_safe

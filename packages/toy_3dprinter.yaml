@@ -1,3 +1,8 @@
+input_boolean:
+  3d_printer_allow_stop:
+    name: 'Enable Stopping Print'
+    icon: mdi:alert
+
 switch:
   - platform: tplink
     host: 192.168.1.52
@@ -130,6 +135,14 @@ script:
       - service: homeassistant.update_entity
         data:
           entity_id: sensor.3d_printer_p80
+  3d_printer_stop_job_safe:
+    alias: 'Stop Job (Enable with slider)'
+    sequence:
+      - condition: state
+        entity_id: 'input_boolean.3d_printer_allow_stop'
+        state: 'on'
+      - service: script.turn_on
+        entity_id: script.3d_printer_stop_job
   3d_printer_main_power_on:
     alias: 'Power On'
     sequence:
@@ -494,3 +507,15 @@ automation:
           message: 'The printer has stopped responding to queries. Check on printer ASAP!'
           data:
             tag: '3d_printer_hung'
+
+  - id: 3d_printer_confirmation_slider_revert
+  alias: "3D Printer: Revert input to safe position"
+  trigger:
+    - platform: state
+      entity_id: input_boolean.3d_printer_allow_stop
+      to: 'on'
+      for:
+        seconds: 10
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.3d_printer_allow_stop
