@@ -44,4 +44,4 @@ outdoor_east_sensor:
   entities:
     - sensor.outdoor_temperature_sensor
     - sensor.outdoor_humidity_sensor
-    - sensor.outdoor_motion_sensor
+    - binary_sensor.outdoor_motion_sensor

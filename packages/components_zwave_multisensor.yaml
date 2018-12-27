@@ -1,0 +1,8 @@
+#Most of this is autoconfigured, but the Monoprice 4-in-1 sensor outputs motion as a sensor instead of a boolean.
+binary_sensor:
+  - platform: template
+    sensors:
+      outdoor_sensor_motion:
+        friendly_name: 'Outdoor Motion Sensor'
+        value_template: '{{ not(is_state("sensor.outdoor_sensor_motion","0")) }}'
+        device_class: motion
