@@ -2,7 +2,7 @@
 binary_sensor:
   - platform: template
     sensors:
-      outdoor_sensor_motion:
+      outdoor_motion_sensor:
         friendly_name: 'Outdoor Motion Sensor'
-        value_template: '{{ not(is_state("sensor.outdoor_sensor_motion","0")) }}'
+        value_template: '{{ not(is_state("sensor.outdoor_motion_sensor","0")) }}'
         device_class: motion
