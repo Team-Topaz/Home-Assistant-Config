@@ -7,10 +7,14 @@ sensor:
     name: Bike Room Temperature
     state_topic: bikeroom_multisensor/sensor/bike_room_temperature/state
     availability_topic: bikeroom_multisensor/status
+    unit_of_measurement: '°C'
+    device_class: temperature
   - platform: mqtt
     name: Bike Room Humidity
     state_topic: bikeroom_multisensor/sensor/bike_room_humidity/state
     availability_topic: bikeroom_multisensor/status
+    unit_of_measurement: '%'
+    device_class: humidity
   - platform: mqtt
     name: Bike Room Brightness
     state_topic: bikeroom_multisensor/sensor/bike_room_brightness/state
@@ -34,10 +38,14 @@ sensor:
     name: Bonus Room Temperature
     state_topic: bonusroom_multisensor/sensor/bonus_room_temperature/state
     availability_topic: bonusroom_multisensor/status
+    unit_of_measurement: '°C'
+    device_class: temperature
   - platform: mqtt
     name: Bonus Room Humidity
     state_topic: bonusroom_multisensor/sensor/bonus_room_humidity/state
     availability_topic: bonusroom_multisensor/status
+    unit_of_measurement: '%'
+    device_class: humidity
   - platform: mqtt
     name: Bonus Room Brightness
     state_topic: bonusroom_multisensor/sensor/bonus_room_brightness/state
@@ -61,10 +69,14 @@ sensor:
     name: Living Room Temperature
     state_topic: livingroom_multisensor/sensor/living_room_temperature/state
     availability_topic: livingroom_multisensor/status
+    unit_of_measurement: '°C'
+    device_class: temperature
   - platform: mqtt
     name: Living Room Humidity
     state_topic: livingroom_multisensor/sensor/living_room_humidity/state
     availability_topic: livingroom_multisensor/status
+    unit_of_measurement: '%'
+    device_class: humidity
   - platform: mqtt
     name: Living Room Brightness
     state_topic: livingroom_multisensor/sensor/living_room_brightness/state
@@ -88,10 +100,14 @@ sensor:
     name: Master Bedroom Temperature
     state_topic: masterbedroom_multisensor/sensor/master_bedroom_temperature/state
     availability_topic: masterbedroom_multisensor/status
+    unit_of_measurement: '°C'
+    device_class: temperature
   - platform: mqtt
     name: Master Bedroom Humidity
     state_topic: masterbedroom_multisensor/sensor/master_bedroom_humidity/state
     availability_topic: masterbedroom_multisensor/status
+    unit_of_measurement: '%'
+    device_class: humidity
   - platform: mqtt
     name: Master Bedroom Brightness
     state_topic: masterbedroom_multisensor/sensor/master_bedroom_brightness/state
@@ -115,10 +131,14 @@ sensor:
     name: Office Temperature
     state_topic: office_multisensor/sensor/office_temperature/state
     availability_topic: office_multisensor/status
+    unit_of_measurement: '°C'
+    device_class: temperature
   - platform: mqtt
     name: Office Humidity
     state_topic: office_multisensor/sensor/office_humidity/state
     availability_topic: office_multisensor/status
+    unit_of_measurement: '%'
+    device_class: humidity
   - platform: mqtt
     name: Office Brightness
     state_topic: office_multisensor/sensor/office_brightness/state
