@@ -95,3 +95,21 @@ light:
       - fastled_rainbow:
           name: Rainbow
           width: 91
+      - fastled_twinkle:
+          name: Twinkle
+          twinkle_probability: 5%
+      - fastled_random_twinkle:
+          name: Random Twinkle
+          twinkle_probability: 5%
+      - fastled_fireworks:
+          name: Fireworks
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: false
+          fade_out_rate: 120
+      - fastled_fireworks:
+          name: Random Fireworks
+          update_interval: 32ms
+          spark_probability: 10%
+          use_random_color: true
+          fade_out_rate: 120
