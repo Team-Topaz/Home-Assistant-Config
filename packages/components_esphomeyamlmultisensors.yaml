@@ -191,7 +191,8 @@ binary_sensor:
     availability_topic: office_multisensor/status
 
 light:
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: Bonus Room LED
     state_topic: bonusroom_multisensor/light/bonus_room_led/state
     command_topic: bonusroom_multisensor/light/bonus_room_led/command
@@ -199,7 +200,8 @@ light:
     brightness: true
     rgb: true
 
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: Living Room LED
     state_topic: livingroom_multisensor/light/living_room_led/state
     command_topic: livingroom_multisensor/light/living_room_led/command
@@ -207,7 +209,8 @@ light:
     brightness: true
     rgb: true
 
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: Master Bedroom LED
     state_topic: masterbedroom_multisensor/light/master_bedroom_led/state
     command_topic: masterbedroom_multisensor/light/master_bedroom_led/command
@@ -215,7 +218,8 @@ light:
     brightness: true
     rgb: true
 
-  - platform: mqtt_json
+  - platform: mqtt
+    schema: json
     name: Office LED
     state_topic: office_multisensor/light/office_led/state
     command_topic: office_multisensor/light/office_led/command
