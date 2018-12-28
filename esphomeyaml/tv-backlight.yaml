@@ -65,11 +65,11 @@ light:
               - red: 100%
                 green: 0%
                 blue: 0%
-                num_leds: 28
+                num_leds: 26
               - red: 0%
                 green: 0%
                 blue: 0%
-                num_leds: 17
+                num_leds: 19
       - fastled_color_wipe:
           name: Yellow Siren
           add_led_interval: 50ms
@@ -77,11 +77,11 @@ light:
               - red: 100%
                 green: 90%
                 blue: 0%
-                num_leds: 28
+                num_leds: 26
               - red: 0%
                 green: 0%
                 blue: 0%
-                num_leds: 17
+                num_leds: 19
       - fastled_color_wipe:
           name: Random Wipe
           add_led_interval: 120ms
