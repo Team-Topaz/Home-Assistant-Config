@@ -98,9 +98,11 @@ light:
       - fastled_twinkle:
           name: Twinkle
           twinkle_probability: 5%
+          progress_interval: 15ms
       - fastled_random_twinkle:
           name: Random Twinkle
           twinkle_probability: 5%
+          progress_interval: 15ms
       - fastled_fireworks:
           name: Fireworks
           update_interval: 32ms
