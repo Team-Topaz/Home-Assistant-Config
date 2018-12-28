@@ -2,9 +2,6 @@ esphomeyaml:
   name: bikeroom_multisensor
   platform: ESP8266
   board: nodemcuv2
-  on_boot:
-    then:
-      - switch.turn_on: pir_power
 
 wifi:
   ssid: !secret wifi1_name
@@ -66,11 +63,12 @@ sensor:
 binary_sensor:
   - platform: gpio
     pin: D5
-    name: "Bike Room Motion"
+    name: "Bike Room Motion Forward"
     device_class: motion
     filters:
       - delayed_on: 500ms
       - delayed_off: 1000ms
+    id: motion_fwd
   - platform: gpio
     pin: D4
     name: "Bike Room Motion Up"
@@ -78,8 +76,32 @@ binary_sensor:
     filters:
       - delayed_on: 500ms
       - delayed_off: 1000ms
+    id: motion_up
+  - platform: template
+    name: "Bike Room Motion"
+    lambda: >-
+      return ( id(motion_fwd).state || id(motion_up).state );
+    device_class: motion;
   - platform: status
     name: "Bike Room Status"
+
+output:
+  - platform: esp8266_pwm
+    pin: D1
+    id: redgpio
+  - platform: esp8266_pwm
+    pin: D2
+    id: greengpio
+  - platform: esp8266_pwm
+    pin: D3
+    id: bluegpio
+
+light:
+  - platform: rgb
+    name: "Bike Room LED"
+    red: redgpio
+    green: greengpio
+    blue: bluegpio
 
 switch:
   - platform: gpio
