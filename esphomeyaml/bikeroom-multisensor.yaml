@@ -81,7 +81,7 @@ binary_sensor:
     name: "Bike Room Motion"
     lambda: >-
       return ( id(motion_fwd).state || id(motion_up).state );
-    device_class: motion;
+    device_class: motion
   - platform: status
     name: "Bike Room Status"
 
