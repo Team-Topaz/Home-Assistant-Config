@@ -40,41 +40,17 @@ sensor:
     sensors:
       ryan_phone_battery:
         friendly_name: "Ryan Phone Battery"
-        value_template: >
-          {% if states.device_tracker.ryan_phone %}
-            {{ states.device_tracker.ryan_phone.attributes.battery | int }}
-          {% else %}
-            unknown
-          {% endif %}
+        value_template: "{{ state_attr('device_tracker.ryan_phone','battery') }}"
         unit_of_measurement: '%'
-        icon_template: >
-          {% if states.device_tracker.ryan_phone.attributes.battery >= 90 %}
-            mdi:battery
-          {% elif states.device_tracker.ryan_phone.attributes.battery > 0 %}
-            mdi:battery-{{(states.device_tracker.ryan_phone.attributes.battery | int / 10) | int + 1}}0
-          {% else %}
-            mdi:battery-unknown
-          {% endif %}
+        device_class: battery
 
   - platform: template
     sensors:
       chelsea_phone_battery:
         friendly_name: "Chelsea Phone Battery"
-        value_template: >
-          {% if states.device_tracker.chelsea_phone %}
-            {{ states.device_tracker.chelsea_phone.attributes.battery | int }}
-          {% else %}
-            unknown
-          {% endif %}
+        value_template: "{{ state_attr('device_tracker.chelsea_phone','battery') }}"
         unit_of_measurement: '%'
-        icon_template: >
-          {% if states.device_tracker.chelsea_phone.attributes.battery >= 90 %}
-            mdi:battery
-          {% elif states.device_tracker.chelsea_phone.attributes.battery > 0 %}
-            mdi:battery-{{(states.device_tracker.chelsea_phone.attributes.battery | int / 10) | int + 1}}0
-          {% else %}
-            mdi:battery-unknown
-          {% endif %}
+        device_class: battery
   - platform: steam_online
     api_key: !secret steam_web_apikey
     accounts:
