@@ -57,4 +57,5 @@ special_lights:
   name: 'Special Lights'
   entities:
     - light.tv_backlight
+    - light.tv_backlight_2
     - light.tv_bar_light
