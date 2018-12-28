@@ -28,5 +28,52 @@ light:
     pin: D7
     num_leds: 91
     name: 'TV Backlight'
+    color_correct: [100%,90%,95%]
     rgb_order: GRB
-    max_refresh_rate: 32ms
+    effects:
+      - strobe:
+          name: Red Alert
+          colors:
+            - state: True
+              brightness: 100%
+              red: 100%
+              green: 0%
+              blue: 0%
+              duration: 1s
+            - state: False
+              duration: 1s
+      - fastled_color_wipe:
+          name: Christmas Marquee
+          add_led_interval: 120ms
+          colors:
+              - red: 100%
+                green: 0%
+                blue: 0%
+                num_leds: 4
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
+              - red: 0%
+                green: 100%
+                blue: 0%
+                num_leds: 4
+      - fastled_color_wipe:
+          name: Random Wipe
+          add_led_interval: 120ms
+          colors:
+              - random: True
+                num_leds: 2
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
+      - fastled_scan:
+          name: Cylon
+          move_interval: 120ms
+      - fastled_flicker:
+          name: Flicker
+          intensity: 7%
+      - fastled_rainbow:
+          name: Rainbow
+          width: 35
