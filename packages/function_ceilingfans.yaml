@@ -30,7 +30,7 @@ fan:
   - platform: mqtt
     name: "Office Fan"
     command_topic: "officefan/cmnd/FanSpeed"
-    speed_command_topic: "officefan/cmndFanSpeed"
+    speed_command_topic: "officefan/cmnd/FanSpeed"
     state_topic: "officefan/stat/RESULT"
     speed_state_topic: "officefan/stat/RESULT"
     state_value_template: >
