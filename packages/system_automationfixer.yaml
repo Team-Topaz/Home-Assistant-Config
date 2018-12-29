@@ -1,0 +1,36 @@
+#Sometimes, Home Assistant totally craps out and decides to disable all automations.
+#This works around it by setting a specific automation to have an initial value of "on,"
+#And a second "sacrificial" automation which should always be on - if it's off,
+#the other automation detects it and notifies.
+
+automation:
+  - id: automation_broken_detector
+    alias: 'Self Monitoring: Detect Broken Automations'
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id: automation.automation_canary
+        to: 'off'
+      - platform: homeassistant
+        event: start
+    condition:
+      - condition: state
+        entity_id: automation.automation_canary
+        state: 'off'
+    action:
+    - service: notify.push_main
+      data:
+        title: 'Automations are broken'
+        message: "Home Assistant has disabled automations. Turning all automations on."
+    - service: automation.turn_on
+  - id: automation_canary
+    alias: 'Self Monitoring: Automation Canary'
+    trigger:
+      - platform: state
+        entity_id: sensor.day_of_year
+        to: 358
+    action:
+    - service: notify.push_main
+      data:
+        title: 'It is the 358th day of the year.'
+        message: "This is probably the end of the world."
