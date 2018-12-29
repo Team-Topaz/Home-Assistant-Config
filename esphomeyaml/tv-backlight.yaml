@@ -53,11 +53,15 @@ light:
               - red: 0%
                 green: 0%
                 blue: 0%
-                num_leds: 10
+                num_leds: 5
               - red: 0%
                 green: 100%
                 blue: 0%
                 num_leds: 14
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 5
       - fastled_color_wipe:
           name: Red Siren
           add_led_interval: 50ms
