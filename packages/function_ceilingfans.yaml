@@ -56,21 +56,27 @@ fan:
 
   - platform: mqtt
     name: "Bonus Room Fan"
-    state_topic: "stat/bonusroomfan/RESULT"
-    speed_state_topic: "stat/bonusroomfan/RESULT"
-    state_value_template: "{% if value_json.FanSpeed == 0 -%}0{%- elif value_json.FanSpeed > 0 -%}2{%- endif %}"
+    command_topic: "bonusroomfan/cmnd/FanSpeed"
+    speed_command_topic: "bonusroomfan/cmnd/FanSpeed"
+    state_topic: "bonusroomfan/stat/RESULT"
+    speed_state_topic: "bonusroomfan/stat/RESULT"
+    state_value_template: >
+      {% if value_json.FanSpeed is defined %}
+        {% if value_json.FanSpeed == 0 -%}0{%- elif value_json.FanSpeed > 0 -%}4{%- endif %}
+      {% else %}
+        {% if states.fan.bonus_room_fan.state == 'off' -%}0{%- elif states.fan.bonus_room_fan.state == 'on' -%}4{%- endif %}
+      {% endif %}
     speed_value_template: "{{ value_json.FanSpeed }}"
-    availability_topic: tele/bonusroomfan/LWT
-    payload_available: Online
-    payload_not_available: Offline
-    speed_command_topic: "cmnd/bonusroomfan/FanSpeed"
+    availability_topic: bonusroomfan/tele/LWT
+    payload_off: "0"
+    payload_on: "4"
     payload_low_speed: "1"
     payload_medium_speed: "2"
     payload_high_speed: "3"
-    command_topic: "cmnd/bonusroomfan/FanSpeed"
-    payload_off: "0"
-    payload_on: "2"
+    payload_available: Online
+    payload_not_available: Offline
     speeds:
+      - 'off'
       - low
       - medium
       - high
