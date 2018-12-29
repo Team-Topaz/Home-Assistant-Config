@@ -12,6 +12,7 @@ mqtt:
   broker: !secret mqtt_server
   username: !secret mqtt1_un
   password: !secret mqtt1_pw
+  discovery: False
 
 time:
   - platform: sntp
