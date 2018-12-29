@@ -122,4 +122,4 @@ light:
       - fastled_flicker:
           name: Shields Up
           update_interval: 32ms
-          intensity: 15%
+          intensity: 10%
