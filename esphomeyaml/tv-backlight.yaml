@@ -49,7 +49,7 @@ light:
               - red: 100%
                 green: 0%
                 blue: 0%
-                num_leds: 18
+                num_leds: 22
               - red: 0%
                 green: 0%
                 blue: 0%
@@ -57,7 +57,7 @@ light:
               - red: 0%
                 green: 100%
                 blue: 0%
-                num_leds: 18
+                num_leds: 14
       - fastled_color_wipe:
           name: Red Siren
           add_led_interval: 50ms
