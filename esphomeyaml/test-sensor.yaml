@@ -12,8 +12,6 @@ mqtt:
   broker: !secret mqtt_server
   username: !secret mqtt1_un
   password: !secret mqtt1_pw
-  birth_message:
-  will_message:
 
 # Enable logging
 logger:
@@ -28,15 +26,24 @@ sensor:
   - platform: bme280
     temperature:
       name: "BME280 Temperature"
-      oversampling: 16x
+      id: "temperature"
     pressure:
       name: "BME280 Pressure"
+      id: "pressure"
     humidity:
       name: "BME280 Humidity"
-    address: 0x77
+      id: "humidity"
+    address: 0x76
+    iir_filter: 2x
+  - platform: template
+    name: "BME280 Absolute Humidity"
+    lambda: >-
+      return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).value)/(id(temperature).value + 243.5))) * id(humidity).value * 2.1674)/(273.15 + id(temperature).value);
     update_interval: 15s
+    accuracy_decimals: 2
+    unit_of_measurement: "g/m³"
 
 i2c:
-  sda: D7
-  scl: D8
+  sda: D2
+  scl: D1
   scan: False
