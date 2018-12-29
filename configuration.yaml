@@ -45,6 +45,7 @@ recorder:
       - sensor.3d_printer_job_time_remaining_trend_filtered
       - sensor.3d_printer_job_time_remaining_trend_raw
       - sensor.solar_elevation
+      - sensor.mqtt_broker_uptime
 history:
   exclude:
     domains:
