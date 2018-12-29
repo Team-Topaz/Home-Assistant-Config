@@ -3,9 +3,6 @@ living_room_temperature:
   hours_to_show: 8
   entities:
     - sensor.living_room_temperature
-    - sensor.outdoor_temperature
-    - sensor.outdoor_temperature_filtered
-    - sensor.home_weather_temperature
     - sensor.outdoor_temperature_sensor
     - sensor.living_room_fan_setpoint
 
@@ -15,27 +12,3 @@ temperature_deltas:
   entities:
     - sensor.living_room_fan_setpoint_delta
     - sensor.living_room_outdoor_temperature_delta
-    - sensor.living_room_outdoor_temperature_delta_raw
-
-temperature_rates:
-  name: 'Temperature Rates'
-  hours_to_show: 8
-  entities:
-    - sensor.outdoor_temperature_change_rate
-    - sensor.living_room_temperature_rate
-    - sensor.average_indoor_temperature_rate
-    - sensor.master_bedroom_temperature_rate
-    - sensor.office_temperature_rate
-    - sensor.bonus_room_temperature_rate
-    - sensor.bike_room_temperature_rate
-
-3d_printer_temperature:
-  name: '3D Printer Temperature'
-  hours_to_show: 2
-  entities:
-    - sensor.3d_printer_bed_temp
-    - sensor.3d_printer_bed_temp_target
-    - sensor.3d_printer_nozzle_temp
-    - sensor.3d_printer_nozzle_temp_target
-    - sensor.bonus_room_temperature
-    - sensor.3d_printer_chamber_temp

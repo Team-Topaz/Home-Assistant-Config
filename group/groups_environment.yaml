@@ -15,7 +15,6 @@ environment_view:
     - group.ceiling_fans
     - group.misc_env
     - history_graph.living_room_temperature_history
-    - history_graph.temperature_deltas
     - history_graph.temperature_rates
 
 temperature:

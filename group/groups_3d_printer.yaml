@@ -17,7 +17,6 @@
     - sensor.3d_printer_nozzle_temp
     - sensor.3d_printer_bed_temp
     - sensor.3d_printer_chamber_temp
-    - history_graph.3d_printer_temperature
 
 3d_printer_job_status:
   name: Job Status
