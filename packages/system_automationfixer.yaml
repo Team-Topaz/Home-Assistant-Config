@@ -28,7 +28,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.day_of_year
-        to: 358
+        to: '358'
     action:
     - service: notify.push_main
       data:
