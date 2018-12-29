@@ -13,6 +13,9 @@ indoor_lights:
     - light.kitchen_overhead_lights
     - light.dining_room_chandelier
     - light.living_room_floor_lamp
+    - light.hall_bathroom_vanity_lights
+    - light.master_bathroom_vanity_lights
+    - light.hallway_sconce
     - light.bike_room_lamp
     - light.master_bedroom_sconce
     - light.nightstand_lamps
