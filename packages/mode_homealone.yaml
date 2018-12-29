@@ -1,7 +1,7 @@
 timer:
   #Used for Home Alone automations to automatically turn off lights unless dismissed.
   home_alone_lights_off_timeout:
-    duration: '00:20:00'
+    duration: '00:15:00'
 
 automation:
   #These automations are "home alone" specific - that is, nobody here but us computers.
