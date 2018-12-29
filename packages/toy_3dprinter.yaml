@@ -182,7 +182,7 @@ sensor:
       - temperature
       - totalTime
     value_template: '{{ value_json.jobstatus }}'
-    scan_interval: 20
+    scan_interval: 30
 
 #JOB-RELATED SENSORS. Most of these should return nothing if no job is printing.
   - platform: template
@@ -481,7 +481,7 @@ automation:
     - service: timer.start
       data_template:
         entity_id: timer.3d_printer_job_remaining_time
-        duration: '{{ states("sensor.3d_printer_job_remaining_time_seconds")}}'
+        duration: '{{ (states("sensor.3d_printer_job_remaining_time_seconds") | int) + 1 }}'
 
   - id: 3d_printer_job_status_refresh_on_timer
     alias: "3D Printer: Refresh when timer expires"
