@@ -28,7 +28,7 @@ light:
     pin: GPIO3
     num_leds: 91
     name: 'TV Backlight'
-    color_correct: [100%,85%,90%]
+    color_correct: [100%,75%,85%]
     rgb_order: GRB
     effects:
       - strobe:
@@ -79,7 +79,7 @@ light:
           add_led_interval: 50ms
           colors:
               - red: 100%
-                green: 90%
+                green: 80%
                 blue: 0%
                 num_leds: 26
               - red: 0%
