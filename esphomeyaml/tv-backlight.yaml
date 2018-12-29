@@ -119,3 +119,7 @@ light:
           spark_probability: 10%
           use_random_color: true
           fade_out_rate: 120
+      - fastled_flicker:
+        name: Shields Up
+        update_interval: 32ms
+        intensity: 15%
