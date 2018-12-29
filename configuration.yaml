@@ -47,6 +47,11 @@ recorder:
       - sensor.bike_room_uptime
       - sensor.time
       - sensor.date
+      - sensor.3d_printer_job_finish_time
+      - sensor.3d_printer_job_remaining_time_seconds
+      - sensor.3d_printer_job_time_remaining_trend_filtered
+      - sensor.3d_printer_job_time_remaining_trend_raw
+      - sensor.solar_elevation
 history:
   exclude:
     domains:

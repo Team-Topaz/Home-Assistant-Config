@@ -1,9 +1,5 @@
 sensor:
   - platform: mqtt
-    name: Bike Room WiFi
-    state_topic: bikeroom_multisensor/sensor/bike_room_wifi/state
-    availability_topic: bikeroom_multisensor/status
-  - platform: mqtt
     name: Bike Room Temperature
     state_topic: bikeroom_multisensor/sensor/bike_room_temperature/state
     availability_topic: bikeroom_multisensor/status
@@ -25,15 +21,7 @@ sensor:
     state_topic: bikeroom_multisensor/sensor/bike_room_absolute_humidity/state
     availability_topic: bikeroom_multisensor/status
     unit_of_measurement: g/m³
-  - platform: mqtt
-    name: Bike Room Uptime
-    state_topic: bikeroom_multisensor/sensor/bike_room_uptime/state
-    availability_topic: bikeroom_multisensor/status
 
-  - platform: mqtt
-    name: Bonus Room WiFi
-    state_topic: bonusroom_multisensor/sensor/bonus_room_wifi/state
-    availability_topic: bonusroom_multisensor/status
   - platform: mqtt
     name: Bonus Room Temperature
     state_topic: bonusroom_multisensor/sensor/bonus_room_temperature/state
@@ -56,15 +44,7 @@ sensor:
     state_topic: bonusroom_multisensor/sensor/bonus_room_absolute_humidity/state
     availability_topic: bonusroom_multisensor/status
     unit_of_measurement: g/m³
-  - platform: mqtt
-    name: Bonus Room Uptime
-    state_topic: bonusroom_multisensor/sensor/bonus_room_uptime/state
-    availability_topic: bonusroom_multisensor/status
 
-  - platform: mqtt
-    name: Living Room WiFi
-    state_topic: livingroom_multisensor/sensor/living_room_wifi/state
-    availability_topic: livingroom_multisensor/status
   - platform: mqtt
     name: Living Room Temperature
     state_topic: livingroom_multisensor/sensor/living_room_temperature/state
@@ -87,15 +67,7 @@ sensor:
     state_topic: livingroom_multisensor/sensor/living_room_absolute_humidity/state
     availability_topic: livingroom_multisensor/status
     unit_of_measurement: g/m³
-  - platform: mqtt
-    name: Living Room Uptime
-    state_topic: livingroom_multisensor/sensor/living_room_uptime/state
-    availability_topic: livingroom_multisensor/status
 
-  - platform: mqtt
-    name: Master Bedroom WiFi
-    state_topic: masterbedroom_multisensor/sensor/master_bedroom_wifi/state
-    availability_topic: masterbedroom_multisensor/status
   - platform: mqtt
     name: Master Bedroom Temperature
     state_topic: masterbedroom_multisensor/sensor/master_bedroom_temperature/state
@@ -118,15 +90,7 @@ sensor:
     state_topic: masterbedroom_multisensor/sensor/master_bedroom_absolute_humidity/state
     availability_topic: masterbedroom_multisensor/status
     unit_of_measurement: g/m³
-  - platform: mqtt
-    name: Master Bedroom Uptime
-    state_topic: masterbedroom_multisensor/sensor/master_bedroom_uptime/state
-    availability_topic: masterbedroom_multisensor/status
 
-  - platform: mqtt
-    name: Office WiFi
-    state_topic: office_multisensor/sensor/office_wifi/state
-    availability_topic: office_multisensor/status
   - platform: mqtt
     name: Office Temperature
     state_topic: office_multisensor/sensor/office_temperature/state
@@ -149,20 +113,11 @@ sensor:
     state_topic: office_multisensor/sensor/office_absolute_humidity/state
     availability_topic: office_multisensor/status
     unit_of_measurement: g/m³
-  - platform: mqtt
-    name: Office Uptime
-    state_topic: office_multisensor/sensor/office_uptime/state
-    availability_topic: office_multisensor/status
 
 binary_sensor:
   - platform: mqtt
     name: Bike Room Motion
     state_topic: bikeroom_multisensor/binary_sensor/bike_room_motion/state
-    availability_topic: bikeroom_multisensor/status
-    device_class: motion
-  - platform: mqtt
-    name: Bike Room Motion Up
-    state_topic: bikeroom_multisensor/binary_sensor/bike_room_motion_up/state
     availability_topic: bikeroom_multisensor/status
     device_class: motion
   - platform: mqtt
