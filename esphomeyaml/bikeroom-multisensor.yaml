@@ -54,7 +54,7 @@ sensor:
   - platform: template
     name: "Bike Room Absolute Humidity"
     lambda: >-
-      return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).value)/(id(temperature).value + 243.5))) * id(humidity).value * 2.1674)/(273.15 + id(temperature).value);
+      return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).state)/(id(temperature).state + 243.5))) * id(humidity).state * 2.1674)/(273.15 + id(temperature).state);
     update_interval: 15s
     accuracy_decimals: 2
     unit_of_measurement: "g/m³"
