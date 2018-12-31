@@ -75,7 +75,7 @@ binary_sensor:
     name: "Bike Room Motion Up"
     device_class: motion
     filters:
-      - delayed_on: 500ms
+      - delayed_on: 750ms
       - delayed_off: 1000ms
     id: motion_up
   - platform: template
