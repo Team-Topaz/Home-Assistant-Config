@@ -19,6 +19,20 @@ automation:
       - service: scene.turn_on
         entity_id: scene.all_off
 
+  - id: front_foyer_pico_all_off
+    #Turns off everything when pico off button is held
+    alias: 'Front Door: Pico Lights Out'
+    trigger:
+      - platform: state
+        entity_id: sensor.front_foyer_pico
+        from: '0'
+        to: '4'
+        for:
+          seconds: 1
+    action:
+      - service: scene.turn_on
+        entity_id: scene.all_off
+
   - id: living_room_lamp_on_at_sunset
     alias: 'Living Room: Turn On Floor Lamp and Dining Slow Fade'
     trigger:
