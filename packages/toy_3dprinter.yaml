@@ -70,6 +70,9 @@ timer:
   3d_printer_job_remaining_time:
     name: 'Job Remaining Time'
     duration: '00:00:00'
+  3d_printer_hung_timeout:
+    name: '3D Printer Hung Shutdown Timeout'
+    duration: '00:05:00'
 
 script:
   #These scripts are used to support the preheat buttons.
@@ -509,10 +512,57 @@ automation:
         entity_id: sensor.3d_printer_p80
         state: 'unavailable'
     action:
+      - service: timer.start
+        data:
+          entity_id: timer.3d_printer_hung_timeout
       - service: notify.push_main
         data_template:
           title: 'Printer Frozen!'
-          message: 'The printer has stopped responding to queries. Check on printer ASAP!'
+          message: 'The printer has stopped responding to queries. Check on printer ASAP! Shutdown will occur in 5 minutes.'
+          data:
+            tag: '3d_printer_hung'
+            actions:
+            - action: 3d_printer_off
+              title: "Turn Off Now"
+            - action: 3d_printer_cancel_off
+              title: "Cancel Auto-Off"
+
+  - id: 3d_printer_auto_off
+    alias: "3D Printer: Auto Turn Off Printer"
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: 3d_printer_off
+      - platform: event
+        event_type: timer.finished
+        event_data:
+          entity_id: timer.3d_printer_hung_timeout
+    action:
+      - service: switch.turn_off
+        entity_id: switch.3d_printer_power
+      - service: notify.push_main
+        data_template:
+          title: 'Printer Shut Down!'
+          message: 'The printer stopped responding and was shut down automatically.'
+          data:
+            tag: '3d_printer_hung'
+
+  - id: 3d_printer_cancel_auto_off
+    alias: "3D Printer: Cancel Auto Turn Off Printer"
+    trigger:
+      - platform: event
+        event_type: html5_notification.clicked
+        event_data:
+          action: 3d_printer_cancel_off
+    action:
+      - service: timer.cancel
+        data:
+          entity_id: timer.3d_printer_hung_timeout
+      - service: notify.push_main
+        data_template:
+          title: 'Printer Shutdown Aborted!'
+          message: 'The printer has hung but will stay on by user request.'
           data:
             tag: '3d_printer_hung'
 
