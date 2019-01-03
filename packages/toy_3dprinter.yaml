@@ -275,7 +275,12 @@ sensor:
       3d_printer_job_time_remaining_trend:
         friendly_name: "Actual Print Speed"
         unit_of_measurement: "%"
-        value_template: "{{ states('sensor.3d_printer_job_time_remaining_trend_filtered') | round(1) }}"
+        value_template: >
+          {% if is_state_attr("sensor.3d_printer_p80","jobstatus","building") %}
+            {{ states('sensor.3d_printer_job_time_remaining_trend_filtered') | round(1) }}
+          {% else %}
+            0
+          {% endif %}
 
 #HARDWARE STATUS
   - platform: template
@@ -340,7 +345,12 @@ binary_sensor:
       3d_printer_active:
         #This is used to determine if we should show job status.
         friendly_name: 'Busy'
-        value_template: '{{ not (is_state_attr("sensor.3d_printer_p80","status","ready")) }}'
+        value_template: >
+          {% if is_state("switch.3d_printer_power","on") %}
+            {{ not (is_state_attr("sensor.3d_printer_p80","status","ready")) }}
+          {% else %}
+            False
+          {% endif %}
         device_class: power
       3d_printer_job_active:
         friendly_name: 'Job in Progress'
