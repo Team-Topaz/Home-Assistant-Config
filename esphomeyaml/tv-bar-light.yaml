@@ -85,7 +85,7 @@ light:
           fade_out_rate: 120
       - fastled_color_wipe:
           name: Christmas Wipe
-          add_led_interval: 120ms
+          add_led_interval: 200ms
           colors:
               - red: 100%
                 green: 0%
@@ -99,3 +99,7 @@ light:
                 green: 100%
                 blue: 0%
                 num_leds: 2
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 1
