@@ -42,7 +42,7 @@ light:
               duration: 1s
             - state: False
               duration: 1s
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Red Wipe
           add_led_interval: 120ms
           colors:
@@ -54,7 +54,7 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 2
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Random Wipe
           add_led_interval: 120ms
           colors:
@@ -64,26 +64,26 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 2
-      - fastled_scan:
+      - addressable_scan:
           name: Cylon
           move_interval: 120ms
-      - fastled_flicker:
+      - addressable_flicker:
           name: Flicker
           intensity: 7%
-      - fastled_rainbow:
+      - addressable_rainbow:
           name: Rainbow
           width: 35
-      - fastled_rainbow:
+      - addressable_rainbow:
           name: Fast Rainbow
           speed: 20
           width: 35
-      - fastled_fireworks:
+      - addressable_fireworks:
           name: Fireworks
           update_interval: 32ms
           spark_probability: 10%
           use_random_color: false
           fade_out_rate: 120
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Christmas Wipe
           add_led_interval: 200ms
           colors:

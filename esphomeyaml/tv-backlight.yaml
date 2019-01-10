@@ -42,7 +42,7 @@ light:
               duration: 1s
             - state: False
               duration: 1s
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Christmas Marquee
           add_led_interval: 120ms
           colors:
@@ -62,7 +62,7 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 5
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Red Siren
           add_led_interval: 50ms
           colors:
@@ -74,7 +74,7 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 19
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Yellow Siren
           add_led_interval: 50ms
           colors:
@@ -86,7 +86,7 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 19
-      - fastled_color_wipe:
+      - addressable_color_wipe:
           name: Random Wipe
           add_led_interval: 120ms
           colors:
@@ -96,30 +96,30 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 10
-      - fastled_rainbow:
+      - addressable_rainbow:
           name: Rainbow
           width: 91
-      - fastled_twinkle:
+      - addressable_twinkle:
           name: Twinkle
           twinkle_probability: 5%
           progress_interval: 15ms
-      - fastled_random_twinkle:
+      - addressable_random_twinkle:
           name: Random Twinkle
           twinkle_probability: 5%
           progress_interval: 15ms
-      - fastled_fireworks:
+      - addressable_fireworks:
           name: Fireworks
           update_interval: 32ms
           spark_probability: 10%
           use_random_color: false
           fade_out_rate: 120
-      - fastled_fireworks:
+      - addressable_fireworks:
           name: Random Fireworks
           update_interval: 32ms
           spark_probability: 10%
           use_random_color: true
           fade_out_rate: 120
-      - fastled_flicker:
+      - addressable_flicker:
           name: Shields Up
           update_interval: 32ms
           intensity: 10%
