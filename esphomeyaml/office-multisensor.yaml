@@ -13,12 +13,6 @@ wifi:
     password: !secret wifi3_pw
   domain: !secret wifi_domain
 
-mqtt:
-  broker: !secret mqtt_server
-  username: !secret mqtt1_un
-  password: !secret mqtt1_pw
-  discovery: clean
-
 api:
 
 time:
