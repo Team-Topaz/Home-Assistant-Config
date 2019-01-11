@@ -17,6 +17,7 @@ mqtt:
   broker: !secret mqtt_server
   username: !secret mqtt2_un
   password: !secret mqtt2_pw
+  discovery: clean
 
 # Enable logging
 logger:
