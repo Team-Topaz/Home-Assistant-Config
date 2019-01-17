@@ -7,6 +7,6 @@ octoprint:
 
 camera:
   - platform: mjpeg
-    mjpeg_url: !secret octoprint_snapshot_url
+    mjpeg_url: !secret octoprint_stream_url
     still_image_url: !secret octoprint_snapshot_url
     name: Geeetech A10
