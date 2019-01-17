@@ -1,0 +1,16 @@
+3d_printer_A10:
+  name: Geeetech A10
+  view: yes
+  icon: mdi:printer-3d
+  entities:
+    - camera.geeetech_a10
+    - binary_sensor.geeetech_a10_printing
+    - binary_sensor.geeetech_a10_printing_error
+    - sensor.geeetech_a10_actual_bed_temp
+    - sensor.geeetech_a10_actual_tool0_temp
+    - sensor.geeetech_a10_current_state
+    - sensor.geeetech_a10_job_percentage
+    - sensor.geeetech_a10_target_bed_temp
+    - sensor.geeetech_a10 target_tool0_temp
+    - sensor.geeetech_a10_time_elapsed
+    - sensor.geeetech_a10_time_remaining
