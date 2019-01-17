@@ -4,6 +4,11 @@
   icon: mdi:printer-3d
   entities:
     - camera.geeetech_a10
+    - group.3d_printer_a10_status
+
+3d_printer_a10_status:
+  name: Geeetech A10 Status
+  entities:
     - binary_sensor.geeetech_a10_printing
     - binary_sensor.geeetech_a10_printing_error
     - sensor.geeetech_a10_actual_bed_temp
