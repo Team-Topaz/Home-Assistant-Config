@@ -19,6 +19,7 @@ input_select:
       - 'Off'
       - 'Watch PC'
       - 'Watch Chromecast'
+      - 'Play Xbox'
       - 'Administer Server'
     icon: mdi:dip-switch
 
@@ -158,7 +159,7 @@ automation:
   - id: tv_harmony_error_off
     alias: "Media Center: Turn off TV if it is erroneously on"
     trigger:
-    - platform: time
+    - platform: time_pattern
       minutes: '/5'
       seconds: 00
     condition:
