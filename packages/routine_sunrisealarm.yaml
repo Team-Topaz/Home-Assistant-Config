@@ -52,8 +52,8 @@ automation:
   - id: sunrise_alarm_bedroom
     alias: "Bedroom Sunrise Alarm"
     trigger:
-      - platform: time
-        minutes: '/1'
+      - platform: time_pattern
+        minutes: '*'
         seconds: 50
     condition:
       condition: and

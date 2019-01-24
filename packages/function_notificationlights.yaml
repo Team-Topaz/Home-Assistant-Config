@@ -31,7 +31,7 @@ automation:
   - id: lights_left_on
     alias: 'Notification Light: Lights Left On'
     trigger:
-      - platform: time
+      - platform: time_pattern
         minutes: '/3'
         seconds: 40
       - platform: state
@@ -60,7 +60,7 @@ automation:
   - id: lights_turned_off
     alias: 'Notification Light: Lights Turned Off'
     trigger:
-      - platform: time
+      - platform: time_pattern
         minutes: '/3'
         seconds: 50
       - platform: state
