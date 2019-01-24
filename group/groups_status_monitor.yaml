@@ -16,7 +16,7 @@ net_ha_server_stats:
   icon: mdi:raspberrypi
   entities:
     - sensor.memory_use_percent
-    - sensor.disk_use_percent_
+    - sensor.disk_use_percent
     - sensor.uptime
     - sensor.sent_eth0
     - sensor.received_eth0

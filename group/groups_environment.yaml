@@ -36,7 +36,7 @@ misc_env:
     - sensor.us_air_pollution_level
     - sensor.allergy_index_today
     - sensor.allergy_index_forecasted_average
-    - sensor.cold__flu_forecasted_average
+    - sensor.cold_flu_forecasted_average
 
 ceiling_fans:
   name: 'Ceiling Fans'
