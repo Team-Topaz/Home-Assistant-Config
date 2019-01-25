@@ -51,11 +51,3 @@ sensor:
         value_template: "{{ state_attr('device_tracker.chelsea_phone','battery') }}"
         unit_of_measurement: '%'
         device_class: battery
-  - platform: steam_online
-    api_key: !secret steam_web_apikey
-    accounts:
-      - !secret steam_friend2
-      - !secret steam_friend4
-      - !secret steam_friend5
-      - !secret steam_friend6
-      - !secret steam_friend8
