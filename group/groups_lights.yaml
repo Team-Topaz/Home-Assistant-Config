@@ -47,18 +47,8 @@ status_lights:
     - light.guest_bedroom_led
     - light.bike_room_led
 
-lighting_automation:
-  name: 'Lighting Automation'
-  entities:
-    - automation.porch_leave_the_light_on
-    - automation.porch_turn_the_light_off
-    - automation.living_room_lamp_off
-    - automation.living_room_turn_on_floor_lamp
-    - automation.dining_room_turn_off_when_kitchen_is_turned_off
-
 special_lights:
   name: 'Special Lights'
   entities:
     - light.tv_backlight
-    - light.tv_backlight_2
     - light.tv_bar_light
