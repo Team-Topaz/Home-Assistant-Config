@@ -32,8 +32,8 @@ media_player:
   - platform: universal
     name: 'Living Room Media Center'
     children:
-      - media_player.living_room_chromecast
-      - media_player.master
+      - media_player.living_room_tv
+      - media_player.master_2
     commands:
       turn_on:
         service: remote.turn_on
@@ -146,10 +146,10 @@ automation:
       condition: and
       conditions:
         - condition: state
-          entity_id: media_player.master
+          entity_id: media_player.master_2
           state: 'idle'
         - condition: state
-          entity_id: media_player.living_room_chromecast
+          entity_id: media_player.living_room_tv
           state: 'off'
     action:
       service: remote.turn_off
