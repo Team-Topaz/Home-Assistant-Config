@@ -31,7 +31,7 @@ light:
     num_leds: 7
     name: 'TV Bar Light'
     color_correct: [93%,100%,100%]
-    rgb_order: GRB
+    type: GRB
     effects:
       - strobe:
           name: Red Alert
