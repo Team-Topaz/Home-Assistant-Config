@@ -12,16 +12,16 @@ input_number:
   sunrise_alarm_fade_time:
     name: Fade Time (Minutes)
     icon: mdi:timelapse
-    min: 1
-    max: 60
-    step: 1
+    min: 15
+    max: 90
+    step: 5
 
   sunrise_alarm_max_level:
     name: Light Level
     icon: mdi:lightbulb-on-outline
     min: 0
     max: 100
-    step: 1
+    step: 5
 
 input_boolean:
   sunrise_alarm_armed:
