@@ -25,8 +25,8 @@ ota:
   password: !secret ota_pw
 
 light:
-  - platform: fastled_clockless
-    chipset: WS2812B
+  - platform: neopixelbus
+    chipset: WS2812X
     pin: D8
     num_leds: 7
     name: 'TV Bar Light'
