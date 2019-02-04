@@ -8,6 +8,14 @@ emulated_hue:
   listen_port: 80
   exposed_domains:
     - light
+  expose_by_default: false
+  entities:
+    light.tv_backlight:
+      hidden: false
+    light.tv_bar_light:
+      hidden: false
+    light.living_room_floor_lamp:
+      hidden: false
 
 light:
   - platform: group
