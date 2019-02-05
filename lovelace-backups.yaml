@@ -1,0 +1,19 @@
+#Christmas tree and wreath config
+cards:
+  - entity: light.christmas_wreath
+    state_image:
+      'off': /local/lights/WreathOff.jpg
+      'on': /local/lights/WreathOn.jpg
+      unavailable: /local/lights/WreathUnavailable.jpg
+    tap_action:
+      action: toggle
+    type: picture-entity
+  - entity: light.christmas_tree
+    state_image:
+      'off': /local/lights/TreeOff.jpg
+      'on': /local/lights/TreeOn.jpg
+      unavailable: /local/lights/TreeUnavailable.jpg
+    tap_action:
+      action: toggle
+    type: picture-entity
+type: horizontal-stack
