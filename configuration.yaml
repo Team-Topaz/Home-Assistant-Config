@@ -10,6 +10,7 @@ homeassistant:
   - type: homeassistant
   - type: legacy_api_password
   packages: !include_dir_named packages
+system_health:
 frontend:
 config:
 http:
