@@ -20,6 +20,7 @@ cloud:
         - light.tv_backlight
         - light.office_light
         - light.bonus_room_fan_light
+        - light.bike_room_light
         - fan.bonus_room_fan
         - fan.office_fan
         - scene.indoor_off
