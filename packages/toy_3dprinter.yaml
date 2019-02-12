@@ -3,6 +3,7 @@ input_boolean:
     name: 'Enable Dangerous Actions'
     icon: mdi:alert
 
+
 switch:
   - platform: tplink
     host: 192.168.1.52
