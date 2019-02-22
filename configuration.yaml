@@ -13,6 +13,7 @@ homeassistant:
 system_health:
 person:
 frontend:
+  themes: !include themes.yaml
 config:
 http:
   api_password: !secret http_password
