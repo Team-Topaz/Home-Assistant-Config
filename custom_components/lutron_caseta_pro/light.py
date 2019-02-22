@@ -7,16 +7,14 @@ Source: https://github.com/jhanssen/home-assistant/tree/caseta-0.40
 Additional Authors:
 upsert (https://github.com/upsert)
 """
-import asyncio
 import logging
 
 from homeassistant.components.light import (
     ATTR_BRIGHTNESS, ATTR_TRANSITION, SUPPORT_BRIGHTNESS, SUPPORT_TRANSITION, Light, DOMAIN)
 from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC, CONF_TYPE, CONF_NAME, CONF_ID)
 
-# pylint: disable=relative-beyond-top-level
-from ..lutron_caseta_pro import (Caseta, DEFAULT_TYPE, ATTR_AREA_NAME, CONF_AREA_NAME,
-                                 ATTR_INTEGRATION_ID, DOMAIN as COMPONENT_DOMAIN)
+from . import (Caseta, DEFAULT_TYPE, ATTR_AREA_NAME, CONF_AREA_NAME,
+               ATTR_INTEGRATION_ID, DOMAIN as COMPONENT_DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,8 +46,7 @@ class CasetaData:
         """Set the device list."""
         self._devices = devices
 
-    @asyncio.coroutine
-    def read_output(self, mode, integration, action, value):
+    async def read_output(self, mode, integration, action, value):
         """Receive output value from the bridge."""
         # find integration ID in devices
         if mode == Caseta.OUTPUT:
@@ -60,18 +57,17 @@ class CasetaData:
                     if action == Caseta.Action.SET:
                         device.update_state(value)
                         if device.hass is not None:
-                            yield from device.async_update_ha_state()
+                            await device.async_update_ha_state()
                         break
 
 
 # pylint: disable=unused-argument
-@asyncio.coroutine
-def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     """Initialize the platform."""
     if discovery_info is None:
         return
     bridge = Caseta(discovery_info[CONF_HOST])
-    yield from bridge.open()
+    await bridge.open()
 
     data = CasetaData(bridge)
     devices = [CasetaLight(light, data, discovery_info[CONF_MAC])
@@ -126,15 +122,13 @@ class CasetaLight(Light):
         self._brightness = 0
         self._mac = mac
 
-    @asyncio.coroutine
-    def async_added_to_hass(self):
+    async def async_added_to_hass(self):
         """Update initial state."""
-        yield from self.query()
+        await self.query()
 
-    @asyncio.coroutine
-    def query(self):
+    async def query(self):
         """Query the bridge for the current level."""
-        yield from self._data.caseta.query(Caseta.OUTPUT, self._integration, Caseta.Action.SET)
+        await self._data.caseta.query(Caseta.OUTPUT, self._integration, Caseta.Action.SET)
 
     @property
     def integration(self):
@@ -178,8 +172,7 @@ class CasetaLight(Light):
         """Flag supported features."""
         return (SUPPORT_BRIGHTNESS | SUPPORT_TRANSITION) if self._is_dimmer else 0
 
-    @asyncio.coroutine
-    def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs):
         """Instruct the light to turn on."""
         value = 100
         transition = None
@@ -191,11 +184,10 @@ class CasetaLight(Light):
         _LOGGER.debug("Writing light OUTPUT value: %d %d %s %s",
                       self._integration, Caseta.Action.SET, value,
                       transition)
-        yield from self._data.caseta.write(Caseta.OUTPUT, self._integration,
-                                           Caseta.Action.SET, value, transition)
+        await self._data.caseta.write(Caseta.OUTPUT, self._integration,
+                                      Caseta.Action.SET, value, transition)
 
-    @asyncio.coroutine
-    def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs):
         """Instruct the light to turn off."""
         transition = None
         if self._is_dimmer:
@@ -203,8 +195,8 @@ class CasetaLight(Light):
                 transition = _format_transition(float(kwargs[ATTR_TRANSITION]))
         _LOGGER.debug("Writing light OUTPUT value: %d %d 0 %s",
                       self._integration, Caseta.Action.SET, str(transition))
-        yield from self._data.caseta.write(Caseta.OUTPUT, self._integration, Caseta.Action.SET, 0,
-                                           transition)
+        await self._data.caseta.write(Caseta.OUTPUT, self._integration, Caseta.Action.SET, 0,
+                                      transition)
 
     def update_state(self, brightness):
         """Update brightness value."""

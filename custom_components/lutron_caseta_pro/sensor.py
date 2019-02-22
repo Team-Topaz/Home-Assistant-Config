@@ -8,17 +8,16 @@ Source: https://github.com/jhanssen/home-assistant/tree/caseta-0.40
 Additional Authors:
 upsert (https://github.com/upsert)
 """
-import asyncio
 import logging
 
 from homeassistant.components.sensor import DOMAIN
-from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC, CONF_NAME, CONF_ID)
+from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC,
+                                 CONF_NAME, CONF_ID)
 from homeassistant.helpers.entity import Entity
 
-# pylint: disable=relative-beyond-top-level
-from ..lutron_caseta_pro import (Caseta, CONF_BUTTONS, ATTR_AREA_NAME,
-                                 CONF_AREA_NAME, ATTR_INTEGRATION_ID,
-                                 DOMAIN as COMPONENT_DOMAIN)
+from . import (Caseta, CONF_BUTTONS, ATTR_AREA_NAME,
+               CONF_AREA_NAME, ATTR_INTEGRATION_ID,
+               DOMAIN as COMPONENT_DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,12 +26,11 @@ DEPENDENCIES = ['lutron_caseta_pro']
 
 class CasetaData:
     """Data holder for a sensor."""
+
     def __init__(self, caseta, hass):
         self._caseta = caseta
         self._hass = hass
         self._devices = []
-        self._added = {}
-        self._later = None
 
     @property
     def devices(self):
@@ -48,63 +46,36 @@ class CasetaData:
         """Set the device list."""
         self._devices = devices
 
-    @asyncio.coroutine
-    def _check_added(self):
-        """"Process and clear the added list."""
-        yield from asyncio.sleep(15)
-        _LOGGER.debug("Checking Caseta added")
-        for integration in self._added:
-            _LOGGER.debug("Removing Caseta added %d %d", integration,
-                          self._added[integration])
-            for device in self._devices:
-                if device.integration == integration:
-                    device.update_state(device.state & ~self._added[integration])
-                    if device.hass is not None:
-                        yield from device.async_update_ha_state()
-                    _LOGGER.debug("Removed Caseta added %d %d",
-                                  integration, self._added[integration])
-                    break
-        self._added.clear()
-
-    @asyncio.coroutine
-    def read_output(self, mode, integration, action, value):
+    async def read_output(self, mode, integration, action, value):
         """Receive output value from the bridge."""
         if mode == Caseta.DEVICE:
             for device in self._devices:
                 if device.integration == integration:
-                    _LOGGER.debug("Got DEVICE value: %s %d %d %f", mode,
+                    _LOGGER.debug("Got DEVICE value: %s %d %d %d", mode,
                                   integration, action, value)
                     state = 1 << action - device.minbutton
                     if value == Caseta.Button.PRESS:
-                        _LOGGER.debug("Got Button Press, updating value")
+                        _LOGGER.debug("Got Button Press, updating "
+                                      "value to: %s", state)
                         device.update_state(device.state | state)
-                        if integration in self._added:
-                            self._added[integration] |= state
-                        else:
-                            self._added[integration] = state
-                        if self._later is not None:
-                            self._later.cancel()
-                        self._later = self._hass.loop.create_task(self._check_added())
-                        if device.hass is not None:
-                            yield from device.async_update_ha_state()
+                        await device.async_update_ha_state()
                     elif value == Caseta.Button.RELEASE:
-                        _LOGGER.debug("Got Button Release, updating value")
+                        _LOGGER.debug("Got Button Release, updating value."
+                                      " Previous state: %s", device.state)
                         device.update_state(device.state & ~state)
-                        if integration in self._added:
-                            self._added[integration] &= ~state
-                        if device.hass is not None:
-                            yield from device.async_update_ha_state()
+                        _LOGGER.debug("State after button release: %s",
+                                      device.state)
+                        await device.async_update_ha_state()
                     break
 
 
 # pylint: disable=unused-argument
-@asyncio.coroutine
-def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     """Setup the platform."""
     if discovery_info is None:
         return
     bridge = Caseta(discovery_info[CONF_HOST])
-    yield from bridge.open()
+    await bridge.open()
 
     data = CasetaData(bridge, hass)
     devices = [CasetaPicoRemote(pico, data, discovery_info[CONF_MAC])

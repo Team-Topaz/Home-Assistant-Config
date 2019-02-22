@@ -4,14 +4,12 @@ Platform for Lutron scenes.
 Author: upsert (https://github.com/upsert)
 Based on work by jhanssen (https://github.com/jhanssen/home-assistant/tree/caseta-0.40)
 """
-import asyncio
 import logging
 
 from homeassistant.components.scene import Scene, DOMAIN
 from homeassistant.const import (CONF_DEVICES, CONF_HOST, CONF_MAC, CONF_NAME, CONF_ID)
 
-# pylint: disable=relative-beyond-top-level
-from ..lutron_caseta_pro import (Caseta, ATTR_SCENE_ID, CONF_SCENE_ID, DOMAIN as COMPONENT_DOMAIN)
+from . import (Caseta, ATTR_SCENE_ID, CONF_SCENE_ID, DOMAIN as COMPONENT_DOMAIN)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -42,8 +40,7 @@ class CasetaData:
         """Set the list of devices."""
         self._devices = devices
 
-    @asyncio.coroutine
-    def read_output(self, mode, integration, component, action):
+    async def read_output(self, mode, integration, component, action):
         """Receive output value from the bridge."""
         # only monitor integration ID 1 for scenes
         if mode == Caseta.DEVICE and integration == 1:
@@ -58,13 +55,12 @@ class CasetaData:
 
 
 # pylint: disable=unused-argument
-@asyncio.coroutine
-def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
+async def async_setup_platform(hass, config, async_add_devices, discovery_info=None):
     """Setup the platform."""
     if discovery_info is None:
         return
     bridge = Caseta(discovery_info[CONF_HOST])
-    yield from bridge.open()
+    await bridge.open()
 
     data = CasetaData(bridge, hass)
     devices = [CasetaScene(scene, data, discovery_info[CONF_MAC])
@@ -122,8 +118,7 @@ class CasetaScene(Scene):
         attr = {ATTR_SCENE_ID: self._scene_id}
         return attr
 
-    @asyncio.coroutine
-    def async_activate(self):
+    async def async_activate(self):
         """Activate the scene."""
-        yield from self._data.caseta.write(Caseta.DEVICE, self._integration,
-                                           self._scene_id, Caseta.Button.PRESS)
+        await self._data.caseta.write(Caseta.DEVICE, self._integration,
+                                      self._scene_id, Caseta.Button.PRESS)
