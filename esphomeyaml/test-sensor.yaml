@@ -1,4 +1,4 @@
-esphomeyaml:
+esphome:
   name: test_sensor
   platform: ESP8266
   board: nodemcuv2

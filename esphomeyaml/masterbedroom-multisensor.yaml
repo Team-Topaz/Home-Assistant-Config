@@ -1,4 +1,4 @@
-esphomeyaml:
+esphome:
   name: masterbedroom_multisensor
   platform: ESP8266
   board: nodemcuv2
