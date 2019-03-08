@@ -81,7 +81,7 @@ light:
           width: 35
       - addressable_fireworks:
           name: Fireworks
-          scan_interval: 32ms
+          update_interval: 32ms
           spark_probability: 10%
           use_random_color: false
           fade_out_rate: 120

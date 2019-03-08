@@ -111,17 +111,17 @@ light:
           progress_interval: 15ms
       - addressable_fireworks:
           name: Fireworks
-          scan_interval: 32ms
+          update_interval: 32ms
           spark_probability: 10%
           use_random_color: false
           fade_out_rate: 120
       - addressable_fireworks:
           name: Random Fireworks
-          scan_interval: 32ms
+          update_interval: 32ms
           spark_probability: 10%
           use_random_color: true
           fade_out_rate: 120
       - addressable_flicker:
           name: Shields Up
-          scan_interval: 32ms
+          update_interval: 32ms
           intensity: 10%

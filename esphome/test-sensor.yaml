@@ -39,7 +39,7 @@ sensor:
     name: "BME280 Absolute Humidity"
     lambda: >-
       return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).value)/(id(temperature).value + 243.5))) * id(humidity).value * 2.1674)/(273.15 + id(temperature).value);
-    scan_interval: 15s
+    update_interval: 15s
     accuracy_decimals: 2
     unit_of_measurement: "g/m³"
 
