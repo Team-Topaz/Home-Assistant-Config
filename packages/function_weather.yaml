@@ -31,7 +31,7 @@ sensor:
       - apparent_temperature_high
       - precip_intensity_max
       - uv_index
-    update_interval: '00:05'
+    scan_interval: '00:05'
 
   - platform: waqi
     token: !secret airquality_api_key
