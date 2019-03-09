@@ -74,10 +74,10 @@ logger:
 
 mqtt:
   discovery: true
-  broker: 192.168.1.20
+  broker: 192.168.1.50
   port: 1883
   client_id: hassio
-  username: !secret mqtt_username
+  username: !secret mqtt_username_new
   password: !secret mqtt_password
   birth_message:
     topic: 'hass/status'
