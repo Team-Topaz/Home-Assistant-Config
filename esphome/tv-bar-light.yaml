@@ -26,6 +26,7 @@ ota:
 
 light:
   - platform: fastled_clockless
+    id: bar_light
     chipset: WS2812B
     pin: D8
     num_leds: 7
@@ -105,3 +106,43 @@ light:
                 green: 0%
                 blue: 0%
                 num_leds: 1
+  - platform: partition
+    name: "TV Bar Light Left"
+    segments:
+      - id: bar_light
+        from: 6
+        to: 4
+    effects:
+      - addressable_color_wipe:
+          name: 'Scanning Effect'
+          add_led_interval: 200ms
+          reverse: true
+          colors:
+            - red: 100%
+              green: 90%
+              blue: 0%
+              num_leds: 1
+            - red: 0%
+              green: 0%
+              blue: 0%
+              num_leds: 2
+  - platform: partition
+    name: "TV Bar Light Right"
+    segments:
+      - id: bar_light
+        from: 6
+        to: 4
+    effects:
+      - addressable_color_wipe:
+          name: 'Scanning Effect'
+          add_led_interval: 200ms
+          reverse: false
+          colors:
+            - red: 100%
+              green: 90%
+              blue: 0%
+              num_leds: 1
+            - red: 0%
+              green: 0%
+              blue: 0%
+              num_leds: 2
