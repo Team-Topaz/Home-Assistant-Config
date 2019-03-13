@@ -110,8 +110,8 @@ light:
     name: "TV Bar Light Left"
     segments:
       - id: bar_light
-        from: 6
-        to: 4
+        from: 4
+        to: 6
     effects:
       - addressable_color_wipe:
           name: 'Scanning Effect'
@@ -130,8 +130,8 @@ light:
     name: "TV Bar Light Right"
     segments:
       - id: bar_light
-        from: 6
-        to: 4
+        from: 0
+        to: 2
     effects:
       - addressable_color_wipe:
           name: 'Scanning Effect'
