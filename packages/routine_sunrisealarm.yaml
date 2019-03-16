@@ -44,6 +44,9 @@ script:
         brightness_pct: "{{ states('input_number.sunrise_alarm_max_level') | round(0) | int }}"
     - wait_template: "{{ is_state('light.master_bedroom_sconce','on') }}"
       timeout: '00:01:00'
+    # Wait to turn the nightstand lamp automation back on until the sunrise transition is complete
+    - delay:
+        seconds: "{{ states('input_number.sunrise_alarm_fade_time') | float * 60 | int }}"
     - service: automation.turn_on
       data:
         entity_id: automation.master_bedroom_turn_on_nightstand_lamp
