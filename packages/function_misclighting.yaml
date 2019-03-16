@@ -73,7 +73,7 @@ automation:
       - platform: numeric_state
         entity_id: light.master_bedroom_sconce
         value_template: '{{ state.attributes.brightness }}'
-        above: 90
+        above: 180
     action:
       - service: light.turn_on
         data:
@@ -85,7 +85,7 @@ automation:
       - platform: numeric_state
         entity_id: light.master_bedroom_sconce
         value_template: '{{ state.attributes.brightness }}'
-        below: 90
+        below: 180
       - platform: state
         entity_id: light.master_bedroom_sconce
         to: 'off'
