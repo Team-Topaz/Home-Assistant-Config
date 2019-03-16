@@ -61,6 +61,16 @@ automation:
     - service: timer.cancel
       entity_id: timer.home_alone_lights_off_timeout
 
+  - id: home_alone_returned_home
+    alias: 'Home Alone: Returned home cancel Auto-Off'
+    trigger:
+      - platform: state
+        entity_id: group.all_devices
+        to: home
+    action:
+    - service: timer.cancel
+      entity_id: timer.home_alone_lights_off_timeout
+
   - id: home_alone_lights_timed_out
     alias: 'Home Alone: Lights Auto-Off'
     trigger:
