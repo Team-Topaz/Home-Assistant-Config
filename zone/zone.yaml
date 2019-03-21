@@ -1,20 +1,20 @@
 - name: !secret work_1_name
   latitude: !secret work_1_lat
   longitude: !secret work_1_lon
-  radius: 150
+  radius: 250
   icon: mdi:domain
 
 - name: !secret work_2_name
   latitude: !secret work_2_lat
   longitude: !secret work_2_lon
-  radius: 200
+  radius: 300
   icon: mdi:briefcase
 
 - name: Home
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   icon: mdi:home
-  radius: 150
+  radius: 300
 
 - name: !secret location_1_name
   latitude: !secret location_1_lat
