@@ -34,7 +34,7 @@ ota:
 sensor:
   - platform: wifi_signal
     name: "Bike Room WiFi"
-    scan_interval: 15s
+    update_interval: 15s
   - platform: dht
     model: DHT22
     pin: D7
@@ -55,7 +55,7 @@ sensor:
     name: "Bike Room Absolute Humidity"
     lambda: >-
       return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).state)/(id(temperature).state + 243.5))) * id(humidity).state * 2.1674)/(273.15 + id(temperature).state);
-    scan_interval: 15s
+    update_interval: 15s
     accuracy_decimals: 2
     unit_of_measurement: "g/m³"
   - platform: uptime
