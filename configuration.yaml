@@ -26,6 +26,7 @@ discovery:
     - roku
 sun:
 map:
+stream:
 
 # Log and history configuration
 recorder:
