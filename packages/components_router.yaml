@@ -1,0 +1,10 @@
+asuswrt:
+  host: 192.168.1.1
+  username: !secret router_username
+  password: !secret router_password
+  mode: ap
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed
