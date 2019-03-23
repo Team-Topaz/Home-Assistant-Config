@@ -53,7 +53,7 @@ script:
         entity_id: automation.master_bedroom_turn_off_nightstand_lamp
     # Wait to turn the nightstand lamp automation back on until the sunrise transition is complete
     - delay:
-        seconds: "{{ states('input_number.sunrise_alarm_fade_time') | float * 60 | int }}"
+        seconds: "{{ states('input_number.sunrise_alarm_fade_time') | int * 60 }}"
     - service: automation.turn_on
       data:
         entity_id: automation.master_bedroom_turn_on_nightstand_lamp
