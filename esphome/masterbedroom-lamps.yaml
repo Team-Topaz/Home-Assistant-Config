@@ -31,13 +31,9 @@ binary_sensor:
       mode: INPUT_PULLUP
       inverted: True
     on_click:
-      min_length: 0ms
-      max_length: 250ms
       then:
         - light.toggle: ryan_lamp
-    on_click:
-      min_length: 251ms
-      max_length: 1000ms
+    on_double_click:
       then:
         - light.toggle: chelsea_lamp
     name: "Master Bedroom Switch Button"
