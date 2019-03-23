@@ -146,9 +146,6 @@ automation:
       condition: and
       conditions:
         - condition: state
-          entity_id: media_player.master_2
-          state: 'idle'
-        - condition: state
           entity_id: media_player.living_room_tv
           state: 'off'
     action:

@@ -40,15 +40,9 @@ automation:
 
   #This auto-restarts Home Assistant. Rethink a bit? It's OK to restart when we're asleep.
   #There's an uptime restriction in conditions to prevent a condition where HASS bootloops.
-  #There are some other problems:
-  # 1. Certain things, like the sunrise alarm, might lose their settings.
-  # 2. We need to not be on vacation or vacation mode will disable.
   - id: hass_auto_reboot
     alias: "HASS: Auto-reboot When Needed"
     trigger:
-      - platform: numeric_state
-        entity_id: sensor.uptime
-        above: 7
       - platform: numeric_state
         entity_id: sensor.ram_used
         above: 95
