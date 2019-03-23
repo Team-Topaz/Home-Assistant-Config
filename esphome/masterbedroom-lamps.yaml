@@ -1,0 +1,68 @@
+esphome:
+  name: masterbedroom_lamps
+  platform: ESP8266
+  board: esp01_1m
+
+wifi:
+  networks:
+  - ssid: !secret wifi1_name
+    password: !secret wifi1_pw
+  - ssid: !secret wifi3_name
+    password: !secret wifi3_pw
+  - ssid: !secret wifi3_name
+    password: !secret wifi3_pw
+  domain: !secret wifi_domain
+
+api:
+
+# Enable logging
+logger:
+
+web_server:
+  port: 80
+
+ota:
+  password: !secret ota_pw
+
+binary_sensor:
+  - platform: gpio
+    pin:
+      number: GPIO10
+      mode: INPUT_PULLUP
+      inverted: True
+    on_click:
+      min_length: 0ms
+      max_length: 250ms
+      then:
+        - light.toggle: ryan_lamp
+    on_click:
+      min_length: 251ms
+      max_length: 1000ms
+      then:
+        - light.toggle: chelsea_lamp
+    name: "Master Bedroom Switch Button"
+  - platform: status
+    name: "Master Bedroom Switch Status"
+
+output:
+  - platform: gpio
+    id: ryan_lamp_output
+    pin: GPIO12
+  - platform: gpio
+    id: chelsea_lamp_output
+    pin: GPIO5
+
+light:
+  - platform: binary
+    name: "Ryan Nightstand Lamp"
+    id: ryan_lamp
+    output: ryan_lamp_output
+  - platform: binary
+    name: "Chelsea Nightstand Lamp"
+    id: chelsea_lamp
+    output: chelsea_lamp_output
+
+status_led:
+  pin:
+    number: GPIO13
+    inverted: True
