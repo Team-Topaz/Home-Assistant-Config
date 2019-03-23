@@ -144,8 +144,8 @@ automation:
       to: 'on'
     condition:
     - condition: state
-      entity_id: group.all_devices
-      state: 'home'
+      entity_id: binary_sensor.anybody_home
+      state: 'on'
     - condition: state
       entity_id: climate.office_fan
       state: 'off'
@@ -157,8 +157,8 @@ automation:
     alias: 'Office Fan: Disable autofan when away'
     trigger:
     - platform: state
-      entity_id: group.all_devices
-      to: not_home
+      entity_id: binary_sensor.anybody_home
+      to: 'off'
       for:
         minutes: 15
     - platform: state
@@ -188,8 +188,8 @@ automation:
       to: 'on'
     condition:
     - condition: state
-      entity_id: group.all_devices
-      state: 'home'
+      entity_id: binary_sensor.anybody_home
+      state: 'on'
     - condition: state
       entity_id: climate.bonus_room_fan
       state: 'off'
@@ -201,8 +201,8 @@ automation:
     alias: 'Bonus Room Fan: Disable autofan when away'
     trigger:
     - platform: state
-      entity_id: group.all_devices
-      to: not_home
+      entity_id: binary_sensor.anybody_home
+      to: 'off'
       for:
         minutes: 5
     - platform: state

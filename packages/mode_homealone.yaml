@@ -9,8 +9,8 @@ automation:
     alias: 'Home Alone: Notify Lights On'
     trigger:
       - platform: state
-        entity_id: group.all_devices
-        to: not_home
+        entity_id: binary_sensor.anybody_home
+        to: 'off'
         for:
           minutes: 5
     condition:
@@ -65,8 +65,8 @@ automation:
     alias: 'Home Alone: Returned home cancel Auto-Off'
     trigger:
       - platform: state
-        entity_id: group.all_devices
-        to: home
+        entity_id: binary_sensor.anybody_home
+        to: 'off'
     action:
     - service: timer.cancel
       entity_id: timer.home_alone_lights_off_timeout

@@ -85,8 +85,8 @@ automation:
                 - condition: template
                   value_template: "{{ (now().hour | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.hour) and (now().minute | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.minute) }}"
         - condition: state
-          entity_id: group.all_devices
-          state: 'home'
+          entity_id: binary_sensor.anybody_home
+          state: 'on'
         - condition: state
           entity_id: input_boolean.sunrise_alarm_armed
           state: 'on'

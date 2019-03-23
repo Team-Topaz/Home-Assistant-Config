@@ -29,3 +29,19 @@ binary_sensor:
           {% else %}
           False
           {% endif %}
+      anybody_home:
+        #The new Persons feature is awesome - but there's no built-in way to
+        #ask "is ANY person home?" As an alternative, here's some template
+        #sorcery to do the same thing.
+        friendly_name: 'Anybody Home'
+        device_class: presence
+        entity_id:
+          - sensor.solar_elevation
+        value_template: >
+          {% set ns = namespace(found=false) %}
+          {% for state in states.person %}
+            {% if state.state == 'home' %}
+              {% set ns.found = true %}
+            {% endif %}
+          {% endfor %}
+          {{ns.found}}

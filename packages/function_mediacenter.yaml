@@ -120,8 +120,8 @@ automation:
     alias: 'Media Center: Turn off when away'
     trigger:
     - platform: state
-      entity_id: group.all_devices
-      to: not_home
+      entity_id: binary_sensor.anybody_home
+      to: 'off'
       for:
         minutes: 30
     condition:

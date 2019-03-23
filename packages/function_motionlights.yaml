@@ -8,8 +8,8 @@ automation:
       to: 'on'
     condition:
     - condition: state
-      entity_id: group.all_devices
-      state: 'home'
+      entity_id: binary_sensor.anybody_home
+      state: 'on'
     action:
       - service: light.turn_on
         data:
@@ -49,8 +49,8 @@ automation:
       condition: and
       conditions:
         - condition: state
-          entity_id: group.all_devices
-          state: 'home'
+          entity_id: binary_sensor.anybody_home
+          state: 'on'
         - condition: or
           conditions:
             - condition: numeric_state
@@ -69,8 +69,8 @@ automation:
     alias: 'Bike Room Lamp: Turn Off When No motion'
     trigger:
     - platform: state
-      entity_id: group.all_devices
-      to: not_home
+      entity_id: binary_sensor.anybody_home
+      to: 'off'
       for:
         minutes: 10
     - platform: state
@@ -102,8 +102,8 @@ automation:
       to: 'on'
     condition:
     - condition: state
-      entity_id: group.all_devices
-      state: 'home'
+      entity_id: binary_sensor.anybody_home
+      state: 'on'
     action:
       - service: light.turn_on
         data:

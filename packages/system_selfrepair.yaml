@@ -67,8 +67,8 @@ automation:
         - condition: or
           conditions:
             - condition: state
-              entity_id: group.all_devices
-              state: 'not_home'
+              entity_id: binary_sensor.anybody_home
+              state: 'off'
             - condition: time
               after: '01:00:00'
               before: '02:00:00'
