@@ -32,7 +32,7 @@ binary_sensor:
       inverted: True
     on_press:
       then:
-        - switch.toggle: relay_light
+        - light.toggle: relay_light
     name: "Bike Room Switch Button"
   - platform: status
     name: "Bike Room Switch Status"
