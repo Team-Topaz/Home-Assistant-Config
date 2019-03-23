@@ -27,7 +27,7 @@ ota:
 binary_sensor:
   - platform: gpio
     pin:
-      number: GPI00
+      number: GPIO0
       mode: INPUT_PULLUP
       inverted: True
     on_press:
