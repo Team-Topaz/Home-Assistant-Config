@@ -56,19 +56,6 @@ automation:
       - service: automation.trigger
         entity_id: automation.living_room_fan_off_when_hotter_outside
 
-  #Home assistant has been keen to change temperatures on its own.
-  #I'm hoping this will help me figure out what causes it.
-  - id: fan_thermostat_setpoint_watcher
-    alias: 'Living Room: Watch fan setpoint'
-    trigger:
-    - platform: state
-      entity_id: sensor.living_room_fan_setpoint
-    action:
-      - service: notify.push_main
-        data_template:
-          title: 'Living Room Temperature Setpoint Changed'
-          message: "The living room fan setpoint changed to {{ states.sensor.living_room_fan_setpoint.state }}."
-
   - id: living_room_fan_on_when_hot
     alias: 'Living Room: Turn Fan On When Hot'
     trigger:
