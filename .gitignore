@@ -11,6 +11,7 @@
 *.cert
 *.pickle
 *.sqlite
+*.db
 .DS_Store
 ._.DS_Store
 OZW_Log.txt
@@ -32,3 +33,6 @@ google_calendars.yaml
 www
 **/__PYCACHE__/
 entity_registry.yaml
+.storage/
+.cloud/
+notebooks/
