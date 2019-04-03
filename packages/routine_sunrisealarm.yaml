@@ -23,11 +23,6 @@ input_number:
     max: 100
     step: 5
 
-input_boolean:
-  sunrise_alarm_armed:
-    name: 'Enabled'
-    icon: mdi:alarm
-
 script:
   sunrise_alarm_light_on:
     alias: 'Sunrise Alarm: Turn On Light'
@@ -86,9 +81,6 @@ automation:
                   value_template: "{{ (now().hour | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.hour) and (now().minute | int) == (states.input_datetime.sunrise_alarm_weekend.attributes.minute) }}"
         - condition: state
           entity_id: binary_sensor.anybody_home
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.sunrise_alarm_armed
           state: 'on'
     action:
     - service: script.turn_on
