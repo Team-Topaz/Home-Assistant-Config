@@ -10,6 +10,7 @@ cloud:
     filter:
       include_domains:
         - climate
+        - camera
       include_entities:
         - switch.living_room_fan
         - light.chelsea_nightstand_lamp
