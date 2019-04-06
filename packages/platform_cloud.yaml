@@ -27,6 +27,7 @@ cloud:
         - scene.indoor_off
         - light.christmas_tree
         - light.christmas_wreath
+        - media_player.living_room_media_center
     entity_config:
       light.chelsea_nightstand_lamp:
         aliases:
@@ -57,4 +58,14 @@ cloud:
       switch.living_room_fan:
         aliases:
           - Fan
+        room: Living Room
+      camera.geeetech_a10:
+        aliases:
+          - "3D Printer"
+          - Printer
+        room: Bonus Room
+      media_player.living_room_media_center:
+        aliases:
+          - TV
+          - Media Center
         room: Living Room
