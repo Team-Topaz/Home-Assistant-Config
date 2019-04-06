@@ -1,0 +1,8 @@
+{
+  "ignore": [
+    "custom_components"
+  ],
+  "disable": [
+    "py"
+  ]
+}
