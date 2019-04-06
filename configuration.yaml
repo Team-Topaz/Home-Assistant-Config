@@ -91,7 +91,6 @@ zha:
 
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
-history_graph: !include history_graph.yaml
 
 #Split all the major components into their own directories.
 group: !include_dir_merge_named group
