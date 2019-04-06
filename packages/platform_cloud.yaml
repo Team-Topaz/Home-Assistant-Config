@@ -21,7 +21,7 @@ cloud:
         - light.tv_backlight
         - light.office_light
         - light.bonus_room_fan_light
-        - light.bike_room_light
+        - light.bike_room_lamp
         - fan.bonus_room_fan
         - fan.office_fan
         - scene.indoor_off
@@ -39,6 +39,8 @@ cloud:
           - "Ryan's Nightstand"
           - "Ryan's Lamp"
         room: Master Bedroom
+      light.bike_room_lamp:
+        room: Bike Room
       light.nightstand_lamps:
         aliases:
           - Bedroom Lamps
