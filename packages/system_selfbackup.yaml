@@ -1,0 +1,14 @@
+automation:
+  - id: hassio_self_backup
+    alias: "Hassio Backup"
+    trigger:
+      - platform: time
+        at: '03:00:00'
+    condition:
+      condition: time
+      weekday:
+        - sun
+        - tue
+        - fri
+    action:
+      - service: hassio.snapshot_full
