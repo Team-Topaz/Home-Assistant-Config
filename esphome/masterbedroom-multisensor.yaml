@@ -32,9 +32,6 @@ ota:
   password: !secret ota_pw
 
 sensor:
-  - platform: wifi_signal
-    name: "Master Bedroom WiFi"
-    update_interval: 15s
   - platform: dht
     model: DHT22
     pin: D7

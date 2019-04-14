@@ -32,9 +32,6 @@ ota:
   password: !secret ota_pw
 
 sensor:
-  - platform: wifi_signal
-    name: "Living Room WiFi"
-    update_interval: 15s
   - platform: dht
     model: DHT22
     pin: D7
@@ -58,8 +55,6 @@ sensor:
     update_interval: 15s
     accuracy_decimals: 2
     unit_of_measurement: "g/m³"
-  - platform: uptime
-    name: Living Room Uptime
 
 binary_sensor:
   - platform: gpio
