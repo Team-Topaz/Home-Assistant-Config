@@ -57,8 +57,3 @@ light:
     name: "Chelsea Nightstand Lamp"
     id: chelsea_lamp
     output: chelsea_lamp_output
-
-status_led:
-  pin:
-    number: GPIO13
-    inverted: True
