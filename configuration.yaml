@@ -49,6 +49,7 @@ recorder:
       - sensor.solar_elevation
       - sensor.mqtt_broker_uptime
       - timer.3d_printer_job_remaining_time
+      - sensor.average_light_level_raw
 history:
   exclude:
     domains:

@@ -10,7 +10,7 @@ sensor:
     round_digits: 1
 
   - platform: min_max
-    name: "Average Light Level"
+    name: "Average Light Level Raw"
     entity_ids:
       - sensor.office_brightness
       - sensor.living_room_brightness
@@ -19,3 +19,11 @@ sensor:
       - sensor.bike_room_brightness
     type: mean
     round_digits: 1
+
+  - platform: filter
+    name: "Average Light Level"
+    filters:
+      - filter: time_simple_moving_average
+        window_size: 00:07
+      - filter: time_throttle
+        window_size: 00:02
