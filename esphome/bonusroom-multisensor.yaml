@@ -38,9 +38,21 @@ sensor:
     temperature:
       name: "Bonus Room Temperature"
       id: "temperature"
+      accuracy_decimals: 1
+      unit_of_measurement: "°F"
+      filters:
+        - sliding_window_moving_average:
+            window_size: 5
+            send_every: 5
+        - lambda: return x * (9.0/5.0) + 32.0;
     humidity:
       name: "Bonus Room Humidity"
       id: "humidity"
+      accuracy_decimals: 1
+      filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
   - platform: adc
     pin: A0
     name: "Bonus Room Brightness"
