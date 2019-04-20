@@ -15,6 +15,12 @@ emulated_hue:
       hidden: false
     light.living_room_floor_lamp:
       hidden: false
+    light.backlight_red_siren:
+      hidden: false
+    light.backlight_yellow_siren:
+      hidden: false
+    light.bar_light_scanner:
+      hidden: false
 
 light:
   - platform: template
