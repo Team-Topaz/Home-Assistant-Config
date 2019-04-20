@@ -1,0 +1,20 @@
+#Some components in support of Artemis or EmptyEpsilon.
+#Since neither of these (surprise) have Home Assistant integration,
+#they can't trigger HASS effects easily.
+#Working around this by creating virtual switches to enable specific fx.
+
+- platform: template
+  lights:
+    backlight_red_siren:
+      friendly_name: "Backlight Red Siren"
+      value_template: "{{ states.light.tv_backlight.attributes.effect == 'Red Siren' }}"
+      turn_on:
+        service: light.turn_on
+        data:
+          entity_id: light.tv_backlight
+          effect: 'Red Siren'
+      turn_off:
+        service: light.turn_on
+        data:
+          entity_id: light.tv_backlight
+          effect: 'None'
