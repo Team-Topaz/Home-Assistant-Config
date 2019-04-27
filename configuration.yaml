@@ -37,9 +37,6 @@ recorder:
     entities:
       - sensor.uptime
       - automation.hass_reset_mqtt_timeout
-      - sensor.bedroom_lights_toggle_randomizer
-      - sensor.kitchen_lights_toggle_randomizer
-      - sensor.living_room_tv_toggle_randomizer
       - sensor.time
       - sensor.date
       - sensor.3d_printer_job_finish_time
@@ -55,21 +52,6 @@ history:
     domains:
       - automation
 
-logbook:
-  exclude:
-    entities:
-      - binary_sensor.office_status
-      - binary_sensor.living_room_status
-      - binary_sensor.master_bedroom_status
-      - binary_sensor.bonus_room_status
-      - binary_sensor.bike_room_status
-      - sensor.average_load_5m
-      - group.office_sensor
-      - group.living_room_sensor
-      - group.sensor_node_3_card
-      - group.sensor_node_4_card
-      - group.sensor_node_5_card
-      - group.bike_room_sensor
 logger:
   default: warning
 
