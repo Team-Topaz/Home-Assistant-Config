@@ -1,0 +1,12 @@
+sensor.vision_zp3111_multisensor_4in1_system:
+  ignored: true
+  polling_intensity: 0
+sensor.vision_zp3111_multisensor_4in1_sourcenodeid:
+  ignored: true
+  polling_intensity: 0
+sensor.vision_zp3111_multisensor_4in1_clock:
+  ignored: true
+  polling_intensity: 0
+sensor.vision_zp3111_multisensor_4in1_alarm_type:
+  ignored: true
+  polling_intensity: 0
