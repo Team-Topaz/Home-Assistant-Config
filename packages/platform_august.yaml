@@ -1,4 +1,4 @@
 august:
-  logon_method: email
+  login_method: email
   username: !secret august_username
   password: !secret august_password
