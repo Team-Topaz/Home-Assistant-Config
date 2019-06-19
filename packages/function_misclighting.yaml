@@ -31,7 +31,7 @@ automation:
           seconds: 1
     action:
       - service: scene.turn_on
-        entity_id: scene.indoor_off
+        entity_id: scene.front_door_exit
 
   - id: living_room_lamp_on_at_sunset
     alias: 'Living Room: Turn On Floor Lamp and Dining Slow Fade'
