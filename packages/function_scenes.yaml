@@ -1,0 +1,49 @@
+#Scenes which don't fit neatly into another function.
+
+scene:
+  - name: 'Indoor Off'
+    entities:
+      scene.caseta_indoor_off: on
+      #Scene "Indoor Off" calls the "Off" scene in the Lutron hub directly.
+      group.all_remotes: off
+      group.indoor_lights: off
+      group.special_lights: off
+      group.xmas_lights: off
+      media_player.kitchen_speaker: off
+      media_player.living_room_speaker: off
+      media_player.office_speaker: off
+      media_player.master_bedroom_speaker: off
+      media_player.great_room_group: off
+      media_player.whole_house_group: off
+      media_player.living_room_chromecast: off
+      media_player.pioneer_avr: off
+      media_player.living_room_media_center: off
+      group.all_fans: off
+
+  - name: 'All Off'
+    entities:
+      #These scenes call the Lutron hub directly.
+      scene.caseta_indoor_off: on
+      scene.caseta_outdoor_off: on
+      group.all_remotes: off
+      group.all_lights: off
+      media_player.kitchen_speaker: off
+      media_player.living_room_speaker: off
+      media_player.office_speaker: off
+      media_player.master_bedroom_speaker: off
+      media_player.great_room_group: off
+      media_player.whole_house_group: off
+      media_player.living_room_chromecast: off
+      group.all_fans: off
+
+  - name: 'Kitchen Only'
+    entities:
+      scene.caseta_kitchen_only: on
+
+  - name: 'Living Room All On'
+    entities:
+      scene.caseta_living_room_all_On: on
+
+  - name: 'Living Room Lights Off'
+    entities:
+      scene.caseta_indoor_off: on

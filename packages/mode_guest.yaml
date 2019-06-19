@@ -3,6 +3,14 @@ input_boolean:
     name: 'Guest Mode'
     icon: mdi:glass-flute
 
+scene:
+  - name: 'Entertaining'
+    entities:
+      light.kitchen_overhead_lights: on
+      light.living_room_floor_lamp: on
+      light.dining_room_chandelier: on
+      remote.living_room: on
+
 automation:
   #Guest mode autoenables if there are guests at the house.
   #There are some conditions:
