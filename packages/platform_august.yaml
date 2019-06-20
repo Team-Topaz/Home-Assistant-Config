@@ -8,7 +8,7 @@ scene:
   - name: 'Front Door Exit'
     entities:
       scene.indoor_off: on
-      automation.lock_front_door_next_close: on
+      automation.front_door_lock_lock_immediately_on_next_close: on
 
 automation:
   - id: lock_front_door_next_close
@@ -24,4 +24,4 @@ automation:
       - service: lock.lock
         entity_id: lock.front_door
       - service: automation.turn_off
-        entity_id: automation.lock_front_door_next_close
+        entity_id: automation.front_door_lock_lock_immediately_on_next_close
