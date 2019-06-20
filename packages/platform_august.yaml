@@ -14,12 +14,12 @@ automation:
   - id: lock_front_door_next_close
     #Lock the front door immediately the next time it is closed.
     alias: 'Front Door Lock: Lock immediately on next close'
-    initial_state: off
+    initial_state: 'off'
     trigger:
       - platform: state
         entity_id: binary_sensor.front_door_open
-        from: on
-        to: off
+        from: 'on'
+        to: 'off'
     action:
       - service: lock.lock
         entity_id: lock.front_door
