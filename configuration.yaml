@@ -51,6 +51,7 @@ history:
   exclude:
     domains:
       - automation
+logbook:
 
 logger:
   default: warning
