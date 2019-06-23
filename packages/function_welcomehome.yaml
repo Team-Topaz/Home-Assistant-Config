@@ -1,0 +1,41 @@
+#"Welcome home" is the function which turns the lights on when the front door is unlocked.
+#It also performs the inverse function: At night when the door is unlocked, it turns on the porch light.
+
+automation:
+  - id: welcme_home_lights_on
+    alias: 'Welcome Home: Lights On'
+    trigger:
+      - platform: state
+        entity_id: lock.front_door
+        from: 'locked'
+        to: 'unlocked'
+    condition:
+        - condition: state
+          entity_id: light.great_room
+          state: 'off'
+    action:
+      - service: light.turn_on
+        entity_id: light.great_room
+  - id: welcme_home_porch_on
+    alias: 'Welcome Home: Porch On'
+    trigger:
+      - platform: state
+        entity_id: lock.front_door
+        from: 'locked'
+        to: 'unlocked'
+      - platform: state
+        entity_id: binary_sensor.front_door_open
+        from: 'off'
+        to: 'on'
+    condition:
+        - condition: and
+          conditions:
+            - condition: sun
+              after: sunset
+              after_offset: '-00:30:00'
+            - condition: sun
+              before: sunrise
+              before_offset: '00:30:00'
+    action:
+      - service: light.turn_on
+        entity_id: light.front_porch_light
