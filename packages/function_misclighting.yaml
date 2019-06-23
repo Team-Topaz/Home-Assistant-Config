@@ -17,7 +17,7 @@ automation:
           seconds: 1
     action:
       - service: scene.turn_on
-        entity_id: scene.all_off
+        entity_id: scene.all_off_with_lock
 
   - id: front_foyer_pico_all_off
     #Turns off everything when pico off button is held

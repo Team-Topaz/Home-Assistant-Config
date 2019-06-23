@@ -11,7 +11,7 @@ scene:
       automation.front_door_lock_lock_immediately_on_next_close: on
 
 automation:
-  - id: lock_front_door_next_close
+  - id: front_door_lock_immediately_on_next_close
     #Lock the front door immediately the next time it is closed.
     alias: 'Front Door Lock: Lock immediately on next close'
     initial_state: 'off'
@@ -25,3 +25,10 @@ automation:
         entity_id: lock.front_door
       - service: automation.turn_off
         entity_id: automation.front_door_lock_lock_immediately_on_next_close
+
+script:
+  front_door_lock_immediate:
+    alias: 'Front Door Lock: Immediate'
+    sequence:
+      - service: lock.lock
+        entity_id: lock.front_door
