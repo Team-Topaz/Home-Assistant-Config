@@ -25,3 +25,12 @@ sensor.weather_temperature:
 camera.usps_mail:
   friendly_name: USPS Mail Image
   entity_picture: /local/icon/USPS.png
+
+sensor.u_s_air_pollution_level:
+  hidden: true
+
+sensor.u_s_main_pollutant:
+  hidden: true
+
+sensor.u_s_air_quality_index:
+  hidden: true
