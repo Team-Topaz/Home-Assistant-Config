@@ -36,3 +36,4 @@ entity_registry.yaml
 .storage/
 .cloud/
 notebooks/
+custom_components/
