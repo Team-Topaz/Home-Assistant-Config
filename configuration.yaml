@@ -76,6 +76,7 @@ zha:
 
 hacs:
   token: !secret github_personal_access_token
+  theme: true
 
 #Single-file includes.
 device_tracker: !include device_tracker.yaml
