@@ -45,3 +45,15 @@ binary_sensor:
             {% endif %}
           {% endfor %}
           {{ns.found}}
+sensor:
+  - platform: history_stats
+    #In certain scenarios, we only care if people have been home for a long
+    #time - for instance, when people are arriving, we don't really care
+    #about the distinction between "just arrived" and "just barely not
+    #arrived."
+    name: 'Anybody Home: Extended Time'
+    entity_id: binary_sensor.anybody_home
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration: 00:15
