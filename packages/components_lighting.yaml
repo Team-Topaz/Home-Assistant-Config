@@ -1,6 +1,6 @@
 lutron_caseta_pro:
   bridges:
-    - host: 192.168.1.34
+    - host: !secret lutron_hub_dnsname
       mac: !secret lutron_hub_mac
 
 light:
