@@ -1,7 +1,5 @@
 - platform: nmap_tracker
   hosts: 192.168.1.51-192.168.1.255
-  exclude:
-    - 192.168.1.196
   interval_seconds: 30
   consider_home: 180
   new_device_defaults:
