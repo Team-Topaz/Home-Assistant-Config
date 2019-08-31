@@ -2,6 +2,7 @@ lutron_caseta_pro:
   bridges:
     - host: !secret lutron_hub_dnsname
       mac: !secret lutron_hub_mac
+  default_transition_seconds: 0
 
 light:
   - platform: group
