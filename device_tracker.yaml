@@ -1,6 +1,0 @@
-- platform: nmap_tracker
-  hosts: 192.168.1.51-192.168.1.255
-  interval_seconds: 30
-  consider_home: 180
-  new_device_defaults:
-    hide_if_away: False

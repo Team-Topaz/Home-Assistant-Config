@@ -78,9 +78,6 @@ hacs:
   token: !secret github_personal_access_token
   theme: true
 
-#Single-file includes.
-device_tracker: !include device_tracker.yaml
-
 #Split all the major components into their own directories.
 group: !include_dir_merge_named group
 
