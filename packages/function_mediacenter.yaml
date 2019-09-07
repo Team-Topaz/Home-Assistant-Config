@@ -19,7 +19,6 @@ input_select:
       - 'Off'
       - 'Watch PC'
       - 'Watch Chromecast'
-      - 'Play Xbox'
       - 'Administer Server'
     icon: mdi:dip-switch
 
