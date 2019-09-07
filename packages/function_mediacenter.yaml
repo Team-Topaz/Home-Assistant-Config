@@ -1,6 +1,6 @@
 remote:
   - platform: harmony
-    host: 192.168.1.30
+    host: !secret harmony_ip
     name: Living Room
     activity: Watch Chromecast
 
@@ -27,7 +27,7 @@ media_player:
   - platform: plex
 
   - platform: pioneer
-    host: 192.168.1.104
+    host: !secret pioneer_ip
 
   - platform: universal
     name: 'Living Room Media Center'
