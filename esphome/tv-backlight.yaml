@@ -7,10 +7,6 @@ wifi:
   networks:
   - ssid: !secret wifi1_name
     password: !secret wifi1_pw
-  - ssid: !secret wifi3_name
-    password: !secret wifi3_pw
-  - ssid: !secret wifi3_name
-    password: !secret wifi3_pw
   domain: !secret wifi_domain
 
 api:
