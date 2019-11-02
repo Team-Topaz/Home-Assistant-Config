@@ -40,15 +40,3 @@ scene:
     entities:
       scene.all_off: on
       script.front_door_lock_immediate: on
-
-  - name: 'Kitchen Only'
-    entities:
-      scene.caseta_kitchen_only: on
-
-  - name: 'Living Room All On'
-    entities:
-      scene.caseta_living_room_all_On: on
-
-  - name: 'Living Room Lights Off'
-    entities:
-      scene.caseta_indoor_off: on
