@@ -35,8 +35,3 @@ scene:
       media_player.whole_house_group: off
       media_player.living_room_chromecast: off
       group.all_fans: off
-
-  - name: 'All Off with Lock'
-    entities:
-      scene.all_off: on
-      script.front_door_lock_immediate: on
