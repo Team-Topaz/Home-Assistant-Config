@@ -27,6 +27,7 @@ discovery:
 sun:
 map:
 stream:
+mobile_app:
 
 # Log and history configuration
 recorder:
