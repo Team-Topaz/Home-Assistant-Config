@@ -20,6 +20,7 @@ input_select:
       - 'Watch PC'
       - 'Watch Chromecast'
       - 'Administer Server'
+      - 'Play a Game'
     icon: mdi:dip-switch
 
 media_player:
