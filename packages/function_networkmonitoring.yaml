@@ -40,7 +40,7 @@ sensor:
     sensors:
       ryan_phone_battery:
         friendly_name: "Ryan Phone Battery"
-        value_template: "{{ state_attr('device_tracker.ryanphoneapp','batterylevel') }}"
+        value_template: "{{ state_attr('device_tracker.ryanphoneapp','battery_level') }}"
         unit_of_measurement: '%'
         device_class: battery
 
@@ -48,6 +48,6 @@ sensor:
     sensors:
       chelsea_phone_battery:
         friendly_name: "Chelsea Phone Battery"
-        value_template: "{{ state_attr('device_tracker.chelseaphoneapp','batterylevel') }}"
+        value_template: "{{ state_attr('device_tracker.chelseaphoneapp','battery_level') }}"
         unit_of_measurement: '%'
         device_class: battery
