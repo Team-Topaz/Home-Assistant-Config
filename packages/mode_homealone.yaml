@@ -25,7 +25,7 @@ automation:
     action:
     - service: timer.start
       entity_id: timer.home_alone_lights_off_timeout
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'Lights still on'
         message: "It looks like a few lights are still on. Turn them off? Auto-off in 15 minutes."

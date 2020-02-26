@@ -41,7 +41,7 @@ automation:
     action:
       - service: input_boolean.turn_on
         entity_id: input_boolean.guest_mode
-      - service: notify.push_main
+      - service: notify.preferred_notification
         data:
           title: 'Party Time'
           message: "Guest Mode has been turned on. If this was wrong, press the 'turn off' button."
@@ -78,7 +78,7 @@ automation:
       entity_id: input_boolean.guest_mode
       state: 'on'
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'End the Party?'
         message: "All guests were detected to have left. Disable Guest Mode?"

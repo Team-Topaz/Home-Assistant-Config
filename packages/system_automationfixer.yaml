@@ -18,7 +18,7 @@ automation:
         entity_id: automation.automation_canary
         state: 'off'
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'Automations are broken'
         message: "Home Assistant has disabled automations. Turning all automations on."
@@ -30,7 +30,7 @@ automation:
         entity_id: sensor.day_of_year
         to: '358'
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'It is the 358th day of the year.'
         message: "This is probably the end of the world."

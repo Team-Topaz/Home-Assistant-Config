@@ -174,7 +174,7 @@ automation:
       - condition: state
         entity_id: binary_sensor.living_room_tv
         state: 'on'
-      - service: notify.push_main
+      - service: notify.preferred_notification
         data:
           message: "Hey, the TV is on and it shouldn't be!"
       - service: remote.send_command

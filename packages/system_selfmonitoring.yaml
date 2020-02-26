@@ -62,7 +62,7 @@ automation:
       platform: state
       entity_id: updater.updater
     action:
-      service: notify.email_ryan
+      service: notify.preferred_notification
       data:
         title: 'HASS Update Available'
         message: 'Update for Home Assistant is available.'

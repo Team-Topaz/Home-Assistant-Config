@@ -15,7 +15,7 @@ script:
           entity_id: switch.modem_power
       - delay:
           minutes: 5
-      - service: notify.push_main
+      - service: notify.preferred_notification
         data:
           title: 'Modem Restarted'
           message: "Internet was down, so I rebooted the modem."
@@ -67,7 +67,7 @@ automation:
               after: '01:00:00'
               before: '02:00:00'
     action:
-      - service: notify.push_main
+      - service: notify.preferred_notification
         data:
           title: 'Reboot Initiated'
           message: "Home Assistant needed to reboot."
@@ -82,7 +82,7 @@ automation:
         event_type: timer.finished
         event_data: {"state": "idle", "entity_id": "timer.mqtt_timeout"}
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data_template:
         title: 'Connectivity to MQTT lost'
         message: "This may cause difficulties controlling some lights and reading some sensors."
@@ -104,7 +104,7 @@ automation:
       entity_id: input_boolean.power_out
       state: 'on'
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'Home Assistant Restart'
         message: "Home Assistant has been restarted by user request."

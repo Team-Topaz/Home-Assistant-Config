@@ -1,23 +1,8 @@
-- name: group_email
+- name: preferred_notification
   platform: group
   services:
-    - service: email_ryan
-    - service: email_chelsea
-
-- name: group_sms
-  platform: group
-  services:
-    - service: sms_ryan
-    - service: sms_chelsea
-
-- name: group_urgent
-  platform: group
-  services:
-    - service: email_ryan
-    - service: email_chelsea
-    - service: sms_ryan
-    - service: sms_chelsea
-    - service: push_main
+    - service: notify.mobile_app_chelsea_phone
+    - service: notify.mobile_app_ryan_s_phone
 
 - name: twitter_main
   platform: twitter
@@ -26,46 +11,6 @@
   access_token: !secret twitter_access_token
   access_token_secret: !secret twitter_access_secret
   username: !secret twitter_username
-
-- name: email_ryan
-  platform: smtp
-  sender: !secret email_address
-  recipient: !secret email_recipient
-  server: !secret email_server
-  port: !secret email_port
-  username: !secret email_address
-  password: !secret email_password
-  encryption: !secret email_encryption
-
-- name: email_chelsea
-  platform: smtp
-  sender: !secret email_address
-  recipient: !secret email_recipient_2
-  server: !secret email_server
-  port: !secret email_port
-  username: !secret email_address
-  password: !secret email_password
-  encryption: !secret email_encryption
-
-- name: sms_ryan
-  platform: smtp
-  sender: !secret email_address
-  recipient: !secret email_recipient_3
-  server: !secret email_server
-  port: !secret email_port
-  username: !secret email_address
-  password: !secret email_password
-  encryption: !secret email_encryption
-
-- name: sms_chelsea
-  platform: smtp
-  sender: !secret email_address
-  recipient: !secret email_recipient_4
-  server: !secret email_server
-  port: !secret email_port
-  username: !secret email_address
-  password: !secret email_password
-  encryption: !secret email_encryption
 
 - name: push_main
   platform: html5

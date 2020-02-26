@@ -91,7 +91,7 @@ automation:
           entity_id: binary_sensor.garden_is_growing_season
           state: 'on'
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data_template:
         title: 'Unexpected Frost!'
         message: "Today's temperature is expected to dip to {{ states('sensor.temperature_low') | float | round(0) | int }}°F. Protect frost-sensitive plants."
@@ -106,7 +106,7 @@ automation:
       to: 'on'
     action:
     - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'Garden Frost Alerts Started'
         message: "Gardening season has begun! You'll recieve alerts if frost is forecasted."
@@ -121,7 +121,7 @@ automation:
       to: 'off'
     action:
     - wait_template: "{{ (as_timestamp(now()) | timestamp_custom('%j', true) | int) == 8 }}"
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data:
         title: 'Garden Frost Alerts Ended'
         message: "Gardening season is wrapping up! Alerts for frost have stopped."
@@ -152,7 +152,7 @@ automation:
       - condition: template
         value_template: "{{ as_timestamp(now()) | timestamp_custom('%w') == 6 }}" #On Saturday
     action:
-    - service: notify.push_main
+    - service: notify.preferred_notification
       data_template:
         title: Water the Garden
         message: "It's watering day! It needs about {{ states(sensor.garden_rainmeter_water_needs) }} inches!"
