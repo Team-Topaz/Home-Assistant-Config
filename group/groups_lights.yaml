@@ -37,7 +37,6 @@ outdoor_lights:
 
 status_lights:
   name: 'Status Lights'
-  control: 'hidden'
   entities:
     - light.notification_led
     - light.office_led
