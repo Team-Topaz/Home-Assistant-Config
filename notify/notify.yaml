@@ -1,8 +1,8 @@
 - name: preferred_notification
   platform: group
   services:
-    - service: notify.mobile_app_chelsea_phone
-    - service: notify.mobile_app_ryan_s_phone
+    - service: mobile_app_chelsea_phone
+    - service: mobile_app_ryan_s_phone
 
 - name: twitter_main
   platform: twitter
