@@ -49,6 +49,12 @@ automation:
       entity_id: scene.indoor_off
     - service: timer.cancel
       entity_id: timer.home_alone_lights_off_timeout
+    - service: notify.preferred_notification
+      data:
+        title: 'Lights turned off manually'
+        message: "The lights were turned off."
+        data:
+          tag: 'home_alone_lights_on'
 
   - id: home_alone_stay_on_clicked
     alias: 'Home Alone: Notification Clicked: Stay On'
@@ -60,6 +66,12 @@ automation:
     action:
     - service: timer.cancel
       entity_id: timer.home_alone_lights_off_timeout
+    - service: notify.preferred_notification
+      data:
+        title: 'Light timeout cancelled'
+        message: "The lights will stay on."
+        data:
+          tag: 'home_alone_lights_on'
 
   - id: home_alone_returned_home
     alias: 'Home Alone: Returned home cancel Auto-Off'
@@ -70,6 +82,12 @@ automation:
     action:
     - service: timer.cancel
       entity_id: timer.home_alone_lights_off_timeout
+    - service: notify.preferred_notification
+      data:
+        title: 'Lights auto-off cancelled'
+        message: "Someone returned home, so I won't turn the lights off."
+        data:
+          tag: 'home_alone_lights_on'
 
   - id: home_alone_lights_timed_out
     alias: 'Home Alone: Lights Auto-Off'
@@ -80,3 +98,9 @@ automation:
     action:
     - service: scene.turn_on
       entity_id: scene.indoor_off
+    - service: notify.preferred_notification
+      data:
+        title: 'Lights turned off automatically'
+        message: "The lights were turned off."
+        data:
+          tag: 'home_alone_lights_on'
