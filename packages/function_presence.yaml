@@ -18,13 +18,13 @@ binary_sensor:
           {% if is_state('binary_sensor.everybody_home', 'on') %}
           True
           {% elif is_state('person.ryan', 'home')
-            and (states('sensor.chelsea_distance_from_home') | float > 3) %}
+            and (states('sensor.chelsea_distance_from_home') | float > 5) %}
           True
           {% elif is_state('person.chelsea', 'home')
-            and (states('sensor.ryan_distance_from_home') | float > 3) %}
+            and (states('sensor.ryan_distance_from_home') | float > 5) %}
           True
-          {% elif (states('sensor.chelsea_distance_from_home') | float > 3)
-            and (states('sensor.ryan_distance_from_home') | float > 3)  %}
+          {% elif (states('sensor.chelsea_distance_from_home') | float > 5)
+            and (states('sensor.ryan_distance_from_home') | float > 5)  %}
           True
           {% else %}
           False

@@ -7,7 +7,6 @@ automation:
       - platform: state
         entity_id: binary_sensor.everybody_home_or_distant
         to: 'off'
-        for: 00:02:00
       - platform: sun
         event: sunset
         offset: '-00:30:00'
