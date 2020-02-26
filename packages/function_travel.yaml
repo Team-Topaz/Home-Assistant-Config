@@ -3,32 +3,32 @@ proximity:
   both_home:
     zone: home
     devices:
-      - device_tracker.ryan_phone
-      - device_tracker.chelsea_phone
+      - device_tracker.ryanphoneapp
+      - device_tracker.chelseaphoneapp
     unit_of_measurement: mi
 
   ryan_home:
     zone: home
     devices:
-      - device_tracker.ryan_phone
+      - device_tracker.ryanphoneapp
     unit_of_measurement: mi
 
   chelsea_home:
     zone: home
     devices:
-      - device_tracker.chelsea_phone
+      - device_tracker.chelseaphoneapp
     unit_of_measurement: mi
 
   ryan_work:
     zone: !secret work_1_name
     devices:
-      - device_tracker.ryan_phone
+      - device_tracker.ryanphoneapp
     unit_of_measurement: mi
 
   chelsea_work:
     zone: !secret work_2_name
     devices:
-      - device_tracker.chelsea_phone
+      - device_tracker.chelseaphoneapp
     unit_of_measurement: mi
 
 
@@ -63,25 +63,25 @@ sensor:
     sensors:
       ryan_distance_from_home:
         entity_id:
-          - device_tracker.ryan_phone
+          - device_tracker.ryanphoneapp
           - sensor.time
         friendly_name: 'Ryan Distance from Home'
-        value_template: '{{distance(states.zone.home,states.device_tracker.ryan_phone) | float | round(2) }}'
+        value_template: '{{distance(states.zone.home,states.device_tracker.ryanphoneapp) | float | round(2) }}'
         unit_of_measurement: 'mi'
       chelsea_distance_from_home:
         entity_id:
-            - device_tracker.chelsea_phone
+            - device_tracker.chelseaphoneapp
             - sensor.time
         friendly_name: 'Chelsea Distance from Home'
-        value_template: '{{distance(states.zone.home,states.device_tracker.chelsea_phone) | float | round(2)}}'
+        value_template: '{{distance(states.zone.home,states.device_tracker.chelseaphoneapp) | float | round(2)}}'
         unit_of_measurement: 'mi'
       ryan_chelsea_distance:
         entity_id:
-            - device_tracker.ryan_phone
-            - device_tracker.chelsea_phone
+            - device_tracker.ryanphoneapp
+            - device_tracker.chelseaphoneapp
             - sensor.time
         friendly_name: 'Chelsea Distance from Ryan'
-        value_template: '{{distance(states.device_tracker.chelsea_phone,states.device_tracker.ryan_phone) | float | round(2)}}'
+        value_template: '{{distance(states.device_tracker.chelseaphoneapp,states.device_tracker.ryanphoneapp) | float | round(2)}}'
         unit_of_measurement: 'mi'
 
   - platform: template
@@ -103,8 +103,8 @@ sensor:
   - platform: google_travel_time
     name: "Chelsea to Ryan Bike Time"
     api_key: !secret google_api_key
-    origin: device_tracker.chelsea_phone
-    destination: device_tracker.ryan_phone
+    origin: device_tracker.chelseaphoneapp
+    destination: device_tracker.ryanphoneapp
     options:
       mode: bicycling
     scan_interval: 900
@@ -112,7 +112,7 @@ sensor:
   - platform: google_travel_time
     name: "Ryan to Home Bike Time"
     api_key: !secret google_api_key
-    origin: device_tracker.ryan_phone
+    origin: device_tracker.ryanphoneapp
     destination: zone.home
     options:
       mode: bicycling
@@ -121,32 +121,32 @@ sensor:
   - platform: google_travel_time
     name: "Chelsea to Home Bike Time"
     api_key: !secret google_api_key
-    origin: device_tracker.chelsea_phone
+    origin: device_tracker.chelseaphoneapp
     destination: zone.home
     options:
       mode: bicycling
     scan_interval: 900
 
   - platform: waze_travel_time
-    origin: device_tracker.ryan_phone
+    origin: device_tracker.ryanphoneapp
     destination: zone.home
     region: 'US'
     name: "Ryan to Home Drive Time"
 
   - platform: waze_travel_time
-    origin: device_tracker.chelsea_phone
+    origin: device_tracker.chelseaphoneapp
     destination: zone.home
     region: 'US'
     name: "Chelsea to Home Drive Time"
 
   - platform: waze_travel_time
-    origin: device_tracker.chelsea_phone
-    destination: device_tracker.ryan_phone
+    origin: device_tracker.chelseaphoneapp
+    destination: device_tracker.ryanphoneapp
     region: 'US'
     name: "Chelsea to Ryan Drive Time"
 
   - platform: waze_travel_time
-    origin: device_tracker.ryan_phone
-    destination: device_tracker.chelsea_phone
+    origin: device_tracker.ryanphoneapp
+    destination: device_tracker.chelseaphoneapp
     region: 'US'
     name: "Ryan to Chelsea Drive Time"
