@@ -33,10 +33,6 @@ sensor:
   - platform: dnsip
     ipv6: false
     scan_interval: 1200
-  - platform: dnsip
-    hostname: !secret hostname
-    ipv6: false
-    scan_interval: 1200
 
 timer:
   #This timeout is used to determine how long before HASS detects a failure
