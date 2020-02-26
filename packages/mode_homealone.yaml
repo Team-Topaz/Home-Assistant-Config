@@ -41,7 +41,7 @@ automation:
     alias: 'Home Alone: Notification Clicked: Turn Off'
     trigger:
       platform: event
-      event_type: html5_notification.clicked
+      event_type: mobile_app_notification_action
       event_data:
         action: turn_off
     action:
@@ -54,7 +54,7 @@ automation:
     alias: 'Home Alone: Notification Clicked: Stay On'
     trigger:
       platform: event
-      event_type: html5_notification.clicked
+      event_type: mobile_app_notification_action
       event_data:
         action: home_alone_stay_on
     action:

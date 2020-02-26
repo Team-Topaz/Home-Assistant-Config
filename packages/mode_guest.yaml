@@ -93,7 +93,7 @@ automation:
     alias: 'Guest Mode: Notification Clicked: Turn Off'
     trigger:
       platform: event
-      event_type: html5_notification.clicked
+      event_type: mobile_app_notification_action
       event_data:
         action: guest_mode_off
     action:

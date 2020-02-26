@@ -166,7 +166,7 @@ automation:
     alias: 'Garden: Irrigation Complete'
     trigger:
     - platform: event
-      event_type: html5_notification.clicked
+      event_type: mobile_app_notification_action
       event_data:
         action: garden_irrigated
     action:

@@ -96,7 +96,7 @@ automation:
     alias: 'HASS: Restart Requested'
     trigger:
       platform: event
-      event_type: html5_notification.clicked
+      event_type: mobile_app_notification_action
       event_data:
         action: hass_restart
     condition:
