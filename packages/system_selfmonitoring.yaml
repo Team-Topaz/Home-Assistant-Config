@@ -52,6 +52,17 @@ automation:
         data:
           topic: "cmnd/sonoffs/state"
           payload: ""
+  - id: hass_update_phone_app_state
+    alias: "HASS: Request App State Update"
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: time_pattern
+        minutes: "/45"
+    action:
+      - service: notify.preferred_notification
+        data:
+          message: "request_location_update"
   - id: hass_update_available
     alias: 'HASS: Update Available Notifications'
     trigger:
