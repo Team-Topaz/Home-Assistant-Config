@@ -13,6 +13,8 @@
         "integration": "Integrasjon",
         "integrations": "Integrasjoner",
         "manage": "manage",
+        "netdaemon": "NetDaemon",
+        "netdaemon_apps": "NetDaemon Apper",
         "plugin": "Plugin",
         "plugins": "Plugins",
         "python_script": "Python-skript",
@@ -34,6 +36,7 @@
             "user": {
                 "data": {
                     "appdaemon": "Aktiver oppdagelse og sporing av AppDaemon-apper",
+                    "netdaemon": "Aktiver oppdagelse og sporing av NetDaemon-apper",
                     "python_script": "Aktiver oppdagelse og sporing av python_scripts",
                     "sidepanel_icon": "Sidepanel ikon",
                     "sidepanel_title": "Sidepanel tittel",
@@ -75,6 +78,7 @@
                     "country": "Filtrer med landskode.",
                     "debug": "Aktiver debug",
                     "experimental": "Aktiver eksperimentelle funksjoner",
+                    "netdaemon": "Aktiver oppdagelse og sporing av NetDaemon-apper",
                     "not_in_use": "Ikke i bruk med YAML",
                     "release_limit": "Antall utgivelser som skal vises.",
                     "sidepanel_icon": "Sidepanel ikon",
@@ -115,6 +119,7 @@
         "note_installed": "Når det er installert, vil dette ligge i",
         "note_integration": "du må fortsatt legge den til 'configuration.yaml' filen",
         "note_plugin": "du må fortsatt legge den til i lovelace-konfigurasjonen ('ui-lovelace.yaml' eller den rå UI-konfigurasjonsredigereren)",
+        "note_plugin_post_107": "du må fortsatt legge den til i lovelace konfigurasjonen ('configuration.yaml' eller via resource behanleren i grensesnittet '\/config\/lovelace\/resources')",
         "open_issue": "Meld et problem",
         "open_plugin": "Åpne plugin",
         "reinstall": "Installer på nytt",

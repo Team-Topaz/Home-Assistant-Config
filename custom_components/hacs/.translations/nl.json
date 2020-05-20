@@ -13,6 +13,8 @@
         "integration": "Integratie",
         "integrations": "Integraties",
         "manage": "beheer",
+        "netdaemon": "NetDaemon",
+        "netdaemon_apps": "NetDaemon Apps",
         "plugin": "Plugin",
         "plugins": "Plugins",
         "python_script": "Python Script",
@@ -34,6 +36,7 @@
             "user": {
                 "data": {
                     "appdaemon": "Zet AppDaemon apps ontdekken & traceren aan",
+                    "netdaemon": "Zet NetDaemon apps ontdekken & traceren aan",
                     "python_script": "Zet python_scripts ontdekken & traceren aan",
                     "sidepanel_icon": "Zijpaneel icoon",
                     "sidepanel_title": "Zijpaneel titel",
@@ -56,6 +59,7 @@
         "exist": "{item} bestaat al.",
         "generic": "Weet je het zeker?",
         "home_assistant_is_restarting": "Een moment alstublieft, Home Assistant is aan het herstarten.",
+        "home_assistant_version_not_correct": "Je gebruikt Home Assistant versie '{haversion}', echter deze repository vereist dat minimaal versie '{minversion}' is geïnstalleerd.",
         "no": "Nee",
         "no_upgrades": "Geen upgrades in afwachting.",
         "ok": "Oké",
@@ -74,6 +78,7 @@
                     "country": "Filter met land code.",
                     "debug": "Schakel debug in.",
                     "experimental": "Zet experimentele functies aan",
+                    "netdaemon": "Zet NetDaemon apps ontdekken & traceren aan",
                     "not_in_use": "Niet in gebruik met YAML",
                     "release_limit": "Aantal releases om te laten zien.",
                     "sidepanel_icon": "Zijpaneel icoon",
@@ -84,6 +89,7 @@
     },
     "repository_banner": {
         "config_flow": "Deze integratie ondersteunt config_flow, wat betekent dat u via uw \"Instellingen\" naar \"Integraties\" kunt gaan om het te configureren.",
+        "config_flow_title": "UI-configuratie ondersteund",
         "integration_not_loaded": "Deze integratie wordt niet geladen in Home Assistant.",
         "no_restart_required": "Geen herstart vereist",
         "not_loaded": "Niet geladen",
@@ -114,6 +120,7 @@
         "note_installed": "Wanneer geïnstalleerd, staat het in",
         "note_integration": "je moet het nog steeds toevoegen aan je 'configuration.yaml' bestand",
         "note_plugin": "je moet het nog steeds toevoegen aan je lovelace configuratie ('ui-lovelace.yaml') of raw UI config editor.",
+        "note_plugin_post_107": "je moet het nog steeds toevoegen aan je lovelace configuratie ('configuration.yaml' of de resource editor '\/config\/lovelace\/resources')",
         "open_issue": "Meld probleem",
         "open_plugin": "Open plugin",
         "reinstall": "Herinstalleer",
