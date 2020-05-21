@@ -41,11 +41,6 @@ sensor:
       - uv_index
     scan_interval: '00:10'
 
-  - platform: airvisual
-    api_key: !secret airvisual_api_key
-    monitored_conditions:
-      - us
-
   - platform: template
     sensors:
       home_weather_temperature:

@@ -1,39 +1,11 @@
 binary_sensor:
   - platform: ping
-    host: 192.168.1.33
-    name: Living Room TV Ping
-
-  - platform: ping
-    host: 192.168.1.30
-    name: Living Room Harmony Ping
-
-  - platform: ping
-    host: 192.168.1.20
-    name: Domain Controller Ping
-
-  - platform: ping
-    host: 192.168.1.25
-    name: Media Center PC Ping
-
-  - platform: ping
     host: 192.168.1.1
     name: Gateway Ping
 
   - platform: ping
-    host: 192.168.1.133
-    name: Printer Ping
-
-  - platform: ping
-    host: 192.168.1.34
-    name: Lutron Smart Bridge Ping
-
-  - platform: ping
     host: 192.168.100.1
     name: Modem Ping
-
-  - platform: ping
-    host: 192.168.1.2
-    name: Switch Ping
 
 sensor:
   - platform: template
