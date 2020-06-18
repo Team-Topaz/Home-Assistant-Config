@@ -1,5 +1,0 @@
-scene.indoor_off:
-  friendly_name: 'Indoor Off'
-
-scene.all_off:
-  friendly_name: 'All Off'

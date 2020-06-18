@@ -1,8 +1,0 @@
-switch.sonoff_1:
-  friendly_name: Living Room Fan
-
-switch.hdmi_0:
-  friendly_name: 'Vizio TV'
-
-switch.hdmi_5:
-  friendly_name: 'Pioneer Receiver'

@@ -1,40 +1,5 @@
 #A few functions for self-health.
 
-script:
-  #The modem's switch should automatically toggle back on - but this explicitly requests it to turn back on.
-  restart_modem:
-    alias: Restart Modem
-    sequence:
-      - service: switch.turn_off
-        data:
-          entity_id: switch.modem_power
-      - delay:
-          seconds: 30
-      - service: light.turn_on
-        data:
-          entity_id: switch.modem_power
-      - delay:
-          minutes: 5
-      - service: notify.preferred_notification
-        data:
-          title: 'Modem Restarted'
-          message: "Internet was down, so I rebooted the modem."
-          data:
-            tag: 'modem_reboot_notify'
-
-switch:
-  - platform: mqtt
-    name: "Modem Power"
-    state_topic: "stat/modemswitch/POWER"
-    command_topic: "cmnd/modemswitch/POWER"
-    availability_topic: "tele/modemswitch/LWT"
-    qos: 1
-    payload_on: "ON"
-    payload_off: "OFF"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-    retain: false
-
 automation:
   #Tasks for keeping Home Assistant running well.
 
@@ -111,20 +76,3 @@ automation:
         data:
           tag: 'hass_restart'
     - service: homeassistant.restart
-    #Sometimes the network falls over. We're hopefully going to detect this and resolve it.
-  - id: networkfix-modemreboot
-    alias: 'Network Fix: Reboot Modem'
-    initial_state: 'on'
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.modem_ping
-        to: 'off'
-        for:
-          minutes: 10
-    condition:
-      condition: state
-      entity_id: binary_sensor.gateway_ping
-      state: 'on'
-    action:
-    - service: script.turn_on
-      entity_id: script.restart_modem

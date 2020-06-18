@@ -13,34 +13,6 @@ iqvia:
       - disease_average_forecasted
 
 sensor:
-  - platform: darksky
-    name: Outdoor
-    api_key: !secret darksky_api_key
-    monitored_conditions:
-      - summary
-      - temperature
-      - humidity
-      - wind_speed
-      - wind_bearing
-      - dew_point
-      - apparent_temperature
-      - precip_type
-      - pressure
-      - ozone
-      - minutely_summary
-      - hourly_summary
-      - daily_summary
-      - cloud_cover
-      - visibility
-      - precip_probability
-      - temperature_low
-      - temperature_high
-      - apparent_temperature_low
-      - apparent_temperature_high
-      - precip_intensity_max
-      - uv_index
-    scan_interval: '00:10'
-
   - platform: template
     sensors:
       home_weather_temperature:
