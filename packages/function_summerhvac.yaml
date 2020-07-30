@@ -16,7 +16,7 @@ binary_sensor:
       summer_open_window:
         friendly_name: "OK to Open Windows"
         value_template: >
-          {% if is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') }
+          {{ is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') }}
 
 input_number:
   summer_desired_temperature:
