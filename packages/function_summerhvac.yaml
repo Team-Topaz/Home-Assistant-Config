@@ -46,6 +46,7 @@ input_number:
     max: 80
     step: 1
     unit_of_measurement: '°F'
+    icon: mdi:thermometer
   summer_max_outdoor_window_open_temperature:
     name: Max Outdoor Temperature
     initial: 77
@@ -53,3 +54,4 @@ input_number:
     max: 85
     step: 1
     unit_of_measurement: '°F'
+    icon: mdi:thermometer-alert
