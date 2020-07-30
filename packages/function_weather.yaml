@@ -6,11 +6,6 @@ weather:
 
 iqvia:
     zip_code: !secret home_zip
-    monitored_conditions:
-      - allergy_average_forecasted
-      - allergy_index_today
-      - allergy_index_tomorrow
-      - disease_average_forecasted
 
 sensor:
   - platform: template

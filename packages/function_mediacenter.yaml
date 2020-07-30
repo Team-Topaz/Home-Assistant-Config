@@ -24,8 +24,6 @@ input_select:
     icon: mdi:dip-switch
 
 media_player:
-  - platform: plex
-
   - platform: pioneer
     host: !secret pioneer_ip
 
@@ -85,12 +83,6 @@ sensor:
           {% else %}
             -80.5
           {% endif %}
-  - platform: plex
-    host: 192.168.1.20
-    port: 32400
-    name: Plex
-    username: !secret plex_username
-    password: !secret plex_password
 
 automation:
   - id: tv_backlight_on
