@@ -46,9 +46,9 @@ binary_sensor:
         delay_off: 
           minutes: 5
         value_template: >
-          {% if is_state('binary.sensor.summer_open_window', 'on') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+          {% if is_state('binary_sensor.summer_open_window', 'on') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
             true
-          {% elif is_state('binary.sensor.summer_open_window', 'off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_limit', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+          {% elif is_state('binary_sensor.summer_open_window', 'off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_limit', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
             true
           {% else %}
             false
