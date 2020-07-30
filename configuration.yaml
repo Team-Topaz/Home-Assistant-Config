@@ -11,7 +11,6 @@ homeassistant:
   packages: !include_dir_named packages
 http:
   server_port: !secret server_port
-  base_url: !secret base_url
 updater:
   include_used_components: true
 discovery:
