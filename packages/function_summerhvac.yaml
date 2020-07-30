@@ -19,6 +19,15 @@ binary_sensor:
           minutes: 1
         value_template: >-
           {{ states('sensor.living_room_temperature')|float > states('input_number.summer_desired_temperature')|float }}
+      summer_hotter_inside_than_limit:
+        friendly_name: "Hotter Inside than Limit"
+        device_class: heat
+        delay_on:
+          minutes: 1
+        delay_off:
+          minutes: 1
+        value_template: >-
+          {{ states('sensor.living_room_temperature')|float > states('input_number.summer_minimum_temperature_to_open')|float }}
       summer_hotter_outside_than_limit:
         friendly_name: "Hotter Outside than Limit"
         device_class: heat
@@ -29,6 +38,7 @@ binary_sensor:
         value_template: >-
           {{ states('sensor.outdoor_temperature_sensor')|float > states('input_number.summer_max_outdoor_window_open_temperature') }}
       summer_open_window:
+        # This works by checking if it is already on. If so, it checks if it's below the desired temperature. If not, it checks if it's above the temperature limit.
         friendly_name: "OK to Open Windows"
         device_class: window
         delay_on:
@@ -36,13 +46,27 @@ binary_sensor:
         delay_off: 
           minutes: 5
         value_template: >
-          {{ is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') }}
+          {% if is_state('binary.sensor.summer_open_window', 'on') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+            true
+          {% elif is_state('binary.sensor.summer_open_window', 'off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_limit', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+            true
+          {% else %}
+            false
+          {% endif %}
 
 input_number:
   summer_desired_temperature:
     name: Desired Temperature
     initial: 70
     min: 60
+    max: 80
+    step: 1
+    unit_of_measurement: '°F'
+    icon: mdi:thermometer
+  summer_minimum_temperature_to_open:
+    name: Temperature Limit before Opening Windows
+    initial: 75
+    min: 70
     max: 80
     step: 1
     unit_of_measurement: '°F'
