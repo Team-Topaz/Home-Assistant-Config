@@ -19,7 +19,7 @@
 - name: !secret location_1_name
   latitude: !secret location_1_lat
   longitude: !secret location_1_lon
-  icon: mdi:directions-walk
+  icon: mdi:walk
   radius: 150
 
 - name: !secret location_2_name
