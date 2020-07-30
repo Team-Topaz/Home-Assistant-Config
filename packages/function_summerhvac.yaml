@@ -1,0 +1,35 @@
+binary_sensor:
+  - platform: template
+    sensors:
+      summer_hotter_inside:
+        friendly_name: "Hotter Inside than Outside"
+        value_template: >-
+          {{ states('sensor.outdoor_temperature_sensor')|float < states('sensor.living_room_temperature')|float }}
+      summer_hotter_inside_than_target:
+        friendly_name: "Hotter Inside than Target"
+        value_template: >-
+          {{ states('sensor.living_room_temperature')|float > states('input_number.summer_desired_temperature')|float }}
+      summer_hotter_outside_than_limit:
+        friendly_name: "Hotter Outside than Limit"
+        value_template: >-
+          {{ states('sensor.outdoor_temperature_sensor')|float > states('input_number.summer_max_outdoor_window_open_temperature') }}
+      summer_open_window:
+        friendly_name: "OK to Open Windows"
+        value_template: >
+          {% if is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') }
+
+input_number:
+  summer_desired_temperature:
+    name: Desired Temperature
+    initial: 70
+    min: 60
+    max: 80
+    step: 1
+    unit_of_measurement: '°F'
+  summer_max_outdoor_window_open_temperature:
+    name: Max Outdoor Temperature
+    initial: 77
+    min: 75
+    max: 85
+    step: 1
+    unit_of_measurement: '°F'

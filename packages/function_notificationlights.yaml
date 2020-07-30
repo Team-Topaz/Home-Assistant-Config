@@ -1,33 +1,4 @@
 automation:
-  - id: living_room_window_open_ok
-    alias: 'Living Room: OK to open window'
-    trigger:
-      - platform: state
-        entity_id: climate.living_room_fan
-        to: 'cool'
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.living_room_led
-          color_name: green
-          brightness: 100
-
-  - id: living_room_window_open_nok
-    #initial_state: 'off' #Disabled for winter.
-    alias: 'Living Room: Close Windows'
-    trigger:
-      - platform: state
-        entity_id: climate.living_room_fan
-        to: 'off'
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.living_room_led
-          color_name: red
-          brightness: 100
-
-
-
   - id: lights_left_on
     alias: 'Notification Light: Lights Left On'
     trigger:
