@@ -36,7 +36,7 @@ binary_sensor:
         delay_off:
           minutes: 1
         value_template: >-
-          {{ states('sensor.outdoor_temperature_sensor')|float > states('input_number.summer_max_outdoor_window_open_temperature') }}
+          {{ states('sensor.outdoor_temperature_sensor')|float > states('input_number.summer_max_outdoor_window_open_temperature')|float }}
       summer_open_window:
         # This works by checking if it is already on. If so, it checks if it's below the desired temperature. If not, it checks if it's above the temperature limit.
         friendly_name: "OK to Open Windows"
@@ -79,3 +79,87 @@ input_number:
     step: 1
     unit_of_measurement: '°F'
     icon: mdi:thermometer-alert
+
+automation:
+  - id: summer_open_windows
+    alias: 'Summer: Open the Windows'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.summer_open_window
+        to: 'on'
+    action:
+    - choose:
+      - conditions: 
+          - condition: state
+            entity_id: person.ryan
+            state: "home"
+        sequence: 
+        - service: notify.mobile_app_ryan_s_phone
+          data:
+            title: 'Open the Windows!'
+            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            data:
+              tag: 'summer_window'
+      - conditions: 
+          - condition: state
+            entity_id: person.chelsea
+            state: "home"
+        sequence: 
+        - service: notify.mobile_app_chelsea_phone
+          data:
+            title: 'Open the Windows!'
+            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            data:
+              tag: 'summer_window'
+      - conditions: 
+          - condition: state
+            entity_id: binary_sensor.anybody_home
+            state: "home"
+        sequence: 
+        - service: notify.preferred_notification
+          data:
+            title: 'Open the Windows!'
+            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            data:
+              tag: 'summer_window'
+  - id: summer_close_windows
+    alias: 'Summer: Close the Windows'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.summer_open_window
+        to: 'off'
+    action:
+    - choose:
+      - conditions: 
+          - condition: state
+            entity_id: person.ryan
+            state: "home"
+        sequence: 
+        - service: notify.mobile_app_ryan_s_phone
+          data:
+            title: 'Close the Windows!'
+            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            data:
+              tag: 'summer_window'
+      - conditions: 
+          - condition: state
+            entity_id: person.chelsea
+            state: "home"
+        sequence: 
+        - service: notify.mobile_app_chelsea_phone
+          data:
+            title: 'Close the Windows!'
+            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            data:
+              tag: 'summer_window'
+      - conditions: 
+          - condition: state
+            entity_id: binary_sensor.anybody_home
+            state: "home"
+        sequence: 
+        - service: notify.preferred_notification
+          data:
+            title: 'Close the Windows!'
+            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            data:
+              tag: 'summer_window'

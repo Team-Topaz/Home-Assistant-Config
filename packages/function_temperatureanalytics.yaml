@@ -40,17 +40,17 @@ binary_sensor:
         device_class: heat
       outdoor_temperature_trend:
         friendly_name: "Outdoor Temperature Trend"
-        entity_id: sensor.outdoor_temperature
+        entity_id: sensor.outdoor_temperature_sensor
         max_samples: 10
         sample_duration: 1800
-        min_gradient: 0.000138
+        min_gradient: 0.0000277
         device_class: heat
       outdoor_temperature_trend_test:
         friendly_name: "Outdoor Temperature Trend Test"
         entity_id: sensor.outdoor_temperature_filtered
         max_samples: 10
         sample_duration: 1800
-        min_gradient: 0.000138
+        min_gradient: 0.0000138
         device_class: heat
 
 
