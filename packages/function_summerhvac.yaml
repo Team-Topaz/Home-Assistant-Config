@@ -95,9 +95,9 @@ automation:
             state: "home"
         sequence: 
         - service: notify.mobile_app_ryan_s_phone
-          data:
+          data_template:
             title: 'Open the Windows!'
-            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
       - conditions: 
@@ -106,9 +106,9 @@ automation:
             state: "home"
         sequence: 
         - service: notify.mobile_app_chelsea_phone
-          data:
+          data_template:
             title: 'Open the Windows!'
-            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
       - conditions: 
@@ -117,9 +117,9 @@ automation:
             state: "home"
         sequence: 
         - service: notify.preferred_notification
-          data:
+          data_template:
             title: 'Open the Windows!'
-            message: "It's hot inside and cooler outside. You should open the windows and turn off the A/C."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
   - id: summer_close_windows
@@ -136,9 +136,9 @@ automation:
             state: "home"
         sequence: 
         - service: notify.mobile_app_ryan_s_phone
-          data:
+          data_template:
             title: 'Close the Windows!'
-            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
       - conditions: 
@@ -147,9 +147,9 @@ automation:
             state: "home"
         sequence: 
         - service: notify.mobile_app_chelsea_phone
-          data:
+          data_template:
             title: 'Close the Windows!'
-            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
       - conditions: 
@@ -158,8 +158,8 @@ automation:
             state: "home"
         sequence: 
         - service: notify.preferred_notification
-          data:
+          data_template:
             title: 'Close the Windows!'
-            message: "It's cooler inside than outside. You should close the windows and turn on the A/C, if desired."
+            message: "Indoor: {{ states('sensor.living_room_temperature') }}°F Outdoor: {{ states('sensor.outdoor_temperature_sensor') }}°F"
             data:
               tag: 'summer_window'
