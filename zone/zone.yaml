@@ -57,3 +57,9 @@
   longitude: !secret location_7_lon
   radius: 200
   icon: !secret location_7_icon
+
+- name: !secret location_8_name
+  latitude: !secret location_8_lat
+  longitude: !secret location_8_lon
+  radius: 300
+  icon: mdi:walk
