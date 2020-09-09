@@ -1,6 +1,15 @@
 binary_sensor:
   - platform: template
     sensors:
+      summer_aqi_too_high:
+        friendly_name: "Air Quality Too Poor"
+        device_class: smoke
+        delay_on:
+          minutes: 1
+        delay_off:
+          minutes: 1
+        value_template: >-
+          {{ states('sensor.u_s_air_quality_index')|float > states('input_number.summer_max_outdoor_aqi')|float }}
       summer_hotter_inside:
         friendly_name: "Hotter Inside than Outside"
         device_class: heat
@@ -46,9 +55,9 @@ binary_sensor:
         delay_off: 
           minutes: 5
         value_template: >
-          {% if is_state('binary_sensor.summer_open_window', 'on') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+          {% if is_state('binary_sensor.summer_open_window', 'on') and is_state('binary_sensor.summer_aqi_too_high','off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_target', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
             true
-          {% elif is_state('binary_sensor.summer_open_window', 'off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_limit', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
+          {% elif is_state('binary_sensor.summer_open_window', 'off') and is_state('binary_sensor.summer_aqi_too_high','off') and is_state('binary_sensor.summer_hotter_inside', 'on') and is_state('binary_sensor.summer_hotter_inside_than_limit', 'on') and is_state('binary_sensor.summer_hotter_outside_than_limit', 'off') %}
             true
           {% else %}
             false
@@ -63,6 +72,14 @@ input_number:
     step: 1
     unit_of_measurement: '°F'
     icon: mdi:thermometer
+  summer_max_outdoor_aqi:
+    name: Maximum Air Quality Index
+    initial: 75
+    min: 50
+    max: 100
+    step: 5
+    unit_of_measurement: 'AQI'
+    icon: mdi:hazard-lights
   summer_minimum_temperature_to_open:
     name: Temperature Limit before Opening Windows
     initial: 75
@@ -73,7 +90,7 @@ input_number:
     icon: mdi:thermometer
   summer_max_outdoor_window_open_temperature:
     name: Max Outdoor Temperature
-    initial: 77
+    initial: 80
     min: 75
     max: 85
     step: 1
