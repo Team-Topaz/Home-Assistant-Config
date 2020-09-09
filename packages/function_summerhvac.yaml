@@ -4,10 +4,6 @@ binary_sensor:
       summer_aqi_too_high:
         friendly_name: "Air Quality Too Poor"
         device_class: smoke
-        delay_on:
-          minutes: 1
-        delay_off:
-          minutes: 1
         value_template: >-
           {{ states('sensor.u_s_air_quality_index')|float > states('input_number.summer_max_outdoor_aqi')|float }}
       summer_hotter_inside:
