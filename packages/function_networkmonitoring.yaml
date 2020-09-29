@@ -6,3 +6,7 @@ binary_sensor:
   - platform: ping
     host: 192.168.100.1
     name: Modem Ping
+
+  - platform: ping
+    host: 8.8.8.8
+    name: Internet Connectivity
