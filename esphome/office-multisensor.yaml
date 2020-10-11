@@ -65,10 +65,12 @@ sensor:
       name: "Office CO²"
       filters:
       - filter_out: 65021
+      - filter_out: 0
     tvoc:
       name: "Office VOC"
       filters:
       - filter_out: 65021
+      - filter_out: 0
     update_interval: 60s
     address: 0x5A
     humidity: humidity
