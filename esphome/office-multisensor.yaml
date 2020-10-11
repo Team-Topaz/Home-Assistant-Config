@@ -26,6 +26,10 @@ logger:
 
 ota:
   password: !secret ota_pw
+  
+i2c:
+  sda: D2
+  scl: D1
 
 sensor:
   - platform: dht
@@ -34,13 +38,10 @@ sensor:
     temperature:
       name: "Office Temperature"
       id: "temperature"
-      accuracy_decimals: 1
-      unit_of_measurement: "°F"
       filters:
         - sliding_window_moving_average:
             window_size: 5
             send_every: 5
-        - lambda: return x * (9.0/5.0) + 32.0;
     humidity:
       name: "Office Humidity"
       id: "humidity"
@@ -59,15 +60,20 @@ sensor:
       - exponential_moving_average:
           alpha: 0.2
           send_every: 3
-  - platform: template
-    name: "Office Absolute Humidity"
-    lambda: >-
-      return (6.112 * pow(2.7182818284, ((17.67 * id(temperature).state)/(id(temperature).state + 243.5))) * id(humidity).state * 2.1674)/(273.15 + id(temperature).state);
-    update_interval: 15s
-    accuracy_decimals: 2
-    unit_of_measurement: "g/m³"
-
-
+  - platform: ccs811
+    eco2:
+      name: "Office CO²"
+      filters:
+      - filter_out: 65021
+    tvoc:
+      name: "Office VOC"
+      filters:
+      - filter_out: 65021
+    update_interval: 60s
+    address: 0x5A
+    humidity: humidity
+    temperature: temperature
+    
 binary_sensor:
   - platform: gpio
     pin: D5
@@ -78,25 +84,6 @@ binary_sensor:
       - delayed_off: 1000ms
   - platform: status
     name: "Office Status"
-
-output:
-  - platform: esp8266_pwm
-    pin: D1
-    id: redgpio
-  - platform: esp8266_pwm
-    pin: D2
-    id: greengpio
-  - platform: esp8266_pwm
-    pin: D3
-    id: bluegpio
-
-light:
-  - platform: rgb
-    name: "Office LED"
-    red: redgpio
-    green: greengpio
-    blue: bluegpio
-    #default_transition_length: 100ms
 
 switch:
   - platform: restart
