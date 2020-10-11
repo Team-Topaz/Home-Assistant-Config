@@ -27,7 +27,7 @@ i2c:
 sensor:
   - platform: ccs811
     eco2:
-      name: "CCS811 B CO²"
+      name: "CCS811 B CO2"
       filters:
       - filter_out: 65021
       - filter_out: 0
@@ -40,7 +40,7 @@ sensor:
     address: 0x5A
   - platform: ccs811
     eco2:
-      name: "CCS811 J CO²"
+      name: "CCS811 J CO2"
       filters:
       - filter_out: 65021
       - filter_out: 0

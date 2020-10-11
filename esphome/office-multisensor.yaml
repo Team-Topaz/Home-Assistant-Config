@@ -62,7 +62,7 @@ sensor:
           send_every: 3
   - platform: ccs811
     eco2:
-      name: "Office CO²"
+      name: "Office CO2"
       filters:
       - filter_out: 65021
       - filter_out: 0
