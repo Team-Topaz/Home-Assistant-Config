@@ -54,7 +54,7 @@ binary_sensor:
         delay_off:
           minutes: 1
         value_template: >-
-          {{ states('sensor.weather_upcoming_high_temperature')|float > states('input_number.summer_min_max_daily_temperature')|float }}
+          {{ states('sensor.weather_upcoming_high_temperature')|float < states('input_number.summer_min_max_daily_temperature')|float }}
       summer_open_window:
         # This works by checking if it is already on. If so, it checks if it's below the desired temperature. If not, it checks if it's above the temperature limit.
         friendly_name: "OK to Open Windows"
@@ -71,20 +71,6 @@ binary_sensor:
           {% else %}
             false
           {% endif %}
-
-
-sensor:
-  - platform: template
-    sensors:
-      weather_upcoming_high_temperature:
-        friendly_name: "Daily High Temperature"
-        value_template: "{{ (state_attr('weather.home_weather','forecast') | sort(attribute='temperature',reverse=true) | first()).temperature | float }}"
-  - platform: template
-    sensors:
-      weather_upcoming_low_temperature:
-        friendly_name: "Daily Low Temperature"
-        value_template: "{{ (state_attr('weather.home_weather','forecast') | sort(attribute='temperature',reverse=false) | first()).temperature | float }}"
-
 
 input_number:
   summer_desired_temperature:

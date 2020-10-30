@@ -14,3 +14,15 @@ sensor:
         friendly_name: "Home Weather Temperature"
         value_template: '{{ (states.weather.home_weather.attributes.temperature | float) }}'
         unit_of_measurement: "°F"
+  - platform: template
+    sensors:
+      weather_upcoming_high_temperature:
+        friendly_name: "Upcoming High Temperature"
+        unit_of_measurement: "°F"
+        value_template: "{{ (state_attr('weather.home_weather','forecast') | selectattr('datetime', 'lessthan', ((as_timestamp(now()) + 64800)*1000) ) | list() | sort(attribute='temperature',reverse=true) | first()).temperature | float}}"
+  - platform: template
+    sensors:
+      weather_upcoming_low_temperature:
+        friendly_name: "Upcoming Low Temperature"
+        unit_of_measurement: "°F"
+        value_template: "{{ (state_attr('weather.home_weather','forecast') | selectattr('datetime', 'lessthan', ((as_timestamp(now()) + 64800)*1000) ) | list() | sort(attribute='temperature',reverse=false) | first()).temperature | float}}"
