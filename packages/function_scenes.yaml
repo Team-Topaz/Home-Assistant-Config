@@ -44,13 +44,13 @@ scene:
       light.christmas_tree: on
       light.christmas_wreath:
         state: "on"
-        brightness: 75%"
+        brightness_pct: 65
         effect: "Multicolor Christmas Lights"
       light.tv_backlight:
         state: "on"
-        brightness: 100%"
+        brightness_pct: 100
         effect: "Christmas Marquee"
       light.tv_bar_light:
         state: "on"
-        brightness: 100%"
+        brightness_pct: 100
         effect: "Christmas Wipe"
