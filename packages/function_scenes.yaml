@@ -42,7 +42,7 @@ scene:
     entities:
       #Activate ALL the Christmas.
       light.christmas_tree: on
-      light.christmas_wreath: on
+      light.christmas_wreath:
         state: "on"
         brightness: 75%"
         effect: "Multicolor Christmas Lights"
@@ -50,7 +50,7 @@ scene:
         state: "on"
         brightness: 100%"
         effect: "Christmas Marquee"
-      light.tv_bar_light: on
+      light.tv_bar_light:
         state: "on"
         brightness: 100%"
         effect: "Christmas Wipe"
