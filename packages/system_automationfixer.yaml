@@ -32,5 +32,5 @@ automation:
     action:
     - service: notify.preferred_notification
       data:
-        title: 'It is the 358th day of the year.'
+        title: 'It is the 368th day of the year.'
         message: "This is probably the end of the world."
