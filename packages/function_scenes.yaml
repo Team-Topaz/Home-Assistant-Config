@@ -37,3 +37,20 @@ scene:
       media_player.living_room_chromecast: off
       fan.bonus_room_fan: off
       fan.office_fan: off
+
+  - name: 'Christmas Festive'
+    entities:
+      #Activate ALL the Christmas.
+      light.christmas_tree: on
+      light.christmas_wreath: on
+        state: "on"
+        brightness: 75%"
+        effect: "Multicolor Christmas Lights"
+      light.tv_backlight:
+        state: "on"
+        brightness: 100%"
+        effect: "Christmas Marquee"
+      light.tv_bar_light: on
+        state: "on"
+        brightness: 100%"
+        effect: "Christmas Wipe"
