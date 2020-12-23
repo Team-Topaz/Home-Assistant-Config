@@ -33,7 +33,16 @@ light:
       - addressable_lambda:
           name: Multicolor Christmas Lights
           lambda: |-
-            int current_color_index = 0;
+            static int starting_color_index = 0;
+            
+            if(initial_run)
+            {
+              srand (time(NULL));
+              starting_color_index = rand() % 4;
+            }
+            
+            int current_color_index = starting_color_index;
+            
             int current_brightness = current_color.w;
             
             for(int i = 0; i < it.size(); i++) {
