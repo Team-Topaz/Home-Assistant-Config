@@ -28,9 +28,9 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.day_of_year
-        to: '358'
+        to: '368'
     action:
     - service: notify.preferred_notification
       data:
-        title: 'It is the 358th day of the year.'
+        title: 'It is the 368th day of the year.'
         message: "This is probably the end of the world."

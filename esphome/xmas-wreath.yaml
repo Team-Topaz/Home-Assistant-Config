@@ -1,7 +1,7 @@
 esphome:
   name: xmas_wreath
   platform: ESP8266
-  board: esp01_1m
+  board: nodemcuv2
 
 wifi:
   networks:
@@ -20,31 +20,183 @@ web_server:
 ota:
   password: !secret ota_pw
 
-binary_sensor:
-  - platform: gpio
-    pin:
-      number: GPIO0
-      mode: INPUT_PULLUP
-      inverted: True
-    on_press:
-      then:
-        - light.toggle: relay_light
-    name: "Christmas Wreath Switch Button"
-  - platform: status
-    name: "Christmas Lamp Switch Status"
-
-output:
-  - platform: gpio
-    id: relay_output
-    pin: GPIO12
-
 light:
-  - platform: binary
-    name: "Christmas Wreath"
-    output: relay_output
-    id: relay_light
+  - platform: fastled_clockless
+    chipset: WS2811
+    pin: GPIO3
+    num_leds: 50
+    name: 'Wreath'
+    color_correct: [100%,69%,55%]
+    default_transition_length: 2s
+    gamma_correct: 2
+    effects:
+      - addressable_lambda:
+          name: Multicolor Christmas Lights
+          lambda: |-
+            int current_color_index = 0;
+            int current_brightness = current_color.w;
+            
+            for(int i = 0; i < it.size(); i++) {
+              switch(current_color_index) {
+                case 0 :
+                  it[i] = ESPColor(current_brightness,current_brightness,0);
+                  break;
+                case 1 : 
+                  it[i] = ESPColor(0,current_brightness,0);
+                  break;
+                case 2 : 
+                  it[i] = ESPColor(0,0,current_brightness);
+                  break;
+                case 3 : 
+                  it[i] = ESPColor(current_brightness,0,0);
+                  current_color_index = -1;
+                  break;
+                default : 
+                  it[i] = ESPColor::BLACK;
+                  current_color_index = -1;
+                  break;
+                }
 
-status_led:
-  pin:
-    number: GPIO13
-    inverted: True
+                current_color_index++;
+            }
+      - addressable_lambda:
+          name: Christmas Twinkle Lights
+          lambda: |-
+            ESPColor twinkle_color = current_color;
+            ESPColor flicker_color = current_color;
+            
+            //Change values of i+=5 to change which bulbs are flickering.
+            for(int i = 0;i < it.size();i += 5)
+            {
+              int random_number = rand() % 1000;
+            
+              if(it[i].get_effect_data() > 0)
+              {
+                //Light is currently twinkling
+                if(it[i].get_effect_data() > 5)
+                {
+                  //Fading in.
+                  float fade_value = ((5 - ((it[i].get_effect_data()) - 5))/5.0);
+                  it[i] = ESPColor((twinkle_color.r*fade_value),(twinkle_color.g*fade_value),(twinkle_color.b*fade_value));
+                  it[i].set_effect_data(it[i].get_effect_data()-1); //Deincrement fade counter.
+                  flicker_color = flicker_color.darken(5);
+                }
+                else if(it[i].get_effect_data() == 5)
+                {
+                  //Waiting a random amount of time.
+                  flicker_color = flicker_color.darken(5);
+                  if(random_number > 920)
+                  {
+                    it[i].set_effect_data(it[i].get_effect_data()-1);
+                  }
+                }
+                else if(it[i].get_effect_data() <= 0)
+                {
+                  //Light off.
+                  it[i].set_effect_data(0);
+                  it[i] = ESPColor::BLACK;
+                }
+                else if(it[i].get_effect_data() < 5)
+                {
+                  //Fading out.
+                  float fade_value = (it[i].get_effect_data()/5.0);
+                  it[i] = ESPColor((twinkle_color.r*fade_value),(twinkle_color.g*fade_value),(twinkle_color.b*fade_value));
+                  it[i].set_effect_data(it[i].get_effect_data()-1); //Deincrement fade counter.
+                }
+              }
+              else
+              {
+                //Light is off.
+                it[i] = ESPColor::BLACK;
+                
+                if(random_number < 5)
+                {
+                  //Light turns on.
+                  it[i].set_effect_data(10);
+                  flicker_color.darken(1);
+                }
+              }
+              
+            }
+            
+            for(int i = 0;i < it.size();i++)
+            {
+              if( (i % 5) == 0 )
+              {
+                continue;
+              }
+              
+              it[i] = flicker_color;
+            }
+      - addressable_color_wipe:
+          name: Christmas Marquee
+          add_led_interval: 120ms
+          colors:
+              - red: 100%
+                green: 0%
+                blue: 0%
+                num_leds: 12
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
+              - red: 0%
+                green: 100%
+                blue: 0%
+                num_leds: 9
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 2
+      - addressable_flicker:
+          name: Christmas Flicker
+          update_interval: 16ms
+          intensity: 5%
+      - strobe:
+          name: Red Alert
+          colors:
+            - state: True
+              brightness: 100%
+              red: 100%
+              green: 0%
+              blue: 0%
+              duration: 1s
+            - state: False
+              duration: 1s
+      - addressable_color_wipe:
+          name: Random Wipe
+          add_led_interval: 120ms
+          colors:
+              - random: True
+                num_leds: 15
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 10
+      - addressable_rainbow:
+          name: Rainbow
+          width: 50
+      - addressable_color_wipe:
+          name: Red Siren
+          add_led_interval: 50ms
+          colors:
+              - red: 100%
+                green: 0%
+                blue: 0%
+                num_leds: 15
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 10
+      - addressable_color_wipe:
+          name: Yellow Siren
+          add_led_interval: 50ms
+          colors:
+              - red: 100%
+                green: 90%
+                blue: 0%
+                num_leds: 15
+              - red: 0%
+                green: 0%
+                blue: 0%
+                num_leds: 10

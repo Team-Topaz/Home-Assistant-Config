@@ -18,9 +18,9 @@ automation:
           entity_id: group.outdoor_lights
           state: 'on'
     action:
-      - service: light.turn_on
+      - service: scene.turn_on
         data:
-          entity_id: group.xmas_lights
+          entity_id: scene.christmas_festive
 
   - id: xmas_lights_off
     alias: 'Christmas: Lights Off'
