@@ -69,6 +69,31 @@ light:
                 current_color_index++;
             }
       - addressable_lambda:
+          name: Christmas Alternating
+          update_interval: 1000ms
+          lambda: |-
+            static int starting_color_index = 0;
+            
+            if(starting_color_index > 1)
+            {
+              starting_color_index = 0;
+            }
+
+            int current_brightness = current_color.w;
+            
+            for(int i = 0; i < it.size(); i++) {
+              if( (i%2) ==  starting_color_index)
+              {
+                it[i] = ESPColor(current_brightness,0,0);
+              }
+              else
+              {
+                it[i] = ESPColor(0,current_brightness,0);
+              }
+            }
+
+            starting_color_index++;
+      - addressable_lambda:
           name: Christmas Twinkle Lights
           lambda: |-
             ESPColor twinkle_color = current_color;
