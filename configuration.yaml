@@ -16,6 +16,7 @@ updater:
 discovery:
 stream:
 default_config:
+ffmpeg:
 
 # Log and history configuration
 recorder:
