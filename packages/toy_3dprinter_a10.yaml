@@ -6,6 +6,7 @@ octoprint:
   number_of_tools: 1
 
 camera:
-  - platform: ffmpeg
-    input: !secret octoprint_stream_url
+  - platform: mjpeg
+    mjpeg_url: !secret octoprint_stream_url
+    still_image_url: !secret octoprint_snapshot_url
     name: Geeetech A10
