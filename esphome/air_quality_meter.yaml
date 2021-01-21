@@ -1,0 +1,82 @@
+esphome:
+  name: air_quality_sensor
+  platform: ESP8266
+  board: nodemcuv2
+
+wifi:
+  networks:
+  - ssid: !secret wifi1_name
+    password: !secret wifi1_pw
+  domain: !secret wifi_domain
+
+api:
+
+time:
+  - platform: sntp
+    id: sntp_time
+    servers:
+      - 3.north-america.pool.ntp.org
+      - 2.pool.ntp.org
+
+web_server:
+  port: 80
+
+# Enable logging
+logger:
+  baud_rate: 0
+
+ota:
+  password: !secret ota_pw
+  
+uart:
+  rx_pin: D7
+  tx_pin: D8
+  baud_rate: 9600
+
+i2c:
+  - id: bus_a
+    sda: D6
+    scl: D5
+    scan: True
+
+sensor:
+  - platform: sds011
+    pm_2_5:
+      name: "PM2.5 Concentration"
+    pm_10_0:
+      name: "PM10.0 Concentration"
+    update_interval: 5min
+  - platform: bmp280
+    i2c_id: bus_a
+    address: 0x76
+    temperature:
+      id: temperature
+      name: "AQI Sensor Temperature"
+      oversampling: 16x
+    pressure:
+      name: "AQI Sensor Pressure"
+    update_interval: 60s
+    iir_filter: 16x
+  - platform: ccs811
+    i2c_id: bus_a
+    eco2:
+      name: "AQI CO₂"
+      filters:
+      - filter_out: 65021
+      - filter_out: 0
+    tvoc:
+      name: "AQI Total Volatile Organic Compound"
+      filters:
+      - filter_out: 65021
+      - filter_out: 0
+    update_interval: 60s
+    address: 0x5A
+    temperature: temperature
+    
+binary_sensor:
+  - platform: status
+    name: "AQI Sensor Status"
+
+switch:
+  - platform: restart
+    name: "AQI Sensor Restart"
