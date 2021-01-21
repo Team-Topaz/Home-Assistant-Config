@@ -1,6 +1,6 @@
 sensor:
   - platform: min_max
-    name: "Average Humidity"
+    name: "Indoor Humidity"
     entity_ids:
       - sensor.office_humidity
       - sensor.living_room_humidity
@@ -10,21 +10,28 @@ sensor:
     round_digits: 1
 
   - platform: min_max
-    name: "Average Light Level Raw"
+    name: "Indoor Temperature"
     entity_ids:
-      - sensor.office_brightness
-      - sensor.living_room_brightness
-      - sensor.master_bedroom_brightness
-      - sensor.bonus_room_brightness
-      - sensor.bike_room_brightness
+      - sensor.office_temperature
+      - sensor.living_room_temperature
+      - sensor.master_bedroom_temperature
+      - sensor.bonus_room_temperature
+      - sensor.aqi_sensor_temperature
     type: mean
     round_digits: 1
 
-  - platform: filter
-    name: "Average Light Level"
-    entity_id: sensor.average_light_level_raw
-    filters:
-      - filter: time_simple_moving_average
-        window_size: 00:07
-      - filter: time_throttle
-        window_size: 00:02
+  - platform: min_max
+    name: "Indoor CO₂"
+    entity_ids:
+      - sensor.aqi_co2
+      - sensor.office_co2
+    type: mean
+    round_digits: 1
+
+  - platform: min_max
+    name: "Indoor VOC"
+    entity_ids:
+      - sensor.aqi_total_volatile_organic_compound
+      - sensor.office_voc
+    type: mean
+    round_digits: 1
