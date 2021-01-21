@@ -169,19 +169,11 @@ light:
               - red: 100%
                 green: 0%
                 blue: 0%
-                num_leds: 12
-              - red: 0%
-                green: 0%
-                blue: 0%
-                num_leds: 2
+                num_leds: 13
               - red: 0%
                 green: 100%
                 blue: 0%
-                num_leds: 9
-              - red: 0%
-                green: 0%
-                blue: 0%
-                num_leds: 2
+                num_leds: 12
       - addressable_flicker:
           name: Christmas Flicker
           update_interval: 16ms
