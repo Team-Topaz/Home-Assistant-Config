@@ -1,37 +1,8 @@
 #Components that facilitate the house "greeting" you.
 
 automation:
-  - id: porch_light_on_arriving_home
-    alias: "Porch: Turn On For Arrival"
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.everybody_home_or_distant
-        to: 'off'
-      - platform: sun
-        event: sunset
-        offset: '-00:30:00'
-    condition:
-      condition: and
-      conditions:
-        - condition: or
-          conditions:
-          - condition: sun
-            after: sunset
-            after_offset: '-00:30:00'
-          - condition: sun
-            before: sunrise
-            before_offset: '00:30:00'
-        - condition: state
-          entity_id: binary_sensor.everybody_home_or_distant
-          state: 'off'
-    action:
-      - service: light.turn_on
-        data:
-          entity_id: light.front_porch_light
-          brightness: 255
-
-  - id: porch_light_off_after_arrival
-    alias: "Porch: Turn the Light Off After Arrival"
+  - id: porch_light_off_at_midnight
+    alias: "Porch: Turn the Light Off  at Midnight"
     trigger:
       - platform: state
         entity_id: binary_sensor.everybody_home_or_distant
@@ -40,6 +11,8 @@ automation:
       - platform: state
         entity_id: input_boolean.guest_mode
         to: 'off'
+      - platform: time
+        at: '00:00:00'
     condition:
       condition: and
       conditions:
@@ -49,10 +22,24 @@ automation:
       - condition: state
         entity_id: binary_sensor.everybody_home_or_distant
         state: 'on'
+      - condition: time
+        before: '04:00:00'
     action:
       - service: light.turn_off
         data:
           entity_id: light.front_porch_light
+
+  - id: porch_light_on_at_sunset
+    alias: "Porch: Turn the Light On At Sunset"
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: '-00:30:00'
+    action:
+      - service: light.turn_on
+        data:
+          entity_id: light.front_porch_light
+          brightness: 255
 
   - id: porch_light_off_at_sunrise
     alias: "Porch: Turn the Light Off At Sunrise"
