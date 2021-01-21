@@ -54,3 +54,12 @@ scene:
         state: "on"
         brightness_pct: 100
         effect: "Christmas Wipe"
+
+  - name: 'Christmas Low-Key Festive'
+    entities:
+      #Activate SOME of the Christmas.
+      light.christmas_tree: on
+      light.christmas_wreath:
+        state: "on"
+        brightness_pct: 65
+        effect: "Christmas Twinkle Lights"

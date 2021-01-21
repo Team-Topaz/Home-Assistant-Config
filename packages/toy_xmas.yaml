@@ -9,18 +9,57 @@ automation:
         entity_id: group.outdoor_lights
         to: 'on'
     condition:
-      condition: or
+      condition: and
       conditions:
-        - condition: state
-          entity_id: group.indoor_lights
-          state: 'on'
-        - condition: state
-          entity_id: group.outdoor_lights
-          state: 'on'
+        - condition: or
+          conditions:
+          - condition: numeric_state
+            entity_id: sensor.day_of_year
+            below: 16
+          - condition: numeric_state
+            entity_id: sensor.day_of_year
+            above: 329
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: group.indoor_lights
+              state: 'on'
+            - condition: state
+              entity_id: group.outdoor_lights
+              state: 'on'
     action:
       - service: scene.turn_on
         data:
           entity_id: scene.christmas_festive
+
+  - id: xmas_lights_on_lowkey
+    alias: 'Christmas: Lights On'
+    trigger:
+      - platform: state
+        entity_id: group.indoor_lights
+        to: 'on'
+      - platform: state
+        entity_id: group.outdoor_lights
+        to: 'on'
+    condition:
+      condition: and
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.day_of_year
+          above: 15
+          below: 330
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: group.indoor_lights
+              state: 'on'
+            - condition: state
+              entity_id: group.outdoor_lights
+              state: 'on'
+    action:
+      - service: scene.turn_on
+        data:
+          entity_id: scene.christmas_low_key_festive
 
   - id: xmas_lights_off
     alias: 'Christmas: Lights Off'
