@@ -6,6 +6,7 @@ sensor:
       - sensor.living_room_humidity
       - sensor.master_bedroom_humidity
       - sensor.bonus_room_humidity
+      - sensor.guest_room_humidity
     type: mean
     round_digits: 1
 
@@ -17,6 +18,7 @@ sensor:
       - sensor.master_bedroom_temperature
       - sensor.bonus_room_temperature
       - sensor.aqi_sensor_temperature
+      - sensor.guest_room_temperature
     type: mean
     round_digits: 1
 
